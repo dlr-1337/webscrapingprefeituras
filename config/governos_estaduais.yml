@@ -1,0 +1,109 @@
+governos_estaduais:
+  AC:
+    nome: Governo do Estado do Acre
+    estado: Acre
+    site: https://www.ac.gov.br/
+  AL:
+    nome: Governo do Estado de Alagoas
+    estado: Alagoas
+    site: https://alagoas.al.gov.br/
+  AP:
+    nome: Governo do Estado do Amapa
+    estado: Amapa
+    site: https://www.portal.ap.gov.br/
+  AM:
+    nome: Governo do Estado do Amazonas
+    estado: Amazonas
+    site: https://www.amazonas.am.gov.br/
+  BA:
+    nome: Governo do Estado da Bahia
+    estado: Bahia
+    site: https://www.ba.gov.br/
+  CE:
+    nome: Governo do Estado do Ceara
+    estado: Ceara
+    site: https://www.ceara.gov.br/
+  DF:
+    nome: Governo do Distrito Federal
+    estado: Distrito Federal
+    site: https://www.df.gov.br/
+  ES:
+    nome: Governo do Estado do Espirito Santo
+    estado: Espirito Santo
+    site: https://www.es.gov.br/
+  GO:
+    nome: Governo do Estado de Goias
+    estado: Goias
+    site: https://www.go.gov.br/
+  MA:
+    nome: Governo do Estado do Maranhao
+    estado: Maranhao
+    site: https://www.ma.gov.br/
+  MT:
+    nome: Governo do Estado de Mato Grosso
+    estado: Mato Grosso
+    site: https://www.mt.gov.br/
+  MS:
+    nome: Governo do Estado de Mato Grosso do Sul
+    estado: Mato Grosso do Sul
+    site: https://www.ms.gov.br/
+  MG:
+    nome: Governo do Estado de Minas Gerais
+    estado: Minas Gerais
+    site: https://www.mg.gov.br/
+  PA:
+    nome: Governo do Estado do Para
+    estado: Para
+    site: https://www.pa.gov.br/
+  PB:
+    nome: Governo do Estado da Paraiba
+    estado: Paraiba
+    site: https://paraiba.pb.gov.br/
+  PR:
+    nome: Governo do Estado do Parana
+    estado: Parana
+    site: https://www.parana.pr.gov.br/
+  PE:
+    nome: Governo do Estado de Pernambuco
+    estado: Pernambuco
+    site: https://www.pe.gov.br/
+  PI:
+    nome: Governo do Estado do Piaui
+    estado: Piaui
+    site: https://www.pi.gov.br/
+  RJ:
+    nome: Governo do Estado do Rio de Janeiro
+    estado: Rio de Janeiro
+    site: https://www.rj.gov.br/
+  RN:
+    nome: Governo do Estado do Rio Grande do Norte
+    estado: Rio Grande do Norte
+    site: https://www.rn.gov.br/
+  RS:
+    nome: Governo do Estado do Rio Grande do Sul
+    estado: Rio Grande do Sul
+    site: https://www.estado.rs.gov.br/
+  RO:
+    nome: Governo do Estado de Rondonia
+    estado: Rondonia
+    site: https://rondonia.ro.gov.br/
+  RR:
+    nome: Governo do Estado de Roraima
+    estado: Roraima
+    site: https://portal.rr.gov.br/
+  SC:
+    nome: Governo do Estado de Santa Catarina
+    estado: Santa Catarina
+    site: https://www.sc.gov.br/
+  SP:
+    nome: Governo do Estado de Sao Paulo
+    estado: Sao Paulo
+    site: https://www.saopaulo.sp.gov.br/
+  SE:
+    nome: Governo do Estado de Sergipe
+    estado: Sergipe
+    site: https://www.se.gov.br/
+  TO:
+    nome: Governo do Estado do Tocantins
+    estado: Tocantins
+    site: https://www.to.gov.br/

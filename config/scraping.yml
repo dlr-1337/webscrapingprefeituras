@@ -1,0 +1,7 @@
+timeout_segundos: 20
+retries: 2
+delay_entre_requisicoes: 1.5
+max_paginas_por_municipio: 40
+usar_playwright_quando_necessario: true
+user_agent: "Robo de coleta institucional - contato profissional"
+

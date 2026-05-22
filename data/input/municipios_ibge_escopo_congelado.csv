@@ -1,0 +1,1269 @@
+codigo_ibge,municipio,uf,estado,populacao,capital,site_oficial,criterio_inclusao,fonte,data_congelamento
+1200401,Rio Branco,AC,Acre,389001,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+2704302,Maceió,AL,Alagoas,994952,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+1302603,Manaus,AM,Amazonas,2303732,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+1600303,Macapá,AP,Amapá,489676,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+2900207,Abaré,BA,Bahia,18269,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2900702,Alagoinhas,BA,Bahia,161196,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2900801,Alcobaça,BA,Bahia,25601,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2901007,Amargosa,BA,Bahia,38585,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2901106,Amélia Rodrigues,BA,Bahia,24830,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2901155,América Dourada,BA,Bahia,15572,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2901205,Anagé,BA,Bahia,26745,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2901353,Andorinha,BA,Bahia,15491,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2901908,Aporá,BA,Bahia,16361,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2902104,Araci,BA,Bahia,50308,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2902609,Baixa Grande,BA,Bahia,18628,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2902708,Barra,BA,Bahia,53642,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2902807,Barra da Estiva,BA,Bahia,27743,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2902906,Barra do Choça,BA,Bahia,38581,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2903201,Barreiras,BA,Bahia,171634,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2903276,Barrocas,BA,Bahia,15780,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2903409,Belmonte,BA,Bahia,20527,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2903508,Belo Campo,BA,Bahia,19074,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2903607,Biritinga,BA,Bahia,15603,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2903805,Boa Vista do Tupim,BA,Bahia,17262,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2903904,Bom Jesus da Lapa,BA,Bahia,68866,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2904050,Bonito,BA,Bahia,16425,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2904100,Boquira,BA,Bahia,19782,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2904605,Brumado,BA,Bahia,74368,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2904753,Buritirama,BA,Bahia,20221,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2904852,Cabaceiras do Paraguaçu,BA,Bahia,17024,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2904902,Cachoeira,BA,Bahia,30498,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2905008,Caculé,BA,Bahia,23293,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2905206,Caetité,BA,Bahia,54730,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2905305,Cafarnaum,BA,Bahia,18057,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2905404,Cairu,BA,Bahia,18578,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2905602,Camacan,BA,Bahia,22485,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2905800,Camamu,BA,Bahia,31694,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2905701,Camaçari,BA,Bahia,321636,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2905909,Campo Alegre de Lourdes,BA,Bahia,32500,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2906006,Campo Formoso,BA,Bahia,75112,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2906204,Canarana,BA,Bahia,25007,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2906303,Canavieiras,BA,Bahia,34392,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2906501,Candeias,BA,Bahia,74854,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2906808,Cansanção,BA,Bahia,39725,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2906824,Canudos,BA,Bahia,16693,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2906873,Capim Grosso,BA,Bahia,35437,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2906907,Caravelas,BA,Bahia,21384,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2907103,Carinhanha,BA,Bahia,30439,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2907202,Casa Nova,BA,Bahia,76131,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2907301,Castro Alves,BA,Bahia,25470,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2907509,Catu,BA,Bahia,50109,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2907608,Central,BA,Bahia,16847,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2907905,Cipó,BA,Bahia,17875,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2908002,Coaraci,BA,Bahia,17557,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2908101,Cocos,BA,Bahia,19865,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2908200,Conceição da Feira,BA,Bahia,21529,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2908309,Conceição do Almeida,BA,Bahia,16134,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2908408,Conceição do Coité,BA,Bahia,71601,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2908507,Conceição do Jacuípe,BA,Bahia,37622,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2908606,Conde,BA,Bahia,24460,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2908705,Condeúba,BA,Bahia,17567,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2908903,Coração de Maria,BA,Bahia,28408,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2909208,Coronel João Sá,BA,Bahia,17598,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2909307,Correntina,BA,Bahia,34266,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2909604,Crisópolis,BA,Bahia,20346,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2909802,Cruz das Almas,BA,Bahia,63326,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2909901,Curaçá,BA,Bahia,36127,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2906709,Cândido Sales,BA,Bahia,26469,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2907806,Cícero Dantas,BA,Bahia,32292,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2910057,Dias d'Ávila,BA,Bahia,75296,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2910404,Encruzilhada,BA,Bahia,19450,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2910503,Entre Rios,BA,Bahia,39890,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2910602,Esplanada,BA,Bahia,34163,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2910701,Euclides da Cunha,BA,Bahia,64768,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2910727,Eunápolis,BA,Bahia,121067,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2910800,Feira de Santana,BA,Bahia,660806,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2910859,Filadélfia,BA,Bahia,18637,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2911105,Formosa do Rio Preto,BA,Bahia,27567,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2910750,Fátima,BA,Bahia,18480,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2911204,Gandu,BA,Bahia,34051,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2911402,Glória,BA,Bahia,16107,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2911600,Governador Mangabeira,BA,Bahia,21353,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2911709,Guanambi,BA,Bahia,93488,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2911808,Guaratinga,BA,Bahia,19413,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2911907,Iaçu,BA,Bahia,25315,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2912103,Ibicaraí,BA,Bahia,22131,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2912202,Ibicoara,BA,Bahia,21827,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2912400,Ibipeba,BA,Bahia,17134,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2912707,Ibirapitanga,BA,Bahia,26917,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2912905,Ibirataia,BA,Bahia,19377,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2913002,Ibitiara,BA,Bahia,15049,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2913101,Ibititá,BA,Bahia,17517,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2913200,Ibotirama,BA,Bahia,27723,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2913408,Igaporã,BA,Bahia,16069,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2913507,Iguaí,BA,Bahia,21763,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2913606,Ilhéus,BA,Bahia,189149,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2913705,Inhambupe,BA,Bahia,35390,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2913903,Ipiaú,BA,Bahia,42429,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2914000,Ipirá,BA,Bahia,59222,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2914406,Iraquara,BA,Bahia,24833,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2914505,Irará,BA,Bahia,29572,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2914604,Irecê,BA,Bahia,78781,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2914653,Itabela,BA,Bahia,29588,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2914703,Itaberaba,BA,Bahia,68425,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2914802,Itabuna,BA,Bahia,196344,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2914901,Itacaré,BA,Bahia,29496,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2915205,Itagibá,BA,Bahia,15796,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2915502,Itajuípe,BA,Bahia,19191,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2915601,Itamaraju,BA,Bahia,61999,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2915809,Itambé,BA,Bahia,25088,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2916005,Itanhém,BA,Bahia,18203,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2916104,Itaparica,BA,Bahia,20353,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2916401,Itapetinga,BA,Bahia,68724,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2916500,Itapicuru,BA,Bahia,33284,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2916807,Itarantim,BA,Bahia,17485,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2916856,Itatim,BA,Bahia,16454,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2917003,Itiúba,BA,Bahia,35490,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2917102,Itororó,BA,Bahia,16849,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2917201,Ituaçu,BA,Bahia,18506,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2917300,Ituberá,BA,Bahia,22154,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2917508,Jacobina,BA,Bahia,86896,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2917607,Jaguaquara,BA,Bahia,47624,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2917706,Jaguarari,BA,Bahia,34528,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2917805,Jaguaripe,BA,Bahia,18349,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2918001,Jequié,BA,Bahia,169201,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2918100,Jeremoabo,BA,Bahia,39539,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2918357,João Dourado,BA,Bahia,25892,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2918407,Juazeiro,BA,Bahia,256122,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2918506,Jussara,BA,Bahia,17007,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2918803,Laje,BA,Bahia,21705,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2919157,Lapão,BA,Bahia,27014,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2919207,Lauro de Freitas,BA,Bahia,219564,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2919504,Livramento de Nossa Senhora,BA,Bahia,46376,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2919553,Luís Eduardo Magalhães,BA,Bahia,118382,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2919702,Macarani,BA,Bahia,22768,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2919801,Macaúbas,BA,Bahia,43653,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2919926,Madre de Deus,BA,Bahia,19224,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2920106,Mairi,BA,Bahia,18130,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2920205,Malhada,BA,Bahia,15814,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2920502,Maracás,BA,Bahia,29330,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2920601,Maragogipe,BA,Bahia,37041,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2920700,Maraú,BA,Bahia,25804,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2921005,Mata de São João,BA,Bahia,44962,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2921104,Medeiros Neto,BA,Bahia,22801,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2921203,Miguel Calmon,BA,Bahia,25263,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2921401,Mirangaba,BA,Bahia,16167,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2921500,Monte Santo,BA,Bahia,49807,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2921708,Morro do Chapéu,BA,Bahia,35235,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2922003,Mucuri,BA,Bahia,40114,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2922102,Mundo Novo,BA,Bahia,17197,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2922300,Muritiba,BA,Bahia,30180,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2922409,Mutuípe,BA,Bahia,20590,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2922508,Nazaré,BA,Bahia,28427,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2922656,Nordestina,BA,Bahia,19711,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2922904,Nova Soure,BA,Bahia,24865,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2923001,Nova Viçosa,BA,Bahia,41629,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2923100,Olindina,BA,Bahia,22956,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2923209,Oliveira dos Brejinhos,BA,Bahia,21323,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2923357,Ourolândia,BA,Bahia,20141,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2923407,Palmas de Monte Alto,BA,Bahia,20666,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2923605,Paramirim,BA,Bahia,21025,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2923704,Paratinga,BA,Bahia,30680,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2923803,Paripiranga,BA,Bahia,27860,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2924009,Paulo Afonso,BA,Bahia,119418,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2924306,Piatã,BA,Bahia,20938,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2924405,Pilão Arcado,BA,Bahia,37388,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2924504,Pindaí,BA,Bahia,15125,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2924603,Pindobaçu,BA,Bahia,19601,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2924801,Piritiba,BA,Bahia,17697,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925006,Planalto,BA,Bahia,24026,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925204,Pojuca,BA,Bahia,33573,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925253,Ponto Novo,BA,Bahia,18763,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925303,Porto Seguro,BA,Bahia,182630,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925105,Poções,BA,Bahia,50773,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925501,Prado,BA,Bahia,37533,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925600,Presidente Dutra,BA,Bahia,15677,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925758,Presidente Tancredo Neves,BA,Bahia,29489,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925808,Queimadas,BA,Bahia,27429,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925907,Quijingue,BA,Bahia,26443,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2925956,Rafael Jambeiro,BA,Bahia,20081,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2926004,Remanso,BA,Bahia,42855,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2926400,Riacho de Santana,BA,Bahia,32060,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2926202,Riachão das Neves,BA,Bahia,22329,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2926301,Riachão do Jacuípe,BA,Bahia,35188,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2926608,Ribeira do Pombal,BA,Bahia,56316,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2927002,Rio Real,BA,Bahia,36966,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2927200,Ruy Barbosa,BA,Bahia,29590,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2927309,Salinas da Margarida,BA,Bahia,15629,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2927408,Salvador,BA,Bahia,2564204,true,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2927606,Santa Brígida,BA,Bahia,15417,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2927507,Santa Bárbara,BA,Bahia,21787,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2927705,Santa Cruz Cabrália,BA,Bahia,31007,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2928109,Santa Maria da Vitória,BA,Bahia,40474,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2928406,Santa Rita de Cássia,BA,Bahia,28890,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2928000,Santaluz,BA,Bahia,40066,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2928208,Santana,BA,Bahia,25521,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2928604,Santo Amaro,BA,Bahia,58398,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2928703,Santo Antônio de Jesus,BA,Bahia,109791,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2928802,Santo Estêvão,BA,Bahia,55146,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2929602,Sapeaçu,BA,Bahia,18656,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2929909,Seabra,BA,Bahia,48721,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2930105,Senhor do Bonfim,BA,Bahia,78090,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2930204,Sento Sé,BA,Bahia,40232,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2930303,Serra Dourada,BA,Bahia,17574,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2930402,Serra Preta,BA,Bahia,18754,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2930154,Serra do Ramalho,BA,Bahia,36252,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2930501,Serrinha,BA,Bahia,84690,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2930709,Simões Filho,BA,Bahia,120419,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2930774,Sobradinho,BA,Bahia,27097,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2930808,Souto Soares,BA,Bahia,17724,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2929701,Sátiro Dias,BA,Bahia,16476,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2928901,São Desidério,BA,Bahia,34982,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2929107,São Felipe,BA,Bahia,20923,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2929206,São Francisco do Conde,BA,Bahia,41110,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2929057,São Félix do Coribe,BA,Bahia,15780,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2929255,São Gabriel,BA,Bahia,19229,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2929305,São Gonçalo dos Campos,BA,Bahia,42171,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2929503,São Sebastião do Passé,BA,Bahia,42944,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2931004,Tanhaçu,BA,Bahia,21787,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2931053,Tanque Novo,BA,Bahia,17812,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2931202,Taperoá,BA,Bahia,18556,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2931301,Tapiramutá,BA,Bahia,16226,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2931350,Teixeira de Freitas,BA,Bahia,153738,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2931509,Teofilândia,BA,Bahia,21825,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2931608,Teolândia,BA,Bahia,15978,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2931806,Tremedal,BA,Bahia,16646,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2931905,Tucano,BA,Bahia,51016,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2932002,Uauá,BA,Bahia,25449,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2932200,Ubaitaba,BA,Bahia,17878,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2932309,Ubatã,BA,Bahia,15839,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2932101,Ubaíra,BA,Bahia,19142,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2932507,Una,BA,Bahia,18254,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2932606,Urandi,BA,Bahia,15776,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2932705,Uruçuca,BA,Bahia,22155,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2932804,Utinga,BA,Bahia,16645,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2933000,Valente,BA,Bahia,25132,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2932903,Valença,BA,Bahia,90053,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2933208,Vera Cruz,BA,Bahia,45191,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2933307,Vitória da Conquista,BA,Bahia,396613,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2933505,Wenceslau Guimarães,BA,Bahia,25535,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2933604,Xique-Xique,BA,Bahia,47019,false,,BA acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2304400,Fortaleza,CE,Ceará,2578483,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+5300108,Brasília,DF,Distrito Federal,2996899,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+3200102,Afonso Cláudio,ES,Espírito Santo,32456,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3200201,Alegre,ES,Espírito Santo,30702,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3200409,Anchieta,ES,Espírito Santo,33017,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3200607,Aracruz,ES,Espírito Santo,103363,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3200805,Baixo Guandu,ES,Espírito Santo,32829,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3200904,Barra de São Francisco,ES,Espírito Santo,45415,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3201209,Cachoeiro de Itapemirim,ES,Espírito Santo,198342,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3201308,Cariacica,ES,Espírito Santo,376200,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3201407,Castelo,ES,Espírito Santo,39575,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3201506,Colatina,ES,Espírito Santo,129301,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3201605,Conceição da Barra,ES,Espírito Santo,28923,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3201902,Domingos Martins,ES,Espírito Santo,38236,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3202108,Ecoporanga,ES,Espírito Santo,22611,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3202207,Fundão,ES,Espírito Santo,18898,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3202405,Guarapari,ES,Espírito Santo,136311,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3202306,Guaçuí,ES,Espírito Santo,31418,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3202454,Ibatiba,ES,Espírito Santo,27543,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3202801,Itapemirim,ES,Espírito Santo,44020,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3203007,Iúna,ES,Espírito Santo,30556,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3203056,Jaguaré,ES,Espírito Santo,31551,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3203205,Linhares,ES,Espírito Santo,183797,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3203320,Marataízes,ES,Espírito Santo,45953,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3203346,Marechal Floriano,ES,Espírito Santo,18964,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3203403,Mimoso do Sul,ES,Espírito Santo,25088,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3203502,Montanha,ES,Espírito Santo,19830,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3203700,Muniz Freire,ES,Espírito Santo,18809,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3203908,Nova Venécia,ES,Espírito Santo,52324,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3204005,Pancas,ES,Espírito Santo,19120,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3204054,Pedro Canário,ES,Espírito Santo,21923,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3204104,Pinheiros,ES,Espírito Santo,24843,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3204203,Piúma,ES,Espírito Santo,23912,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3204351,Rio Bananal,ES,Espírito Santo,20350,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3204559,Santa Maria de Jetibá,ES,Espírito Santo,45575,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3204609,Santa Teresa,ES,Espírito Santo,23872,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3205002,Serra,ES,Espírito Santo,579720,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3205010,Sooretama,ES,Espírito Santo,28668,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3204708,São Gabriel da Palha,ES,Espírito Santo,34272,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3204906,São Mateus,ES,Espírito Santo,134423,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3205036,Vargem Alta,ES,Espírito Santo,20390,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3205069,Venda Nova do Imigrante,ES,Espírito Santo,25395,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3205101,Viana,ES,Espírito Santo,79043,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3205200,Vila Velha,ES,Espírito Santo,506779,false,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3205309,Vitória,ES,Espírito Santo,343378,true,,ES acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5200050,Abadia de Goiás,GO,Goiás,22052,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5200100,Abadiânia,GO,Goiás,17738,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5200134,Acreúna,GO,Goiás,22079,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5200308,Alexânia,GO,Goiás,28244,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5201306,Anicuns,GO,Goiás,18306,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5201108,Anápolis,GO,Goiás,420300,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5201405,Aparecida de Goiânia,GO,Goiás,556021,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5201702,Aragarças,GO,Goiás,18601,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5203302,Bela Vista de Goiás,GO,Goiás,37305,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5203500,Bom Jesus de Goiás,GO,Goiás,24925,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5204409,Caiapônia,GO,Goiás,16628,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5204508,Caldas Novas,GO,Goiás,106820,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5204904,Campos Belos,GO,Goiás,18227,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5205109,Catalão,GO,Goiás,122760,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5205406,Ceres,GO,Goiás,22570,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5205497,Cidade Ocidental,GO,Goiás,101570,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5205513,Cocalzinho de Goiás,GO,Goiás,27196,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5206206,Cristalina,GO,Goiás,66827,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5206404,Crixás,GO,Goiás,17532,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5208004,Formosa,GO,Goiás,121559,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5208806,Goianira,GO,Goiás,81495,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5208608,Goianésia,GO,Goiás,78009,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5209101,Goiatuba,GO,Goiás,36984,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5208905,Goiás,GO,Goiás,24172,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5208707,Goiânia,GO,Goiás,1503256,true,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5209200,Guapó,GO,Goiás,20985,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5209705,Hidrolândia,GO,Goiás,30587,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5209952,Indiara,GO,Goiás,17985,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5210000,Inhumas,GO,Goiás,53884,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5210109,Ipameri,GO,Goiás,26223,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5210208,Iporá,GO,Goiás,37283,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5210406,Itaberaí,GO,Goiás,47603,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5210901,Itapaci,GO,Goiás,21891,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5211206,Itapuranga,GO,Goiás,26553,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5211503,Itumbiara,GO,Goiás,113322,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5211800,Jaraguá,GO,Goiás,46633,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5211909,Jataí,GO,Goiás,111634,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5212204,Jussara,GO,Goiás,19926,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5212501,Luziânia,GO,Goiás,221262,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5213087,Minaçu,GO,Goiás,26616,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5213103,Mineiros,GO,Goiás,74999,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5213806,Morrinhos,GO,Goiás,54326,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5214002,Mozarlândia,GO,Goiás,15199,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5214507,Nerópolis,GO,Goiás,34273,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5214606,Niquelândia,GO,Goiás,33890,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5215231,Novo Gama,GO,Goiás,107663,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5215306,Orizona,GO,Goiás,17035,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5215603,Padre Bernardo,GO,Goiás,37207,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5215702,Palmeiras de Goiás,GO,Goiás,34375,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5217104,Piracanjuba,GO,Goiás,25373,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5217302,Pirenópolis,GO,Goiás,28028,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5217401,Pires do Rio,GO,Goiás,33736,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5217609,Planaltina,GO,Goiás,112304,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5217708,Pontalina,GO,Goiás,18763,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5218003,Porangatu,GO,Goiás,45512,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5218300,Posse,GO,Goiás,36291,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5218508,Quirinópolis,GO,Goiás,50329,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5218805,Rio Verde,GO,Goiás,241494,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5218904,Rubiataba,GO,Goiás,20186,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5219308,Santa Helena de Goiás,GO,Goiás,39601,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5219753,Santo Antônio do Descoberto,GO,Goiás,75221,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5220454,Senador Canedo,GO,Goiás,175042,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5220603,Silvânia,GO,Goiás,23150,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5220009,São João d'Aliança,GO,Goiás,15026,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5220108,São Luís de Montes Belos,GO,Goiás,35288,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5220207,São Miguel do Araguaia,GO,Goiás,22040,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5220405,São Simão,GO,Goiás,17181,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5221403,Trindade,GO,Goiás,153560,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5221601,Uruaçu,GO,Goiás,44533,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5221858,Valparaíso de Goiás,GO,Goiás,218416,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5222005,Vianópolis,GO,Goiás,15644,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5200258,Águas Lindas de Goiás,GO,Goiás,245352,false,,GO acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2111300,São Luís,MA,Maranhão,1089215,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+3100203,Abaeté,MG,Minas Gerais,23173,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3101102,Aimorés,MG,Minas Gerais,26212,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3101607,Alfenas,MG,Minas Gerais,82303,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3101706,Almenara,MG,Minas Gerais,42019,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3101904,Alpinópolis,MG,Minas Gerais,18673,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3102308,Alvinópolis,MG,Minas Gerais,15358,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3101508,Além Paraíba,MG,Minas Gerais,31159,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3102605,Andradas,MG,Minas Gerais,42501,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3103504,Araguari,MG,Minas Gerais,123432,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3104007,Araxá,MG,Minas Gerais,118786,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3103405,Araçuaí,MG,Minas Gerais,35185,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3104205,Arcos,MG,Minas Gerais,43653,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3104502,Arinos,MG,Minas Gerais,17586,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3104908,Baependi,MG,Minas Gerais,18782,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3105103,Bambuí,MG,Minas Gerais,24203,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3105608,Barbacena,MG,Minas Gerais,129695,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3105905,Barroso,MG,Minas Gerais,20604,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3105400,Barão de Cocais,MG,Minas Gerais,32264,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3106200,Belo Horizonte,MG,Minas Gerais,2415872,true,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3106309,Belo Oriente,MG,Minas Gerais,24546,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3106705,Betim,MG,Minas Gerais,431433,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3107109,Boa Esperança,MG,Minas Gerais,41443,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3107307,Bocaiúva,MG,Minas Gerais,49797,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3107406,Bom Despacho,MG,Minas Gerais,54377,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3108008,Bom Sucesso,MG,Minas Gerais,17515,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3108305,Borda da Mata,MG,Minas Gerais,17837,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3108404,Botelhos,MG,Minas Gerais,15141,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3108552,Brasilândia de Minas,MG,Minas Gerais,15485,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3108602,Brasília de Minas,MG,Minas Gerais,33262,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3109006,Brumadinho,MG,Minas Gerais,41090,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3109303,Buritis,MG,Minas Gerais,24779,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3109402,Buritizeiro,MG,Minas Gerais,23908,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3110004,Caeté,MG,Minas Gerais,39775,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3110509,Camanducaia,MG,Minas Gerais,27860,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3110608,Cambuí,MG,Minas Gerais,31066,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3110905,Campanha,MG,Minas Gerais,16372,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3111002,Campestre,MG,Minas Gerais,21155,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3111101,Campina Verde,MG,Minas Gerais,18188,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3111200,Campo Belo,MG,Minas Gerais,54027,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3111606,Campos Gerais,MG,Minas Gerais,26749,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3112307,Capelinha,MG,Minas Gerais,41858,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3113206,Carandaí,MG,Minas Gerais,24403,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3113305,Carangola,MG,Minas Gerais,32134,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3113404,Caratinga,MG,Minas Gerais,90890,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3113008,Caraí,MG,Minas Gerais,19511,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3113701,Carlos Chagas,MG,Minas Gerais,18783,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3114204,Carmo do Cajuru,MG,Minas Gerais,24581,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3114303,Carmo do Paranaíba,MG,Minas Gerais,29885,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3114402,Carmo do Rio Claro,MG,Minas Gerais,21506,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3114501,Carmópolis de Minas,MG,Minas Gerais,18561,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3115300,Cataguases,MG,Minas Gerais,67732,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3115508,Caxambu,MG,Minas Gerais,21412,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3116605,Cláudio,MG,Minas Gerais,31936,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3117306,Conceição das Alagoas,MG,Minas Gerais,30278,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3117504,Conceição do Mato Dentro,MG,Minas Gerais,24559,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3118007,Congonhas,MG,Minas Gerais,55272,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3118304,Conselheiro Lafaiete,MG,Minas Gerais,138946,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3118403,Conselheiro Pena,MG,Minas Gerais,21052,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3118601,Contagem,MG,Minas Gerais,651718,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3118809,Coração de Jesus,MG,Minas Gerais,26138,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3119104,Corinto,MG,Minas Gerais,23988,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3119302,Coromandel,MG,Minas Gerais,30114,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3119401,Coronel Fabriciano,MG,Minas Gerais,108708,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3120805,Cruzília,MG,Minas Gerais,15831,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3120904,Curvelo,MG,Minas Gerais,84297,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3115102,Cássia,MG,Minas Gerais,17491,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3121605,Diamantina,MG,Minas Gerais,49493,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3122009,Divino,MG,Minas Gerais,21428,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3122306,Divinópolis,MG,Minas Gerais,243583,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3123601,Elói Mendes,MG,Minas Gerais,27429,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3123908,Entre Rios de Minas,MG,Minas Gerais,15157,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3124005,Ervália,MG,Minas Gerais,21091,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3124104,Esmeraldas,MG,Minas Gerais,93103,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3124203,Espera Feliz,MG,Minas Gerais,24844,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3124302,Espinosa,MG,Minas Gerais,31375,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3125101,Extrema,MG,Minas Gerais,59336,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3126109,Formiga,MG,Minas Gerais,70897,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3126703,Francisco Sá,MG,Minas Gerais,23753,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3127107,Frutal,MG,Minas Gerais,61275,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3127701,Governador Valadares,MG,Minas Gerais,266561,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3128006,Guanhães,MG,Minas Gerais,33517,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3128303,Guaranésia,MG,Minas Gerais,19646,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3128709,Guaxupé,MG,Minas Gerais,52744,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3129806,Ibirité,MG,Minas Gerais,179582,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3129509,Ibiá,MG,Minas Gerais,22554,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3130101,Igarapé,MG,Minas Gerais,49120,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3130903,Inhapim,MG,Minas Gerais,22925,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3131158,Ipaba,MG,Minas Gerais,17587,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3131208,Ipanema,MG,Minas Gerais,20181,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3131307,Ipatinga,MG,Minas Gerais,235311,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3131703,Itabira,MG,Minas Gerais,118053,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3131901,Itabirito,MG,Minas Gerais,56369,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3132107,Itacarambi,MG,Minas Gerais,17502,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3132404,Itajubá,MG,Minas Gerais,96855,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3132503,Itamarandiba,MG,Minas Gerais,34210,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3132701,Itambacuri,MG,Minas Gerais,21210,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3133006,Itamonte,MG,Minas Gerais,15245,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3133105,Itanhandu,MG,Minas Gerais,15751,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3133303,Itaobim,MG,Minas Gerais,19263,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3133501,Itapecerica,MG,Minas Gerais,21456,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3133808,Itaúna,MG,Minas Gerais,103272,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3134202,Ituiutaba,MG,Minas Gerais,106775,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3134400,Iturama,MG,Minas Gerais,40259,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3134608,Jaboticatubas,MG,Minas Gerais,21407,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3134905,Jacutinga,MG,Minas Gerais,26888,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3135100,Janaúba,MG,Minas Gerais,73555,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3135209,Januária,MG,Minas Gerais,67123,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3135050,Jaíba,MG,Minas Gerais,39639,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3135803,Jequitinhonha,MG,Minas Gerais,24516,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3136207,João Monlevade,MG,Minas Gerais,83791,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3136306,João Pinheiro,MG,Minas Gerais,48725,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3136652,Juatuba,MG,Minas Gerais,33249,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3136702,Juiz de Fora,MG,Minas Gerais,567730,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3137502,Lagoa Formosa,MG,Minas Gerais,19614,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3137601,Lagoa Santa,MG,Minas Gerais,81299,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3137205,Lagoa da Prata,MG,Minas Gerais,53927,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3137700,Lajinha,MG,Minas Gerais,21502,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3137809,Lambari,MG,Minas Gerais,21010,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3138203,Lavras,MG,Minas Gerais,110682,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3138401,Leopoldina,MG,Minas Gerais,52739,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3138609,Lima Duarte,MG,Minas Gerais,17782,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3138807,Luz,MG,Minas Gerais,18336,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3139003,Machado,MG,Minas Gerais,38809,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3139201,Malacacheta,MG,Minas Gerais,17691,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3139300,Manga,MG,Minas Gerais,19148,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3139409,Manhuaçu,MG,Minas Gerais,97328,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3139508,Manhumirim,MG,Minas Gerais,20939,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3139607,Mantena,MG,Minas Gerais,27350,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3140001,Mariana,MG,Minas Gerais,64506,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3140704,Mateus Leme,MG,Minas Gerais,40814,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3140902,Matipó,MG,Minas Gerais,19115,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3141108,Matozinhos,MG,Minas Gerais,39529,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3141405,Medina,MG,Minas Gerais,20455,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3141801,Minas Novas,MG,Minas Gerais,23843,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3142809,Monte Alegre de Minas,MG,Minas Gerais,20708,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3142908,Monte Azul,MG,Minas Gerais,20497,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3143104,Monte Carmelo,MG,Minas Gerais,49500,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3143203,Monte Santo de Minas,MG,Minas Gerais,21294,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3143401,Monte Sião,MG,Minas Gerais,25107,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3143302,Montes Claros,MG,Minas Gerais,437601,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3143906,Muriaé,MG,Minas Gerais,108447,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3144003,Mutum,MG,Minas Gerais,28749,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3144102,Muzambinho,MG,Minas Gerais,22620,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3140159,Mário Campos,MG,Minas Gerais,16705,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3144300,Nanuque,MG,Minas Gerais,35263,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3144607,Nepomuceno,MG,Minas Gerais,25757,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3144706,Nova Era,MG,Minas Gerais,17813,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3144805,Nova Lima,MG,Minas Gerais,120959,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3145000,Nova Ponte,MG,Minas Gerais,15220,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3145109,Nova Resende,MG,Minas Gerais,16919,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3145208,Nova Serrana,MG,Minas Gerais,114791,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3145307,Novo Cruzeiro,MG,Minas Gerais,27268,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3145604,Oliveira,MG,Minas Gerais,40576,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3145901,Ouro Branco,MG,Minas Gerais,40638,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3146008,Ouro Fino,MG,Minas Gerais,33285,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3146107,Ouro Preto,MG,Minas Gerais,77914,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3146305,Padre Paraíso,MG,Minas Gerais,17463,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3147006,Paracatu,MG,Minas Gerais,99005,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3147204,Paraguaçu,MG,Minas Gerais,22452,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3147303,Paraisópolis,MG,Minas Gerais,21076,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3147402,Paraopeba,MG,Minas Gerais,24899,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3147105,Pará de Minas,MG,Minas Gerais,102844,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3147600,Passa Quatro,MG,Minas Gerais,15847,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3147907,Passos,MG,Minas Gerais,116951,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3148004,Patos de Minas,MG,Minas Gerais,169173,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3148103,Patrocínio,MG,Minas Gerais,94357,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3148707,Pedra Azul,MG,Minas Gerais,25045,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3149309,Pedro Leopoldo,MG,Minas Gerais,65174,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3149804,Perdizes,MG,Minas Gerais,17992,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3149903,Perdões,MG,Minas Gerais,22075,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3148608,Peçanha,MG,Minas Gerais,17863,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3150802,Piranga,MG,Minas Gerais,17358,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3151206,Pirapora,MG,Minas Gerais,57713,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3151404,Pitangui,MG,Minas Gerais,27834,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3151503,Piumhi,MG,Minas Gerais,38007,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3152006,Pompéu,MG,Minas Gerais,32441,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3152105,Ponte Nova,MG,Minas Gerais,59638,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3152204,Porteirinha,MG,Minas Gerais,38692,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3152501,Pouso Alegre,MG,Minas Gerais,162133,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3151701,Poço Fundo,MG,Minas Gerais,16824,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3151800,Poços de Caldas,MG,Minas Gerais,172339,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3152808,Prata,MG,Minas Gerais,29745,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3153400,Presidente Olegário,MG,Minas Gerais,19192,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3153905,Raposos,MG,Minas Gerais,16796,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3154002,Raul Soares,MG,Minas Gerais,23874,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3154309,Resplendor,MG,Minas Gerais,17629,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3154606,Ribeirão das Neves,MG,Minas Gerais,346971,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3155504,Rio Paranaíba,MG,Minas Gerais,15297,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3155603,Rio Pardo de Minas,MG,Minas Gerais,29103,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3155702,Rio Piracicaba,MG,Minas Gerais,15036,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3155801,Rio Pomba,MG,Minas Gerais,17885,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3156700,Sabará,MG,Minas Gerais,134576,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3156908,Sacramento,MG,Minas Gerais,28076,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3157005,Salinas,MG,Minas Gerais,41736,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3157203,Santa Bárbara,MG,Minas Gerais,31916,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3157708,Santa Juliana,MG,Minas Gerais,16820,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3157807,Santa Luzia,MG,Minas Gerais,230382,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3157906,Santa Margarida,MG,Minas Gerais,16989,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3159605,Santa Rita do Sapucaí,MG,Minas Gerais,42517,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3159803,Santa Vitória,MG,Minas Gerais,21914,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3158953,Santana do Paraíso,MG,Minas Gerais,49025,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3159902,Santo Antônio do Amparo,MG,Minas Gerais,17657,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3160405,Santo Antônio do Monte,MG,Minas Gerais,28456,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3160702,Santos Dumont,MG,Minas Gerais,43218,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3165537,Sarzedo,MG,Minas Gerais,39974,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3167103,Serro,MG,Minas Gerais,22624,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3167202,Sete Lagoas,MG,Minas Gerais,238909,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3167608,Simonésia,MG,Minas Gerais,20431,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3161007,São Domingos do Prata,MG,Minas Gerais,17783,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3161106,São Francisco,MG,Minas Gerais,54223,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3162005,São Gonçalo do Sapucaí,MG,Minas Gerais,24497,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3162104,São Gotardo,MG,Minas Gerais,43851,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3162922,São Joaquim de Bicas,MG,Minas Gerais,37017,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3162955,São José da Lapa,MG,Minas Gerais,28087,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3162807,São João Evangelista,MG,Minas Gerais,15613,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3162906,São João Nepomuceno,MG,Minas Gerais,26529,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3162401,São João da Ponte,MG,Minas Gerais,24197,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3162500,São João del Rei,MG,Minas Gerais,94468,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3162708,São João do Paraíso,MG,Minas Gerais,24706,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3163706,São Lourenço,MG,Minas Gerais,46868,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3164704,São Sebastião do Paraíso,MG,Minas Gerais,75179,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3168002,Taiobeiras,MG,Minas Gerais,34537,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3168408,Tarumirim,MG,Minas Gerais,15104,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3168606,Teófilo Otoni,MG,Minas Gerais,142851,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3168705,Timóteo,MG,Minas Gerais,84172,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3169000,Tocantins,MG,Minas Gerais,16603,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3169307,Três Corações,MG,Minas Gerais,78291,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3169356,Três Marias,MG,Minas Gerais,29985,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3169406,Três Pontas,MG,Minas Gerais,57209,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3169604,Tupaciguara,MG,Minas Gerais,26583,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3169703,Turmalina,MG,Minas Gerais,20769,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3170107,Uberaba,MG,Minas Gerais,356781,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3170206,Uberlândia,MG,Minas Gerais,761835,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3169901,Ubá,MG,Minas Gerais,107423,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3170404,Unaí,MG,Minas Gerais,91320,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3170529,Urucuia,MG,Minas Gerais,18515,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3170701,Varginha,MG,Minas Gerais,143676,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3170909,Varzelândia,MG,Minas Gerais,19210,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3171006,Vazante,MG,Minas Gerais,20459,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3171204,Vespasiano,MG,Minas Gerais,138583,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3172004,Visconde do Rio Branco,MG,Minas Gerais,40711,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3171303,Viçosa,MG,Minas Gerais,79517,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3170800,Várzea da Palma,MG,Minas Gerais,34555,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3100906,Águas Formosas,MG,Minas Gerais,18850,false,,MG acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+5002704,Campo Grande,MS,Mato Grosso do Sul,962883,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+5103403,Cuiabá,MT,Mato Grosso,691875,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+1501402,Belém,PA,Pará,1397315,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+2507507,João Pessoa,PB,Paraíba,897633,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+2611606,Recife,PE,Pernambuco,1588376,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+2211001,Teresina,PI,Piauí,905692,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+4100400,Almirante Tamandaré,PR,Paraná,125861,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4100509,Altônia,PR,Paraná,18634,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4101002,Ampére,PR,Paraná,20337,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4101101,Andirá,PR,Paraná,19989,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4101200,Antonina,PR,Paraná,18140,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4101408,Apucarana,PR,Paraná,134910,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4101507,Arapongas,PR,Paraná,124838,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4101606,Arapoti,PR,Paraná,26325,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4101804,Araucária,PR,Paraná,162247,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4102000,Assis Chateaubriand,PR,Paraná,38357,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4102109,Astorga,PR,Paraná,26203,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4102406,Bandeirantes,PR,Paraná,31747,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4102901,Bituruna,PR,Paraná,15650,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4103453,Cafelândia,PR,Paraná,20145,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4103602,Cambará,PR,Paraná,23393,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4103701,Cambé,PR,Paraná,110923,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104006,Campina Grande do Sul,PR,Paraná,50600,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4103909,Campina da Lagoa,PR,Paraná,16014,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104204,Campo Largo,PR,Paraná,144504,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104253,Campo Magro,PR,Paraná,31888,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104303,Campo Mourão,PR,Paraná,104122,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104428,Candói,PR,Paraná,15174,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104501,Capanema,PR,Paraná,21088,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104659,Carambeí,PR,Paraná,24469,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104709,Carlópolis,PR,Paraná,17788,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104808,Cascavel,PR,Paraná,368195,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104907,Castro,PR,Paraná,75644,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4105201,Cerro Azul,PR,Paraná,16287,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4105409,Chopinzinho,PR,Paraná,21604,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4105508,Cianorte,PR,Paraná,82988,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4105805,Colombo,PR,Paraná,241672,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4105904,Colorado,PR,Paraná,23313,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4106209,Contenda,PR,Paraná,20006,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4106308,Corbélia,PR,Paraná,17933,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4106407,Cornélio Procópio,PR,Paraná,45720,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4106506,Coronel Vivida,PR,Paraná,24010,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4106803,Cruz Machado,PR,Paraná,15759,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4106605,Cruzeiro do Oeste,PR,Paraná,24859,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4106902,Curitiba,PR,Paraná,1830795,true,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4104402,Cândido de Abreu,PR,Paraná,15081,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4107207,Dois Vizinhos,PR,Paraná,47589,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4107603,Faxinal,PR,Paraná,16596,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4107652,Fazenda Rio Grande,PR,Paraná,165943,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4108304,Foz do Iguaçu,PR,Paraná,297352,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4108403,Francisco Beltrão,PR,Paraná,102312,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4108601,Goioerê,PR,Paraná,28931,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4109401,Guarapuava,PR,Paraná,189630,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4109609,Guaratuba,PR,Paraná,44913,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4108809,Guaíra,PR,Paraná,33058,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4109708,Ibaiti,PR,Paraná,29464,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4109807,Ibiporã,PR,Paraná,53276,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4110078,Imbaú,PR,Paraná,15068,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4110102,Imbituva,PR,Paraná,30849,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4110607,Iporã,PR,Paraná,16102,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4110706,Irati,PR,Paraná,61004,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4111258,Itaperuçu,PR,Paraná,33310,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4111506,Ivaiporã,PR,Paraná,33566,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4111803,Jacarezinho,PR,Paraná,41493,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4111902,Jaguapitã,PR,Paraná,15908,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4112009,Jaguariaíva,PR,Paraná,36384,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4112108,Jandaia do Sul,PR,Paraná,21930,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4113205,Lapa,PR,Paraná,45878,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4113304,Laranjeiras do Sul,PR,Paraná,33179,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4113502,Loanda,PR,Paraná,23966,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4113700,Londrina,PR,Paraná,581382,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4114203,Mandaguari,PR,Paraná,38313,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4114104,Mandaguaçu,PR,Paraná,34521,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4114302,Mandirituba,PR,Paraná,29104,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4114401,Mangueirinha,PR,Paraná,16737,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4114609,Marechal Cândido Rondon,PR,Paraná,58734,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4114807,Marialva,PR,Paraná,44749,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4115200,Maringá,PR,Paraná,429660,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4115408,Marmeleiro,PR,Paraná,16605,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4115606,Matelândia,PR,Paraná,19223,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4115705,Matinhos,PR,Paraná,42063,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4115804,Medianeira,PR,Paraná,57910,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4116208,Morretes,PR,Paraná,19089,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4116901,Nova Esperança,PR,Paraná,27142,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4117305,Ortigueira,PR,Paraná,24706,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4117503,Paiçandu,PR,Paraná,48695,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4117602,Palmas,PR,Paraná,50238,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4117701,Palmeira,PR,Paraná,34948,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4117909,Palotina,PR,Paraná,37039,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4118204,Paranaguá,PR,Paraná,150104,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4118402,Paranavaí,PR,Paraná,96209,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4118501,Pato Branco,PR,Paraná,97821,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4119152,Pinhais,PR,Paraná,131255,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4119301,Pinhão,PR,Paraná,30451,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4119509,Piraquara,PR,Paraná,127433,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4119400,Piraí do Sul,PR,Paraná,23977,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4119608,Pitanga,PR,Paraná,34527,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4119905,Ponta Grossa,PR,Paraná,375632,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4119954,Pontal do Paraná,PR,Paraná,33131,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4120606,Prudentópolis,PR,Paraná,50946,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4120804,Quatro Barras,PR,Paraná,25397,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4120903,Quedas do Iguaçu,PR,Paraná,31423,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4121208,Quitandinha,PR,Paraná,18882,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4121406,Realeza,PR,Paraná,20097,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4121703,Reserva,PR,Paraná,24878,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4122206,Rio Branco do Sul,PR,Paraná,40308,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4122305,Rio Negro,PR,Paraná,31951,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4122404,Rolândia,PR,Paraná,75818,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4123006,Salto do Lontra,PR,Paraná,15706,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4123501,Santa Helena,PR,Paraná,26461,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4124053,Santa Terezinha de Itaipu,PR,Paraná,25300,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4124103,Santo Antônio da Platina,PR,Paraná,45628,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4124400,Santo Antônio do Sudoeste,PR,Paraná,24980,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4126256,Sarandi,PR,Paraná,128106,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4126306,Sengés,PR,Paraná,17256,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4126504,Sertanópolis,PR,Paraná,16210,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4126603,Siqueira Campos,PR,Paraná,24031,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4125506,São José dos Pinhais,PR,Paraná,349880,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4125605,São Mateus do Sul,PR,Paraná,43490,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4125704,São Miguel do Iguaçu,PR,Paraná,30416,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4126801,Tapejara,PR,Paraná,16326,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4127106,Telêmaco Borba,PR,Paraná,77479,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4127205,Terra Boa,PR,Paraná,18168,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4127403,Terra Roxa,PR,Paraná,18636,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4127502,Tibagi,PR,Paraná,20374,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4127601,Tijucas do Sul,PR,Paraná,18458,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4127700,Toledo,PR,Paraná,160701,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4128005,Ubiratã,PR,Paraná,25732,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4128104,Umuarama,PR,Paraná,123059,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4128203,União da Vitória,PR,Paraná,56560,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4128500,Wenceslau Braz,PR,Paraná,19398,false,,PR acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300100,Angra dos Reis,RJ,Rio de Janeiro,179142,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300209,Araruama,RJ,Rio de Janeiro,137906,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300233,Armação dos Búzios,RJ,Rio de Janeiro,42527,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300258,Arraial do Cabo,RJ,Rio de Janeiro,32822,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300407,Barra Mansa,RJ,Rio de Janeiro,181679,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300308,Barra do Piraí,RJ,Rio de Janeiro,98506,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300456,Belford Roxo,RJ,Rio de Janeiro,518384,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300506,Bom Jardim,RJ,Rio de Janeiro,29758,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300605,Bom Jesus do Itabapoana,RJ,Rio de Janeiro,37176,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300704,Cabo Frio,RJ,Rio de Janeiro,238438,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300803,Cachoeiras de Macacu,RJ,Rio de Janeiro,59861,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3300902,Cambuci,RJ,Rio de Janeiro,15069,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3301009,Campos dos Goytacazes,RJ,Rio de Janeiro,519259,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3301108,Cantagalo,RJ,Rio de Janeiro,19995,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3301207,Carmo,RJ,Rio de Janeiro,17741,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3301306,Casimiro de Abreu,RJ,Rio de Janeiro,48636,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3301405,Conceição de Macabu,RJ,Rio de Janeiro,21770,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3301504,Cordeiro,RJ,Rio de Janeiro,21448,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3301702,Duque de Caxias,RJ,Rio de Janeiro,866225,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3301850,Guapimirim,RJ,Rio de Janeiro,54311,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3301876,Iguaba Grande,RJ,Rio de Janeiro,29616,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3301900,Itaboraí,RJ,Rio de Janeiro,240127,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302007,Itaguaí,RJ,Rio de Janeiro,124021,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302106,Itaocara,RJ,Rio de Janeiro,23645,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302205,Itaperuna,RJ,Rio de Janeiro,107297,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302254,Itatiaia,RJ,Rio de Janeiro,32713,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302270,Japeri,RJ,Rio de Janeiro,102171,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302403,Macaé,RJ,Rio de Janeiro,264439,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302502,Magé,RJ,Rio de Janeiro,244142,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302601,Mangaratiba,RJ,Rio de Janeiro,43660,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302700,Maricá,RJ,Rio de Janeiro,212470,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302809,Mendes,RJ,Rio de Janeiro,18048,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302858,Mesquita,RJ,Rio de Janeiro,178830,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3302908,Miguel Pereira,RJ,Rio de Janeiro,28142,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303005,Miracema,RJ,Rio de Janeiro,28416,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303104,Natividade,RJ,Rio de Janeiro,15551,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303203,Nilópolis,RJ,Rio de Janeiro,155500,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303302,Niterói,RJ,Rio de Janeiro,516787,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303401,Nova Friburgo,RJ,Rio de Janeiro,203417,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303500,Nova Iguaçu,RJ,Rio de Janeiro,843220,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303609,Paracambi,RJ,Rio de Janeiro,43627,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303807,Paraty,RJ,Rio de Janeiro,47668,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303708,Paraíba do Sul,RJ,Rio de Janeiro,44479,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303856,Paty do Alferes,RJ,Rio de Janeiro,31370,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303906,Petrópolis,RJ,Rio de Janeiro,294926,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3303955,Pinheiral,RJ,Rio de Janeiro,25096,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304003,Piraí,RJ,Rio de Janeiro,29066,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304102,Porciúncula,RJ,Rio de Janeiro,17832,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304110,Porto Real,RJ,Rio de Janeiro,21089,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304144,Queimados,RJ,Rio de Janeiro,149135,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304151,Quissamã,RJ,Rio de Janeiro,23142,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304201,Resende,RJ,Rio de Janeiro,137697,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304300,Rio Bonito,RJ,Rio de Janeiro,59126,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304409,Rio Claro,RJ,Rio de Janeiro,17951,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304524,Rio das Ostras,RJ,Rio de Janeiro,168455,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304557,Rio de Janeiro,RJ,Rio de Janeiro,6730729,true,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304706,Santo Antônio de Pádua,RJ,Rio de Janeiro,43697,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305406,Sapucaia,RJ,Rio de Janeiro,18291,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305505,Saquarema,RJ,Rio de Janeiro,95315,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305554,Seropédica,RJ,Rio de Janeiro,84794,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305604,Silva Jardim,RJ,Rio de Janeiro,22028,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305703,Sumidouro,RJ,Rio de Janeiro,15693,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304805,São Fidélis,RJ,Rio de Janeiro,41212,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304755,São Francisco de Itabapoana,RJ,Rio de Janeiro,47397,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3304904,São Gonçalo,RJ,Rio de Janeiro,960196,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305158,São José do Vale do Rio Preto,RJ,Rio de Janeiro,22813,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305000,São João da Barra,RJ,Rio de Janeiro,38740,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305109,São João de Meriti,RJ,Rio de Janeiro,466503,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305208,São Pedro da Aldeia,RJ,Rio de Janeiro,110677,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305752,Tanguá,RJ,Rio de Janeiro,32865,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3305802,Teresópolis,RJ,Rio de Janeiro,176735,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3306008,Três Rios,RJ,Rio de Janeiro,82319,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3306107,Valença,RJ,Rio de Janeiro,71449,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3306206,Vassouras,RJ,Rio de Janeiro,35907,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3306305,Volta Redonda,RJ,Rio de Janeiro,279971,false,,RJ acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2408102,Natal,RN,Rio Grande do Norte,784249,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+1100205,Porto Velho,RO,Rondônia,517709,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+1400100,Boa Vista,RR,Roraima,485477,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
+4300109,Agudo,RS,Rio Grande do Sul,16341,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4300406,Alegrete,RS,Rio Grande do Sul,74285,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4300604,Alvorada,RS,Rio Grande do Sul,194062,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4301305,Arroio Grande,RS,Rio Grande do Sul,17879,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4301008,Arroio do Meio,RS,Rio Grande do Sul,22523,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4301602,Bagé,RS,Rio Grande do Sul,121928,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4301636,Balneário Pinhal,RS,Rio Grande do Sul,15413,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4302105,Bento Gonçalves,RS,Rio Grande do Sul,127977,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4302709,Butiá,RS,Rio Grande do Sul,19421,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4303004,Cachoeira do Sul,RS,Rio Grande do Sul,82222,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4303103,Cachoeirinha,RS,Rio Grande do Sul,141503,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4303509,Camaquã,RS,Rio Grande do Sul,63961,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4303905,Campo Bom,RS,Rio Grande do Sul,64719,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4304200,Candelária,RS,Rio Grande do Sul,29775,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4304408,Canela,RS,Rio Grande do Sul,50715,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4304507,Canguçu,RS,Rio Grande do Sul,50968,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4304606,Canoas,RS,Rio Grande do Sul,359840,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4304630,Capão da Canoa,RS,Rio Grande do Sul,66234,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4304663,Capão do Leão,RS,Rio Grande do Sul,27416,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4304705,Carazinho,RS,Rio Grande do Sul,63670,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4304804,Carlos Barbosa,RS,Rio Grande do Sul,31585,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4305108,Caxias do Sul,RS,Rio Grande do Sul,479599,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4302808,Caçapava do Sul,RS,Rio Grande do Sul,33501,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4305355,Charqueadas,RS,Rio Grande do Sul,36110,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4305454,Cidreira,RS,Rio Grande do Sul,17583,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4306106,Cruz Alta,RS,Rio Grande do Sul,60454,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4306403,Dois Irmãos,RS,Rio Grande do Sul,31804,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4306601,Dom Pedrito,RS,Rio Grande do Sul,38080,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4306767,Eldorado do Sul,RS,Rio Grande do Sul,41012,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4306809,Encantado,RS,Rio Grande do Sul,23520,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4306908,Encruzilhada do Sul,RS,Rio Grande do Sul,24275,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4307005,Erechim,RS,Rio Grande do Sul,109609,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4307500,Espumoso,RS,Rio Grande do Sul,15478,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4307708,Esteio,RS,Rio Grande do Sul,78144,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4307807,Estrela,RS,Rio Grande do Sul,33263,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4307609,Estância Velha,RS,Rio Grande do Sul,49499,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4307906,Farroupilha,RS,Rio Grande do Sul,72552,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4308201,Flores da Cunha,RS,Rio Grande do Sul,32015,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4308508,Frederico Westphalen,RS,Rio Grande do Sul,33726,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4308607,Garibaldi,RS,Rio Grande do Sul,35563,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4308904,Getúlio Vargas,RS,Rio Grande do Sul,16955,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4309001,Giruá,RS,Rio Grande do Sul,16273,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4309100,Gramado,RS,Rio Grande do Sul,41705,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4309209,Gravataí,RS,Rio Grande do Sul,275430,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4309407,Guaporé,RS,Rio Grande do Sul,26168,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4309308,Guaíba,RS,Rio Grande do Sul,95946,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4309605,Horizontina,RS,Rio Grande do Sul,19252,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4310009,Ibirubá,RS,Rio Grande do Sul,22106,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4310108,Igrejinha,RS,Rio Grande do Sul,34776,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4310207,Ijuí,RS,Rio Grande do Sul,87848,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4310330,Imbé,RS,Rio Grande do Sul,28027,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4310603,Itaqui,RS,Rio Grande do Sul,36811,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4310801,Ivoti,RS,Rio Grande do Sul,23566,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4311007,Jaguarão,RS,Rio Grande do Sul,27396,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4311205,Júlio de Castilhos,RS,Rio Grande do Sul,18545,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4311304,Lagoa Vermelha,RS,Rio Grande do Sul,28622,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4311403,Lajeado,RS,Rio Grande do Sul,96879,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4311809,Marau,RS,Rio Grande do Sul,46748,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4312401,Montenegro,RS,Rio Grande do Sul,66352,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4313060,Nova Hartz,RS,Rio Grande do Sul,20558,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4313201,Nova Petrópolis,RS,Rio Grande do Sul,23934,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4313300,Nova Prata,RS,Rio Grande do Sul,26637,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4313375,Nova Santa Rita,RS,Rio Grande do Sul,30189,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4313409,Novo Hamburgo,RS,Rio Grande do Sul,235802,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4312658,Não-Me-Toque,RS,Rio Grande do Sul,18335,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4313508,Osório,RS,Rio Grande do Sul,48999,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4313706,Palmeira das Missões,RS,Rio Grande do Sul,34227,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4313904,Panambi,RS,Rio Grande do Sul,45102,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4314050,Parobé,RS,Rio Grande do Sul,53569,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4314100,Passo Fundo,RS,Rio Grande do Sul,214811,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4314407,Pelotas,RS,Rio Grande do Sul,336150,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4314605,Piratini,RS,Rio Grande do Sul,17770,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4314902,Porto Alegre,RS,Rio Grande do Sul,1388794,true,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4314803,Portão,RS,Rio Grande do Sul,35273,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4315305,Quaraí,RS,Rio Grande do Sul,23995,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4315503,Restinga Sêca,RS,Rio Grande do Sul,15205,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4315602,Rio Grande,RS,Rio Grande do Sul,198935,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4315701,Rio Pardo,RS,Rio Grande do Sul,35641,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4316006,Rolante,RS,Rio Grande do Sul,21752,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4316402,Rosário do Sul,RS,Rio Grande do Sul,37674,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4316600,Sananduva,RS,Rio Grande do Sul,16770,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4317103,Sant'Ana do Livramento,RS,Rio Grande do Sul,87329,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4316808,Santa Cruz do Sul,RS,Rio Grande do Sul,138270,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4316907,Santa Maria,RS,Rio Grande do Sul,282395,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4317202,Santa Rosa,RS,Rio Grande do Sul,79488,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4317301,Santa Vitória do Palmar,RS,Rio Grande do Sul,31965,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4317400,Santiago,RS,Rio Grande do Sul,50336,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4317608,Santo Antônio da Patrulha,RS,Rio Grande do Sul,44431,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4317905,Santo Cristo,RS,Rio Grande do Sul,15667,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4317509,Santo Ângelo,RS,Rio Grande do Sul,79146,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4319901,Sapiranga,RS,Rio Grande do Sul,77935,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4320008,Sapucaia do Sul,RS,Rio Grande do Sul,136572,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4320107,Sarandi,RS,Rio Grande do Sul,23374,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4320404,Serafina Corrêa,RS,Rio Grande do Sul,17407,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4320800,Soledade,RS,Rio Grande do Sul,30939,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4318002,São Borja,RS,Rio Grande do Sul,61311,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4318101,São Francisco de Assis,RS,Rio Grande do Sul,17934,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4318200,São Francisco de Paula,RS,Rio Grande do Sul,22388,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4318309,São Gabriel,RS,Rio Grande do Sul,60090,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4318408,São Jerônimo,RS,Rio Grande do Sul,21412,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4318507,São José do Norte,RS,Rio Grande do Sul,26248,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4318705,São Leopoldo,RS,Rio Grande do Sul,225737,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4318804,São Lourenço do Sul,RS,Rio Grande do Sul,43278,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4318903,São Luiz Gonzaga,RS,Rio Grande do Sul,35865,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4319000,São Marcos,RS,Rio Grande do Sul,21549,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4319406,São Pedro do Sul,RS,Rio Grande do Sul,15863,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4319505,São Sebastião do Caí,RS,Rio Grande do Sul,24898,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4319604,São Sepé,RS,Rio Grande do Sul,21551,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4320909,Tapejara,RS,Rio Grande do Sul,25256,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4321204,Taquara,RS,Rio Grande do Sul,54353,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4321303,Taquari,RS,Rio Grande do Sul,25963,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4321451,Teutônia,RS,Rio Grande do Sul,34023,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4321501,Torres,RS,Rio Grande do Sul,43344,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4321600,Tramandaí,RS,Rio Grande do Sul,56430,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4322004,Triunfo,RS,Rio Grande do Sul,28435,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4321709,Três Coroas,RS,Rio Grande do Sul,24428,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4321907,Três Passos,RS,Rio Grande do Sul,26304,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4321808,Três de Maio,RS,Rio Grande do Sul,25466,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4322202,Tupanciretã,RS,Rio Grande do Sul,20324,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4322400,Uruguaiana,RS,Rio Grande do Sul,120819,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4322509,Vacaria,RS,Rio Grande do Sul,66146,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4322608,Venâncio Aires,RS,Rio Grande do Sul,70842,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4322707,Vera Cruz,RS,Rio Grande do Sul,27670,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4322806,Veranópolis,RS,Rio Grande do Sul,24554,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4323002,Viamão,RS,Rio Grande do Sul,231996,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4323804,Xangri-lá,RS,Rio Grande do Sul,16949,false,,RS acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4200101,Abelardo Luz,SC,Santa Catarina,17767,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4201307,Araquari,SC,Santa Catarina,52079,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4201406,Araranguá,SC,Santa Catarina,76611,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4201950,Balneário Arroio do Silva,SC,Santa Catarina,17786,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4202057,Balneário Barra do Sul,SC,Santa Catarina,16953,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4202008,Balneário Camboriú,SC,Santa Catarina,151674,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4202073,Balneário Gaivota,SC,Santa Catarina,17986,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4212809,Balneário Piçarras,SC,Santa Catarina,30593,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4220000,Balneário Rincão,SC,Santa Catarina,17697,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4202107,Barra Velha,SC,Santa Catarina,52860,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4202305,Biguaçu,SC,Santa Catarina,83756,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4202404,Blumenau,SC,Santa Catarina,385558,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4202453,Bombinhas,SC,Santa Catarina,28738,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4202800,Braço do Norte,SC,Santa Catarina,35985,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4202909,Brusque,SC,Santa Catarina,155307,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4203204,Camboriú,SC,Santa Catarina,117324,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4203600,Campos Novos,SC,Santa Catarina,39049,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4203808,Canoinhas,SC,Santa Catarina,56948,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4203907,Capinzal,SC,Santa Catarina,24414,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4203956,Capivari de Baixo,SC,Santa Catarina,25015,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4203006,Caçador,SC,Santa Catarina,76298,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4204202,Chapecó,SC,Santa Catarina,282648,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4204251,Cocal do Sul,SC,Santa Catarina,18106,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4204301,Concórdia,SC,Santa Catarina,87206,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4204558,Correia Pinto,SC,Santa Catarina,16253,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4204509,Corupá,SC,Santa Catarina,15912,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4204608,Criciúma,SC,Santa Catarina,227438,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4204806,Curitibanos,SC,Santa Catarina,41741,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4205001,Dionísio Cerqueira,SC,Santa Catarina,15316,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4205407,Florianópolis,SC,Santa Catarina,587486,true,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4205456,Forquilhinha,SC,Santa Catarina,34771,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4205506,Fraiburgo,SC,Santa Catarina,34065,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4205704,Garopaba,SC,Santa Catarina,34070,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4205803,Garuva,SC,Santa Catarina,19970,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4205902,Gaspar,SC,Santa Catarina,78344,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4206009,Governador Celso Ramos,SC,Santa Catarina,18280,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4206306,Guabiruba,SC,Santa Catarina,26645,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4206504,Guaramirim,SC,Santa Catarina,51009,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4206702,Herval d'Oeste,SC,Santa Catarina,22222,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4206900,Ibirama,SC,Santa Catarina,20900,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4207106,Ilhota,SC,Santa Catarina,18627,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4207304,Imbituba,SC,Santa Catarina,57256,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4207502,Indaial,SC,Santa Catarina,77888,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4208104,Itaiópolis,SC,Santa Catarina,22906,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4208203,Itajaí,SC,Santa Catarina,294850,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4208302,Itapema,SC,Santa Catarina,86116,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4208401,Itapiranga,SC,Santa Catarina,17268,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4208450,Itapoá,SC,Santa Catarina,36033,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4208500,Ituporanga,SC,Santa Catarina,28461,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4207007,Içara,SC,Santa Catarina,63489,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4208807,Jaguaruna,SC,Santa Catarina,21570,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4208906,Jaraguá do Sul,SC,Santa Catarina,199519,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4209003,Joaçaba,SC,Santa Catarina,31809,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4209102,Joinville,SC,Santa Catarina,664541,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4209300,Lages,SC,Santa Catarina,172458,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4209409,Laguna,SC,Santa Catarina,44060,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4210100,Mafra,SC,Santa Catarina,57262,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4210506,Maravilha,SC,Santa Catarina,30743,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4210605,Massaranduba,SC,Santa Catarina,18122,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4211207,Morro da Fumaça,SC,Santa Catarina,19490,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4211306,Navegantes,SC,Santa Catarina,96046,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4211702,Orleans,SC,Santa Catarina,24686,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4211751,Otacílio Costa,SC,Santa Catarina,17873,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4211900,Palhoça,SC,Santa Catarina,253469,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4212106,Palmitos,SC,Santa Catarina,15781,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4212205,Papanduva,SC,Santa Catarina,19769,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4212502,Penha,SC,Santa Catarina,36995,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4212908,Pinhalzinho,SC,Santa Catarina,23897,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4213203,Pomerode,SC,Santa Catarina,37003,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4213500,Porto Belo,SC,Santa Catarina,31557,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4213609,Porto União,SC,Santa Catarina,33694,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4213708,Pouso Redondo,SC,Santa Catarina,18051,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4214003,Presidente Getúlio,SC,Santa Catarina,21764,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4215000,Rio Negrinho,SC,Santa Catarina,40132,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4214805,Rio do Sul,SC,Santa Catarina,77451,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4215505,Santa Cecília,SC,Santa Catarina,15749,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4215703,Santo Amaro da Imperatriz,SC,Santa Catarina,30099,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4217402,Schroeder,SC,Santa Catarina,21710,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4217501,Seara,SC,Santa Catarina,19399,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4217709,Sombrio,SC,Santa Catarina,31722,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4215802,São Bento do Sul,SC,Santa Catarina,87661,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4216206,São Francisco do Sul,SC,Santa Catarina,56726,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4216503,São Joaquim,SC,Santa Catarina,26982,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4216602,São José,SC,Santa Catarina,295658,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4216305,São João Batista,SC,Santa Catarina,35336,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4216909,São Lourenço do Oeste,SC,Santa Catarina,26056,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4217204,São Miguel do Oeste,SC,Santa Catarina,47724,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4217808,Taió,SC,Santa Catarina,18909,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4218004,Tijucas,SC,Santa Catarina,58695,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4218202,Timbó,SC,Santa Catarina,49768,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4218301,Três Barras,SC,Santa Catarina,20525,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4218707,Tubarão,SC,Santa Catarina,116725,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4219002,Urussanga,SC,Santa Catarina,21464,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4219309,Videira,SC,Santa Catarina,59074,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4219507,Xanxerê,SC,Santa Catarina,54891,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+4219705,Xaxim,SC,Santa Catarina,34485,false,,SC acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2800209,Aquidabã,SE,Sergipe,20556,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2800308,Aracaju,SE,Sergipe,630932,true,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2800506,Areia Branca,SE,Sergipe,18626,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2800605,Barra dos Coqueiros,SE,Sergipe,45175,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2800670,Boquim,SE,Sergipe,25007,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2801009,Campo do Brito,SE,Sergipe,18719,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2801207,Canindé de São Francisco,SE,Sergipe,33641,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2801306,Capela,SE,Sergipe,32783,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2801405,Carira,SE,Sergipe,20314,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2801702,Cristinápolis,SE,Sergipe,17594,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2802106,Estância,SE,Sergipe,67060,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2802809,Indiaroba,SE,Sergipe,16991,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2802908,Itabaiana,SE,Sergipe,109250,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2803005,Itabaianinha,SE,Sergipe,42230,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2803203,Itaporanga d'Ajuda,SE,Sergipe,36074,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2803302,Japaratuba,SE,Sergipe,16451,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2803500,Lagarto,SE,Sergipe,105957,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2803609,Laranjeiras,SE,Sergipe,24047,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2804003,Maruim,SE,Sergipe,15956,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2804409,Neópolis,SE,Sergipe,16473,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2804508,Nossa Senhora da Glória,SE,Sergipe,43686,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2804607,Nossa Senhora das Dores,SE,Sergipe,25569,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2804805,Nossa Senhora do Socorro,SE,Sergipe,204081,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2805604,Porto da Folha,SE,Sergipe,27348,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2805406,Poço Redondo,SE,Sergipe,29238,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2805505,Poço Verde,SE,Sergipe,22217,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2805703,Propriá,SE,Sergipe,27213,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2805802,Riachão do Dantas,SE,Sergipe,18541,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2806008,Ribeirópolis,SE,Sergipe,17365,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2806206,Salgado,SE,Sergipe,20825,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2807105,Simão Dias,SE,Sergipe,44503,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2806701,São Cristóvão,SE,Sergipe,101213,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2807402,Tobias Barreto,SE,Sergipe,52783,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+2807600,Umbaúba,SE,Sergipe,24618,false,,SE acima de 15.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3500105,Adamantina,SP,São Paulo,35673,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3500303,Aguaí,SP,São Paulo,32886,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3500709,Agudos,SP,São Paulo,38988,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3501608,Americana,SP,São Paulo,247571,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3501905,Amparo,SP,São Paulo,69792,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3501707,Américo Brasiliense,SP,São Paulo,33708,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3502101,Andradina,SP,São Paulo,61625,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3502507,Aparecida,SP,São Paulo,33141,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3503208,Araraquara,SP,São Paulo,253474,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3503307,Araras,SP,São Paulo,135744,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3502804,Araçatuba,SP,São Paulo,208415,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3502903,Araçoiaba da Serra,SP,São Paulo,33832,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3503802,Artur Nogueira,SP,São Paulo,53467,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3503901,Arujá,SP,São Paulo,90273,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3504008,Assis,SP,São Paulo,104858,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3504107,Atibaia,SP,São Paulo,167161,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3504503,Avaré,SP,São Paulo,96450,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3505203,Bariri,SP,São Paulo,32406,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3505302,Barra Bonita,SP,São Paulo,35129,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3505500,Barretos,SP,São Paulo,126957,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3505609,Barrinha,SP,São Paulo,33304,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3505708,Barueri,SP,São Paulo,333737,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3505906,Batatais,SP,São Paulo,59939,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3506003,Bauru,SP,São Paulo,392947,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3506102,Bebedouro,SP,São Paulo,78257,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3506359,Bertioga,SP,São Paulo,67436,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3506508,Birigui,SP,São Paulo,123340,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3506607,Biritiba Mirim,SP,São Paulo,30564,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3507001,Boituva,SP,São Paulo,63850,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3507506,Botucatu,SP,São Paulo,151053,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3507605,Bragança Paulista,SP,São Paulo,185688,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3508405,Cabreúva,SP,São Paulo,48654,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3508603,Cachoeira Paulista,SP,São Paulo,32534,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3509007,Caieiras,SP,São Paulo,98549,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3509205,Cajamar,SP,São Paulo,98365,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3509502,Campinas,SP,São Paulo,1187974,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3509601,Campo Limpo Paulista,SP,São Paulo,79781,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3509700,Campos do Jordão,SP,São Paulo,47956,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3510401,Capivari,SP,São Paulo,51369,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3510203,Capão Bonito,SP,São Paulo,47409,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3510500,Caraguatatuba,SP,São Paulo,142248,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3510609,Carapicuíba,SP,São Paulo,398236,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3511102,Catanduva,SP,São Paulo,119275,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3508504,Caçapava,SP,São Paulo,100071,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3511508,Cerquilho,SP,São Paulo,46391,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3512803,Cosmópolis,SP,São Paulo,61167,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3513009,Cotia,SP,São Paulo,289493,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3513108,Cravinhos,SP,São Paulo,34307,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3513405,Cruzeiro,SP,São Paulo,76444,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3513504,Cubatão,SP,São Paulo,114870,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3510005,Cândido Mota,SP,São Paulo,30157,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3513702,Descalvado,SP,São Paulo,32663,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3513801,Diadema,SP,São Paulo,403579,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3514403,Dracena,SP,São Paulo,46735,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3515004,Embu das Artes,SP,São Paulo,259788,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3515103,Embu-Guaçu,SP,São Paulo,68913,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3515186,Espírito Santo do Pinhal,SP,São Paulo,40610,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3515509,Fernandópolis,SP,São Paulo,73508,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3515707,Ferraz de Vasconcelos,SP,São Paulo,186479,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3516200,Franca,SP,São Paulo,365494,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3516309,Francisco Morato,SP,São Paulo,171476,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3516408,Franco da Rocha,SP,São Paulo,150241,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3516705,Garça,SP,São Paulo,43081,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3518206,Guararapes,SP,São Paulo,31888,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3518305,Guararema,SP,São Paulo,32620,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3518404,Guaratinguetá,SP,São Paulo,121916,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3518602,Guariba,SP,São Paulo,38678,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3518701,Guarujá,SP,São Paulo,294871,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3518800,Guarulhos,SP,São Paulo,1349100,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3517406,Guaíra,SP,São Paulo,40489,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3519071,Hortolândia,SP,São Paulo,248842,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3519303,Ibaté,SP,São Paulo,33160,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3519600,Ibitinga,SP,São Paulo,62143,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3519709,Ibiúna,SP,São Paulo,77801,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3520400,Ilhabela,SP,São Paulo,36559,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3520509,Indaiatuba,SP,São Paulo,269657,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3521002,Iperó,SP,São Paulo,38277,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3522109,Itanhaém,SP,São Paulo,118495,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3522208,Itapecerica da Serra,SP,São Paulo,163003,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3522307,Itapetininga,SP,São Paulo,164256,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3522406,Itapeva,SP,São Paulo,92393,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3522505,Itapevi,SP,São Paulo,242995,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3522604,Itapira,SP,São Paulo,74038,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3523107,Itaquaquecetuba,SP,São Paulo,382983,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3523206,Itararé,SP,São Paulo,45213,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3523404,Itatiba,SP,São Paulo,127112,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3523909,Itu,SP,São Paulo,175047,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3524006,Itupeva,SP,São Paulo,74994,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3524105,Ituverava,SP,São Paulo,38413,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3522703,Itápolis,SP,São Paulo,40445,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3524303,Jaboticabal,SP,São Paulo,73473,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3524402,Jacareí,SP,São Paulo,250952,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3524709,Jaguariúna,SP,São Paulo,62309,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3524808,Jales,SP,São Paulo,50078,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3525003,Jandira,SP,São Paulo,121550,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3525102,Jardinópolis,SP,São Paulo,47125,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3525201,Jarinu,SP,São Paulo,40007,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3525300,Jaú,SP,São Paulo,137409,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3525706,José Bonifácio,SP,São Paulo,37992,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3525904,Jundiaí,SP,São Paulo,463039,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3526704,Leme,SP,São Paulo,101537,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3526803,Lençóis Paulista,SP,São Paulo,68568,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3526902,Limeira,SP,São Paulo,301292,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3527108,Lins,SP,São Paulo,76844,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3527207,Lorena,SP,São Paulo,87468,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3527306,Louveira,SP,São Paulo,54865,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3528403,Mairinque,SP,São Paulo,51888,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3528502,Mairiporã,SP,São Paulo,97835,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3529005,Marília,SP,São Paulo,247348,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3529302,Matão,SP,São Paulo,81075,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3529401,Mauá,SP,São Paulo,429014,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3530300,Mirassol,SP,São Paulo,65811,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3530508,Mococa,SP,São Paulo,69372,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3530706,Mogi Guaçu,SP,São Paulo,160318,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3530805,Mogi Mirim,SP,São Paulo,95742,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3530607,Mogi das Cruzes,SP,São Paulo,470302,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3531100,Mongaguá,SP,São Paulo,64845,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3531308,Monte Alto,SP,São Paulo,48758,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3531803,Monte Mor,SP,São Paulo,67832,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3533403,Nova Odessa,SP,São Paulo,64596,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3533502,Novo Horizonte,SP,São Paulo,39494,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3533908,Olímpia,SP,São Paulo,56874,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3534302,Orlândia,SP,São Paulo,39144,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3534401,Osasco,SP,São Paulo,759524,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3534609,Osvaldo Cruz,SP,São Paulo,32112,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3534708,Ourinhos,SP,São Paulo,106911,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3535507,Paraguaçu Paulista,SP,São Paulo,42049,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3536505,Paulínia,SP,São Paulo,116674,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3536703,Pederneiras,SP,São Paulo,46337,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3537107,Pedreira,SP,São Paulo,44385,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3537305,Penápolis,SP,São Paulo,63426,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3537602,Peruíbe,SP,São Paulo,70629,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3537800,Piedade,SP,São Paulo,54266,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3538006,Pindamonhangaba,SP,São Paulo,172681,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3538709,Piracicaba,SP,São Paulo,440835,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3538808,Piraju,SP,São Paulo,30294,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3539301,Pirassununga,SP,São Paulo,75594,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3539509,Pitangueiras,SP,São Paulo,34361,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3540200,Pontal,SP,São Paulo,38286,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3540606,Porto Feliz,SP,São Paulo,58605,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3540705,Porto Ferreira,SP,São Paulo,53966,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3539806,Poá,SP,São Paulo,106355,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3541000,Praia Grande,SP,São Paulo,368539,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3541307,Presidente Epitácio,SP,São Paulo,40322,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3541406,Presidente Prudente,SP,São Paulo,234706,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3541505,Presidente Venceslau,SP,São Paulo,35810,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3541604,Promissão,SP,São Paulo,35973,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3542602,Registro,SP,São Paulo,61927,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3543303,Ribeirão Pires,SP,São Paulo,118954,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3543402,Ribeirão Preto,SP,São Paulo,731639,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3543907,Rio Claro,SP,São Paulo,210323,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3544103,Rio Grande da Serra,SP,São Paulo,45324,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3544004,Rio das Pedras,SP,São Paulo,32329,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3545209,Salto,SP,São Paulo,141111,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3545308,Salto de Pirapora,SP,São Paulo,45262,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3545803,Santa Bárbara d'Oeste,SP,São Paulo,189456,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3546405,Santa Cruz do Rio Pardo,SP,São Paulo,47759,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3546603,Santa Fé do Sul,SP,São Paulo,36288,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3546801,Santa Isabel,SP,São Paulo,54691,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3547304,Santana de Parnaíba,SP,São Paulo,163787,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3547809,Santo André,SP,São Paulo,782048,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3548500,Santos,SP,São Paulo,429547,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3551603,Serra Negra,SP,São Paulo,31047,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3551504,Serrana,SP,São Paulo,45580,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3551702,Sertãozinho,SP,São Paulo,132176,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3552106,Socorro,SP,São Paulo,41527,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3552205,Sorocaba,SP,São Paulo,762172,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3552403,Sumaré,SP,São Paulo,291116,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3552502,Suzano,SP,São Paulo,320261,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3548708,São Bernardo do Campo,SP,São Paulo,841154,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3548807,São Caetano do Sul,SP,São Paulo,172693,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3548906,São Carlos,SP,São Paulo,266427,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3549409,São Joaquim da Barra,SP,São Paulo,49885,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3549706,São José do Rio Pardo,SP,São Paulo,53427,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3549805,São José do Rio Preto,SP,São Paulo,504166,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3549904,São José dos Campos,SP,São Paulo,727078,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3549102,São João da Boa Vista,SP,São Paulo,96080,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3550100,São Manuel,SP,São Paulo,38131,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3550209,São Miguel Arcanjo,SP,São Paulo,32924,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3550308,São Paulo,SP,São Paulo,11904961,true,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3550407,São Pedro,SP,São Paulo,39855,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3550605,São Roque,SP,São Paulo,81366,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3550704,São Sebastião,SP,São Paulo,84280,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3551009,São Vicente,SP,São Paulo,338326,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3552809,Taboão da Serra,SP,São Paulo,285307,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3553708,Taquaritinga,SP,São Paulo,53264,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3554003,Tatuí,SP,São Paulo,129130,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3554102,Taubaté,SP,São Paulo,322397,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3554508,Tietê,SP,São Paulo,38723,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3554805,Tremembé,SP,São Paulo,53426,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3555000,Tupã,SP,São Paulo,65433,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3555406,Ubatuba,SP,São Paulo,97096,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3556206,Valinhos,SP,São Paulo,132258,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3556453,Vargem Grande Paulista,SP,São Paulo,52352,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3556404,Vargem Grande do Sul,SP,São Paulo,41256,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3556701,Vinhedo,SP,São Paulo,79089,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3557006,Votorantim,SP,São Paulo,133510,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3557105,Votuporanga,SP,São Paulo,100568,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+3556503,Várzea Paulista,SP,São Paulo,119655,false,,SP acima de 30.000 habitantes,SIDRA 6579/v/9324/p/2025,2026-05-20
+1721000,Palmas,TO,Tocantins,328499,true,,Capital dos demais estados/DF,SIDRA 6579/v/9324/p/2025,2026-05-20
