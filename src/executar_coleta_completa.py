@@ -131,6 +131,7 @@ def _executar_lote_em_chunks(
     sem_playwright: bool,
     sem_estaduais: bool,
     chunk_size: int,
+    forcar: bool = False,
 ) -> Path:
     df = _read_base_chunks(input_path)
     uf_col = _uf_column(df)
@@ -139,13 +140,20 @@ def _executar_lote_em_chunks(
         return _executar_lote_subprocess(input_path, output_path, uf, sem_playwright, sem_estaduais)
 
     chunks_base = output_path.parent / "chunks"
+    chunk_dir = chunks_base / uf.upper()
+    if forcar and chunk_dir.exists():
+        for stale_output in chunk_dir.glob(f"resultado_{uf.upper()}_part*.xlsx"):
+            stale_output.unlink()
+
     chunk_outputs: list[Path] = []
     for start in range(0, len(uf_df), chunk_size):
         index = start // chunk_size + 1
         chunk_input, chunk_output = _chunk_paths(chunks_base, uf.upper(), index)
         chunk_outputs.append(chunk_output)
-        if lote_concluido(chunk_output):
+        if not forcar and lote_concluido(chunk_output):
             continue
+        if forcar and chunk_output.exists():
+            chunk_output.unlink()
         uf_df.iloc[start : start + chunk_size].to_csv(chunk_input, index=False, encoding="utf-8")
         incluir_estadual_no_chunk = index == 1 and not sem_estaduais
         _executar_lote_subprocess(
@@ -218,7 +226,18 @@ def executar_coleta_completa(
     if workers_ufs <= 1:
         for uf, partial in pendentes:
             print(f"Executando lote {uf}: {partial}")
-            executar_pipeline(_args_lote(input_file, partial, uf, sem_playwright, sem_estaduais))
+            if chunk_size > 0:
+                _executar_lote_em_chunks(
+                    input_file,
+                    partial,
+                    uf,
+                    sem_playwright,
+                    sem_estaduais,
+                    chunk_size,
+                    forcar=forcar,
+                )
+            else:
+                executar_pipeline(_args_lote(input_file, partial, uf, sem_playwright, sem_estaduais))
     else:
         with ThreadPoolExecutor(max_workers=workers_ufs) as executor:
             futures = {
@@ -229,7 +248,7 @@ def executar_coleta_completa(
                     uf,
                     sem_playwright,
                     sem_estaduais,
-                    *([chunk_size] if chunk_size > 0 else []),
+                    *([chunk_size, forcar] if chunk_size > 0 else []),
                 ): (uf, partial)
                 for uf, partial in pendentes
             }

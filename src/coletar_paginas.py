@@ -208,19 +208,24 @@ def _baixar(
     except requests.RequestException as exc:
         return "", "Site fora do ar", f"Erro de conexão: {exc}", url, None, "", "requests"
 
-    final_url = clean_url(response.url)
-    content_type = response.headers.get("content-type", "").lower()
-    if response.status_code in {401, 403, 429}:
-        return _ler_texto_limitado(response), "Bloqueio técnico", f"HTTP {response.status_code}.", final_url, response.status_code, content_type, "requests"
-    if response.status_code >= 500:
-        return _ler_texto_limitado(response), "Site fora do ar", f"HTTP {response.status_code}.", final_url, response.status_code, content_type, "requests"
-    if response.status_code >= 400:
-        return _ler_texto_limitado(response), "Página sem informação pública", f"HTTP {response.status_code}.", final_url, response.status_code, content_type, "requests"
+    try:
+        final_url = clean_url(response.url)
+        content_type = response.headers.get("content-type", "").lower()
+        if response.status_code in {401, 403, 429}:
+            return _ler_texto_limitado(response), "Bloqueio técnico", f"HTTP {response.status_code}.", final_url, response.status_code, content_type, "requests"
+        if response.status_code >= 500:
+            return _ler_texto_limitado(response), "Site fora do ar", f"HTTP {response.status_code}.", final_url, response.status_code, content_type, "requests"
+        if response.status_code >= 400:
+            return _ler_texto_limitado(response), "Página sem informação pública", f"HTTP {response.status_code}.", final_url, response.status_code, content_type, "requests"
 
-    if content_type and "html" not in content_type and "text" not in content_type:
-        return "", "Página sem informação pública", f"Conteúdo ignorado: {content_type}.", final_url, response.status_code, content_type, "requests"
+        if content_type and "html" not in content_type and "text" not in content_type:
+            return "", "Página sem informação pública", f"Conteúdo ignorado: {content_type}.", final_url, response.status_code, content_type, "requests"
 
-    return _ler_texto_limitado(response), "Encontrado", "", final_url, response.status_code, content_type, "requests"
+        return _ler_texto_limitado(response), "Encontrado", "", final_url, response.status_code, content_type, "requests"
+    finally:
+        close = getattr(response, "close", None)
+        if callable(close):
+            close()
 
 
 def _ler_texto_limitado(response: requests.Response, max_bytes: int = MAX_BYTES_POR_PAGINA) -> str:

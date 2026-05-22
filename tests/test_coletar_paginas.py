@@ -16,6 +16,20 @@ class FakeResponse:
         self.headers = {"content-type": content_type}
 
 
+class FakeStreamResponse(FakeResponse):
+    def __init__(self, url, chunks, status_code=200, content_type="text/html"):
+        super().__init__(url, "", status_code, content_type)
+        self.chunks = chunks
+        self.closed = False
+        self.encoding = "utf-8"
+
+    def iter_content(self, chunk_size=65536):
+        yield from self.chunks
+
+    def close(self):
+        self.closed = True
+
+
 class FakeSession:
     def __init__(self, responses=None, exception=None):
         self.responses = dict(responses or {})
@@ -196,6 +210,37 @@ def test_coletar_paginas_classifica_timeout_e_http_bloqueado():
     assert blocked_result.status == "Bloqueio técnico"
     assert "HTTP 403" in blocked_result.observacoes
     assert blocked_result.fontes_consultadas[0].status_http == 403
+
+
+def test_baixar_fecha_resposta_streamada_apos_html():
+    import src.coletar_paginas as coletor
+
+    response = FakeStreamResponse("https://cidade.sp.gov.br/", [b"<html>Gabinete</html>"])
+    session = FakeSession({"https://cidade.sp.gov.br/": response})
+
+    html, status, *_ = coletor._baixar(session, "https://cidade.sp.gov.br/", timeout=1)
+
+    assert html == "<html>Gabinete</html>"
+    assert status == "Encontrado"
+    assert response.closed
+
+
+def test_baixar_fecha_resposta_streamada_em_conteudo_ignorado():
+    import src.coletar_paginas as coletor
+
+    response = FakeStreamResponse(
+        "https://cidade.sp.gov.br/arquivo.pdf",
+        [b"%PDF"],
+        content_type="application/pdf",
+    )
+    session = FakeSession({"https://cidade.sp.gov.br/arquivo.pdf": response})
+
+    html, status, observacao, *_ = coletor._baixar(session, "https://cidade.sp.gov.br/arquivo.pdf", timeout=1)
+
+    assert html == ""
+    assert status != "Encontrado"
+    assert "application/pdf" in observacao
+    assert response.closed
 
 
 def test_coletar_paginas_usa_playwright_quando_requests_nao_tem_texto(monkeypatch):
