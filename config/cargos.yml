@@ -1,0 +1,54 @@
+prefeito:
+  - prefeito
+  - prefeita
+  - gabinete do prefeito
+  - gabinete da prefeita
+  - chefe do executivo
+
+vice_prefeito:
+  - vice-prefeito
+  - vice prefeito
+  - vice-prefeita
+  - vice prefeita
+
+chefe_gabinete:
+  - chefe de gabinete
+  - gabinete
+
+desenvolvimento_economico:
+  - desenvolvimento econômico
+  - secretaria de desenvolvimento econômico
+  - indústria e comércio
+  - desenvolvimento, indústria e comércio
+  - desenvolvimento econômico e turismo
+  - trabalho e desenvolvimento econômico
+
+desenvolvimento:
+  - secretaria de desenvolvimento
+  - desenvolvimento
+  - desenvolvimento municipal
+  - desenvolvimento urbano
+
+financas_fazenda:
+  - finanças
+  - fazenda
+  - secretaria de finanças
+  - secretaria da fazenda
+  - administração e finanças
+  - finanças e planejamento
+
+planejamento:
+  - planejamento
+  - secretaria de planejamento
+  - planejamento urbano
+  - gestão e planejamento
+  - planejamento e gestão
+
+agencia_desenvolvimento:
+  - agência de desenvolvimento
+  - agencia de desenvolvimento
+  - desenvolvimento municipal
+  - sala do empreendedor
+  - banco do povo
+  - casa do empreendedor
+

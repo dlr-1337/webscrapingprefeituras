@@ -1,0 +1,12 @@
+municipio,uf,estado,populacao,capital,site_oficial
+São Paulo,SP,São Paulo,11904961,true,https://www.capital.sp.gov.br/
+Campinas,SP,São Paulo,1187974,false,https://www.campinas.sp.gov.br/
+Belo Horizonte,MG,Minas Gerais,2415872,true,https://prefeitura.pbh.gov.br/
+Curitiba,PR,Paraná,1830795,true,https://www.curitiba.pr.gov.br/
+Florianópolis,SC,Santa Catarina,587486,true,https://www.pmf.sc.gov.br/
+Rio de Janeiro,RJ,Rio de Janeiro,6730729,true,https://prefeitura.rio/
+Salvador,BA,Bahia,2564204,true,https://www.salvador.ba.gov.br/
+Aracaju,SE,Sergipe,630932,true,https://www.aracaju.se.gov.br/
+Goiânia,GO,Goiás,1503256,true,https://www.goiania.go.gov.br/
+Vitória,ES,Espírito Santo,343378,true,https://www.vitoria.es.gov.br/
+Brasília,DF,Distrito Federal,2996899,true,https://www.df.gov.br/

@@ -1,0 +1,35 @@
+SP:
+  populacao_minima: 30000
+  incluir_capital: true
+
+MG:
+  populacao_minima: 15000
+  incluir_capital: true
+SC:
+  populacao_minima: 15000
+  incluir_capital: true
+PR:
+  populacao_minima: 15000
+  incluir_capital: true
+RS:
+  populacao_minima: 15000
+  incluir_capital: true
+RJ:
+  populacao_minima: 15000
+  incluir_capital: true
+GO:
+  populacao_minima: 15000
+  incluir_capital: true
+ES:
+  populacao_minima: 15000
+  incluir_capital: true
+BA:
+  populacao_minima: 15000
+  incluir_capital: true
+SE:
+  populacao_minima: 15000
+  incluir_capital: true
+
+default:
+  apenas_capital: true
+
