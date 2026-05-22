@@ -68,6 +68,38 @@ SEGMENTOS_IGNORADOS = {
 
 MAX_BYTES_POR_PAGINA = 2_000_000
 
+CONTEUDO_PRINCIPAL_SELECTORS = (
+    "main",
+    "article",
+    "[role='main']",
+    ".entry-content",
+    ".post-content",
+    ".page-content",
+    ".content-area",
+    "#content",
+    "#main",
+)
+
+TAGS_BOILERPLATE = ("script", "style", "noscript", "svg", "header", "nav", "footer", "aside")
+
+BOILERPLATE_CLASS_ID_TOKENS = (
+    "breadcrumb",
+    "menu",
+    "navbar",
+    "navigation",
+    "rodape",
+    "footer",
+    "sidebar",
+    "social-share",
+    "social-icons",
+    "social-media",
+    "rede-social",
+    "redes-sociais",
+    "share",
+    "search",
+    "acessibilidade",
+)
+
 
 @dataclass(slots=True)
 class PaginaColetada:
@@ -133,9 +165,31 @@ def criar_sessao(user_agent: str, retries: int) -> requests.Session:
 
 def html_para_texto(html: str) -> str:
     soup = BeautifulSoup(html or "", "html.parser")
-    for tag in soup(["script", "style", "noscript", "svg"]):
+    for tag in soup(TAGS_BOILERPLATE):
         tag.decompose()
-    return soup.get_text("\n", strip=True)
+
+    for tag in list(soup.find_all(True)):
+        if tag.attrs is None:
+            continue
+        marker = " ".join(
+            str(value)
+            for value in (
+                tag.get("id", ""),
+                " ".join(tag.get("class", [])),
+                tag.get("role", ""),
+            )
+        ).lower()
+        if any(token in marker for token in BOILERPLATE_CLASS_ID_TOKENS):
+            tag.decompose()
+
+    candidates = []
+    for selector in CONTEUDO_PRINCIPAL_SELECTORS:
+        candidates.extend(soup.select(selector))
+    container = max(candidates, key=lambda item: len(item.get_text(" ", strip=True)), default=None)
+    if not container or len(container.get_text(" ", strip=True)) < 80:
+        container = soup.body or soup
+
+    return container.get_text("\n", strip=True)
 
 
 def pagina_indica_bloqueio(texto: str, html: str = "") -> bool:

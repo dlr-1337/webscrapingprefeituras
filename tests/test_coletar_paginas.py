@@ -65,6 +65,52 @@ def test_html_para_texto_remove_scripts_styles_e_tags_sem_texto():
     assert "sem js" not in texto
 
 
+def test_html_para_texto_prioriza_conteudo_principal_e_remove_boilerplate():
+    html = """
+    <html>
+      <body>
+        <header>Prefeito Secretarias Autarquias</header>
+        <nav>Vice-Prefeito Gabinete</nav>
+        <main>
+          <h1>Prefeito</h1>
+          <h2>Alysson Bestene Lins</h2>
+          <p>Contatos: alysson.bestene@riobranco.ac.gov.br</p>
+        </main>
+        <footer>Municipal de Educacao</footer>
+      </body>
+    </html>
+    """
+
+    texto = html_para_texto(html)
+
+    assert "Alysson Bestene Lins" in texto
+    assert "alysson.bestene@riobranco.ac.gov.br" in texto
+    assert "Prefeito Secretarias" not in texto
+    assert "Municipal de Educa" not in texto
+
+
+def test_html_para_texto_preserva_assistencia_social_e_remove_widget_social():
+    html = """
+    <html>
+      <body>
+        <main>
+          <section class="assistencia-social">
+            <h1>Secretaria Municipal de Assistencia Social</h1>
+            <p>Telefone: (11) 3333-3333</p>
+          </section>
+          <div class="social-share">Compartilhar no Facebook</div>
+        </main>
+      </body>
+    </html>
+    """
+
+    texto = html_para_texto(html)
+
+    assert "Secretaria Municipal de Assistencia Social" in texto
+    assert "(11) 3333-3333" in texto
+    assert "Compartilhar no Facebook" not in texto
+
+
 def test_pagina_indica_bloqueio_por_texto_ou_html():
     assert pagina_indica_bloqueio("Acesso negado")
     assert pagina_indica_bloqueio("", "<div>Cloudflare verify you are human</div>")
