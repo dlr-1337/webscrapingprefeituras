@@ -51,7 +51,7 @@ CAMINHOS_IGNORADOS = (
     "/turismo",
 )
 
-QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=")
+QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=")
 SEGMENTOS_IGNORADOS = {
     "/page/",
     "/pagina/",
@@ -76,6 +76,10 @@ SEGMENTOS_IGNORADOS = {
     "/portal/obras/",
     "/secretarias-paginas/",
     "/turismo/",
+    "-noticias",
+    "noticias-",
+    "escola-municipal",
+    "escolas-municipais",
     "gabinete-militar",
     "funcoes-da-secretaria",
     "estrutura-da-secretaria",

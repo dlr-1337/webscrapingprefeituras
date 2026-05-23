@@ -153,6 +153,9 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/portal/download/arquivos/CGzzx/">Download sem extensao</a>
     <a href="/portal/editais/0/1/7964/">Edital com contato</a>
     <a href="/portal/obras/20/">Obra com contato</a>
+    <a href="/gabinete-prefeito-noticias">Noticia em slug</a>
+    <a href="/contatos?start=25">Paginacao de contatos</a>
+    <a href="/contatos/18-escolas-municipais">Escolas municipais</a>
     <a href="/estrutura-organizacional/?pg=1&tax=tipo-secretaria%3D5">Secretaria paginada</a>
     <a href="/portal/detalhe-prefeito/21/">Prefeito histórico</a>
     <a href="/portal/secretarias-paginas/30/conselho/">Conselho</a>
