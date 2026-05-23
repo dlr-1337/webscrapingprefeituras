@@ -601,7 +601,12 @@ def coletar_paginas(
             primeiro_status = status
             primeira_observacao = observacao
 
-        if status != "Encontrado" and usar_playwright and status in {"Bloqueio técnico", "Página sem informação pública"}:
+        deve_tentar_navegador_por_status = status in {
+            "Bloqueio técnico",
+            "Página sem informação pública",
+        } or (len(visitadas) == 1 and status == "Site fora do ar")
+
+        if status != "Encontrado" and usar_playwright and deve_tentar_navegador_por_status:
             fontes_consultadas.append(
                 FonteConsultada(
                     url=url,

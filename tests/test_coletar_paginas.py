@@ -256,13 +256,29 @@ def test_coletar_paginas_classifica_timeout_e_http_bloqueado():
     timeout_result = coletar_paginas(
         "https://timeout.test/",
         ["contato"],
-        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste", "usar_caminhos_fallback_bloqueio": False},
+        config={
+            "timeout_segundos": 1,
+            "retries": 0,
+            "delay_entre_requisicoes": 0,
+            "max_paginas_por_municipio": 5,
+            "user_agent": "teste",
+            "usar_playwright_quando_necessario": False,
+            "usar_caminhos_fallback_bloqueio": False,
+        },
         session=FakeSession(exception=requests.Timeout("demorou")),
     )
     blocked_result = coletar_paginas(
         "https://bloqueio.test/",
         ["contato"],
-        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste", "usar_caminhos_fallback_bloqueio": False},
+        config={
+            "timeout_segundos": 1,
+            "retries": 0,
+            "delay_entre_requisicoes": 0,
+            "max_paginas_por_municipio": 5,
+            "user_agent": "teste",
+            "usar_playwright_quando_necessario": False,
+            "usar_caminhos_fallback_bloqueio": False,
+        },
         session=FakeSession({"https://bloqueio.test/": FakeResponse("https://bloqueio.test/", "bloqueado", 403)}),
     )
 
@@ -324,6 +340,38 @@ def test_coletar_paginas_usa_playwright_quando_requests_nao_tem_texto(monkeypatc
 
     assert result.paginas[0].texto == "Gabinete do Prefeito"
     assert [fonte.metodo for fonte in result.fontes_consultadas] == ["requests", "playwright"]
+
+
+def test_coletar_paginas_tenta_navegador_quando_home_tem_timeout(monkeypatch):
+    import src.coletar_paginas as coletor
+
+    session = FakeSession(exception=requests.Timeout("demorou"))
+
+    def fake_navegador(url, timeout, backend="auto", usar_cloakbrowser=True):
+        return "<html><body>Gabinete do Prefeito Maria Silva</body></html>", "Encontrado", "", url, 200, "text/html", "playwright"
+
+    monkeypatch.setattr(coletor, "_baixar_com_navegador", fake_navegador)
+
+    result = coletar_paginas(
+        "https://cidade.sp.gov.br/",
+        ["gabinete"],
+        config={
+            "timeout_segundos": 1,
+            "retries": 0,
+            "delay_entre_requisicoes": 0,
+            "max_paginas_por_municipio": 5,
+            "user_agent": "teste",
+            "usar_playwright_quando_necessario": True,
+            "usar_caminhos_fallback_bloqueio": False,
+        },
+        session=session,
+    )
+
+    assert result.status == "Encontrado"
+    assert result.paginas[0].texto == "Gabinete do Prefeito Maria Silva"
+    assert [fonte.metodo for fonte in result.fontes_consultadas] == ["requests", "playwright"]
+
+
 def test_coletar_paginas_tenta_caminho_institucional_quando_home_bloqueia():
     equipe = "<html><body>Equipe de Governo Prefeita Maria Silva Fone: (14) 3333-0000</body></html>"
     session = FakeSession(
