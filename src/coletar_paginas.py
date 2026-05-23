@@ -49,6 +49,8 @@ CAMINHOS_IGNORADOS = (
     "/normas-legais",
     "/documentos",
     "/turismo",
+    "/videos",
+    "/faq",
 )
 
 QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=")
@@ -282,6 +284,10 @@ def _url_deve_ser_ignorada(url: str) -> bool:
     if any(path.startswith(prefix) for prefix in CAMINHOS_IGNORADOS):
         return True
     if any(segment in path for segment in SEGMENTOS_IGNORADOS):
+        return True
+    if path.count("/secretaria/") >= 2:
+        return True
+    if path.rstrip("/").endswith(("/videos", "/faq")):
         return True
     last_segment = path.rstrip("/").rsplit("/", 1)[-1]
     if len(last_segment) >= 45 and last_segment.count("-") >= 5:
