@@ -166,6 +166,8 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/secretaria/15/secretaria/13/controladoria-geral">Secretaria recursiva</a>
     <a href="/secretaria/15/videos">Videos da secretaria</a>
     <a href="/secretaria/15/faq">FAQ da secretaria</a>
+    <a href="/portal/portal/catnoticias/7">Categoria de noticias</a>
+    <a href="/portal/portal/viewnoticia/3201">Noticia por id</a>
     <a href="mailto:gabinete@cidade.gov.br">Email</a>
     <a href="/noticias">Noticias</a>
     """

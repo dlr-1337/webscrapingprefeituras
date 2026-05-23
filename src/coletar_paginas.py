@@ -76,6 +76,8 @@ SEGMENTOS_IGNORADOS = {
     "/portal/editais/",
     "/portal/noticia/",
     "/portal/noticias/",
+    "/catnoticias/",
+    "/viewnoticia/",
     "/portal/obras/",
     "/portal/contrato/",
     "/marcador/",
