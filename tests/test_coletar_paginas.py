@@ -156,6 +156,9 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/gabinete-prefeito-noticias">Noticia em slug</a>
     <a href="/contatos?start=25">Paginacao de contatos</a>
     <a href="/contatos/18-escolas-municipais">Escolas municipais</a>
+    <a href="/a-cidade/historia/prefeitos-de-lambari">Historico de prefeitos</a>
+    <a href="/portal/contrato/7280/">Contrato municipal</a>
+    <a href="/marcador/gabinete-prefeito">Marcador de noticias</a>
     <a href="/estrutura-organizacional/?pg=1&tax=tipo-secretaria%3D5">Secretaria paginada</a>
     <a href="/portal/detalhe-prefeito/21/">Prefeito histórico</a>
     <a href="/portal/secretarias-paginas/30/conselho/">Conselho</a>
