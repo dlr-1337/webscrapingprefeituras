@@ -53,7 +53,7 @@ CAMINHOS_IGNORADOS = (
     "/faq",
 )
 
-QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=")
+QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=", "export=", "ps_export=")
 SEGMENTOS_IGNORADOS = {
     "/page/",
     "/pagina/",

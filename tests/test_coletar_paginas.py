@@ -171,6 +171,8 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/portal/portal/viewnoticia/3201">Noticia por id</a>
     <a href="/gabinete/5/secretaria/1/administra-o-e-finan-as">Secretaria aninhada no gabinete</a>
     <a href="/gabinetecivil@cidade.sp.gov.br">E-mail colado como URL</a>
+    <a href="/planejamento-orcamentario/?cat=20&export=csv">Export CSV</a>
+    <a href="/planejamento-saude/?ps_export=json&ps_scope=planejamento">Export JSON</a>
     <a href="mailto:gabinete@cidade.gov.br">Email</a>
     <a href="/noticias">Noticias</a>
     """
