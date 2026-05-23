@@ -289,6 +289,8 @@ def _url_deve_ser_ignorada(url: str) -> bool:
         return True
     if path.count("/secretaria/") >= 2:
         return True
+    if "/gabinete/" in path and "/secretaria/" in path:
+        return True
     if path.rstrip("/").endswith(("/videos", "/faq")):
         return True
     last_segment = path.rstrip("/").rsplit("/", 1)[-1]
