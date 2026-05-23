@@ -1,4 +1,5 @@
 from src.extrair_contatos import (
+    carregar_cargos,
     detectar_cargos,
     extrair_celulares,
     extrair_contatos_de_texto,
@@ -21,6 +22,10 @@ def test_extrai_emails_telefones_e_celulares():
     assert extrair_emails(texto) == ["gabinete@exemplo.gov.br"]
     assert "(11) 3333-3333" in extrair_telefones(texto)
     assert "+55 11 99999-9999" in extrair_celulares(texto)
+
+
+def test_intervalo_de_anos_nao_vira_telefone():
+    assert extrair_telefones("Planejamento 2021-2024 e protocolos 1603-2021") == []
 
 
 def test_detecta_cargo_e_associa_contato_no_mesmo_bloco():
@@ -471,3 +476,393 @@ def test_rejeita_menu_como_nome_de_autoridade():
     texto = "Prefeito Secretarias\nGestao Administrativa\nCidade Autarquias\n"
 
     assert extrair_contatos_de_texto(texto, CARGOS, "https://cidade.gov.br") == []
+
+
+def test_gabinete_generico_nao_vira_chefe_de_gabinete():
+    cargos = {"chefe_gabinete": ["chefe de gabinete", "gabinete"]}
+    texto = """
+    Gabinete
+    Minha Casa
+    Prestacao de Contas
+    """
+
+    assert extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br") == []
+
+
+def test_desenvolvimento_generico_em_descricao_nao_vira_secretaria_alvo():
+    cargos = {"desenvolvimento": ["secretaria de desenvolvimento", "desenvolvimento"]}
+    texto = """
+    Secretaria Municipal de Agropecuaria
+    Desenvolvimento da Agricultura:
+    A secretaria trabalha no estimulo ao desenvolvimento da agricultura familiar.
+    Conheca o Secretario
+    Eracides Caetano de Souza
+    Contatos:
+    eracides.souza@cidade.gov.br
+    (68) 3212-7463
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/seagro")
+
+    assert all(item[COL_CARGO_ORGAO] != "Secretaria de Desenvolvimento" for item in contatos)
+
+
+def test_perfil_conheca_secretario_associa_cargo_contatos():
+    cargos = {
+        "financas_fazenda": [
+            "financas",
+            "secretaria de financas",
+            "secretaria municipal de financas",
+            "secretario municipal de financas",
+        ]
+    }
+    texto = """
+    Secretaria Municipal de Financas
+    Conheca o Secretario
+    Wilson Jose das Chagas Sena Leite
+    Secretario Municipal de Financas
+    Contatos:
+    gabinete.secfinancas@cidade.gov.br
+    wilson.leite@cidade.gov.br
+    +55 (68) 3212-7424
+    Endereco:
+    Rua Central, 100
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/sefin")
+
+    assert len(contatos) == 1
+    assert contatos[0][COL_CARGO_ORGAO] == "Secretaria de Finanças/Fazenda"
+    assert contatos[0]["Nome"] == "Wilson Jose das Chagas Sena Leite"
+    assert "wilson.leite@cidade.gov.br" in contatos[0]["E-mail"]
+    assert contatos[0]["Telefone"] == "+55 (68) 3212-7424"
+    assert contatos[0]["Status"] == "Encontrado"
+
+
+def test_desenvolvimento_economico_nao_duplica_desenvolvimento_generico():
+    cargos = {
+        "desenvolvimento_economico": ["desenvolvimento economico"],
+        "desenvolvimento": ["secretaria municipal de desenvolvimento"],
+    }
+    cargos_detectados = detectar_cargos("Secretaria Municipal de Desenvolvimento Economico", cargos)
+
+    assert cargos_detectados == ["Secretaria de Desenvolvimento Econômico"]
+
+
+def test_email_nao_inclui_rotulo_telefone_colado():
+    assert extrair_emails("sec.esportes@cidade.gov.brTelefone: (11) 3333-3333") == ["sec.esportes@cidade.gov.br"]
+
+
+def test_lista_secretarias_extrai_nome_sem_inventar_contato():
+    cargos = {
+        "desenvolvimento_economico": [
+            "desenvolvimento economico",
+            "secretaria municipal de desenvolvimento economico",
+        ]
+    }
+    texto = """
+    Secretarias
+    SDTI
+    Secretaria Municipal de Desenvolvimento Economico, Turismo, Tecnologia e Inovacao
+    Secretario:
+    Coronel Ezequiel de Oliveira Bino
+    Endereco:
+    Rua Goldwasser Santos
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/secretarias")
+
+    assert len(contatos) == 1
+    assert contatos[0][COL_CARGO_ORGAO] == "Secretaria de Desenvolvimento Econômico"
+    assert contatos[0]["Nome"] == "Coronel Ezequiel de Oliveira Bino"
+    assert contatos[0]["Status"] == "Parcial"
+    assert contatos[0]["E-mail"] == ""
+
+
+def test_rotulo_secretario_parenteses_extrai_nome_correto():
+    cargos = {
+        "planejamento": [
+            "planejamento",
+            "planejameto",
+            "secretaria municipal de planejameto",
+        ]
+    }
+    texto = """
+    Secretaria Municipal de Planejameto
+    Secretario(a): Willian da Silva Reis Ferreira Filho (Makito)
+    planejamento@cidade.gov.br
+    (43) 3911-3023
+    Secretarias
+    Secretaria Municipal de Financas
+    Noticias relacionadas
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/secretariaView/?id=18")
+
+    assert contatos[0][COL_CARGO_ORGAO] == "Secretaria de Planejamento"
+    assert contatos[0]["Nome"] == "Willian da Silva Reis Ferreira Filho"
+    assert contatos[0]["E-mail"] == "planejamento@cidade.gov.br"
+
+
+def test_pagina_secretaria_singular_com_diretorio_nao_associa_lista_a_cargo():
+    cargos = {
+        "desenvolvimento_economico": ["desenvolvimento economico"],
+        "planejamento": ["planejamento"],
+    }
+    texto = """
+    Secretarias
+    Secretaria de Protecao e Desenvolvimento Social
+    sec.social@cidade.gov.br
+    (51) 3451-8000
+    Secretaria de Planejamento
+    sec.planejamento@cidade.gov.br
+    (51) 3450-4066
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/secretaria/")
+
+    assert contatos
+    assert {item[COL_CARGO_ORGAO] for item in contatos} == {"Contato geral"}
+
+
+def test_telefones_uteis_nao_vazam_para_vice_prefeito():
+    cargos = {
+        "prefeito": ["prefeito", "prefeita"],
+        "vice_prefeito": ["vice-prefeito", "vice prefeito"],
+    }
+    texto = """
+    Vice-Prefeito
+    Daniel Balke
+    O vice-prefeito de Ferraz de Vasconcelos, Daniel Balke, e contador.
+    Em 2020, foi eleito vice-prefeito junto com a prefeita Priscila.
+    AGENDAMENTO DE CONSULTA ON-LINE
+    Telefones uteis
+    Junta Militar
+    (11) 4678-8970
+    Defesa Civil
+    (11) 95310-2217
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/vice-prefeito")
+    vice = [item for item in contatos if item[COL_CARGO_ORGAO] == "Vice-prefeito"][0]
+
+    assert vice["Nome"] == "Daniel Balke"
+    assert vice["Telefone"] == ""
+    assert vice["Celular/WhatsApp"] == ""
+    assert vice["Status"] == "Parcial"
+    assert all(item[COL_CARGO_ORGAO] != "Prefeito" for item in contatos)
+
+
+def test_manchete_com_subsecretaria_nao_vira_nome():
+    cargos = {"desenvolvimento_economico": ["subsecretaria de esportes e juventude", "desenvolvimento economico"]}
+    texto = """
+    Prefeitura divulga percurso oficial
+    Saude
+    Vitoria Pereira
+    Subsecretaria de Esportes e Juventude
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/")
+
+    assert contatos == []
+
+
+def test_ultimas_noticias_nao_criam_contato_de_prefeito():
+    cargos = {"prefeito": ["prefeito"]}
+    texto = """
+    Prefeito
+    Joao Silva
+    Contatos:
+    prefeito@cidade.gov.br
+    (11) 1111-1111
+
+    Ultimas noticias
+    Prefeito Joao Silva acompanha obras
+    atendimento@cidade.gov.br
+    (11) 2222-2222
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/prefeito")
+    prefeito = [item for item in contatos if item[COL_CARGO_ORGAO] == "Prefeito"][0]
+
+    assert prefeito["E-mail"] == "prefeito@cidade.gov.br"
+    assert "(11) 2222-2222" not in prefeito["Telefone"]
+
+
+def test_pagina_de_contatos_com_muitos_contatos_nao_associa_cargo_especifico():
+    cargos = {"prefeito": ["prefeito"], "planejamento": ["secretaria de planejamento"]}
+    texto = """
+    Contatos
+    Prefeito
+    Secretaria de Planejamento
+    secretaria1@cidade.gov.br
+    secretaria2@cidade.gov.br
+    secretaria3@cidade.gov.br
+    secretaria4@cidade.gov.br
+    (11) 1111-1111
+    (11) 2222-2222
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/contatos")
+
+    assert contatos
+    assert {item[COL_CARGO_ORGAO] for item in contatos} == {"Contato geral"}
+
+
+def test_pires_do_rio_rotulos_nao_viram_autoridades():
+    cargos = {
+        "prefeito": ["prefeito", "prefeita", "gabinete da prefeita"],
+        "financas_fazenda": ["financas", "fazenda", "secretaria municipal de financas"],
+        "desenvolvimento": ["secretaria de desenvolvimento", "desenvolvimento"],
+    }
+    texto = """
+    Gabinete da Prefeita
+    Centro Horário
+    Base Jurídica
+    gabinete@piresdorio.go.gov.br
+    (64) 98440-0020
+
+    Continue Lendo Chefe Nédia Mazon Sobre
+    Termos de Posse
+
+    Secretaria de Obras e Desenvolvimento Urbano
+    Divisão Divisão
+    (64) 98440-0071
+
+    Secretaria Municipal de Finanças
+    Base Jurídica
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://piresdorio.go.gov.br/estrutura/gabinete-da-prefeito/")
+
+    assert all(item["Nome"] not in {"Centro Horário", "Base Jurídica", "Termos de Posse", "Divisão Divisão"} for item in contatos)
+    assert all("Continue Lendo" not in item["Nome"] for item in contatos)
+    assert all(item[COL_CARGO_ORGAO] != "Prefeito" for item in contatos if item["Nome"])
+
+
+def test_pires_do_rio_mescla_nome_e_contato_do_prefeito_no_mesmo_orgao():
+    cargos = {"prefeito": ["prefeito", "prefeita", "gabinete da prefeita"]}
+    texto = """
+    Gabinete da Prefeita
+    Hugo Sérgio Batista
+    Prefeito
+
+    Gabinete da Prefeita
+    Centro Horário
+    comunicacao@piresdorio.go.gov.br
+    (64) 98440-0043
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://piresdorio.go.gov.br/estrutura/gabinete-da-prefeito/")
+    prefeito = [item for item in contatos if item[COL_CARGO_ORGAO] == "Prefeito"][0]
+
+    assert prefeito["Nome"] == "Hugo Sérgio Batista"
+    assert prefeito["E-mail"] == "comunicacao@piresdorio.go.gov.br"
+    assert prefeito["Celular/WhatsApp"] == "(64) 98440-0043"
+    assert prefeito["Status"] == "Encontrado"
+
+
+def test_equipe_governo_bauru_nao_vaza_contatos_entre_perfis():
+    cargos = {
+        "prefeito": ["prefeito", "prefeita"],
+        "vice_prefeito": ["vice-prefeito", "vice prefeito"],
+        "chefe_gabinete": ["chefe de gabinete", "gabinete"],
+        "desenvolvimento_economico": ["desenvolvimento economico", "secretaria de desenvolvimento economico"],
+        "financas_fazenda": ["fazenda", "secretaria da fazenda"],
+    }
+    texto = """
+    Prefeita
+    Suéllen Silva Rosim
+    Fone:
+    (014) 3235-1000
+
+    Vice-Prefeito
+    Orlando Costa Dias
+    Fone:
+    (014) 3235-1000
+
+    Gabinete
+    Leonardo Marcari
+    Fone:
+    (014) 3235-1000
+
+    Secretaria de Desenvolvimento Econômico, Turismo e Inovação
+    Carlos Agra
+    Fone:
+    (014) 3227-7819
+
+    Secretaria da Fazenda
+    Everson Demarchi
+    Fone:
+    (014) 3235-1496
+
+    Secretaria de Educação
+    Pessoa Fora do Escopo
+    Fone:
+    (014) 3235-1314
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www2.bauru.sp.gov.br/equipe_governo.aspx")
+    por_cargo = {item[COL_CARGO_ORGAO]: item for item in contatos}
+
+    assert por_cargo["Prefeito"]["Nome"] == "Suéllen Silva Rosim"
+    assert por_cargo["Vice-prefeito"]["Nome"] == "Orlando Costa Dias"
+    assert por_cargo["Vice-prefeito"]["Telefone"] == "3235-1000"
+    assert por_cargo["Chefe de gabinete"]["Nome"] == "Leonardo Marcari"
+    assert por_cargo["Secretaria de Desenvolvimento Econômico"]["Nome"] == "Carlos Agra"
+    assert por_cargo["Secretaria de Desenvolvimento Econômico"]["Telefone"] == "3227-7819"
+    assert por_cargo["Secretaria de Finanças/Fazenda"]["Nome"] == "Everson Demarchi"
+    assert "(014) 3235-1314" not in por_cargo["Secretaria de Finanças/Fazenda"]["Telefone"]
+def test_pires_do_rio_chefia_de_gabinete_usa_responsavel_do_bloco():
+    cargos = {
+        "chefe_gabinete": ["chefe de gabinete", "chefia de gabinete", "gabinete"],
+    }
+    texto = """
+    Chefia de Gabinete
+    Responsável:
+    Nédia Mazon
+    Telefone:
+    64 98440-0020
+    E-mail:
+    gabinete@piresdorio.go.gov.br
+
+    Superintendência de Comunicação, Tecnologia e Inovação
+    Responsável:
+    Glênio José Martins Filho
+    Telefone:
+    64 98440-0043
+    E-mail:
+    comunicacao@piresdorio.go.gov.br
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://piresdorio.go.gov.br/estrutura/gabinete-da-prefeito/")
+    chefe = [item for item in contatos if item[COL_CARGO_ORGAO] == "Chefe de gabinete"][0]
+
+    assert chefe["Nome"] == "Nédia Mazon"
+    assert chefe["E-mail"] == "gabinete@piresdorio.go.gov.br"
+    assert chefe["Celular/WhatsApp"] == "64 98440-0020"
+    assert "98440-0043" not in chefe["Celular/WhatsApp"]
+def test_concessao_de_areas_nao_vira_agencia_de_desenvolvimento():
+    cargos = carregar_cargos()
+    texto = """
+    Secretaria de Desenvolvimento Municipal
+    Concessão de Áreas
+    Saiba como solicitar concessão de áreas públicas para instalação de empresas.
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www2.bauru.sp.gov.br/servicos.aspx?m=5")
+
+    assert all(item[COL_CARGO_ORGAO] != "Agência/Sala de Desenvolvimento" for item in contatos)
+
+
+def test_distritos_industriais_nao_vira_agencia_de_desenvolvimento():
+    cargos = carregar_cargos()
+    texto = """
+    Secretaria de Desenvolvimento Econômico
+    Distritos Industriais
+    Informações sobre áreas, empresas instaladas e concessões.
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www2.bauru.sp.gov.br/sedecon/")
+
+    assert all(item[COL_CARGO_ORGAO] != "Agência/Sala de Desenvolvimento" for item in contatos)

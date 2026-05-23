@@ -117,6 +117,22 @@ def test_pagina_indica_bloqueio_por_texto_ou_html():
     assert not pagina_indica_bloqueio("Página de contatos institucional")
 
 
+def test_recaptcha_em_pagina_institucional_com_conteudo_util_nao_e_bloqueio():
+    texto = " ".join(
+        [
+            "Prefeitura Municipal",
+            "Equipe de Governo",
+            "Prefeita Maria Silva",
+            "Secretaria de Desenvolvimento Econômico",
+            "Secretaria da Fazenda",
+            "Contato e Telefones da Prefeitura",
+        ]
+        * 8
+    )
+
+    assert not pagina_indica_bloqueio(texto, "<script src='recaptcha/api.js'></script>")
+
+
 def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     html = """
     <a href="/gabinete">Gabinete do prefeito</a>
@@ -176,7 +192,7 @@ def test_coletar_paginas_visita_home_e_links_relevantes_sem_rede_real():
     result = coletar_paginas(
         "cidade.sp.gov.br",
         ["gabinete", "secretaria"],
-        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste"},
+        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste", "usar_caminhos_fallback_bloqueio": False},
         session=session,
     )
 
@@ -209,7 +225,7 @@ def test_coletar_paginas_deduplica_www_http_e_https():
     result = coletar_paginas(
         "https://cidade.sp.gov.br/",
         ["gabinete"],
-        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste"},
+        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste", "usar_caminhos_fallback_bloqueio": False},
         session=session,
     )
 
@@ -227,7 +243,7 @@ def test_coletar_paginas_detecta_bloqueio_no_primeiro_html():
     result = coletar_paginas(
         "https://cidade.sp.gov.br/",
         ["gabinete"],
-        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste"},
+        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste", "usar_caminhos_fallback_bloqueio": False},
         session=session,
     )
 
@@ -240,13 +256,13 @@ def test_coletar_paginas_classifica_timeout_e_http_bloqueado():
     timeout_result = coletar_paginas(
         "https://timeout.test/",
         ["contato"],
-        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste"},
+        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste", "usar_caminhos_fallback_bloqueio": False},
         session=FakeSession(exception=requests.Timeout("demorou")),
     )
     blocked_result = coletar_paginas(
         "https://bloqueio.test/",
         ["contato"],
-        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste"},
+        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste", "usar_caminhos_fallback_bloqueio": False},
         session=FakeSession({"https://bloqueio.test/": FakeResponse("https://bloqueio.test/", "bloqueado", 403)}),
     )
 
@@ -308,3 +324,32 @@ def test_coletar_paginas_usa_playwright_quando_requests_nao_tem_texto(monkeypatc
 
     assert result.paginas[0].texto == "Gabinete do Prefeito"
     assert [fonte.metodo for fonte in result.fontes_consultadas] == ["requests", "playwright"]
+def test_coletar_paginas_tenta_caminho_institucional_quando_home_bloqueia():
+    equipe = "<html><body>Equipe de Governo Prefeita Maria Silva Fone: (14) 3333-0000</body></html>"
+    session = FakeSession(
+        {
+            "https://www.bauru.sp.gov.br/": FakeResponse("https://www.bauru.sp.gov.br/", "<html>Acesso negado captcha</html>"),
+            "https://www.bauru.sp.gov.br/equipe_governo.aspx": FakeResponse(
+                "https://www2.bauru.sp.gov.br/equipe_governo.aspx",
+                equipe,
+            ),
+        }
+    )
+
+    result = coletar_paginas(
+        "https://www.bauru.sp.gov.br/",
+        ["equipe de governo"],
+        config={
+            "timeout_segundos": 1,
+            "retries": 0,
+            "delay_entre_requisicoes": 0,
+            "max_paginas_por_municipio": 2,
+            "user_agent": "teste",
+            "usar_playwright_quando_necessario": False,
+        },
+        session=session,
+    )
+
+    assert result.status == "Encontrado"
+    assert len(result.paginas) == 1
+    assert result.paginas[0].url == "https://www2.bauru.sp.gov.br/equipe_governo.aspx"

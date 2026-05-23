@@ -7,6 +7,7 @@ import pandas as pd
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
+from src.escopo_categorias import CATEGORIA_IDENTIFICACAO
 from src.validar_resultados import (
     COLUNAS_FONTES_LOG,
     COLUNAS_MUNICIPIOS,
@@ -23,8 +24,9 @@ def criar_resumo(
     pendencias_df: pd.DataFrame,
 ) -> pd.DataFrame:
     total_municipios = len(municipios_df)
-    encontrados = resultado_df[resultado_df.get("Status", "") == "Encontrado"] if not resultado_df.empty else resultado_df
-    parciais = resultado_df[resultado_df.get("Status", "") == "Parcial"] if not resultado_df.empty else resultado_df
+    resultado_contatos = _resultado_sem_identificacao(resultado_df)
+    encontrados = resultado_contatos[resultado_contatos.get("Status", "") == "Encontrado"] if not resultado_contatos.empty else resultado_contatos
+    parciais = resultado_contatos[resultado_contatos.get("Status", "") == "Parcial"] if not resultado_contatos.empty else resultado_contatos
 
     status_geral = municipios_df.get("Status geral", pd.Series(dtype=str)).astype(str)
     pend_status = pendencias_df.get("Status", pd.Series(dtype=str)).astype(str)
@@ -127,6 +129,12 @@ def _contar_municipios_unicos(df: pd.DataFrame) -> int:
     if df.empty or not {"UF", "Município"}.issubset(df.columns):
         return 0
     return int(df[["UF", "Município"]].drop_duplicates().shape[0])
+
+
+def _resultado_sem_identificacao(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty or "Cargo/Área" not in df.columns:
+        return df
+    return df[df["Cargo/Área"].astype(str) != CATEGORIA_IDENTIFICACAO.label].copy()
 
 
 def _formatar_aba(writer: pd.ExcelWriter, sheet_name: str) -> None:

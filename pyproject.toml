@@ -18,7 +18,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0.0"]
-dynamic = ["playwright>=1.45.0"]
+dynamic = ["playwright>=1.45.0", "cloakbrowser>=0.3.30"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

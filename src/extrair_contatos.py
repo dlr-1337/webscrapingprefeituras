@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 from typing import Iterable
+from urllib.parse import urlparse
 
 from src.coletar_paginas import PaginaColetada
 from src.utils import load_yaml, normalize_for_search, project_path, strip_accents
@@ -36,6 +37,7 @@ NOME_EXCLUDE = {
     "sala do empreendedor",
     "fale conosco",
     "portal da transparencia",
+    "praca",
     "diario oficial",
     "acessar o conteudo",
     "prefeito secretarias",
@@ -48,34 +50,143 @@ NOME_EXCLUDE = {
     "ultimas noticias",
     "endereco",
     "contatos",
+    "ano mes semana dia boletim informativo",
+    "assistencia social",
+    "base juridica",
+    "casa civil",
+    "ciencia e tecnologia",
+    "comunidade mariele franco",
+    "competencias e atribuicoes",
+    "concessao de areas",
+    "controle ambiental economia solidaria",
+    "diretoria de financas publicas coordenador",
+    "estrada do aviario",
+    "horario de atendimento",
+    "licenciamento e regularizacao",
+    "meio ambiente cultura",
+    "ministerio da mulher",
+    "minha casa",
+    "municipio de acrelandia assessor parlamentar",
+    "obras publicas",
+    "parque chico mendes novo mirante",
+    "poder executivo",
+    "prestacao de contas",
+    "procuradoria geral",
+    "projeto de lei complementar",
+    "ramal menino jesus prefeitura",
+    "rio branco",
+    "rua alvorada",
+    "rua rui barbosa",
+    "segundo andar",
+    "seguranca publica",
+    "saude de jussara opcao",
+    "superintendencia executiva",
+    "trabalho coordenadoria",
+    "planejameto noticias",
+    "continue lendo",
+    "termos de posse",
+    "divisao divisao",
+    "distritos industriais",
+    "patrulha agricola rural",
 }
 
 NOME_TOKEN_EXCLUDE = {
     "acessar",
+    "agricola",
     "administrativa",
     "autarquias",
+    "ambiental",
+    "andar",
+    "ano",
+    "avenida",
+    "aviario",
+    "bairro",
+    "base",
+    "branco",
     "cidade",
+    "casa",
+    "centro",
+    "ciencia",
+    "civil",
+    "complementar",
+    "competencias",
+    "concessao",
+    "areas",
+    "comunidade",
     "contato",
     "contatos",
     "conteudo",
+    "contas",
+    "controle",
+    "continue",
+    "cultura",
+    "dia",
     "diario",
+    "diretoria",
     "educacao",
     "email",
     "endereco",
+    "estrada",
     "estado",
+    "executivo",
+    "financas",
+    "juridica",
+    "juridico",
     "gabinete",
     "gestao",
+    "horario",
+    "juventude",
+    "lei",
+    "lendo",
+    "licenciamento",
+    "mariele",
+    "meio",
+    "menino",
+    "ministerio",
+    "mes",
+    "minha",
     "municipais",
     "municipal",
+    "municipio",
+    "mulher",
+    "obras",
+    "opcao",
     "orgaos",
+    "parque",
+    "patrulha",
+    "poder",
     "portal",
+    "praca",
+    "posse",
+    "prestacao",
+    "presidente",
     "prefeita",
     "prefeito",
+    "procurador",
+    "publicas",
+    "rua",
+    "saude",
     "secretaria",
     "secretarias",
     "secretario",
+    "sobre",
+    "subsecretaria",
+    "subsecretario",
     "telefone",
+    "tecnologia",
+    "termos",
+    "tribunal",
+    "trabalho",
     "transparencia",
+    "rural",
+    "urbano",
+    "departamentos",
+    "divisao",
+    "distritos",
+    "industriais",
+    "filtrar",
+    "apagar",
+    "ver",
 }
 
 NOME_PREFIXOS_INVALIDOS = {
@@ -88,16 +199,30 @@ NOME_PREFIXOS_INVALIDOS = {
 }
 
 CARGOS_EXECUTIVOS = {"Prefeito", "Vice-prefeito", "Chefe de gabinete"}
+PARTICULAS_NOME = {"de", "da", "do", "dos", "das", "e"}
 
 SECOES_RUIDOSAS = {
     "ultimas noticias",
     "ultimas notícias",
     "noticias recentes",
     "notícias recentes",
+    "agendamento de consulta on-line",
+    "telefones uteis",
+    "telefones úteis",
     "veja tambem",
     "veja também",
     "leia tambem",
     "leia também",
+    "noticias relacionadas",
+    "notícias relacionadas",
+}
+
+VARIACOES_GENERICAS_IGNORADAS = {
+    ("chefe_gabinete", "gabinete"),
+    ("desenvolvimento", "desenvolvimento"),
+    ("financas_fazenda", "fazenda"),
+    ("financas_fazenda", "financas"),
+    ("planejamento", "planejamento"),
 }
 
 COL_ORGAO = "\u00d3rg\u00e3o/Secretaria"
@@ -126,15 +251,39 @@ def carregar_cargos(path: str | Path | None = None) -> dict[str, list[str]]:
 
 
 def extrair_emails(texto: str) -> list[str]:
-    emails = [email.lower() for email in EMAIL_PATTERN.findall(texto or "")]
+    emails = [_limpar_email(email.lower()) for email in EMAIL_PATTERN.findall(texto or "")]
+    emails = [email for email in emails if email]
     return list(dict.fromkeys(emails))
+
+
+def _limpar_email(email: str) -> str:
+    value = str(email or "").strip().strip(".,;:")
+    for suffix in ("telefone", "telefones", "fone", "celular", "whatsapp"):
+        if value.endswith(suffix):
+            value = value[: -len(suffix)]
+            break
+    return value.strip(".,;:")
 
 
 def extrair_telefones(texto: str) -> list[str]:
     telefones: list[str] = []
     for match in PHONE_PATTERN.finditer(texto or ""):
+        if _parece_intervalo_de_anos(match):
+            continue
         telefones.append(match.group(0).strip())
     return list(dict.fromkeys(telefones))
+
+
+def _parece_intervalo_de_anos(match: re.Match) -> bool:
+    if match.group(1):
+        return False
+    inicio = match.group(2)
+    fim = match.group(3)
+    if len(inicio) != 4 or len(fim) != 4:
+        return False
+    if inicio.startswith(("19", "20")) and fim.startswith(("19", "20")):
+        return True
+    return bool(fim.startswith("20") and 101 <= int(inicio) <= 3112)
 
 
 def _digits(value: str) -> str:
@@ -188,15 +337,27 @@ def _termo_cargo_presente(haystack: str, needle: str) -> bool:
     return False
 
 
+def _ignorar_variacao_generica(cargo_key: str, variacao: str) -> bool:
+    return (cargo_key, normalize_for_search(variacao)) in VARIACOES_GENERICAS_IGNORADAS
+
+
 def detectar_cargos(texto: str, cargos_config: dict[str, list[str]]) -> list[str]:
     haystack = normalize_for_search(texto)
     encontrados: list[str] = []
     for cargo_key, variacoes in cargos_config.items():
         for variacao in variacoes:
+            if _ignorar_variacao_generica(cargo_key, variacao):
+                continue
             needle = normalize_for_search(variacao)
             if _termo_cargo_presente(haystack, needle):
                 encontrados.append(CARGO_LABELS.get(cargo_key, cargo_key.replace("_", " ").title()))
                 break
+    if (
+        "Secretaria de Desenvolvimento Econômico" in encontrados
+        and "Secretaria de Desenvolvimento" in encontrados
+        and "desenvolvimento economico" in haystack
+    ):
+        encontrados = [cargo for cargo in encontrados if cargo != "Secretaria de Desenvolvimento"]
     return list(dict.fromkeys(encontrados))
 
 
@@ -215,6 +376,8 @@ def _nome_valido(nome: str) -> bool:
         if normalize_for_search(part).strip(".,:;") not in {"de", "da", "do", "dos", "das", "e"}
     ]
     if any(part in NOME_TOKEN_EXCLUDE for part in normalized_parts):
+        return False
+    if len(normalized_parts) != len(set(normalized_parts)):
         return False
     return 2 <= len(normalized_parts) <= 6
 
@@ -305,6 +468,38 @@ def _linha_continua_biografia(line: str, nome: str) -> bool:
     return bool(normalized_nome and normalized_nome in normalized_line)
 
 
+def _linha_parece_inicio_perfil(line: str, cargos_config: dict[str, list[str]]) -> bool:
+    normalized = normalize_for_search(line).strip(" :-")
+    if not normalized or len(normalized) > 140:
+        return False
+    if _cargo_no_inicio_da_linha(line, cargos_config):
+        return True
+    return normalized in {"gabinete", "prefeito", "prefeita", "vice prefeito", "vice-prefeito"} or normalized.startswith(
+        (
+            "secretaria de ",
+            "secretaria da ",
+            "secretaria do ",
+            "secretaria municipal",
+            "secretaria estadual",
+            "departamento de ",
+            "diretoria de ",
+            "superintendencia de ",
+            "chefia de ",
+            "fundacao ",
+        )
+    )
+
+
+def _remover_secoes_ruidosas(texto: str) -> str:
+    linhas: list[str] = []
+    for raw_line in re.sub(r"\r\n?", "\n", texto or "").split("\n"):
+        normalized = normalize_for_search(raw_line)
+        if any(normalized.startswith(section) for section in SECOES_RUIDOSAS):
+            break
+        linhas.append(raw_line)
+    return "\n".join(linhas)
+
+
 def _cargo_por_linha_curta(line: str, cargos_config: dict[str, list[str]]) -> str:
     text = str(line or "").strip(" \t:-\u2013\u2014")
     if not text or len(text) > 90 or re.search(r"[@\d.,;]", text):
@@ -317,7 +512,11 @@ def _cargo_por_linha_curta(line: str, cargos_config: dict[str, list[str]]) -> st
     for cargo_key, variacoes in cargos_config.items():
         label = CARGO_LABELS.get(cargo_key, cargo_key.replace("_", " ").title())
         candidates = {normalize_for_search(label).replace("-", " ")}
-        candidates.update(normalize_for_search(variacao).replace("-", " ") for variacao in variacoes)
+        candidates.update(
+            normalize_for_search(variacao).replace("-", " ")
+            for variacao in variacoes
+            if not _ignorar_variacao_generica(cargo_key, variacao)
+        )
         if normalized_plain in candidates:
             return label
     return ""
@@ -341,11 +540,18 @@ def _cargo_no_inicio_info(line: str, cargos_config: dict[str, list[str]]) -> tup
     for cargo_key, variacoes in cargos_config.items():
         label = CARGO_LABELS.get(cargo_key, cargo_key.replace("_", " ").title())
         candidates = {normalize_for_search(label)}
-        candidates.update(normalize_for_search(variacao) for variacao in variacoes)
+        candidates.update(
+            normalize_for_search(variacao)
+            for variacao in variacoes
+            if not _ignorar_variacao_generica(cargo_key, variacao)
+        )
         for candidate in candidates:
             candidate_pattern = _cargo_pattern(candidate)
             if not candidate_pattern:
                 continue
+            match = re.match(rf"^{candidate_pattern}\s*[,/]\s*(.*)$", normalized)
+            if match:
+                return label, ""
             match = re.match(rf"^{candidate_pattern}\s*[:\-\u2013\u2014]\s*(.+)$", normalized)
             if match:
                 tail = original[offset + match.start(1) :].strip(" \t:-\u2013\u2014")
@@ -353,6 +559,8 @@ def _cargo_no_inicio_info(line: str, cargos_config: dict[str, list[str]]) -> tup
             match = re.match(rf"^{candidate_pattern}\s+(.+)$", normalized)
             if match:
                 tail = original[offset + match.start(1) :].strip(" \t:-\u2013\u2014")
+                if normalize_for_search(tail).startswith(("de ", "da ", "do ", "dos ", "das ")):
+                    continue
                 if _nome_da_linha(tail):
                     return label, tail
     return "", ""
@@ -377,7 +585,22 @@ def _nome_da_linha(line: str) -> str:
     if not _nome_valido(candidate):
         return ""
     found = NAME_PATTERN.fullmatch(candidate)
-    return found.group(1) if found else ""
+    if found:
+        return found.group(1)
+    if _parece_linha_de_nome_proprio(candidate):
+        return candidate
+    return ""
+
+
+def _parece_linha_de_nome_proprio(candidate: str) -> bool:
+    token_pattern = re.compile(r"^[A-ZÁÀÂÃÉÈÊÍÌÓÒÔÕÚÙÇ][A-Za-zÁÀÂÃÉÈÊÍÌÓÒÔÕÚÙÇáàâãéèêíìóòôõúùç']+$")
+    for token in str(candidate or "").split():
+        normalized = normalize_for_search(token).strip(".,:;")
+        if normalized in PARTICULAS_NOME:
+            continue
+        if not token_pattern.match(token.strip(".,:;")):
+            return False
+    return True
 
 
 def _fim_janela_perfil(
@@ -410,6 +633,8 @@ def _fim_janela_perfil(
         if any(normalized.startswith(section) for section in SECOES_RUIDOSAS):
             return index
         proximo_cargo = _cargo_no_inicio_da_linha(lines[index], cargos_config)
+        if index > nome_index and _linha_parece_inicio_perfil(lines[index], cargos_config) and proximo_cargo != cargo_atual:
+            return index
         if proximo_cargo and proximo_cargo != cargo_atual:
             return index
         if proximo_cargo and index > start + 4:
@@ -432,6 +657,10 @@ def extrair_perfis_institucionais(
             continue
 
         cargo, nome_inline = _cargo_no_inicio_info(line, cargos_config)
+        if not cargo and normalize_for_search(line).strip(" :-") == "gabinete":
+            next_index = _indice_proxima_linha(linhas, index)
+            if next_index is not None and _nome_da_linha(linhas[next_index]):
+                cargo = "Chefe de gabinete"
         if not cargo:
             continue
 
@@ -451,6 +680,11 @@ def extrair_perfis_institucionais(
                         nome_index = candidate_index
                         break
                     continue
+
+                nome, rotulo_nome_index = _nome_apos_rotulo_responsavel(linhas, candidate_index)
+                if nome:
+                    nome_index = rotulo_nome_index
+                    break
 
                 nome = _nome_da_linha(candidate_line)
                 if nome:
@@ -473,6 +707,151 @@ def extrair_perfis_institucionais(
     return _deduplicar_resultados(resultados)
 
 
+def _linhas_nao_vazias(texto: str) -> list[str]:
+    return [line.strip() for line in re.sub(r"\r\n?", "\n", texto or "").split("\n") if line.strip()]
+
+
+def _indice_proxima_linha(lines: list[str], start: int) -> int | None:
+    for index in range(start + 1, len(lines)):
+        if lines[index].strip():
+            return index
+    return None
+
+
+def _limite_bloco_secretaria(lines: list[str], start: int) -> int:
+    end = min(len(lines), start + 80)
+    for index in range(start + 1, end):
+        normalized = normalize_for_search(lines[index])
+        if normalized == "secretarias" or normalized.startswith(("endereco", "ultimas noticias", "noticias relacionadas", "ver todas")):
+            return index
+    return end
+
+
+def _contatos_no_intervalo(lines: list[str], start: int, end: int) -> tuple[list[str], list[str], list[str]]:
+    trecho = "\n".join(lines[start:end])
+    emails = extrair_emails(trecho)
+    telefones = extrair_telefones(trecho)
+    celulares = [phone for phone in telefones if telefone_eh_celular(phone)]
+    fixos = [phone for phone in telefones if phone not in celulares]
+    return emails, fixos, celulares
+
+
+def _nome_apos_rotulo_secretario(lines: list[str], index: int) -> tuple[str, int]:
+    line = lines[index]
+    match = re.match(r"^\s*secret[aá]ri[oa](?:\s*\(a\))?\s*[:\-\u2013\u2014]\s*(.*)$", line, flags=re.IGNORECASE)
+    if not match:
+        return "", index
+
+    inline = _nome_no_trecho(match.group(1))
+    if inline:
+        return inline, index
+
+    next_index = _indice_proxima_linha(lines, index)
+    if next_index is None:
+        return "", index
+    return _nome_da_linha(lines[next_index]) or _nome_no_trecho(lines[next_index]), next_index
+
+
+def _nome_apos_rotulo_responsavel(lines: list[str], index: int) -> tuple[str, int]:
+    normalized = normalize_for_search(lines[index]).strip(" :-")
+    match = re.match(r"^(responsavel|titular)\s*[:\-\u2013\u2014]?\s*(.*)$", normalized)
+    if not match:
+        return "", index
+
+    inline = _nome_no_trecho(lines[index].split(":", 1)[1] if ":" in lines[index] else "")
+    if inline:
+        return inline, index
+
+    next_index = _indice_proxima_linha(lines, index)
+    if next_index is None:
+        return "", index
+    return _nome_da_linha(lines[next_index]) or _nome_no_trecho(lines[next_index]), next_index
+
+
+def extrair_perfis_secretaria(
+    texto: str,
+    cargos_config: dict[str, list[str]],
+    url: str,
+) -> list[dict[str, str]]:
+    lines = _linhas_nao_vazias(texto)
+    resultados: list[dict[str, str]] = []
+
+    for index, line in enumerate(lines):
+        normalized = normalize_for_search(line)
+        if not normalized.startswith(("conheca o secretario", "conheca a secretaria")):
+            continue
+
+        nome = ""
+        nome_index = index
+        for candidate_index in range(index + 1, min(len(lines), index + 6)):
+            nome = _nome_da_linha(lines[candidate_index])
+            if nome:
+                nome_index = candidate_index
+                break
+        if not nome:
+            continue
+
+        cargos: list[str] = []
+        cargo_index = _indice_proxima_linha(lines, nome_index)
+        if cargo_index is not None:
+            cargos.extend(detectar_cargos(lines[cargo_index], cargos_config))
+        if not cargos:
+            for candidate_line in reversed(lines[max(0, index - 3) : index]):
+                if "secretaria" in normalize_for_search(candidate_line):
+                    cargos.extend(detectar_cargos(candidate_line, cargos_config))
+        cargos = list(dict.fromkeys(cargos))
+        if not cargos:
+            continue
+
+        end = _limite_bloco_secretaria(lines, index)
+        emails, fixos, celulares = _contatos_no_intervalo(lines, index, end)
+        status = "Encontrado" if emails or fixos or celulares else "Parcial"
+        observacoes = "" if status == "Encontrado" else "Nome/cargo publicado, mas sem contato direto no bloco."
+        for cargo in cargos:
+            resultados.append(_montar_resultado(cargo, nome, emails, fixos, celulares, url, status, observacoes))
+
+    return _deduplicar_resultados(resultados)
+
+
+def extrair_perfis_lista_secretarias(
+    texto: str,
+    cargos_config: dict[str, list[str]],
+    url: str,
+) -> list[dict[str, str]]:
+    lines = _linhas_nao_vazias(texto)
+    resultados: list[dict[str, str]] = []
+
+    for index, line in enumerate(lines):
+        normalized = normalize_for_search(line)
+        if "secretaria" not in normalized and "agencia" not in normalized:
+            continue
+
+        cargos = detectar_cargos(line, cargos_config)
+        if not cargos:
+            continue
+
+        nome = ""
+        nome_index = index
+        for candidate_index in range(index + 1, min(len(lines), index + 8)):
+            candidate_normalized = normalize_for_search(lines[candidate_index])
+            if not candidate_normalized.startswith(("secretario", "secretaria")):
+                continue
+            nome, nome_index = _nome_apos_rotulo_secretario(lines, candidate_index)
+            if nome:
+                break
+        if not nome:
+            continue
+
+        end = _limite_bloco_secretaria(lines, nome_index)
+        emails, fixos, celulares = _contatos_no_intervalo(lines, index, end)
+        status = "Encontrado" if emails or fixos or celulares else "Parcial"
+        observacoes = "" if status == "Encontrado" else "Nome/cargo publicado, mas sem contato direto no bloco."
+        for cargo in list(dict.fromkeys(cargos)):
+            resultados.append(_montar_resultado(cargo, nome, emails, fixos, celulares, url, status, observacoes))
+
+    return _deduplicar_resultados(resultados)
+
+
 def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str:
     block = texto or ""
 
@@ -484,8 +863,10 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
             return found.group(1)
 
     normalized_block = normalize_for_search(block)
-    for variacoes in cargos_config.values():
+    for cargo_key, variacoes in cargos_config.items():
         for variacao in variacoes:
+            if _ignorar_variacao_generica(cargo_key, variacao):
+                continue
             normalized_variacao = normalize_for_search(variacao)
             index = normalized_block.find(normalized_variacao)
             if index < 0:
@@ -506,6 +887,74 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
         if _nome_valido(candidate):
             return candidate
     return ""
+
+
+def _nome_veio_de_rotulo_ou_cargo(bloco: str, nome: str, cargos_config: dict[str, list[str]]) -> bool:
+    nome_norm = normalize_for_search(nome)
+    if not nome_norm:
+        return False
+    for line in _linhas_nao_vazias(bloco):
+        cargo, nome_inline = _cargo_no_inicio_info(line, cargos_config)
+        if cargo and nome_inline and nome_norm in normalize_for_search(nome_inline):
+            return True
+        if re.search(r"\bnome\s*[:\-]", line, flags=re.IGNORECASE) and nome_norm in normalize_for_search(line):
+            return True
+        if re.search(r"\bsecret[aá]ri[oa](?:\s*\(a\))?\s*[:\-]", line, flags=re.IGNORECASE) and nome_norm in normalize_for_search(line):
+            return True
+    return False
+
+
+def _bloco_de_unidade_subordinada(bloco: str) -> bool:
+    normalized = normalize_for_search(bloco)
+    return "responsavel" in normalized and any(
+        token in normalized
+        for token in (
+            "departamento",
+            "superintendencia",
+            "diretoria",
+            "divisao",
+            "chefia",
+            "conselho",
+            "unidade",
+        )
+    )
+
+
+def _trecho_a_partir_do_nome(bloco: str, nome: str) -> str:
+    block = str(bloco or "")
+    nome_norm = normalize_for_search(nome)
+    if not nome_norm:
+        return block
+    linhas = _linhas_nao_vazias(block)
+    for index, line in enumerate(linhas):
+        if nome_norm in normalize_for_search(line):
+            return "\n".join(linhas[index:])
+    return block
+
+
+def _contato_aparece_antes_do_cargo(bloco: str, cargos: list[str]) -> bool:
+    text = str(bloco or "")
+    normalized = normalize_for_search(text)
+    contatos = [match.start() for match in EMAIL_PATTERN.finditer(text)]
+    contatos.extend(match.start() for match in PHONE_PATTERN.finditer(text))
+    if not contatos:
+        return False
+
+    cargo_positions: list[int] = []
+    for cargo in cargos:
+        cargo_norm = normalize_for_search(cargo).replace("-", " ")
+        termos = {cargo_norm}
+        if cargo == "Prefeito":
+            termos.update({"prefeito", "prefeita"})
+        elif cargo == "Vice-prefeito":
+            termos.update({"vice prefeito", "vice prefeita"})
+        elif cargo == "Chefe de gabinete":
+            termos.add("chefe de gabinete")
+        for termo in termos:
+            pos = normalized.find(termo)
+            if pos >= 0:
+                cargo_positions.append(pos)
+    return bool(cargo_positions and min(contatos) < min(cargo_positions))
 
 
 def _tem_contato_resultado(item: dict[str, str]) -> bool:
@@ -544,6 +993,21 @@ def _resultado_cobre_todos_contatos(item: dict[str, str], emails: list[str], tel
     return emails_bloco <= _split_contatos(item.get("E-mail", "")) and telefones_bloco <= _telefones_do_resultado(item)
 
 
+def _pagina_de_secretaria(url: str) -> bool:
+    path = urlparse(str(url or "")).path.lower()
+    normalized = path.rstrip("/") + "/"
+    return "/secretaria/" in normalized or "/secretarias/" in normalized or "/secretarias-especiais/" in normalized
+
+
+def _pagina_de_contatos(url: str) -> bool:
+    path = urlparse(str(url or "")).path.lower().rstrip("/")
+    return path.endswith("/contato") or path.endswith("/contatos") or "/contato/" in path or "/contatos/" in path
+
+
+def _muitos_contatos_no_bloco(emails: list[str], telefones: list[str]) -> bool:
+    return len(emails) + len(telefones) > 2
+
+
 def _bloco_executivo_parece_manchete(bloco: str, cargo: str) -> bool:
     cargo_pattern = _cargo_pattern(normalize_for_search(cargo))
     original = str(bloco or "").strip()
@@ -556,6 +1020,27 @@ def _bloco_executivo_parece_manchete(bloco: str, cargo: str) -> bool:
     if not found or not _nome_valido(found.group(1)):
         return False
     return not bool(_nome_da_linha(tail))
+
+
+def _bloco_tem_prefeito_explicito(bloco: str) -> bool:
+    for line in _linhas_nao_vazias(bloco):
+        normalized = normalize_for_search(line)
+        if re.match(r"^(prefeito|prefeita)\s*($|[:\-\u2013\u2014])", normalized):
+            return True
+    return False
+
+
+def _nome_agencia_desenvolvimento_valido(nome: str) -> bool:
+    normalized = normalize_for_search(nome)
+    return any(
+        termo in normalized
+        for termo in (
+            "agencia de desenvolvimento",
+            "sala do empreendedor",
+            "casa do empreendedor",
+            "banco do povo",
+        )
+    )
 
 
 def _deduplicar_resultados(resultados: list[dict[str, str]]) -> list[dict[str, str]]:
@@ -588,12 +1073,72 @@ def _deduplicar_resultados(resultados: list[dict[str, str]]) -> list[dict[str, s
     return deduplicados
 
 
+def _merge_contato_texto(atual: str, novo: str) -> str:
+    partes = [part.strip() for part in str(atual or "").split(";") if part.strip()]
+    for part in str(novo or "").split(";"):
+        part = part.strip()
+        if part and part not in partes:
+            partes.append(part)
+    return "; ".join(partes)
+
+
+def _mesclar_resultados_complementares(resultados: list[dict[str, str]]) -> list[dict[str, str]]:
+    mesclados: list[dict[str, str]] = []
+    for item in resultados:
+        cargo = item.get(COL_CARGO_ORGAO, "")
+        url = item.get("URL da fonte", "")
+        nome = item.get("Nome", "")
+        destino = None
+        for existente in mesclados:
+            if existente.get(COL_CARGO_ORGAO, "") != cargo or existente.get("URL da fonte", "") != url:
+                continue
+            nome_existente = existente.get("Nome", "")
+            if nome_existente and not nome and not _url_especifica_para_mescla(cargo, url):
+                continue
+            if not nome or not nome_existente or nome == nome_existente:
+                destino = existente
+                break
+        if destino is None:
+            mesclados.append(dict(item))
+            continue
+
+        if not destino.get("Nome") and nome:
+            destino["Nome"] = nome
+        for column in ("E-mail", "Telefone", "Celular/WhatsApp", "Celular"):
+            destino[column] = _merge_contato_texto(destino.get(column, ""), item.get(column, ""))
+        if _tem_contato_resultado(destino):
+            destino["Status"] = "Encontrado"
+            destino[COL_OBSERVACOES] = ""
+        elif destino.get("Status") != "Encontrado":
+            destino["Status"] = item.get("Status", destino.get("Status", "Parcial"))
+            destino[COL_OBSERVACOES] = destino.get(COL_OBSERVACOES) or item.get(COL_OBSERVACOES, "")
+    return mesclados
+
+
+def _url_especifica_para_mescla(cargo: str, url: str) -> bool:
+    path = normalize_for_search(urlparse(str(url or "")).path).replace("-", " ")
+    cargo_norm = normalize_for_search(cargo).replace("-", " ")
+    if cargo == "Prefeito":
+        return "prefeito" in path and "vice prefeito" not in path
+    if cargo == "Vice-prefeito":
+        return "vice prefeito" in path
+    if cargo == "Chefe de gabinete":
+        return "chefe de gabinete" in path
+    return cargo_norm and cargo_norm in path
+
+
 def extrair_contatos_de_texto(
     texto: str,
     cargos_config: dict[str, list[str]] | None = None,
     url: str = "",
 ) -> list[dict[str, str]]:
     cargos_config = cargos_config or carregar_cargos()
+    texto = _remover_secoes_ruidosas(texto)
+    perfis_secretaria = extrair_perfis_secretaria(texto, cargos_config, url)
+    perfis_secretaria.extend(extrair_perfis_lista_secretarias(texto, cargos_config, url))
+    if perfis_secretaria:
+        return _deduplicar_resultados(perfis_secretaria)
+
     estruturados = extrair_perfis_institucionais(texto, cargos_config, url)
     estruturados_fortes = [item for item in estruturados if _registro_forte(item)]
     executivos_fortes = [
@@ -610,6 +1155,10 @@ def extrair_contatos_de_texto(
         celulares = [phone for phone in telefones if telefone_eh_celular(phone)]
         fixos = [phone for phone in telefones if phone not in celulares]
         cargos_detectados = detectar_cargos(bloco, cargos_config)
+        if "Vice-prefeito" in cargos_detectados and "Prefeito" in cargos_detectados and not _bloco_tem_prefeito_explicito(bloco):
+            cargos_detectados = [cargo for cargo in cargos_detectados if cargo != "Prefeito"]
+        if cargos_detectados and _muitos_contatos_no_bloco(emails, telefones):
+            cargos_detectados = []
         bloco_duplica_estruturado_forte = any(
             _resultado_cobre_todos_contatos(item, emails, telefones)
             for item in estruturados_fortes
@@ -627,6 +1176,22 @@ def extrair_contatos_de_texto(
             )
         ]
         nome = extrair_nome_proximo(bloco, cargos_config) if cargos else ""
+        if nome and any(cargo not in CARGOS_EXECUTIVOS for cargo in cargos):
+            if not _nome_veio_de_rotulo_ou_cargo(bloco, nome, cargos_config):
+                nome = ""
+        if not nome and any(cargo in CARGOS_EXECUTIVOS for cargo in cargos) and _bloco_de_unidade_subordinada(bloco):
+            cargos = [cargo for cargo in cargos if cargo not in CARGOS_EXECUTIVOS]
+        if not nome and any(cargo in CARGOS_EXECUTIVOS for cargo in cargos) and _contato_aparece_antes_do_cargo(bloco, cargos):
+            cargos = [cargo for cargo in cargos if cargo not in CARGOS_EXECUTIVOS]
+        if nome:
+            trecho_nome = _trecho_a_partir_do_nome(bloco, nome)
+            if not (extrair_emails(trecho_nome) or extrair_telefones(trecho_nome)):
+                emails = []
+                telefones = []
+                celulares = []
+                fixos = []
+        if estruturados_fortes and cargos and not nome:
+            continue
         if cargos:
             cargos_validos = [
                 cargo
@@ -657,6 +1222,13 @@ def extrair_contatos_de_texto(
 
         for cargo in cargos:
             contato_geral = cargo == "Contato geral"
+            if (
+                cargo == "Agência/Sala de Desenvolvimento"
+                and nome
+                and not tem_contato
+                and not _nome_agencia_desenvolvimento_valido(nome)
+            ):
+                continue
             status = "Encontrado" if tem_contato and not contato_geral else "Parcial"
             observacoes = ""
             if contato_geral:
@@ -666,7 +1238,10 @@ def extrair_contatos_de_texto(
 
             resultados.append(_montar_resultado(cargo, nome, emails, fixos, celulares, url, status, observacoes))
 
-    return _deduplicar_resultados(resultados)
+    resultados = _deduplicar_resultados(_mesclar_resultados_complementares(resultados))
+    if _pagina_de_secretaria(url) or _pagina_de_contatos(url):
+        return [item for item in resultados if item.get(COL_CARGO_ORGAO) == "Contato geral"]
+    return resultados
 
 
 def extrair_contatos_paginas(

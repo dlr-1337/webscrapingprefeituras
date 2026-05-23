@@ -13,11 +13,14 @@ vice_prefeito:
 
 chefe_gabinete:
   - chefe de gabinete
+  - chefia de gabinete
   - gabinete
 
 desenvolvimento_economico:
   - desenvolvimento econômico
   - secretaria de desenvolvimento econômico
+  - secretaria municipal de desenvolvimento econômico
+  - secretário municipal de desenvolvimento econômico
   - indústria e comércio
   - desenvolvimento, indústria e comércio
   - desenvolvimento econômico e turismo
@@ -25,21 +28,30 @@ desenvolvimento_economico:
 
 desenvolvimento:
   - secretaria de desenvolvimento
+  - secretaria municipal de desenvolvimento
+  - secretário municipal de desenvolvimento
   - desenvolvimento
-  - desenvolvimento municipal
   - desenvolvimento urbano
 
 financas_fazenda:
   - finanças
   - fazenda
   - secretaria de finanças
+  - secretaria municipal de finanças
   - secretaria da fazenda
+  - secretaria municipal da fazenda
+  - secretário municipal de finanças
+  - secretário municipal da fazenda
   - administração e finanças
   - finanças e planejamento
 
 planejamento:
   - planejamento
+  - planejameto
   - secretaria de planejamento
+  - secretaria municipal de planejamento
+  - secretaria municipal de planejameto
+  - secretário municipal de planejamento
   - planejamento urbano
   - gestão e planejamento
   - planejamento e gestão

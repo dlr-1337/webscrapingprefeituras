@@ -3,6 +3,7 @@ import logging
 
 import pandas as pd
 
+from src.escopo_categorias import labels_categorias_obrigatorias
 from src import main as main_module
 
 
@@ -43,8 +44,14 @@ def test_executar_pipeline_com_site_ausente_gera_excel_e_pendencia(tmp_path, mon
     assert output_path.exists()
     pendencias = pd.read_excel(output_path, sheet_name="Pendências")
     municipios = pd.read_excel(output_path, sheet_name="Municípios pesquisados")
+    dados = pd.read_excel(output_path, sheet_name="Dados")
     assert pendencias.loc[0, "Status"] == "Site não localizado"
     assert municipios.loc[0, "Status geral"] == "Site não localizado"
+    assert set(dados["Cargo/Área"]) == set(labels_categorias_obrigatorias())
+    identidade = dados[dados["Cargo/Área"] == "Município/Capital e UF"].iloc[0]
+    prefeito = dados[dados["Cargo/Área"] == "Prefeito"].iloc[0]
+    assert identidade["Status"] == "Encontrado"
+    assert prefeito["Status"] == "Site não localizado"
 
 
 def test_executar_pipeline_somente_filtrar_retorna_planilha_filtrada(tmp_path, monkeypatch):

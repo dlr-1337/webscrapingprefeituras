@@ -1,6 +1,8 @@
 import pandas as pd
 
-from src.validar_resultados import criar_pendencia, garantir_colunas, validar_resultados
+from src.escopo_categorias import FONTE_TERRITORIAL_URL, labels_categorias_obrigatorias
+from src.gerar_excel import gerar_excel
+from src.validar_resultados import auditar_planilha_final, criar_pendencia, garantir_colunas, validar_resultados
 
 
 def test_garantir_colunas_preserva_ordem_e_preenche_ausentes():
@@ -51,3 +53,116 @@ def test_validar_resultados_aceita_nao_publicado_e_url_da_fonte():
     )
 
     assert validar_resultados(df) == []
+
+
+def test_validar_resultados_aponta_categoria_obrigatoria_ausente():
+    resultado = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Município/Capital": "Campinas",
+                "Município": "Campinas",
+                "Esfera": "Municipal",
+                "Cargo/Área": "Município/Capital e UF",
+                "Status": "Encontrado",
+                "URL da fonte": FONTE_TERRITORIAL_URL,
+            }
+        ]
+    )
+    municipios = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Município/Capital": "Campinas",
+                "Município": "Campinas",
+                "Esfera": "Municipal",
+                "Site oficial": "https://campinas.sp.gov.br/",
+            }
+        ]
+    )
+
+    pendencias = validar_resultados(resultado, municipios)
+
+    assert {item["Tipo de pendência"] for item in pendencias} == {"Cobertura de categoria"}
+    assert len(pendencias) == 8
+    assert "Prefeito" in {item["Descrição"].rsplit(": ", 1)[1].rstrip(".") for item in pendencias}
+
+
+def test_auditar_planilha_final_aprova_cobertura_completa(tmp_path):
+    input_path = tmp_path / "municipios.csv"
+    input_path.write_text(
+        "municipio,uf,estado,populacao,capital,site_oficial\n"
+        "Campinas,SP,São Paulo,1200000,false,https://campinas.sp.gov.br/\n",
+        encoding="utf-8",
+    )
+    output = tmp_path / "resultado.xlsx"
+    dados = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Estado": "São Paulo",
+                "Município/Capital": "Campinas",
+                "Município": "Campinas",
+                "Esfera": "Municipal",
+                "Cargo/Área": categoria,
+                "Cargo/Órgão": categoria,
+                "URL da fonte": "https://campinas.sp.gov.br/",
+                "URL específica": "https://campinas.sp.gov.br/",
+                "Data da coleta": "2026-05-22",
+                "Status": "Encontrado" if categoria == "Município/Capital e UF" else "Não publicado",
+                "Observações": "" if categoria == "Município/Capital e UF" else "Não publicado oficialmente na fonte consultada.",
+            }
+            for categoria in labels_categorias_obrigatorias()
+        ]
+    )
+    municipios = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Estado": "São Paulo",
+                "Município/Capital": "Campinas",
+                "Município": "Campinas",
+                "Esfera": "Municipal",
+                "Site oficial": "https://campinas.sp.gov.br/",
+                "Status geral": "Não publicado",
+                "Observações": "Sem dados publicados para categorias alvo.",
+            }
+        ]
+    )
+
+    gerar_excel(dados, municipios, pd.DataFrame(), output)
+
+    assert auditar_planilha_final(output, input_path).empty
+
+
+def test_auditar_planilha_final_aponta_data_url_e_escopo(tmp_path):
+    input_path = tmp_path / "municipios.csv"
+    input_path.write_text(
+        "municipio,uf,estado,populacao,capital,site_oficial\n"
+        "Campinas,SP,São Paulo,1200000,false,https://campinas.sp.gov.br/\n"
+        "Limeira,SP,São Paulo,300000,false,https://limeira.sp.gov.br/\n",
+        encoding="utf-8",
+    )
+    output = tmp_path / "resultado.xlsx"
+    dados = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Município/Capital": "Campinas",
+                "Município": "Campinas",
+                "Esfera": "Municipal",
+                "Cargo/Área": "Município/Capital e UF",
+                "Status": "Encontrado",
+                "URL da fonte": "",
+                "Data da coleta": "",
+            }
+        ]
+    )
+    municipios = pd.DataFrame(
+        [{"UF": "SP", "Município/Capital": "Campinas", "Município": "Campinas", "Esfera": "Municipal"}]
+    )
+
+    gerar_excel(dados, municipios, pd.DataFrame(), output)
+    issues = auditar_planilha_final(output, input_path)
+
+    assert {"Fonte", "Data", "Cobertura", "Escopo"}.issubset(set(issues["Tipo"]))

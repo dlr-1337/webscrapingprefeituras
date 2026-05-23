@@ -43,6 +43,7 @@ CAMINHOS_IGNORADOS = (
     "/blog",
     "/avaliar",
     "/category",
+    "/categoria",
     "/publicacoes",
     "/galeria",
     "/normas-legais",
@@ -50,17 +51,28 @@ CAMINHOS_IGNORADOS = (
     "/turismo",
 )
 
-QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pg=")
+QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=")
 SEGMENTOS_IGNORADOS = {
     "/page/",
     "/pagina/",
     "/category/",
+    "/categoria/",
+    "/calendario-secretaria/",
     "/downloads/",
     "/detalhe-da-materia/",
     "/detalhe-prefeito/",
+    "/gabinete-militar/",
     "/galeria",
+    "/agenda",
+    "/planejamento-municipal/",
     "/secretarias-paginas/",
     "/turismo/",
+    "gabinete-militar",
+    "funcoes-da-secretaria",
+    "estrutura-da-secretaria",
+    "downloads-secretaria",
+    "editais-e-publicacoes",
+    "instituicoes-relacionadas",
     "simbolos-oficiais",
     "esqueci-minha-senha",
     "/entrar",
@@ -100,6 +112,19 @@ BOILERPLATE_CLASS_ID_TOKENS = (
     "acessibilidade",
 )
 
+CAMINHOS_FALLBACK_BLOQUEIO = (
+    "equipe_governo.aspx",
+    "equipe-de-governo",
+    "equipe-governo",
+    "estrutura-organizacional",
+    "secretarias",
+    "secretaria",
+    "gabinete",
+    "prefeito",
+    "contato",
+    "fale-conosco",
+)
+
 
 @dataclass(slots=True)
 class PaginaColetada:
@@ -136,9 +161,12 @@ def carregar_config_scraping(path: str | Path | None = None) -> dict:
     defaults = {
         "timeout_segundos": 20,
         "retries": 2,
-        "delay_entre_requisicoes": 1.5,
-        "max_paginas_por_municipio": 40,
+        "delay_entre_requisicoes": 3.0,
+        "max_paginas_por_municipio": 60,
         "usar_playwright_quando_necessario": True,
+        "browser_backend": "auto",
+        "usar_cloakbrowser_quando_necessario": True,
+        "usar_caminhos_fallback_bloqueio": True,
         "user_agent": "Robo de coleta institucional - contato profissional",
     }
     defaults.update(load_yaml(config_path))
@@ -194,16 +222,36 @@ def html_para_texto(html: str) -> str:
 
 def pagina_indica_bloqueio(texto: str, html: str = "") -> bool:
     haystack = normalize_for_search(f"{texto} {html[:3000]}")
-    sinais = (
-        "captcha",
-        "recaptcha",
-        "cloudflare",
+    sinais_fortes = (
         "access denied",
         "acesso negado",
         "forbidden",
         "verify you are human",
+        "verifique se voce e humano",
+        "cloudflare error",
+        "attention required",
+        "temporarily blocked",
     )
-    return any(sinal in haystack for sinal in sinais)
+    if any(sinal in haystack for sinal in sinais_fortes):
+        return True
+
+    # reCAPTCHA em formulario de contato nao deve invalidar uma pagina oficial
+    # que renderizou conteudo institucional util.
+    texto_normalizado = normalize_for_search(texto)
+    if any(sinal in haystack for sinal in ("captcha", "recaptcha", "cloudflare")):
+        conteudo_util = len(texto_normalizado) >= 350 and any(
+            sinal in texto_normalizado
+            for sinal in (
+                "prefeitura",
+                "secretaria",
+                "gabinete",
+                "prefeito",
+                "contato",
+                "equipe de governo",
+            )
+        )
+        return not conteudo_util
+    return False
 
 
 def _url_deve_ser_ignorada(url: str) -> bool:
@@ -219,6 +267,13 @@ def _url_deve_ser_ignorada(url: str) -> bool:
     last_segment = path.rstrip("/").rsplit("/", 1)[-1]
     if len(last_segment) >= 45 and last_segment.count("-") >= 5:
         return True
+    if last_segment.count("-") >= 5 and not last_segment.startswith(("secretaria-", "departamento-", "diretoria-", "gabinete-", "sala-do-empreendedor")):
+        return True
+    if last_segment.count("-") >= 3 and any(
+        token in last_segment
+        for token in ("acompanhe", "visita", "lanca", "lança", "promove", "estende", "campanha", "obras-na-cidade")
+    ):
+        return True
     return any(token in query for token in QUERY_IGNORADAS)
 
 
@@ -227,6 +282,44 @@ def _url_chave(url: str) -> tuple[str, str, str]:
     host = parsed.netloc.lower().removeprefix("www.")
     path = parsed.path.rstrip("/") or "/"
     return host, path, parsed.query
+
+
+def _bases_fallback_bloqueio(site: str) -> list[str]:
+    parsed = urlparse(site)
+    host = parsed.netloc.lower()
+    hosts = [host]
+    if host.startswith("www."):
+        hosts.append(f"www2.{host[4:]}")
+    elif host.startswith("www2."):
+        hosts.append(f"www.{host[5:]}")
+
+    bases = []
+    for candidate_host in dict.fromkeys(hosts):
+        bases.append(clean_url(f"{parsed.scheme}://{candidate_host}/"))
+    return bases
+
+
+def urls_fallback_bloqueio(site: str) -> list[str]:
+    urls: list[str] = []
+    for base in _bases_fallback_bloqueio(site):
+        for path in CAMINHOS_FALLBACK_BLOQUEIO:
+            urls.append(clean_url(urljoin(base, path)))
+    return list(dict.fromkeys(url for url in urls if url and not _url_deve_ser_ignorada(url)))
+
+
+def _prioridade_url_relevante(url: str) -> int:
+    normalized = normalize_for_search(url).replace("-", "_")
+    grupos = (
+        ("equipe_governo", "equipe_de_governo", "estrutura_organizacional"),
+        ("gabinete", "prefeito", "vice_prefeito", "secretarias", "secretaria"),
+        ("sedecon", "desenvolvimento", "seplan", "planejamento", "financas", "fazenda"),
+        ("contato", "fale_conosco"),
+        ("servicos", "materia", "noticia", "concursos", "licitacoes", "iptu", "nfe"),
+    )
+    for prioridade, tokens in enumerate(grupos):
+        if any(token in normalized for token in tokens):
+            return prioridade
+    return len(grupos)
 
 
 def extrair_links_relevantes(html: str, base_url: str, palavras_chave: Iterable[str]) -> list[str]:
@@ -247,7 +340,8 @@ def extrair_links_relevantes(html: str, base_url: str, palavras_chave: Iterable[
         if any(word in text for word in palavras):
             links.append(absolute)
 
-    return list(dict.fromkeys(links))
+    unicos = list(dict.fromkeys(links))
+    return sorted(unicos, key=lambda link: (_prioridade_url_relevante(link), unicos.index(link)))
 
 
 def _baixar(
@@ -316,27 +410,35 @@ def _baixar_com_playwright(
     except ImportError as exc:
         return "", "Necessita validação manual", f"Playwright indisponível: {exc}.", url, None, "", "playwright"
 
+    def safe_close(open_browser) -> None:
+        if open_browser:
+            try:
+                open_browser.close()
+            except Exception:
+                pass
+
     browser = None
     try:
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(headless=True)
             page = browser.new_page()
-            response = page.goto(url, wait_until="networkidle", timeout=timeout * 1000)
+            response = page.goto(url, wait_until="domcontentloaded", timeout=timeout * 1000)
+            try:
+                page.wait_for_timeout(1000)
+            except PlaywrightError:
+                pass
             html = page.content()
             final_url = clean_url(page.url)
             status_http = response.status if response else None
             browser.close()
     except PlaywrightTimeoutError:
-        if browser:
-            browser.close()
+        safe_close(browser)
         return "", "Site fora do ar", "Timeout ao acessar URL com Playwright.", url, None, "", "playwright"
     except PlaywrightError as exc:
-        if browser:
-            browser.close()
+        safe_close(browser)
         return "", "Necessita validação manual", f"Erro Playwright: {exc}", url, None, "", "playwright"
     except Exception as exc:  # pragma: no cover - proteção para falhas de browser local
-        if browser:
-            browser.close()
+        safe_close(browser)
         return "", "Necessita validação manual", f"Erro inesperado no Playwright: {exc}", url, None, "", "playwright"
 
     if status_http in {401, 403, 429}:
@@ -346,6 +448,85 @@ def _baixar_com_playwright(
     if status_http and status_http >= 400:
         return html, "Página sem informação pública", f"HTTP {status_http}.", final_url, status_http, "text/html", "playwright"
     return html, "Encontrado", "", final_url, status_http, "text/html", "playwright"
+
+
+def _baixar_com_cloakbrowser(
+    url: str,
+    timeout: int,
+) -> tuple[str, str, str, str, int | None, str, str]:
+    try:
+        from cloakbrowser import launch
+    except ImportError as exc:
+        return "", "Necessita validação manual", f"CloakBrowser indisponível: {exc}.", url, None, "", "cloakbrowser"
+
+    browser = None
+    try:
+        browser = launch(headless=True)
+        page = browser.new_page()
+        response = page.goto(url, wait_until="domcontentloaded", timeout=timeout * 1000)
+        try:
+            page.wait_for_timeout(1000)
+        except Exception:
+            pass
+        html = page.content()
+        final_url = clean_url(page.url)
+        status_http = response.status if response else None
+        browser.close()
+    except Exception as exc:  # pragma: no cover - depende do binario externo
+        if browser:
+            try:
+                browser.close()
+            except Exception:
+                pass
+        exc_text = str(exc)
+        if "Timeout" in type(exc).__name__ or "timeout" in exc_text.lower():
+            return "", "Site fora do ar", "Timeout ao acessar URL com CloakBrowser.", url, None, "", "cloakbrowser"
+        return "", "Necessita validação manual", f"Erro CloakBrowser: {exc}", url, None, "", "cloakbrowser"
+
+    if status_http in {401, 403, 429}:
+        return html, "Bloqueio técnico", f"HTTP {status_http}.", final_url, status_http, "text/html", "cloakbrowser"
+    if status_http and status_http >= 500:
+        return html, "Site fora do ar", f"HTTP {status_http}.", final_url, status_http, "text/html", "cloakbrowser"
+    if status_http and status_http >= 400:
+        return html, "Página sem informação pública", f"HTTP {status_http}.", final_url, status_http, "text/html", "cloakbrowser"
+    return html, "Encontrado", "", final_url, status_http, "text/html", "cloakbrowser"
+
+
+def _resultado_navegador_util(resultado: tuple[str, str, str, str, int | None, str, str]) -> bool:
+    html, status, *_ = resultado
+    if status != "Encontrado":
+        return False
+    texto = html_para_texto(html)
+    return bool(texto and not pagina_indica_bloqueio(texto, html))
+
+
+def _baixar_com_navegador(
+    url: str,
+    timeout: int,
+    backend: str = "auto",
+    usar_cloakbrowser: bool = True,
+) -> tuple[str, str, str, str, int | None, str, str]:
+    backend_normalizado = normalize_for_search(backend or "auto")
+    if backend_normalizado not in {"auto", "playwright", "cloakbrowser"}:
+        backend_normalizado = "auto"
+
+    tentativas: list[tuple[str, str, str, str, int | None, str, str]] = []
+
+    if backend_normalizado in {"auto", "playwright"}:
+        resultado = _baixar_com_playwright(url, timeout)
+        tentativas.append(resultado)
+        if backend_normalizado == "playwright" or _resultado_navegador_util(resultado) or not usar_cloakbrowser:
+            return resultado
+
+    if backend_normalizado in {"auto", "cloakbrowser"} and usar_cloakbrowser:
+        resultado = _baixar_com_cloakbrowser(url, timeout)
+        tentativas.append(resultado)
+        if backend_normalizado == "cloakbrowser" or _resultado_navegador_util(resultado):
+            return resultado
+
+    if tentativas:
+        return max(tentativas, key=lambda item: (item[1] == "Encontrado", bool(item[0])))
+    return "", "Necessita validação manual", "Nenhum backend de navegador disponível.", url, None, "", "browser"
 
 
 def coletar_paginas(
@@ -372,6 +553,9 @@ def coletar_paginas(
     delay = float(config.get("delay_entre_requisicoes", 1.5))
     max_paginas = int(config.get("max_paginas_por_municipio", 40))
     usar_playwright = bool(config.get("usar_playwright_quando_necessario", True))
+    browser_backend = str(config.get("browser_backend", "auto") or "auto")
+    usar_cloakbrowser = bool(config.get("usar_cloakbrowser_quando_necessario", True))
+    usar_fallback_bloqueio = bool(config.get("usar_caminhos_fallback_bloqueio", True))
     session = session or criar_sessao(str(config.get("user_agent")), retries)
 
     fila = [site]
@@ -380,6 +564,25 @@ def coletar_paginas(
     fontes_consultadas: list[FonteConsultada] = []
     primeiro_status = "Encontrado"
     primeira_observacao = ""
+    fallback_bloqueio_inserido = False
+
+    def inserir_fallback_bloqueio() -> bool:
+        nonlocal fallback_bloqueio_inserido
+        if fallback_bloqueio_inserido or not usar_fallback_bloqueio:
+            return False
+        fallback_bloqueio_inserido = True
+        fila_keys = {_url_chave(item) for item in fila}
+        adicionados = 0
+        for candidate in urls_fallback_bloqueio(site):
+            candidate_key = _url_chave(candidate)
+            if candidate_key in visitadas or candidate_key in fila_keys:
+                continue
+            if len(visitadas) + len(fila) >= max_paginas:
+                break
+            fila.append(candidate)
+            fila_keys.add(candidate_key)
+            adicionados += 1
+        return adicionados > 0
 
     while fila and len(visitadas) < max_paginas:
         url = fila.pop(0)
@@ -398,6 +601,30 @@ def coletar_paginas(
             primeiro_status = status
             primeira_observacao = observacao
 
+        if status != "Encontrado" and usar_playwright and status in {"Bloqueio técnico", "Página sem informação pública"}:
+            fontes_consultadas.append(
+                FonteConsultada(
+                    url=url,
+                    url_final=final_url or url,
+                    status=status,
+                    observacoes=observacao,
+                    status_http=status_http,
+                    content_type=content_type,
+                    metodo=metodo,
+                    data_hora=datetime.now().isoformat(timespec="seconds"),
+                    gerou_texto=bool(html_para_texto(html)),
+                )
+            )
+            html, status, observacao, final_url, status_http, content_type, metodo = _baixar_com_navegador(
+                final_url or url,
+                timeout,
+                browser_backend,
+                usar_cloakbrowser=usar_cloakbrowser,
+            )
+            if len(visitadas) == 1 and status == "Encontrado":
+                primeiro_status = status
+                primeira_observacao = observacao
+
         if status != "Encontrado":
             fontes_consultadas.append(
                 FonteConsultada(
@@ -415,6 +642,8 @@ def coletar_paginas(
             if logger:
                 logger.warning("Página ignorada: %s | %s | %s", url, status, observacao)
             if len(visitadas) == 1 and status in {"Site fora do ar", "Bloqueio técnico"}:
+                if inserir_fallback_bloqueio():
+                    continue
                 return ResultadoColeta([], status, observacao, fontes_consultadas)
             continue
 
@@ -433,8 +662,46 @@ def coletar_paginas(
                     gerou_texto=False,
                 )
             )
-            html, status, observacao, final_url, status_http, content_type, metodo = _baixar_com_playwright(final_url or url, timeout)
+            html, status, observacao, final_url, status_http, content_type, metodo = _baixar_com_navegador(
+                final_url or url,
+                timeout,
+                browser_backend,
+                usar_cloakbrowser=usar_cloakbrowser,
+            )
             texto = html_para_texto(html)
+
+        if pagina_indica_bloqueio(texto, html) and usar_playwright and metodo not in {"playwright", "cloakbrowser"}:
+            fontes_consultadas.append(
+                FonteConsultada(
+                    url=url,
+                    url_final=final_url or url,
+                    status="Bloqueio técnico",
+                    observacoes="Página indica captcha, recaptcha ou bloqueio de acesso; tentando navegador.",
+                    status_http=status_http,
+                    content_type=content_type,
+                    metodo=metodo,
+                    data_hora=datetime.now().isoformat(timespec="seconds"),
+                    gerou_texto=bool(texto),
+                )
+            )
+            html_nav, status_nav, observacao_nav, final_url_nav, status_http_nav, content_type_nav, metodo_nav = _baixar_com_navegador(
+                final_url or url,
+                timeout,
+                browser_backend,
+                usar_cloakbrowser=usar_cloakbrowser,
+            )
+            texto_nav = html_para_texto(html_nav)
+            if status_nav == "Encontrado" and texto_nav and not pagina_indica_bloqueio(texto_nav, html_nav):
+                html, status, observacao, final_url, status_http, content_type, metodo = (
+                    html_nav,
+                    status_nav,
+                    observacao_nav,
+                    final_url_nav,
+                    status_http_nav,
+                    content_type_nav,
+                    metodo_nav,
+                )
+                texto = texto_nav
 
         if pagina_indica_bloqueio(texto, html):
             fontes_consultadas.append(
@@ -450,7 +717,15 @@ def coletar_paginas(
                     gerou_texto=bool(texto),
                 )
             )
-            return ResultadoColeta([], "Bloqueio técnico", "Página indica captcha, recaptcha ou bloqueio de acesso.", fontes_consultadas)
+            if len(visitadas) == 1 and not paginas:
+                if inserir_fallback_bloqueio():
+                    if logger:
+                        logger.warning("Primeira página bloqueada; tentando caminhos institucionais alternativos.")
+                    continue
+                return ResultadoColeta([], "Bloqueio técnico", "Página indica captcha, recaptcha ou bloqueio de acesso.", fontes_consultadas)
+            if logger:
+                logger.warning("Página ignorada por bloqueio aparente: %s", url)
+            continue
 
         fontes_consultadas.append(
             FonteConsultada(
