@@ -28,6 +28,13 @@ def test_intervalo_de_anos_nao_vira_telefone():
     assert extrair_telefones("Planejamento 2021-2024 e protocolos 1603-2021") == []
 
 
+def test_cep_numerico_nao_vira_telefone():
+    telefones = extrair_telefones("Endereco: Rua Central, 69, Centro, 36980000. Telefone: 3344-2006")
+
+    assert "36980000" not in telefones
+    assert "3344-2006" in telefones
+
+
 def test_detecta_cargo_e_associa_contato_no_mesmo_bloco():
     texto = """
     Secretaria de Finanças: Maria Silva
@@ -707,6 +714,84 @@ def test_pagina_de_contatos_com_muitos_contatos_nao_associa_cargo_especifico():
 
     assert contatos
     assert {item[COL_CARGO_ORGAO] for item in contatos} == {"Contato geral"}
+
+
+def test_secretaria_com_responsavel_nao_puxa_contato_de_rodape():
+    cargos = {"financas_fazenda": ["secretaria da fazenda", "fazenda"]}
+    texto = """
+    Secretaria da Fazenda
+    Responsavel
+    Agnaldo de Souza Schuab
+    E-mail
+    fazenda@lajinha.mg.gov.br
+    Telefone
+    (33) 3344-2006
+    Endereco
+    Rua Central, Centro, 36980000
+    Informacoes
+    Telefone: (33) 9999-9999
+    Email:
+    contato@lajinha.mg.gov.br
+    Ouvidoria:
+    ouvidoria@lajinha.mg.gov.br
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/prefeitura/secretaria-da-fazenda")
+
+    assert len(contatos) == 1
+    assert contatos[0][COL_CARGO_ORGAO].endswith("/Fazenda")
+    assert contatos[0]["Nome"] == "Agnaldo de Souza Schuab"
+    assert contatos[0]["E-mail"] == "fazenda@lajinha.mg.gov.br"
+    assert contatos[0]["Telefone"] == "(33) 3344-2006"
+    assert "contato@lajinha.mg.gov.br" not in contatos[0]["E-mail"]
+    assert "36980000" not in contatos[0]["Telefone"]
+
+
+def test_secretaria_nao_puxa_telefones_de_diretorias_subordinadas():
+    cargos = {"planejamento": ["secretaria de planejamento"]}
+    texto = """
+    Secretaria de Planejamento e Gestao
+    Secretario - Frederic Henrique Magalhaes
+    Telefone:
+    (31) 3688-1400
+    E-mail:
+    planejamento@cidade.gov.br
+    DIRETORIA DE INOVACAO TECNOLOGICA
+    Diretor
+    Telefone:
+    (31) 3688-1478
+    E-mail:
+    diretoria@cidade.gov.br
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/prefeitura/secretarias/planejamento-e-gestao")
+
+    assert len(contatos) == 1
+    assert contatos[0]["Telefone"] == "(31) 3688-1400"
+    assert contatos[0]["E-mail"] == "planejamento@cidade.gov.br"
+    assert "(31) 3688-1478" not in contatos[0]["Telefone"]
+    assert "diretoria@cidade.gov.br" not in contatos[0]["E-mail"]
+
+
+def test_endereco_com_nome_e_mencao_descritiva_ao_prefeito_nao_cria_prefeito():
+    cargos = {"prefeito": ["prefeito"]}
+    texto = """
+    Secretaria de Cultura e Turismo
+    Responsavel
+    Maria Luiza Azine Vitor
+    E-mail
+    cultura@cidade.gov.br
+    Telefone
+    (33) 3344-2796
+    Endereco
+    Av. Dr. Rubens Boechat de Oliveira, Centro, Cidade, MG, Brasil, 36980000
+    Descricao
+    Prestar assessoramento direto e indireto ao Prefeito, em assuntos relativos a Esporte, Cultura e Turismo.
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/prefeitura/secretaria-de-cultura")
+
+    assert all(item[COL_CARGO_ORGAO] != "Prefeito" for item in contatos)
 
 
 def test_pires_do_rio_rotulos_nao_viram_autoridades():

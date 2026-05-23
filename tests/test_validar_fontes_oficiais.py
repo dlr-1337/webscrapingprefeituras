@@ -160,6 +160,42 @@ def test_validar_registros_rejeita_nome_estranho_mesmo_presente_na_fonte():
 
     assert result.loc[0, "Status validação"] == "Divergente"
     assert "não parece pessoa" in result.loc[0, "Observações"]
+
+
+def test_validar_registros_rejeita_nome_presente_apenas_em_endereco():
+    dados = pd.DataFrame(
+        [
+            {
+                "UF": "MG",
+                "MunicÃ­pio/Capital": "Lajinha",
+                "Cargo/Ãrea": "Prefeito",
+                "Ã“rgÃ£o/Secretaria": "Gabinete/Prefeitura",
+                "Status": "Encontrado",
+                "Nome": "Rubens Boechat",
+                "E-mail": "",
+                "Telefone": "(33) 3344-2796",
+                "Celular/WhatsApp": "",
+                "URL da fonte": "https://fonte.test/cultura",
+            }
+        ]
+    )
+    texto = """
+    Secretaria de Cultura e Turismo
+    Telefone: (33) 3344-2796
+    Endereco
+    Av. Dr. Rubens Boechat de Oliveira, Centro, Lajinha, MG, 36980000
+    Descricao
+    Prestar assessoramento direto ao Prefeito.
+    """
+
+    result = validar_registros(dados, lambda _url: (texto, "Encontrado", ""))
+
+    status_col = next(c for c in result.columns if str(c).startswith("Status valida"))
+    obs_col = next(c for c in result.columns if str(c).startswith("Observa"))
+    assert result.loc[0, status_col] == "Divergente"
+    assert "endere" in result.loc[0, obs_col].lower()
+
+
 def test_validar_registros_associa_telefone_por_digitos_no_bloco_da_categoria():
     dados = pd.DataFrame(
         [
