@@ -151,6 +151,8 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/detalhe-da-materia/info/3032/simbolos-oficiais/">Secretaria símbolos</a>
     <a href="/portal/noticias/0/3/2554/informativo-copa-do-mundo/">Noticia com palavra gabinete</a>
     <a href="/portal/download/arquivos/CGzzx/">Download sem extensao</a>
+    <a href="/portal/editais/0/1/7964/">Edital com contato</a>
+    <a href="/portal/obras/20/">Obra com contato</a>
     <a href="/estrutura-organizacional/?pg=1&tax=tipo-secretaria%3D5">Secretaria paginada</a>
     <a href="/portal/detalhe-prefeito/21/">Prefeito histórico</a>
     <a href="/portal/secretarias-paginas/30/conselho/">Conselho</a>
