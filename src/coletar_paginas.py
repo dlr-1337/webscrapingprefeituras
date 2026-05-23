@@ -88,6 +88,8 @@ SEGMENTOS_IGNORADOS = {
     "escola-municipal",
     "escolas-municipais",
     "prefeitos-de-",
+    "intendentes_e_prefeitos",
+    "intendentes-e-prefeitos",
     "ex-prefeitos",
     "historico-prefeitos",
     "gabinete-militar",
@@ -282,6 +284,8 @@ def _url_deve_ser_ignorada(url: str) -> bool:
     path = parsed.path.lower()
     query = parsed.query.lower()
     if any(path.endswith(ext) for ext in EXTENSOES_IGNORADAS):
+        return True
+    if "@" in path:
         return True
     if any(path.startswith(prefix) for prefix in CAMINHOS_IGNORADOS):
         return True
