@@ -64,17 +64,23 @@ NOME_EXCLUDE = {
     "corrupcao login",
     "controle ambiental economia solidaria",
     "constituicao federal",
+    "constituicao estadual",
     "diretoria de financas publicas coordenador",
     "estrada do aviario",
     "estrutura organizacional nosso",
     "horario de atendimento",
+    "infraestrutura prefeitura",
+    "imprensa oficial art",
     "licenciamento e regularizacao",
     "legislacao denuncia",
     "meio ambiente cultura",
     "ministerio da mulher",
     "minha casa",
     "municipio de acrelandia assessor parlamentar",
+    "negocios publicos",
     "obras publicas",
+    "orgao de imprensa",
+    "ouvidoria e atendimento",
     "parque chico mendes novo mirante",
     "poder executivo",
     "poderes publicos",
@@ -87,6 +93,7 @@ NOME_EXCLUDE = {
     "rua rui barbosa",
     "segundo andar",
     "seguranca publica",
+    "servico de informacoes",
     "servicos ponto eletronico processos seletivos licitacoes",
     "sistema de recursos humanos",
     "sistema unico",
@@ -100,6 +107,7 @@ NOME_EXCLUDE = {
     "termos de posse",
     "chefia chefe",
     "clique aqui",
+    "tecnica legislativa art",
     "divisao divisao",
     "distritos industriais",
     "patrulha agricola rural",
@@ -115,6 +123,8 @@ NOME_TOKEN_EXCLUDE = {
     "ambiental",
     "andar",
     "ano",
+    "art",
+    "atendimento",
     "autor",
     "autoria",
     "atualizacao",
@@ -158,6 +168,7 @@ NOME_TOKEN_EXCLUDE = {
     "endereco",
     "estrada",
     "estado",
+    "estadual",
     "estrutura",
     "eventos",
     "executivo",
@@ -167,6 +178,9 @@ NOME_TOKEN_EXCLUDE = {
     "fotos",
     "imagem",
     "imagens",
+    "imprensa",
+    "informacoes",
+    "infraestrutura",
     "juridica",
     "juridico",
     "licitacao",
@@ -191,11 +205,15 @@ NOME_TOKEN_EXCLUDE = {
     "municipal",
     "municipio",
     "mulher",
+    "negocios",
     "nosso",
     "obras",
+    "oficial",
     "opcao",
     "organizacional",
+    "orgao",
     "orgaos",
+    "ouvidoria",
     "parque",
     "patrulha",
     "poder",
@@ -216,12 +234,14 @@ NOME_TOKEN_EXCLUDE = {
     "redacao",
     "rapido",
     "recursos",
+    "responsavel",
     "reportagem",
     "rua",
     "saude",
     "secretaria",
     "secretarias",
     "secretario",
+    "servico",
     "servicos",
     "sistema",
     "sessao",
@@ -229,7 +249,10 @@ NOME_TOKEN_EXCLUDE = {
     "subsecretaria",
     "subsecretario",
     "telefone",
+    "telefones",
     "tecnologia",
+    "tecnica",
+    "legislativa",
     "termos",
     "eletronico",
     "seletivos",
@@ -331,7 +354,11 @@ ENDERECO_PREFIXOS = (
     "av. ",
     "bairro ",
     "cep",
+    "endere",
+    "endereco",
     "estrada ",
+    "localiza",
+    "localizacao",
     "logradouro",
     "praca ",
     "rodovia ",
@@ -647,7 +674,57 @@ def _nome_aparece_apenas_em_linha_de_endereco(texto: str, nome: str) -> bool:
     if not nome_norm:
         return False
     linhas_com_nome = [line for line in _linhas_nao_vazias(texto) if nome_norm in normalize_for_search(line)]
-    return bool(linhas_com_nome) and all(_linha_parece_endereco(line) for line in linhas_com_nome)
+    return bool(linhas_com_nome) and all(
+        _linha_parece_endereco(line) or _nome_em_contexto_de_endereco(line, nome)
+        for line in linhas_com_nome
+    )
+
+
+def _nome_em_contexto_de_endereco(texto: str, nome: str) -> bool:
+    nome_norm = normalize_for_search(nome)
+    normalized = normalize_for_search(texto)
+    if not nome_norm or not normalized:
+        return False
+    tokens = (
+        "endereco",
+        "endere",
+        "localizacao",
+        "localiza",
+        "logradouro",
+        "rua",
+        "avenida",
+        "av.",
+        "av ",
+        "praca",
+        "rodovia",
+        "travessa",
+    )
+    for match in re.finditer(re.escape(nome_norm), normalized):
+        contexto = normalized[max(0, match.start() - 70) : match.start()]
+        if any(token in contexto for token in tokens):
+            return True
+    return False
+
+
+def _nome_antes_do_indice(texto: str, index: int) -> str:
+    prefix = str(texto or "")[max(0, index - 180) : index].strip(" \t\n\r:-\u2013\u2014")
+    if not prefix:
+        return ""
+    partes = re.split(
+        r"(?:/|\b(?:home|inicio|gabinete|poder executivo|secretaria|prefeitura)\b)",
+        prefix,
+        flags=re.IGNORECASE,
+    )
+    for parte in reversed(partes):
+        nome = _nome_no_trecho(parte)
+        if (
+            nome
+            and _nome_valido(nome)
+            and not _nome_aparece_apenas_em_linha_de_credito(parte, nome)
+            and not _nome_em_contexto_de_endereco(parte, nome)
+        ):
+            return nome
+    return ""
 
 
 def _nome_aparece_apenas_em_linha_de_credito(texto: str, nome: str) -> bool:
@@ -756,8 +833,9 @@ def _cargo_no_inicio_info(line: str, cargos_config: dict[str, list[str]]) -> tup
                 tail = original[offset + match.start(1) :].strip(" \t:-\u2013\u2014")
                 if normalize_for_search(tail).startswith(("de ", "da ", "do ", "dos ", "das ")):
                     continue
-                if _nome_da_linha(tail):
-                    return label, tail
+                nome_tail = _nome_da_linha(tail)
+                if nome_tail:
+                    return label, nome_tail
     return "", ""
 
 
@@ -768,9 +846,17 @@ def _cargo_no_inicio_da_linha(line: str, cargos_config: dict[str, list[str]]) ->
 
 def _nome_no_trecho(value: str) -> str:
     candidate = str(value or "").strip(" \t:-\u2013\u2014")
+    candidate = re.split(
+        r"\b(?:chefe de gabinete|vice-prefeit[oa]|vice prefeit[oa]|vice|telefones?|e-?mails?|emails?|contatos?|celular|whatsapp|endere[cç]o|hor[aá]rio|atendimento)\b",
+        candidate,
+        maxsplit=1,
+        flags=re.IGNORECASE,
+    )[0].strip(" \t:-\u2013\u2014")
     normalized_candidate = normalize_for_search(candidate)
     if re.match(r"^(foto|fotos|credito|creditos|imagem|imagens|autor|autoria|reportagem|redacao)\b", normalized_candidate):
         return ""
+    if _nome_valido(candidate) and _parece_linha_de_nome_proprio(candidate):
+        return candidate
     for found in NAME_PATTERN.finditer(candidate):
         nome = found.group(1)
         if _nome_valido(nome):
@@ -780,6 +866,12 @@ def _nome_no_trecho(value: str) -> str:
 
 def _nome_da_linha(line: str) -> str:
     candidate = str(line or "").strip(" \t:-\u2013\u2014")
+    candidate = re.split(
+        r"\b(?:chefe de gabinete|vice-prefeit[oa]|vice prefeit[oa]|vice|telefones?|e-?mails?|emails?|contatos?|celular|whatsapp|endere[cç]o|hor[aá]rio|atendimento)\b",
+        candidate,
+        maxsplit=1,
+        flags=re.IGNORECASE,
+    )[0].strip(" \t:-\u2013\u2014")
     if not _nome_valido(candidate):
         return ""
     found = NAME_PATTERN.fullmatch(candidate)
@@ -962,12 +1054,27 @@ def _nome_apos_rotulo_secretario(lines: list[str], index: int) -> tuple[str, int
 
 
 def _nome_apos_rotulo_responsavel(lines: list[str], index: int) -> tuple[str, int]:
-    normalized = normalize_for_search(lines[index]).strip(" :-")
-    match = re.match(r"^(responsavel|titular|autoridade administrativa)\s*[:\-\u2013\u2014]?\s*(.*)$", normalized)
-    if not match:
+    line = lines[index]
+    normalized = normalize_for_search(line).strip(" :-")
+    if not (
+        normalized.startswith("respons")
+        or normalized.startswith("titular")
+        or normalized.startswith("autoridade administrativa")
+    ):
         return "", index
+    if normalized.startswith("autoridade administrativa"):
+        inline_source = re.sub(
+            r"^\s*autoridade\s+administrativa\s*[:\-\u2013\u2014]?\s*",
+            "",
+            line,
+            flags=re.IGNORECASE,
+        )
+    elif normalized.startswith("titular"):
+        inline_source = re.sub(r"^\s*titular\s*[:\-\u2013\u2014]?\s*", "", line, flags=re.IGNORECASE)
+    else:
+        inline_source = re.sub(r"^\s*respons\S*\s*[:\-\u2013\u2014]?\s*", "", line, flags=re.IGNORECASE)
 
-    inline = _nome_no_trecho(lines[index].split(":", 1)[1] if ":" in lines[index] else "")
+    inline = _nome_no_trecho(inline_source)
     if inline:
         return inline, index
 
@@ -1118,8 +1225,14 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
     if nome_match:
         candidate = nome_match.group(1).strip()
         found = NAME_PATTERN.search(candidate)
-        if found and _nome_valido(found.group(1)) and not _nome_aparece_apenas_em_linha_de_credito(block, found.group(1)):
-            return found.group(1)
+        candidate = _nome_no_trecho(found.group(1)) if found else ""
+        if (
+            candidate
+            and _nome_valido(candidate)
+            and not _nome_aparece_apenas_em_linha_de_credito(block, candidate)
+            and not _nome_em_contexto_de_endereco(block, candidate)
+        ):
+            return candidate
 
     for index, line in enumerate(_linhas_nao_vazias(block)):
         normalized = normalize_for_search(line).strip(" :-")
@@ -1127,6 +1240,16 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
             nome, _nome_index = _nome_apos_rotulo_responsavel(_linhas_nao_vazias(block), index)
             if nome and _nome_valido(nome) and not _nome_aparece_apenas_em_linha_de_credito(block, nome):
                 return nome
+
+    rotulo_match = re.search(
+        r"(?:respons\S*|titular|autoridade administrativa)\s*[:\-\u2013\u2014]?\s*(.{4,140})",
+        block,
+        flags=re.IGNORECASE,
+    )
+    if rotulo_match:
+        candidate = _nome_no_trecho(rotulo_match.group(1))
+        if candidate and _nome_valido(candidate) and not _nome_aparece_apenas_em_linha_de_credito(block, candidate):
+            return candidate
 
     normalized_block = normalize_for_search(block)
     for cargo_key, variacoes in cargos_config.items():
@@ -1137,20 +1260,39 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
             index = normalized_block.find(normalized_variacao)
             if index < 0:
                 continue
+            nome_anterior = _nome_antes_do_indice(block, index)
+            if nome_anterior:
+                return nome_anterior
             window = block[index : index + 260]
             colon_match = re.search(r"[:\-]\s*([A-ZÁÀÂÃÉÈÊÍÌÓÒÔÕÚÙÇ][^\n|;,.]{4,80})", window)
             if colon_match:
                 found = NAME_PATTERN.search(colon_match.group(1))
-                if found and _nome_valido(found.group(1)) and not _nome_aparece_apenas_em_linha_de_credito(window, found.group(1)):
-                    return found.group(1)
+                candidate = _nome_no_trecho(found.group(1)) if found else ""
+                if (
+                    candidate
+                    and _nome_valido(candidate)
+                    and not _nome_aparece_apenas_em_linha_de_credito(window, candidate)
+                    and not _nome_em_contexto_de_endereco(window, candidate)
+                ):
+                    return candidate
             for found in NAME_PATTERN.finditer(window):
-                candidate = found.group(1)
-                if _nome_valido(candidate) and not _nome_aparece_apenas_em_linha_de_credito(window, candidate):
+                candidate = _nome_no_trecho(found.group(1))
+                if (
+                    candidate
+                    and _nome_valido(candidate)
+                    and not _nome_aparece_apenas_em_linha_de_credito(window, candidate)
+                    and not _nome_em_contexto_de_endereco(window, candidate)
+                ):
                     return candidate
 
     for found in NAME_PATTERN.finditer(block[:300]):
-        candidate = found.group(1)
-        if _nome_valido(candidate) and not _nome_aparece_apenas_em_linha_de_credito(block[:300], candidate):
+        candidate = _nome_no_trecho(found.group(1))
+        if (
+            candidate
+            and _nome_valido(candidate)
+            and not _nome_aparece_apenas_em_linha_de_credito(block[:300], candidate)
+            and not _nome_em_contexto_de_endereco(block[:300], candidate)
+        ):
             return candidate
     return ""
 
@@ -1281,7 +1423,16 @@ def _pagina_de_secretaria(url: str) -> bool:
 
 def _pagina_de_contatos(url: str) -> bool:
     path = urlparse(str(url or "")).path.lower().rstrip("/")
-    return path.endswith("/contato") or path.endswith("/contatos") or "/contato/" in path or "/contatos/" in path
+    return (
+        path.endswith("/contato")
+        or path.endswith("/contatos")
+        or path.endswith("/fale-conosco")
+        or path.endswith("/fale_conosco")
+        or "/contato/" in path
+        or "/contatos/" in path
+        or "/fale-conosco/" in path
+        or "/fale_conosco/" in path
+    )
 
 
 def _muitos_contatos_no_bloco(emails: list[str], telefones: list[str]) -> bool:

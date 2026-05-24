@@ -1092,7 +1092,13 @@ def test_menu_calendario_nao_vira_nome_de_autoridade():
 
 
 def test_rotulos_de_portal_nao_viram_nome_de_autoridade():
-    cargos = {"vice_prefeito": ["vice-prefeito", "vice prefeito"], "planejamento": ["planejamento"]}
+    cargos = {
+        "vice_prefeito": ["vice-prefeito", "vice prefeito"],
+        "planejamento": ["planejamento"],
+        "prefeito": ["prefeito", "prefeita"],
+        "chefe_gabinete": ["chefe de gabinete"],
+        "financas_fazenda": ["finanças", "fazenda"],
+    }
     texto = """
     Vice-prefeito
     Legislação Denuncia
@@ -1117,6 +1123,30 @@ def test_rotulos_de_portal_nao_viram_nome_de_autoridade():
 
     Vice-prefeito
     Chefia Chefe
+
+    Prefeito
+    Infraestrutura Prefeitura
+
+    Chefe de gabinete
+    Imprensa Oficial Art
+
+    Chefe de gabinete
+    Técnica Legislativa Art
+
+    Vice-prefeito
+    Constituição Estadual
+
+    Finanças
+    Negócios Públicos
+
+    Prefeito
+    Ouvidoria e Atendimento
+
+    Prefeito
+    Serviço de Informações
+
+    Prefeito
+    Órgão de Imprensa
     """
 
     contatos = extrair_contatos_de_texto(texto, cargos, "https://ecoporanga.es.gov.br/")
@@ -1129,6 +1159,109 @@ def test_rotulos_de_portal_nao_viram_nome_de_autoridade():
     assert all(item["Nome"] != "Sistema Único" for item in contatos)
     assert all(item["Nome"] != "Clique Aqui" for item in contatos)
     assert all(item["Nome"] != "Chefia Chefe" for item in contatos)
+    assert all(item["Nome"] != "Infraestrutura Prefeitura" for item in contatos)
+    assert all(item["Nome"] != "Imprensa Oficial Art" for item in contatos)
+    assert all(item["Nome"] != "Técnica Legislativa Art" for item in contatos)
+    assert all(item["Nome"] != "Constituição Estadual" for item in contatos)
+    assert all(item["Nome"] != "Negócios Públicos" for item in contatos)
+    assert all(item["Nome"] != "Ouvidoria e Atendimento" for item in contatos)
+    assert all(item["Nome"] != "Serviço de Informações" for item in contatos)
+    assert all(item["Nome"] != "Órgão de Imprensa" for item in contatos)
+
+
+def test_responsavel_inline_nao_inclui_rotulo_no_nome():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Gabinete da Prefeita
+    Responsável Sebastião Viana
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/gabinete")
+
+    assert all(item["Nome"] != "Responsável Sebastião Viana" for item in contatos)
+    assert any(item["Nome"] == "Sebastião Viana" for item in contatos)
+
+
+def test_nome_em_linha_de_endereco_nao_vira_prefeito():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Endereço: Av. Deufino Meireles, 100
+    Telefone: (61) 3614-2573
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/prefeito")
+
+    assert all(item["Nome"] != "Deufino Meireles" for item in contatos)
+
+
+def test_responsavel_com_telefone_na_mesma_linha_nao_gruda_rotulo_contato():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Gabinete do Prefeito Responsável: Roberto Pereira dos Santos Telefones: 61 3614-2573
+    Email: gabineteprefeito@novogama.go.gov.br
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/gabinete")
+
+    assert any(item["Nome"] == "Roberto Pereira dos Santos" for item in contatos)
+    assert all(item["Nome"] != "Roberto Pereira dos Santos Telefones" for item in contatos)
+
+
+def test_nome_antes_de_cargo_na_mesma_linha_nao_gruda_chefe():
+    cargos = {"chefe_gabinete": ["chefe de gabinete", "gabinete"]}
+    texto = """
+    Gabinete Kelen Cristina Aires de Melo Cury Chefe de Gabinete
+    Telefone (64) 3441-5070
+    E-mail gabinete@catalao.go.gov.br
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/gabinete")
+
+    assert any(item["Nome"] == "Kelen Cristina Aires de Melo Cury" for item in contatos)
+    assert all(item["Nome"] != "Melo Cury Chefe" for item in contatos)
+
+
+def test_nome_antes_de_vice_na_mesma_linha_nao_gruda_cargo():
+    cargos = {"vice_prefeito": ["vice-prefeito", "vice prefeito"]}
+    texto = """
+    Nelson Martins Fayad Vice-Prefeito
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/vice-prefeito")
+
+    assert any(item["Nome"] == "Nelson Martins Fayad" for item in contatos)
+    assert all(item["Nome"] != "Nelson Martins Fayad Vice" for item in contatos)
+
+
+def test_nome_com_vice_isolado_no_fim_eh_aparado():
+    cargos = {"vice_prefeito": ["vice-prefeito", "vice prefeito"]}
+    texto = """
+    Vice Prefeito
+    Nelson Martins Fayad Vice
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/vice-prefeito")
+
+    assert any(item["Nome"] == "Nelson Martins Fayad" for item in contatos)
+    assert all(item["Nome"] != "Nelson Martins Fayad Vice" for item in contatos)
+
+
+def test_fale_conosco_ouvidoria_nao_vira_prefeito():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Gabinete do Prefeito
+    Fale conosco
+    Ouvidoria e Atendimento
+    Responsável ouvidoria
+    Hilário Freitas Guimarães
+    62 99898-5281
+    ouvidoria@itapaci.go.gov.br
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/fale-conosco/")
+
+    assert all(item[COL_CARGO_ORGAO] != "Prefeito" for item in contatos)
 
 
 def test_autoridade_administrativa_eh_responsavel_oficial():

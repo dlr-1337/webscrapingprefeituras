@@ -31,8 +31,40 @@ def test_validar_registros_confere_campos_na_fonte():
 
     result = validar_registros(dados, fetcher)
 
-    assert result.loc[0, "Status validação"] == "Validado"
+    status_col = next(c for c in result.columns if str(c).startswith("Status valida"))
+    assert result.loc[0, status_col] == "Validado"
     assert result.loc[0, "Campos conferidos"] == 4
+
+
+def test_validar_desenvolvimento_economico_aceita_industria_e_comercio_oficial():
+    dados = pd.DataFrame(
+        [
+            {
+                "UF": "GO",
+                "Municipio/Capital": "Anicuns",
+                "Cargo/Area": "Desenvolvimento econômico",
+                "Orgao/Secretaria": "Secretaria Municipal de Indústria e Comércio",
+                "Status": "Encontrado",
+                "Nome": "",
+                "E-mail": "agricultura@anicuns.go.gov.br",
+                "Telefone": "",
+                "Celular/WhatsApp": "",
+                "URL da fonte": "https://fonte.test/industria-comercio",
+            }
+        ]
+    )
+    texto = """
+    Secretaria Municipal de Indústria e Comércio
+    E-mail:
+    agricultura@anicuns.go.gov.br
+    Competências
+    Orientar o desenvolvimento industrial e comercial.
+    """
+
+    result = validar_registros(dados, lambda _url: (texto, "Encontrado", ""), max_linhas=0)
+
+    status_col = next(c for c in result.columns if str(c).startswith("Status valida"))
+    assert result.loc[0, status_col] == "Validado"
 
 
 def test_validar_registros_aponta_divergencia():
