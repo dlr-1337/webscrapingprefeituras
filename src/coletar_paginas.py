@@ -152,6 +152,8 @@ SEGMENTOS_IGNORADOS = {
     "/viewnoticia/",
     "cont_not.asp",
     "contagem.asp",
+    "exibenoticia.php",
+    "exibe-noticia",
     "/portal/obras/",
     "/portal/contrato/",
     "/portaltransparencia/",
