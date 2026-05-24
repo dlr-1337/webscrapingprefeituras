@@ -839,6 +839,20 @@ def test_credito_de_foto_em_noticia_nao_vira_autoridade():
     assert all(item["Nome"] != "Marcelo Magalhaes" for item in contatos)
 
 
+def test_rotulo_institucional_ultima_nao_vira_autoridade():
+    cargos = {"vice_prefeito": ["vice-prefeito", "vice prefeito"]}
+    texto = """
+    Vice-prefeito
+    Institucional Ultima
+    Atualizacao
+    Noticias
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/institucional")
+
+    assert all(item["Nome"] != "Institucional Ultima" for item in contatos)
+
+
 def test_pires_do_rio_mescla_nome_e_contato_do_prefeito_no_mesmo_orgao():
     cargos = {"prefeito": ["prefeito", "prefeita", "gabinete da prefeita"]}
     texto = """

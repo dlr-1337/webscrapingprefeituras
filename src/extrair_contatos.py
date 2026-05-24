@@ -100,6 +100,8 @@ NOME_TOKEN_EXCLUDE = {
     "ano",
     "autor",
     "autoria",
+    "atualizacao",
+    "atualizado",
     "avenida",
     "aviario",
     "bairro",
@@ -192,8 +194,14 @@ NOME_TOKEN_EXCLUDE = {
     "divisao",
     "distritos",
     "industriais",
+    "institucional",
     "filtrar",
+    "noticia",
+    "noticias",
     "apagar",
+    "ultima",
+    "ultimas",
+    "ultimo",
     "ver",
 }
 
