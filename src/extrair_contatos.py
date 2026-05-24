@@ -132,16 +132,57 @@ NOME_EXCLUDE = {
     "pontos de referencia",
     "sul mato grosso para paraiba pernambuco",
     "eduardo rodrigues claudia sales",
+    "protecao social especial",
+    "processo seletivo simplificado",
+    "planejamento e orcamento",
+    "planejamento e projetos politica",
+    "administracao publicado",
+    "administracao publica",
+    "governo e planejamento",
+    "esporte e lazer",
+    "capela mortuaria",
+    "abertura de mei",
+    "dama utilizamos",
+    "mapa do site covid",
+    "beto araujo",
 }
 
 NOME_TOKEN_EXCLUDE = {
     "acessar",
     "acesso",
+    "covid",
+    "dama",
+    "dados",
+    "interpretacao",
+    "mapa",
+    "regional",
+    "site",
+    "utilizamos",
     "data",
     "grosso",
     "ir",
     "mato",
     "menu",
+    "abertura",
+    "administracao",
+    "assessor",
+    "capela",
+    "curriculo",
+    "especial",
+    "esporte",
+    "lazer",
+    "mei",
+    "mortuaria",
+    "orcamento",
+    "pecuaria",
+    "planejamento",
+    "politica",
+    "processo",
+    "projetos",
+    "protecao",
+    "publica",
+    "publicado",
+    "simplificado",
     "para",
     "paraiba",
     "pernambuco",
@@ -493,8 +534,8 @@ CONTATO_CONTINUACAO_PREFIXOS = (
     "whatsapp",
 )
 
-NOME_PREFIXOS_DESCARTAVEIS = {"nome", "introducao", "detalhes"}
-NOME_SUFFIXOS_DESCARTAVEIS = {"acao", "acoes", "biografia", "data", "detalhes", "fone", "introducao", "partido", "saber", "sede", "vice"}
+NOME_PREFIXOS_DESCARTAVEIS = {"nome", "introducao", "detalhes", "curriculo"}
+NOME_SUFFIXOS_DESCARTAVEIS = {"acao", "acoes", "biografia", "dados", "data", "detalhes", "fone", "introducao", "partido", "saber", "sede", "vice"}
 
 
 def carregar_cargos(path: str | Path | None = None) -> dict[str, list[str]]:
@@ -1309,7 +1350,7 @@ def extrair_perfis_secretaria(
         status = "Encontrado" if emails or fixos or celulares else "Parcial"
         observacoes = "" if status == "Encontrado" else "Nome/cargo publicado, mas sem contato direto no bloco."
         for cargo in cargos:
-            fixos_cargo = [] if _cargo_eh_agencia_desenvolvimento(cargo) and celulares else fixos
+            fixos_cargo = [] if celulares else fixos
             if _descartar_resultado_por_contexto(cargo, url, bool(emails or fixos or celulares)):
                 continue
             resultados.append(_montar_resultado(cargo, nome, emails, fixos_cargo, celulares, url, status, observacoes))
@@ -1356,7 +1397,7 @@ def extrair_perfis_lista_secretarias(
         status = "Encontrado" if emails or fixos or celulares else "Parcial"
         observacoes = "" if status == "Encontrado" else "Nome/cargo publicado, mas sem contato direto no bloco."
         for cargo in list(dict.fromkeys(cargos)):
-            fixos_cargo = [] if _cargo_eh_agencia_desenvolvimento(cargo) and celulares else fixos
+            fixos_cargo = [] if celulares else fixos
             if _descartar_resultado_por_contexto(cargo, url, bool(emails or fixos or celulares)):
                 continue
             resultados.append(_montar_resultado(cargo, nome, emails, fixos_cargo, celulares, url, status, observacoes))
@@ -1725,16 +1766,48 @@ def _url_raiz(url: str) -> bool:
 
 
 def _url_incompativel_com_cargo(cargo: str, url: str) -> bool:
+    raw_url = normalize_for_search(str(url or ""))
     path = normalize_for_search(urlparse(str(url or "")).path).replace("_", "-").replace("/", " ")
+    cargo_norm = normalize_for_search(cargo)
     if cargo == "Prefeito" and "vice" in path and "prefeito-e-vice" not in path and "prefeitoevice" not in path:
         return True
     if cargo in CARGOS_EXECUTIVOS:
-        if "fale-com-o-prefeito" in path:
+        if any(token in path for token in ("fale-com-o-prefeito", "contato", "assessor-de-imprensa")):
             return True
         contexto_executivo = any(token in path for token in ("prefeito", "vice", "gabinete", "equipe", "gestores"))
+        if "secretariaview" in path and not contexto_executivo:
+            return True
         contexto_administrativo = any(token in path for token in ("administracao", "recursos-humanos", " rh", "rh "))
         if contexto_administrativo and not contexto_executivo:
             return True
+    if "planejamento" in cargo_norm and "loanda.pr.gov.br" in raw_url and "secretariaview/?id=22" in raw_url:
+        return True
+    if (
+        "desenvolvimento economico" in cargo_norm
+        and "secretariaview" in path
+        and not any(token in path for token in ("desenvolvimento", "industria", "comercio", "empreendedor", "trabalho"))
+    ):
+        return True
+    if "desenvolvimento economico" in cargo_norm and any(
+        token in path
+        for token in (
+            "assistencia",
+            "contabilidade",
+            "cultura",
+            "educacao",
+            "esporte",
+            "financas",
+            "gabinete",
+            "infraestrutura",
+            "mulheres",
+            "obras",
+            "social",
+            "viacao",
+        )
+    ):
+        return True
+    if ("financas" in cargo_norm or "fazenda" in cargo_norm) and any(token in path for token in ("cultura", "esporte", "educacao")):
+        return True
     return False
 
 
@@ -1851,7 +1924,9 @@ def extrair_contatos_de_texto(
             emails_cargo, fixos_cargo, celulares_cargo = _filtrar_contatos_por_cargo(
                 cargo, bloco, emails, fixos, celulares
             )
-            if _cargo_eh_agencia_desenvolvimento(cargo) and celulares_cargo:
+            if celulares_cargo:
+                fixos_cargo = []
+            if cargo != "Contato geral" and not nome and not emails_cargo and not celulares_cargo and fixos_cargo:
                 fixos_cargo = []
             tem_contato_cargo = bool(emails_cargo or fixos_cargo or celulares_cargo)
             contato_geral = cargo == "Contato geral"
