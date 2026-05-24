@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Iterable
-from urllib.parse import urldefrag, urljoin, urlparse
+from urllib.parse import unquote, urldefrag, urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -55,7 +55,7 @@ CAMINHOS_IGNORADOS = (
     "/faq",
 )
 
-QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=", "export=", "ps_export=", "length=", "share=")
+QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=", "export=", "ps_export=", "length=", "share=", "servico=")
 SEGMENTOS_IGNORADOS = {
     "/page/",
     "/pagina/",
@@ -68,6 +68,7 @@ SEGMENTOS_IGNORADOS = {
     "/contratos",
     "/convenios",
     "/cadastro-esic",
+    "/carta-de-servicos",
     "/dados-abertos",
     "/dados-genericos-esic",
     "/download/",
@@ -83,8 +84,11 @@ SEGMENTOS_IGNORADOS = {
     "/folha-pagamento",
     "/homepage",
     "/inscritos-divida-ativa",
+    "/divida-ativa",
     "/lei-acesso-informacao",
+    "/lei-de-acesso-informacao",
     "/leis-atos-normativos",
+    "/legislacoes-e-atos",
     "/lei-diretrizes-orcamentarias",
     "/lei-orcamentaria",
     "/lei-plurianual-ppa",
@@ -98,11 +102,15 @@ SEGMENTOS_IGNORADOS = {
     "/perguntas-frequentes",
     "/perguntasfrequentes",
     "/pesquisa-satisfacao",
+    "/pesquisa-de-satisfacao",
     "/plano-contratacao-anual",
     "/plano-estrategico-institucional",
     "/politica-privacidade",
     "/receita",
+    "/renuncias-de-receitas",
     "/relacao-sancionados",
+    "/prestacao-de-contas",
+    "/prestacao_de_contas",
     "/responsavel-lgpd",
     "/servicos/",
     "/servidores",
@@ -114,6 +122,7 @@ SEGMENTOS_IGNORADOS = {
     "/transmissao",
     "/usuario-esic",
     "/valores-diarias",
+    "/acessoexterno/",
     "/site/acessibilidade",
     "/site/acessoainformacao",
     "/site/dadosmunicipais",
@@ -145,6 +154,8 @@ SEGMENTOS_IGNORADOS = {
     "contagem.asp",
     "/portal/obras/",
     "/portal/contrato/",
+    "/portaltransparencia/",
+    "/emendas-parlamentares",
     "/conselhos_municipais/",
     "/conselhos-municipais/",
     "/marcador/",
@@ -161,7 +172,11 @@ SEGMENTOS_IGNORADOS = {
     "historico-prefeitos",
     "gabinete-militar",
     "funcoes-da-secretaria",
+    "filadepagamento",
+    "fila-de-pagamento",
+    "fornecedor",
     "estrutura-da-secretaria",
+    "recursos-humanos",
     "em-acao",
     "consulta_publica",
     "consulta-publica",
@@ -359,7 +374,7 @@ def pagina_indica_bloqueio(texto: str, html: str = "") -> bool:
 
 def _url_deve_ser_ignorada(url: str) -> bool:
     parsed = urlparse(url)
-    path = parsed.path.lower()
+    path = normalize_for_search(unquote(parsed.path))
     query = parsed.query.lower()
     if any(path.endswith(ext) for ext in EXTENSOES_IGNORADAS):
         return True

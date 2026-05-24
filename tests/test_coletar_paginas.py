@@ -202,6 +202,18 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/Site/Glossario?Length=4">Glossario</a>
     <a href="/secretaria-de-infraestrutura-em-acao/">Noticia da secretaria</a>
     <a href="/secretaria-de-infraestrutura-em-acao/?share=facebook">Compartilhar</a>
+    <a href="/orgao/secretaria/planejamento-e-prestacao-de-contas">Prestacao de contas</a>
+    <a href="/orgao/secretaria/legislacoes-e-atos">Legislacoes</a>
+    <a href="/orgao/secretaria/portaltransparencia/?servico=fornecedor/filadepagamento">Fila pagamento</a>
+    <a href="/orgao/secretaria/recursos-humanos">Recursos humanos</a>
+    <a href="/orgao/secretaria/di%C3%A1rio-oficial-do-munic%C3%ADpio">Diario acentuado</a>
+    <a href="/orgao/secretaria/acessoexterno/https/transparencia.example">Acesso externo</a>
+    <a href="/orgao/secretaria/pesquisa-de-satisfacao">Pesquisa satisfacao</a>
+    <a href="/orgao/secretaria/renuncias-de-receitas">Renuncias</a>
+    <a href="/orgao/secretaria/emendas-parlamentares">Emendas</a>
+    <a href="/orgao/secretaria/carta-de-servicos">Carta servicos</a>
+    <a href="/orgao/secretaria/divida-ativa">Divida ativa</a>
+    <a href="/orgao/secretaria/lei-de-acesso-informacao">LAI</a>
     <a href="/gabinete/5/secretaria/1/administra-o-e-finan-as">Secretaria aninhada no gabinete</a>
     <a href="/gabinetecivil@cidade.sp.gov.br">E-mail colado como URL</a>
     <a href="/planejamento-orcamentario/?cat=20&export=csv">Export CSV</a>
