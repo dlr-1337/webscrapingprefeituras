@@ -40,6 +40,7 @@ NOME_EXCLUDE = {
     "praca",
     "diario oficial",
     "acessar o conteudo",
+    "acesso rapido",
     "prefeito secretarias",
     "secretarias autarquias",
     "orgaos municipais",
@@ -55,14 +56,20 @@ NOME_EXCLUDE = {
     "base juridica",
     "casa civil",
     "ciencia e tecnologia",
+    "calendario de eventos agenda",
     "comunidade mariele franco",
+    "colatina digital",
     "competencias e atribuicoes",
     "concessao de areas",
+    "corrupcao login",
     "controle ambiental economia solidaria",
+    "constituicao federal",
     "diretoria de financas publicas coordenador",
     "estrada do aviario",
+    "estrutura organizacional nosso",
     "horario de atendimento",
     "licenciamento e regularizacao",
+    "legislacao denuncia",
     "meio ambiente cultura",
     "ministerio da mulher",
     "minha casa",
@@ -70,6 +77,7 @@ NOME_EXCLUDE = {
     "obras publicas",
     "parque chico mendes novo mirante",
     "poder executivo",
+    "poderes publicos",
     "prestacao de contas",
     "procuradoria geral",
     "projeto de lei complementar",
@@ -79,6 +87,9 @@ NOME_EXCLUDE = {
     "rua rui barbosa",
     "segundo andar",
     "seguranca publica",
+    "servicos ponto eletronico processos seletivos licitacoes",
+    "sistema de recursos humanos",
+    "sistema unico",
     "saude de jussara opcao",
     "superintendencia executiva",
     "trabalho coordenadoria",
@@ -87,6 +98,8 @@ NOME_EXCLUDE = {
     "continue lendo",
     "visualizar pdf",
     "termos de posse",
+    "chefia chefe",
+    "clique aqui",
     "divisao divisao",
     "distritos industriais",
     "patrulha agricola rural",
@@ -95,6 +108,7 @@ NOME_EXCLUDE = {
 
 NOME_TOKEN_EXCLUDE = {
     "acessar",
+    "acesso",
     "agricola",
     "administrativa",
     "autarquias",
@@ -110,7 +124,10 @@ NOME_TOKEN_EXCLUDE = {
     "bairro",
     "base",
     "branco",
+    "calendario",
+    "chefia",
     "cidade",
+    "clique",
     "casa",
     "centro",
     "ciencia",
@@ -119,6 +136,7 @@ NOME_TOKEN_EXCLUDE = {
     "competencias",
     "concessao",
     "areas",
+    "aqui",
     "comunidade",
     "contato",
     "contatos",
@@ -126,9 +144,13 @@ NOME_TOKEN_EXCLUDE = {
     "cotas",
     "contas",
     "controle",
+    "corrupcao",
     "continue",
+    "constituicao",
     "cultura",
     "dia",
+    "denuncia",
+    "digital",
     "diario",
     "diretoria",
     "educacao",
@@ -136,7 +158,10 @@ NOME_TOKEN_EXCLUDE = {
     "endereco",
     "estrada",
     "estado",
+    "estrutura",
+    "eventos",
     "executivo",
+    "federal",
     "financas",
     "foto",
     "fotos",
@@ -144,13 +169,18 @@ NOME_TOKEN_EXCLUDE = {
     "imagens",
     "juridica",
     "juridico",
+    "licitacao",
+    "licitacoes",
+    "login",
     "gabinete",
     "gestao",
     "horario",
     "juventude",
     "lei",
+    "legislacao",
     "lendo",
     "licenciamento",
+    "localizacao",
     "mariele",
     "meio",
     "menino",
@@ -161,12 +191,15 @@ NOME_TOKEN_EXCLUDE = {
     "municipal",
     "municipio",
     "mulher",
+    "nosso",
     "obras",
     "opcao",
+    "organizacional",
     "orgaos",
     "parque",
     "patrulha",
     "poder",
+    "poderes",
     "portal",
     "praca",
     "posse",
@@ -175,15 +208,22 @@ NOME_TOKEN_EXCLUDE = {
     "presidente",
     "prefeita",
     "prefeito",
+    "ponto",
     "procurador",
+    "processos",
     "publicas",
+    "publicos",
     "redacao",
+    "rapido",
+    "recursos",
     "reportagem",
     "rua",
     "saude",
     "secretaria",
     "secretarias",
     "secretario",
+    "servicos",
+    "sistema",
     "sessao",
     "sobre",
     "subsecretaria",
@@ -191,6 +231,8 @@ NOME_TOKEN_EXCLUDE = {
     "telefone",
     "tecnologia",
     "termos",
+    "eletronico",
+    "seletivos",
     "tribunal",
     "trabalho",
     "transparencia",
@@ -207,9 +249,11 @@ NOME_TOKEN_EXCLUDE = {
     "noticia",
     "noticias",
     "apagar",
+    "agenda",
     "ultima",
     "ultimas",
     "ultimo",
+    "unico",
     "ver",
     "visualizar",
     "verba",
@@ -248,6 +292,7 @@ SECOES_DADOS_GERAIS = (
     "endereco",
     "localizacao",
     "horario",
+    "humanos",
     "horario de funcionamento",
     "informacoes",
     "links uteis",
@@ -667,6 +712,8 @@ def _cargo_por_linha_curta(line: str, cargos_config: dict[str, list[str]]) -> st
         )
         if normalized_plain in candidates:
             return label
+        if label == "Prefeito" and "gabinete do prefeito" in candidates and "gabinete do prefeito" in normalized_plain:
+            return label
     return ""
 
 
@@ -856,6 +903,7 @@ def extrair_perfis_institucionais(
         telefones = extrair_telefones(trecho)
         celulares = [phone for phone in telefones if telefone_eh_celular(phone)]
         fixos = [phone for phone in telefones if phone not in celulares]
+        emails, fixos, celulares = _filtrar_contatos_por_cargo(cargo, trecho, emails, fixos, celulares)
         tem_contato = bool(emails or fixos or celulares)
         status = "Encontrado" if tem_contato else "Parcial"
         observacoes = "" if tem_contato else "Cargo ou nome identificado, mas sem contato direto no mesmo bloco."
@@ -915,7 +963,7 @@ def _nome_apos_rotulo_secretario(lines: list[str], index: int) -> tuple[str, int
 
 def _nome_apos_rotulo_responsavel(lines: list[str], index: int) -> tuple[str, int]:
     normalized = normalize_for_search(lines[index]).strip(" :-")
-    match = re.match(r"^(responsavel|titular)\s*[:\-\u2013\u2014]?\s*(.*)$", normalized)
+    match = re.match(r"^(responsavel|titular|autoridade administrativa)\s*[:\-\u2013\u2014]?\s*(.*)$", normalized)
     if not match:
         return "", index
 
@@ -927,6 +975,51 @@ def _nome_apos_rotulo_responsavel(lines: list[str], index: int) -> tuple[str, in
     if next_index is None:
         return "", index
     return _nome_da_linha(lines[next_index]) or _nome_no_trecho(lines[next_index]), next_index
+
+
+def _linha_com_valor(texto: str, valor: str) -> str:
+    valor_digits = re.sub(r"\D", "", valor or "")
+    valor_norm = normalize_for_search(valor)
+    for line in _linhas_nao_vazias(texto):
+        line_digits = re.sub(r"\D", "", line)
+        line_norm = normalize_for_search(line)
+        if valor_digits and valor_digits in line_digits:
+            return line
+        if valor_norm and valor_norm in line_norm:
+            return line
+    return ""
+
+
+def _filtrar_emails_por_cargo(cargo: str, emails: list[str]) -> list[str]:
+    if cargo == "Vice-prefeito":
+        return [email for email in emails if not ("prefeito" in email.lower() and "vice" not in email.lower())]
+    if cargo == "Prefeito":
+        return [email for email in emails if "vice" not in email.lower()]
+    return emails
+
+
+def _filtrar_telefones_por_cargo(cargo: str, texto: str, telefones: list[str]) -> list[str]:
+    filtrados: list[str] = []
+    for telefone in telefones:
+        line_norm = normalize_for_search(_linha_com_valor(texto, telefone))
+        if cargo == "Vice-prefeito" and "gabinete" in line_norm and "vice" not in line_norm:
+            continue
+        filtrados.append(telefone)
+    return filtrados
+
+
+def _filtrar_contatos_por_cargo(
+    cargo: str,
+    texto: str,
+    emails: list[str],
+    fixos: list[str],
+    celulares: list[str],
+) -> tuple[list[str], list[str], list[str]]:
+    return (
+        _filtrar_emails_por_cargo(cargo, emails),
+        _filtrar_telefones_por_cargo(cargo, texto, fixos),
+        _filtrar_telefones_por_cargo(cargo, texto, celulares),
+    )
 
 
 def extrair_perfis_secretaria(
@@ -999,7 +1092,7 @@ def extrair_perfis_lista_secretarias(
             candidate_normalized = normalize_for_search(lines[candidate_index])
             if candidate_normalized.startswith(("secretario", "secretaria")):
                 nome, nome_index = _nome_apos_rotulo_secretario(lines, candidate_index)
-            elif candidate_normalized.startswith(("responsavel", "titular")):
+            elif candidate_normalized.startswith(("responsavel", "titular", "autoridade administrativa")):
                 nome, nome_index = _nome_apos_rotulo_responsavel(lines, candidate_index)
             else:
                 continue
@@ -1027,6 +1120,13 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
         found = NAME_PATTERN.search(candidate)
         if found and _nome_valido(found.group(1)) and not _nome_aparece_apenas_em_linha_de_credito(block, found.group(1)):
             return found.group(1)
+
+    for index, line in enumerate(_linhas_nao_vazias(block)):
+        normalized = normalize_for_search(line).strip(" :-")
+        if normalized.startswith(("responsavel", "titular", "autoridade administrativa")):
+            nome, _nome_index = _nome_apos_rotulo_responsavel(_linhas_nao_vazias(block), index)
+            if nome and _nome_valido(nome) and not _nome_aparece_apenas_em_linha_de_credito(block, nome):
+                return nome
 
     normalized_block = normalize_for_search(block)
     for cargo_key, variacoes in cargos_config.items():
@@ -1411,22 +1511,26 @@ def extrair_contatos_de_texto(
             continue
 
         for cargo in cargos:
+            emails_cargo, fixos_cargo, celulares_cargo = _filtrar_contatos_por_cargo(
+                cargo, bloco, emails, fixos, celulares
+            )
+            tem_contato_cargo = bool(emails_cargo or fixos_cargo or celulares_cargo)
             contato_geral = cargo == "Contato geral"
             if (
                 cargo == "Agência/Sala de Desenvolvimento"
                 and nome
-                and not tem_contato
+                and not tem_contato_cargo
                 and not _nome_agencia_desenvolvimento_valido(nome)
             ):
                 continue
-            status = "Encontrado" if tem_contato and not contato_geral else "Parcial"
+            status = "Encontrado" if tem_contato_cargo and not contato_geral else "Parcial"
             observacoes = ""
             if contato_geral:
                 observacoes = "Contato geral sem associação clara a cargo específico."
-            elif not tem_contato:
+            elif not tem_contato_cargo:
                 observacoes = "Cargo ou nome identificado, mas sem contato direto no mesmo bloco."
 
-            resultados.append(_montar_resultado(cargo, nome, emails, fixos, celulares, url, status, observacoes))
+            resultados.append(_montar_resultado(cargo, nome, emails_cargo, fixos_cargo, celulares_cargo, url, status, observacoes))
 
     resultados = _deduplicar_resultados(_mesclar_resultados_complementares(resultados))
     if _pagina_de_secretaria(url) or _pagina_de_contatos(url):

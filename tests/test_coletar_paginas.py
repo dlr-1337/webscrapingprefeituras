@@ -1,6 +1,7 @@
 import requests
 
 from src.coletar_paginas import (
+    _url_deve_ser_ignorada,
     coletar_paginas,
     extrair_links_relevantes,
     html_para_texto,
@@ -494,3 +495,18 @@ def test_coletar_paginas_tenta_caminho_institucional_quando_home_bloqueia():
     assert result.status == "Encontrado"
     assert len(result.paginas) == 1
     assert result.paginas[0].url == "https://www2.bauru.sp.gov.br/equipe_governo.aspx"
+
+
+def test_url_ignora_rotas_de_licitacao_e_template_eletronico():
+    assert _url_deve_ser_ignorada("https://guacui.es.gov.br/licitacao/localizar/o/secretaria-de-financas.html")
+    assert _url_deve_ser_ignorada("https://fundao.es.gov.br/secretaria/ler/28/<?=CLIENTE_PROCESSO_ELETRONICO;?>")
+    assert _url_deve_ser_ignorada("https://www.aracruz.es.gov.br/secretarias/semfa/noticias")
+    assert _url_deve_ser_ignorada("http://transparencia.aracruz.es.gov.br/MostraArquivo.ashx?ArquivoId=6676")
+    assert _url_deve_ser_ignorada("https://www.jaguare.es.gov.br/documento?tipo=124")
+    assert _url_deve_ser_ignorada("https://iuna.es.gov.br/secretarias/publicacoes/filtro/1?types=Registro")
+    assert _url_deve_ser_ignorada("https://iuna.es.gov.br/secretarias/<br/><b>Notice</b>:Trying")
+    assert _url_deve_ser_ignorada("https://guacui.es.gov.br/secretaria-de-saude/sobre.html")
+    assert _url_deve_ser_ignorada("https://www.piuma.es.gov.br/portal/carta-de-servico/servico/111/licitacao")
+    assert _url_deve_ser_ignorada("https://transparencia.serra.es.gov.br/Contrato.Lista.aspx?MunicipioID=1")
+    assert _url_deve_ser_ignorada("https://transparencia.serra.es.gov.br/BemImovel.Secretaria.Relatorio.ashx")
+    assert _url_deve_ser_ignorada("https://www.jaguare.es.gov.br/secretaria/ler/es-jaguare-pm.ctgi.cloud.el.com.br")

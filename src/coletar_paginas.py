@@ -32,6 +32,7 @@ EXTENSOES_IGNORADAS = {
     ".webp",
     ".mp4",
     ".mp3",
+    ".ashx",
 }
 
 CAMINHOS_IGNORADOS = (
@@ -45,17 +46,33 @@ CAMINHOS_IGNORADOS = (
     "/category",
     "/categoria",
     "/publicacoes",
+    "/publicacao",
     "/galeria",
     "/normas-legais",
     "/documentos",
+    "/documento",
     "/site/tag",
     "/site/servicos",
+    "/portal/carta-de-servico/servico/",
     "/turismo",
     "/videos",
     "/faq",
 )
 
-QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=", "export=", "ps_export=", "length=", "share=", "servico=")
+QUERY_IGNORADAS = (
+    "pag=",
+    "page=",
+    "pagina=",
+    "pagina=404",
+    "pg=",
+    "start=",
+    "export=",
+    "ps_export=",
+    "length=",
+    "share=",
+    "servico=",
+    "tipo=",
+)
 SEGMENTOS_IGNORADOS = {
     "/page/",
     "/pagina/",
@@ -81,6 +98,7 @@ SEGMENTOS_IGNORADOS = {
     "/editais-licitacoes",
     "/esic-registro-solicitacao",
     "/fotos/",
+    "/filtro/",
     "/folha-pagamento",
     "/homepage",
     "/inscritos-divida-ativa",
@@ -92,6 +110,7 @@ SEGMENTOS_IGNORADOS = {
     "/lei-diretrizes-orcamentarias",
     "/lei-orcamentaria",
     "/lei-plurianual-ppa",
+    "/licitacao/",
     "/licitacoes",
     "/links-uteis",
     "/mapa-site",
@@ -114,6 +133,8 @@ SEGMENTOS_IGNORADOS = {
     "/responsavel-lgpd",
     "/servicos/",
     "/servidores",
+    "/secretaria-de-saude",
+    "/secretaria-municipal-de-saude",
     "/sic-presencial",
     "/srp",
     "/estatisticas-sic",
@@ -142,6 +163,7 @@ SEGMENTOS_IGNORADOS = {
     "/galeria",
     "/noticia/",
     "/noticias/",
+    "/noticias",
     "/agenda",
     "/planejamento-municipal/",
     "/portal/download/",
@@ -154,6 +176,7 @@ SEGMENTOS_IGNORADOS = {
     "contagem.asp",
     "exibenoticia.php",
     "exibe-noticia",
+    "mostraarquivo.ashx",
     "/portal/obras/",
     "/portal/contrato/",
     "/portaltransparencia/",
@@ -177,6 +200,10 @@ SEGMENTOS_IGNORADOS = {
     "filadepagamento",
     "fila-de-pagamento",
     "fornecedor",
+    "bemimovel",
+    "consumoestoque",
+    "contrato.lista",
+    "convenio.lista",
     "estrutura-da-secretaria",
     "recursos-humanos",
     "em-acao",
@@ -376,8 +403,15 @@ def pagina_indica_bloqueio(texto: str, html: str = "") -> bool:
 
 def _url_deve_ser_ignorada(url: str) -> bool:
     parsed = urlparse(url)
+    raw_url = unquote(url).lower()
     path = normalize_for_search(unquote(parsed.path))
     query = parsed.query.lower()
+    if any(token in raw_url for token in ("<br", "<b>", "notice", "trying to get property")):
+        return True
+    if "cliente_processo_eletronico" in raw_url:
+        return True
+    if "ctgi.cloud.el.com.br" in raw_url:
+        return True
     if any(path.endswith(ext) for ext in EXTENSOES_IGNORADAS):
         return True
     if "@" in path:

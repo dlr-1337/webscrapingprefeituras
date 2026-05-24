@@ -1041,6 +1041,137 @@ def test_visualizar_pdf_nao_vira_nome_de_responsavel():
     assert all(item["Nome"] != "Visualizar PDF" for item in contatos)
 
 
+def test_acesso_rapido_nao_vira_nome_de_autoridade():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Acesso Rápido
+    Secretarias
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www.colatina.es.gov.br/")
+
+    assert all(item["Nome"] != "Acesso Rápido" for item in contatos)
+
+
+def test_aplicativo_digital_nao_vira_nome_de_autoridade():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Colatina Digital
+    Serviços Online
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www.colatina.es.gov.br/")
+
+    assert all(item["Nome"] != "Colatina Digital" for item in contatos)
+
+
+def test_menu_servicos_nao_vira_nome_de_autoridade():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Serviços Ponto Eletrônico Processos Seletivos Licitações
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www.colatina.es.gov.br/")
+
+    assert all(item["Nome"] != "Serviços Ponto Eletrônico Processos Seletivos Licitações" for item in contatos)
+
+
+def test_menu_calendario_nao_vira_nome_de_autoridade():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Calendário de Eventos Agenda
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www.colatina.es.gov.br/")
+
+    assert all(item["Nome"] != "Calendário de Eventos Agenda" for item in contatos)
+
+
+def test_rotulos_de_portal_nao_viram_nome_de_autoridade():
+    cargos = {"vice_prefeito": ["vice-prefeito", "vice prefeito"], "planejamento": ["planejamento"]}
+    texto = """
+    Vice-prefeito
+    Legislação Denuncia
+
+    Planejamento
+    Sistema de Recursos Humanos
+
+    Vice-prefeito
+    Corrupção Login
+
+    Vice-prefeito
+    Estrutura Organizacional Nosso
+
+    Vice-prefeito
+    Estrutura Organizacional
+
+    Planejamento
+    Sistema Único
+
+    Planejamento
+    Clique Aqui
+
+    Vice-prefeito
+    Chefia Chefe
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://ecoporanga.es.gov.br/")
+
+    assert all(item["Nome"] != "Legislação Denuncia" for item in contatos)
+    assert all(item["Nome"] != "Sistema de Recursos Humanos" for item in contatos)
+    assert all(item["Nome"] != "Corrupção Login" for item in contatos)
+    assert all(item["Nome"] != "Estrutura Organizacional Nosso" for item in contatos)
+    assert all(item["Nome"] != "Estrutura Organizacional" for item in contatos)
+    assert all(item["Nome"] != "Sistema Único" for item in contatos)
+    assert all(item["Nome"] != "Clique Aqui" for item in contatos)
+    assert all(item["Nome"] != "Chefia Chefe" for item in contatos)
+
+
+def test_autoridade_administrativa_eh_responsavel_oficial():
+    cargos = {"prefeito": ["prefeito", "prefeita", "gabinete do prefeito"]}
+    texto = """
+    GABPREF - Gabinete do Prefeito
+    Autoridade administrativa
+    Paulo Celso Cola Pereira
+    Localização
+    Avenida Felicindo Lopes, 238
+    E-mail: gabinete@piuma.es.gov.br
+    Telefone: (28) 3520-6500
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www.piuma.es.gov.br/portal/carta-de-servico/orgao/4/gabpref-gabinete-do-prefeito")
+    prefeito = [item for item in contatos if item[COL_CARGO_ORGAO] == "Prefeito"][0]
+
+    assert prefeito["Nome"] == "Paulo Celso Cola Pereira"
+    assert prefeito["Nome"] != "Felicindo Lopes"
+
+
+def test_vice_nao_herda_telefone_do_gabinete_do_prefeito():
+    cargos = {"vice_prefeito": ["vice-prefeita", "vice-prefeito"], "prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito:
+    Marcus Azevedo Batista
+    Vice-Prefeita:
+    Raquel da Silva Rocha
+    E-mail(s):
+    prefeito@saomateus.es.gov.br
+    viceprefeita@saomateus.es.gov.br
+    Telefones:
+    Gabinete (27) 3195-0120
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www.saomateus.es.gov.br/prefeito")
+    vice = [item for item in contatos if item[COL_CARGO_ORGAO] == "Vice-prefeito"][0]
+
+    assert vice["Nome"] == "Raquel da Silva Rocha"
+    assert vice["E-mail"] == "viceprefeita@saomateus.es.gov.br"
+    assert vice["Telefone"] == ""
+
+
 def test_distritos_industriais_nao_vira_agencia_de_desenvolvimento():
     cargos = carregar_cargos()
     texto = """
