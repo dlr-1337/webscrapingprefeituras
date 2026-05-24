@@ -78,6 +78,7 @@ SEGMENTOS_IGNORADOS = {
     "/portal/noticias/",
     "/catnoticias/",
     "/viewnoticia/",
+    "cont_not.asp",
     "/portal/obras/",
     "/portal/contrato/",
     "/marcador/",
@@ -296,6 +297,8 @@ def _url_deve_ser_ignorada(url: str) -> bool:
     if "/gabinete/" in path and "/secretaria/" in path:
         return True
     if path.rstrip("/").endswith(("/videos", "/faq")):
+        return True
+    if "noticias.asp" in query or "cont_not" in query:
         return True
     last_segment = path.rstrip("/").rsplit("/", 1)[-1]
     if len(last_segment) >= 45 and last_segment.count("-") >= 5:

@@ -169,6 +169,7 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/secretaria/15/faq">FAQ da secretaria</a>
     <a href="/portal/portal/catnoticias/7">Categoria de noticias</a>
     <a href="/portal/portal/viewnoticia/3201">Noticia por id</a>
+    <a href="/secom/cont_not.asp?titulo=Prefeito-assina-decreto&id=1&link=secom/noticias.asp&idn=43314">Noticia ASP antiga</a>
     <a href="/gabinete/5/secretaria/1/administra-o-e-finan-as">Secretaria aninhada no gabinete</a>
     <a href="/gabinetecivil@cidade.sp.gov.br">E-mail colado como URL</a>
     <a href="/planejamento-orcamentario/?cat=20&export=csv">Export CSV</a>
