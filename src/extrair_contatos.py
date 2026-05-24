@@ -548,6 +548,23 @@ def _linha_parece_secao_subordinada(line: str) -> bool:
     return any(normalized.startswith(section) for section in SECOES_SUBORDINADAS)
 
 
+def _linha_parece_titulo_orgao(line: str) -> bool:
+    normalized = normalize_for_search(line).strip(" :-")
+    return normalized.startswith(
+        (
+            "secretaria municipal ",
+            "secretaria de ",
+            "secretaria da ",
+            "secretaria do ",
+            "controladoria ",
+            "procuradoria ",
+            "hospital municipal",
+            "recursos humanos",
+            "caixa de previdencia",
+        )
+    )
+
+
 def _linha_parece_endereco(line: str) -> bool:
     normalized = normalize_for_search(line).strip(" :-")
     if any(normalized.startswith(prefix) for prefix in ENDERECO_PREFIXOS):
@@ -853,6 +870,8 @@ def _limite_bloco_secretaria(lines: list[str], start: int) -> int:
         normalized = normalize_for_search(lines[index])
         if normalized == "secretarias" or normalized.startswith(("endereco", "ultimas noticias", "noticias relacionadas", "ver todas")):
             return index
+        if _linha_parece_titulo_orgao(lines[index]):
+            return index
         if _linha_parece_secao_subordinada(lines[index]):
             return index
     return end
@@ -955,6 +974,8 @@ def extrair_perfis_lista_secretarias(
     for index, line in enumerate(lines):
         normalized = normalize_for_search(line)
         if "secretaria" not in normalized and "agencia" not in normalized:
+            continue
+        if not _linha_parece_titulo_orgao(line) and not normalized.startswith("agencia"):
             continue
 
         cargos = detectar_cargos(line, cargos_config)

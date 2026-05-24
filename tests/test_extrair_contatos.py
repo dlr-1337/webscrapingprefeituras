@@ -586,6 +586,41 @@ def test_lista_secretarias_extrai_nome_sem_inventar_contato():
     assert contatos[0]["E-mail"] == ""
 
 
+def test_lista_secretarias_nao_usa_descricao_como_titulo_nem_mistura_blocos():
+    cargos = {
+        "desenvolvimento_economico": ["desenvolvimento economico"],
+        "desenvolvimento": ["secretaria municipal de desenvolvimento social", "desenvolvimento social"],
+        "planejamento": ["planejamento"],
+    }
+    texto = """
+    SECRETARIA MUNICIPAL DE AGRICULTURA
+    Secretario: Joscival Bispo Rodrigues
+    Telefone: (73) 98101-6419
+    E-mail: seagri.itabela@gmail.com
+    A Secretaria Municipal de Agricultura promove o desenvolvimento economico e social do meio rural.
+    SECRETARIA MUNICIPAL DE SAUDE
+    Secretaria: Wadla Silva de Andrade Casiano
+    Telefone: (73) 99923-1716
+    E-mail: secsaude@yahoo.com.br
+    SECRETARIA MUNICIPAL DE DESENVOLVIMENTO SOCIAL, TRABALHO E HABITACAO
+    Secretaria: Maria Vania Costa Santana Ferreira
+    Telefone: (73) 98117-3514
+    E-mail: sedesth@gmail.com
+    SECRETARIA MUNICIPAL DE INTEGRACAO INSTITUCIONAL
+    Secretaria: Emilia Francisca Goncalves de Oliveira
+    Telefone: (73) 98171-5313
+    E-mail: planejamentoegestao.itabela@gmail.com
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/secretarias")
+    por_cargo = {item[COL_CARGO_ORGAO]: item for item in contatos}
+
+    assert "Secretaria de Desenvolvimento Econômico" not in por_cargo
+    assert por_cargo["Secretaria de Desenvolvimento"]["Nome"] == "Maria Vania Costa Santana Ferreira"
+    assert por_cargo["Secretaria de Desenvolvimento"]["E-mail"] == "sedesth@gmail.com"
+    assert por_cargo["Secretaria de Desenvolvimento"]["Celular/WhatsApp"] == "(73) 98117-3514"
+
+
 def test_rotulo_secretario_parenteses_extrai_nome_correto():
     cargos = {
         "planejamento": [
