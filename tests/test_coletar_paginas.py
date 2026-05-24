@@ -175,6 +175,11 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/Site/Servicos/9">Pagina de servicos</a>
     <a href="/servicos/secretaria_de_infraestrutura/pagina_inicial">Servico de secretaria</a>
     <a href="/secretarias/diario_oficial">Diario oficial</a>
+    <a href="/fotos/estrutura/secretaria_de_desenvolvimento">Fotos da estrutura</a>
+    <a href="/Account/Login">Login</a>
+    <a href="/politica-privacidade-protecao-dados">LGPD</a>
+    <a href="/editais-licitacoes">Licitacoes</a>
+    <a href="/site/tiposservicos">Tipos de servicos</a>
     <a href="/gabinete/5/secretaria/1/administra-o-e-finan-as">Secretaria aninhada no gabinete</a>
     <a href="/gabinetecivil@cidade.sp.gov.br">E-mail colado como URL</a>
     <a href="/planejamento-orcamentario/?cat=20&export=csv">Export CSV</a>
