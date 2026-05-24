@@ -180,6 +180,9 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/politica-privacidade-protecao-dados">LGPD</a>
     <a href="/editais-licitacoes">Licitacoes</a>
     <a href="/site/tiposservicos">Tipos de servicos</a>
+    <a href="/servidores">Servidores</a>
+    <a href="/contratos">Contratos</a>
+    <a href="/lei-orcamentaria">LOA</a>
     <a href="/gabinete/5/secretaria/1/administra-o-e-finan-as">Secretaria aninhada no gabinete</a>
     <a href="/gabinetecivil@cidade.sp.gov.br">E-mail colado como URL</a>
     <a href="/planejamento-orcamentario/?cat=20&export=csv">Export CSV</a>
