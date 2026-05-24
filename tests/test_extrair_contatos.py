@@ -656,7 +656,7 @@ def test_pagina_secretaria_singular_com_diretorio_nao_associa_lista_a_cargo():
     Secretaria de Protecao e Desenvolvimento Social
     sec.social@cidade.gov.br
     (51) 3451-8000
-    Secretaria de Planejamento
+    Planejamento
     sec.planejamento@cidade.gov.br
     (51) 3450-4066
     """
@@ -930,9 +930,9 @@ def test_pires_do_rio_mescla_nome_e_contato_do_prefeito_no_mesmo_orgao():
     prefeito = [item for item in contatos if item[COL_CARGO_ORGAO] == "Prefeito"][0]
 
     assert prefeito["Nome"] == "Hugo Sérgio Batista"
-    assert prefeito["E-mail"] == "comunicacao@piresdorio.go.gov.br"
-    assert prefeito["Celular/WhatsApp"] == "(64) 98440-0043"
-    assert prefeito["Status"] == "Encontrado"
+    assert prefeito["E-mail"] == ""
+    assert prefeito["Celular/WhatsApp"] == ""
+    assert prefeito["Status"] == "Parcial"
 
 
 def test_equipe_governo_bauru_nao_vaza_contatos_entre_perfis():
@@ -1316,3 +1316,111 @@ def test_distritos_industriais_nao_vira_agencia_de_desenvolvimento():
     contatos = extrair_contatos_de_texto(texto, cargos, "https://www2.bauru.sp.gov.br/sedecon/")
 
     assert all(item[COL_CARGO_ORGAO] != "Agência/Sala de Desenvolvimento" for item in contatos)
+
+
+def test_rotulos_de_portal_mg_nao_viram_nome_de_autoridade():
+    cargos = {
+        "prefeito": ["prefeito", "prefeita"],
+        "vice_prefeito": ["vice-prefeito", "vice prefeito"],
+        "chefe_gabinete": ["chefe de gabinete", "gabinete"],
+        "planejamento": ["planejamento"],
+        "agencia_desenvolvimento": ["agencia de desenvolvimento", "sala do empreendedor"],
+    }
+    texto = """
+    Prefeito
+    Nome Completo
+    prefeito@cidade.gov.br
+
+    Vice-prefeito
+    Principal Vice
+
+    Chefe de gabinete
+    Instituto Federal
+
+    Planejamento
+    Avaliar Servico Baixar
+
+    Agencia de Desenvolvimento
+    COM VOCE
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/")
+    nomes = {item["Nome"] for item in contatos}
+
+    assert "Nome Completo" not in nomes
+    assert "Principal Vice" not in nomes
+    assert "Instituto Federal" not in nomes
+    assert "Avaliar Servico Baixar" not in nomes
+    assert "COM VOCE" not in nomes
+
+
+def test_sufixos_de_portal_mg_sao_aparados_do_nome():
+    cargos = {
+        "prefeito": ["prefeito", "prefeita"],
+        "vice_prefeito": ["vice-prefeito", "vice prefeito"],
+        "planejamento": ["secretaria de planejamento"],
+    }
+    texto = """
+    Prefeito
+    Introducao Danilo Mendes Rodrigues
+
+    Vice Prefeito
+    Fernando Marangoni Partido
+
+    Secretaria de Planejamento
+    Katia Silva Goncalves Acoes
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/equipe")
+    nomes = {item["Nome"] for item in contatos}
+
+    assert "Danilo Mendes Rodrigues" in nomes
+    assert "Fernando Marangoni" in nomes
+    assert "Katia Silva Goncalves" in nomes
+    assert "Introducao Danilo Mendes Rodrigues" not in nomes
+    assert "Fernando Marangoni Partido" not in nomes
+    assert "Katia Silva Goncalves Acoes" not in nomes
+
+
+def test_contatos_de_conselho_nao_vazam_para_secretaria():
+    cargos = {"desenvolvimento": ["desenvolvimento social", "secretaria de desenvolvimento social"]}
+    texto = """
+    Secretaria de Desenvolvimento Social
+    Secretaria: Blandina Oliveira
+    E-mail: smds@cidade.gov.br
+    Telefone: (38) 99161-0120
+
+    Conselho Tutelar
+    E-mail: tutelar@cidade.gov.br
+    Telefone: (38) 99161-0107
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/social")
+    social = [item for item in contatos if item[COL_CARGO_ORGAO] == "Secretaria de Desenvolvimento"][0]
+
+    assert social["Nome"] == "Blandina Oliveira"
+    assert social["E-mail"] == "smds@cidade.gov.br"
+    assert "tutelar@cidade.gov.br" not in social["E-mail"]
+    assert "(38) 99161-0107" not in social["Celular/WhatsApp"]
+
+
+def test_contato_de_endereco_nao_gruda_em_prefeito_publicado():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Joao Silva
+    Biografia do prefeito.
+
+    Endereco
+    Praca Central, 100
+    E-mail: contato@cidade.gov.br
+    Telefone: (11) 2222-3333
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/prefeito")
+    prefeito = [item for item in contatos if item[COL_CARGO_ORGAO] == "Prefeito"][0]
+
+    assert prefeito["Nome"] == "Joao Silva"
+    assert prefeito["E-mail"] == ""
+    assert prefeito["Telefone"] == ""
+    assert prefeito["Status"] == "Parcial"
