@@ -194,6 +194,12 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/transmissao">Transmissao</a>
     <a href="/conselhos_municipais/secretaria_de_financas">Conselho municipal</a>
     <a href="/secretarias/consulta_publica_pmsb">Consulta publica</a>
+    <a href="/Site/Novidade/novidade-23062021190508125-PPA-Participativo">PPA novidade</a>
+    <a href="/Site/AcessoAInformacao">Acesso a informacao generico</a>
+    <a href="/Site/Transparencia">Transparencia generica</a>
+    <a href="/Site/DiarioOficial">Diario oficial</a>
+    <a href="/Site/SaoJoao">Sao Joao</a>
+    <a href="/Site/Glossario?Length=4">Glossario</a>
     <a href="/gabinete/5/secretaria/1/administra-o-e-finan-as">Secretaria aninhada no gabinete</a>
     <a href="/gabinetecivil@cidade.sp.gov.br">E-mail colado como URL</a>
     <a href="/planejamento-orcamentario/?cat=20&export=csv">Export CSV</a>

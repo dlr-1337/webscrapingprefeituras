@@ -55,7 +55,7 @@ CAMINHOS_IGNORADOS = (
     "/faq",
 )
 
-QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=", "export=", "ps_export=")
+QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=", "export=", "ps_export=", "length=")
 SEGMENTOS_IGNORADOS = {
     "/page/",
     "/pagina/",
@@ -115,12 +115,18 @@ SEGMENTOS_IGNORADOS = {
     "/usuario-esic",
     "/valores-diarias",
     "/site/acessibilidade",
+    "/site/acessoainformacao",
     "/site/dadosmunicipais",
+    "/site/diariooficial",
     "/site/encontreportal",
+    "/site/glossario",
     "/site/mapasite",
     "/site/minibanner",
+    "/site/novidade",
     "/site/noticias",
     "/site/paginadinamica",
+    "/site/saojoao",
+    "/site/transparencia",
     "/site/tiposservicos",
     "/editais/",
     "/gabinete-militar/",
@@ -158,6 +164,8 @@ SEGMENTOS_IGNORADOS = {
     "estrutura-da-secretaria",
     "consulta_publica",
     "consulta-publica",
+    "novidade-",
+    "ppa-participativo",
     "plano_de_saneamento",
     "plano-de-saneamento",
     "saneamento_basico",
