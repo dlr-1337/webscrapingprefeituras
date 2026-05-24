@@ -200,6 +200,8 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/Site/DiarioOficial">Diario oficial</a>
     <a href="/Site/SaoJoao">Sao Joao</a>
     <a href="/Site/Glossario?Length=4">Glossario</a>
+    <a href="/secretaria-de-infraestrutura-em-acao/">Noticia da secretaria</a>
+    <a href="/secretaria-de-infraestrutura-em-acao/?share=facebook">Compartilhar</a>
     <a href="/gabinete/5/secretaria/1/administra-o-e-finan-as">Secretaria aninhada no gabinete</a>
     <a href="/gabinetecivil@cidade.sp.gov.br">E-mail colado como URL</a>
     <a href="/planejamento-orcamentario/?cat=20&export=csv">Export CSV</a>

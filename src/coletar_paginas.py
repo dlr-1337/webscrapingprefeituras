@@ -55,7 +55,7 @@ CAMINHOS_IGNORADOS = (
     "/faq",
 )
 
-QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=", "export=", "ps_export=", "length=")
+QUERY_IGNORADAS = ("pag=", "page=", "pagina=", "pagina=404", "pg=", "start=", "export=", "ps_export=", "length=", "share=")
 SEGMENTOS_IGNORADOS = {
     "/page/",
     "/pagina/",
@@ -162,6 +162,7 @@ SEGMENTOS_IGNORADOS = {
     "gabinete-militar",
     "funcoes-da-secretaria",
     "estrutura-da-secretaria",
+    "em-acao",
     "consulta_publica",
     "consulta-publica",
     "novidade-",
