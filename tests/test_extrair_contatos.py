@@ -888,6 +888,19 @@ def test_rotulo_institucional_ultima_nao_vira_autoridade():
     assert all(item["Nome"] != "Institucional Ultima" for item in contatos)
 
 
+def test_rotulo_sessao_transmissao_nao_vira_autoridade():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Sessao Transmissao
+    Portal oficial
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/transmissao")
+
+    assert all(item["Nome"] != "Sessao Transmissao" for item in contatos)
+
+
 def test_pires_do_rio_mescla_nome_e_contato_do_prefeito_no_mesmo_orgao():
     cargos = {"prefeito": ["prefeito", "prefeita", "gabinete da prefeita"]}
     texto = """

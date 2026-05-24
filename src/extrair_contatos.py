@@ -88,6 +88,7 @@ NOME_EXCLUDE = {
     "divisao divisao",
     "distritos industriais",
     "patrulha agricola rural",
+    "sessao transmissao",
 }
 
 NOME_TOKEN_EXCLUDE = {
@@ -179,6 +180,7 @@ NOME_TOKEN_EXCLUDE = {
     "secretaria",
     "secretarias",
     "secretario",
+    "sessao",
     "sobre",
     "subsecretaria",
     "subsecretario",
@@ -188,6 +190,7 @@ NOME_TOKEN_EXCLUDE = {
     "tribunal",
     "trabalho",
     "transparencia",
+    "transmissao",
     "rural",
     "urbano",
     "departamentos",
