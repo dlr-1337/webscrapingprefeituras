@@ -825,6 +825,20 @@ def test_pires_do_rio_rotulos_nao_viram_autoridades():
     assert all(item[COL_CARGO_ORGAO] != "Prefeito" for item in contatos if item["Nome"])
 
 
+def test_credito_de_foto_em_noticia_nao_vira_autoridade():
+    cargos = {"chefe_gabinete": ["chefe de gabinete", "chefia de gabinete", "gabinete"]}
+    texto = """
+    Chefe de Gabinete responde interinamente pela presidencia
+    Fotos: Marcelo Magalhaes
+    A noticia informa que o chefe de gabinete participou da agenda.
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/secom/cont_not.asp?idn=1")
+
+    assert all(item["Nome"] != "Fotos: Marcelo Magalhaes" for item in contatos)
+    assert all(item["Nome"] != "Marcelo Magalhaes" for item in contatos)
+
+
 def test_pires_do_rio_mescla_nome_e_contato_do_prefeito_no_mesmo_orgao():
     cargos = {"prefeito": ["prefeito", "prefeita", "gabinete da prefeita"]}
     texto = """

@@ -11,7 +11,11 @@ import pandas as pd
 
 from src.coletar_paginas import _baixar, _baixar_com_navegador, criar_sessao, html_para_texto
 from src.escopo_categorias import CATEGORIA_IDENTIFICACAO
-from src.extrair_contatos import _nome_aparece_apenas_em_linha_de_endereco, _nome_valido
+from src.extrair_contatos import (
+    _nome_aparece_apenas_em_linha_de_credito,
+    _nome_aparece_apenas_em_linha_de_endereco,
+    _nome_valido,
+)
 from src.utils import normalize_for_search
 
 
@@ -215,6 +219,8 @@ def validar_registros(
                 divergencias.append(f"Nome não parece pessoa publicada: {nome}")
             elif _nome_aparece_apenas_em_linha_de_endereco(texto, nome):
                 divergencias.append(f"Nome aparece apenas em linha de endereco/CEP: {nome}")
+            elif _nome_aparece_apenas_em_linha_de_credito(texto, nome):
+                divergencias.append(f"Nome aparece apenas em linha de credito/autoria: {nome}")
             elif not _valor_associado_a_categoria(texto, nome, row):
                 divergencias.append(f"Nome sem associação visual/estrutural com a categoria: {nome}")
         for campo in CAMPOS_CONFERENCIA:

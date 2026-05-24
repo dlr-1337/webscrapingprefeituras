@@ -98,6 +98,8 @@ NOME_TOKEN_EXCLUDE = {
     "ambiental",
     "andar",
     "ano",
+    "autor",
+    "autoria",
     "avenida",
     "aviario",
     "bairro",
@@ -130,6 +132,10 @@ NOME_TOKEN_EXCLUDE = {
     "estado",
     "executivo",
     "financas",
+    "foto",
+    "fotos",
+    "imagem",
+    "imagens",
     "juridica",
     "juridico",
     "gabinete",
@@ -164,6 +170,8 @@ NOME_TOKEN_EXCLUDE = {
     "prefeito",
     "procurador",
     "publicas",
+    "redacao",
+    "reportagem",
     "rua",
     "saude",
     "secretaria",
@@ -237,6 +245,19 @@ SECOES_SUBORDINADAS = (
     "gerencia",
     "setor",
     "superintendencia",
+)
+
+CREDITO_AUTORIA_PREFIXOS = (
+    "foto",
+    "fotos",
+    "credito",
+    "creditos",
+    "imagem",
+    "imagens",
+    "autor",
+    "autoria",
+    "reportagem",
+    "redacao",
 )
 
 ENDERECO_PREFIXOS = (
@@ -526,12 +547,37 @@ def _linha_parece_endereco(line: str) -> bool:
     return bool(re.search(r"\b\d{5}-?\d{3}\b", normalized))
 
 
+def _linha_parece_credito_autoria(line: str) -> bool:
+    normalized = normalize_for_search(line).strip(" :-")
+    return any(re.match(rf"^{re.escape(prefix)}\b", normalized) for prefix in CREDITO_AUTORIA_PREFIXOS)
+
+
+def _trecho_tem_credito_para_nome(texto: str, nome: str) -> bool:
+    nome_norm = normalize_for_search(nome)
+    if not nome_norm:
+        return False
+    normalized = normalize_for_search(texto)
+    prefix_pattern = "|".join(re.escape(prefix) for prefix in CREDITO_AUTORIA_PREFIXOS)
+    return bool(re.search(rf"\b(?:{prefix_pattern})\b\s*[:\-\u2013\u2014]?\s*{re.escape(nome_norm)}\b", normalized))
+
+
 def _nome_aparece_apenas_em_linha_de_endereco(texto: str, nome: str) -> bool:
     nome_norm = normalize_for_search(nome)
     if not nome_norm:
         return False
     linhas_com_nome = [line for line in _linhas_nao_vazias(texto) if nome_norm in normalize_for_search(line)]
     return bool(linhas_com_nome) and all(_linha_parece_endereco(line) for line in linhas_com_nome)
+
+
+def _nome_aparece_apenas_em_linha_de_credito(texto: str, nome: str) -> bool:
+    nome_norm = normalize_for_search(nome)
+    if not nome_norm:
+        return False
+    linhas_com_nome = [line for line in _linhas_nao_vazias(texto) if nome_norm in normalize_for_search(line)]
+    return bool(linhas_com_nome) and all(
+        _linha_parece_credito_autoria(line) or _trecho_tem_credito_para_nome(line, nome)
+        for line in linhas_com_nome
+    )
 
 
 def _linha_parece_inicio_perfil(line: str, cargos_config: dict[str, list[str]]) -> bool:
@@ -639,6 +685,9 @@ def _cargo_no_inicio_da_linha(line: str, cargos_config: dict[str, list[str]]) ->
 
 def _nome_no_trecho(value: str) -> str:
     candidate = str(value or "").strip(" \t:-\u2013\u2014")
+    normalized_candidate = normalize_for_search(candidate)
+    if re.match(r"^(foto|fotos|credito|creditos|imagem|imagens|autor|autoria|reportagem|redacao)\b", normalized_candidate):
+        return ""
     for found in NAME_PATTERN.finditer(candidate):
         nome = found.group(1)
         if _nome_valido(nome):
@@ -936,7 +985,7 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
     if nome_match:
         candidate = nome_match.group(1).strip()
         found = NAME_PATTERN.search(candidate)
-        if found and _nome_valido(found.group(1)):
+        if found and _nome_valido(found.group(1)) and not _nome_aparece_apenas_em_linha_de_credito(block, found.group(1)):
             return found.group(1)
 
     normalized_block = normalize_for_search(block)
@@ -952,16 +1001,16 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
             colon_match = re.search(r"[:\-]\s*([A-ZÁÀÂÃÉÈÊÍÌÓÒÔÕÚÙÇ][^\n|;,.]{4,80})", window)
             if colon_match:
                 found = NAME_PATTERN.search(colon_match.group(1))
-                if found and _nome_valido(found.group(1)):
+                if found and _nome_valido(found.group(1)) and not _nome_aparece_apenas_em_linha_de_credito(window, found.group(1)):
                     return found.group(1)
             for found in NAME_PATTERN.finditer(window):
                 candidate = found.group(1)
-                if _nome_valido(candidate):
+                if _nome_valido(candidate) and not _nome_aparece_apenas_em_linha_de_credito(window, candidate):
                     return candidate
 
     for found in NAME_PATTERN.finditer(block[:300]):
         candidate = found.group(1)
-        if _nome_valido(candidate):
+        if _nome_valido(candidate) and not _nome_aparece_apenas_em_linha_de_credito(block[:300], candidate):
             return candidate
     return ""
 

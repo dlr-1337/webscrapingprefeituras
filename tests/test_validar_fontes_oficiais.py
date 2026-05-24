@@ -196,6 +196,33 @@ def test_validar_registros_rejeita_nome_presente_apenas_em_endereco():
     assert "endere" in result.loc[0, obs_col].lower()
 
 
+def test_validar_registros_rejeita_credito_de_foto_como_nome():
+    dados = pd.DataFrame(
+        [
+            {
+                "UF": "BA",
+                "Municipio/Capital": "Feira de Santana",
+                "Cargo/Area": "Chefe de gabinete",
+                "Orgao/Secretaria": "Gabinete/Prefeitura",
+                "Status": "Parcial",
+                "Nome": "Marcelo Magalhaes",
+                "E-mail": "",
+                "Telefone": "",
+                "Celular/WhatsApp": "",
+                "URL da fonte": "https://fonte.test/noticia",
+            }
+        ]
+    )
+    texto = "Chefe de Gabinete responde interinamente pela presidencia. Fotos: Marcelo Magalhaes"
+
+    result = validar_registros(dados, lambda _url: (texto, "Encontrado", ""), max_linhas=0)
+
+    status_col = next(c for c in result.columns if str(c).startswith("Status valida"))
+    obs_col = next(c for c in result.columns if str(c).startswith("Observa"))
+    assert result.loc[0, status_col] == "Divergente"
+    assert "credito" in result.loc[0, obs_col].lower()
+
+
 def test_validar_registros_associa_telefone_por_digitos_no_bloco_da_categoria():
     dados = pd.DataFrame(
         [

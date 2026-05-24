@@ -48,6 +48,7 @@ CAMINHOS_IGNORADOS = (
     "/galeria",
     "/normas-legais",
     "/documentos",
+    "/site/tag",
     "/turismo",
     "/videos",
     "/faq",
