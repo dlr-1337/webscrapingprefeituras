@@ -183,6 +183,17 @@ def test_extrair_links_relevantes_filtra_dominio_tipo_e_palavra_chave():
     <a href="/servidores">Servidores</a>
     <a href="/contratos">Contratos</a>
     <a href="/lei-orcamentaria">LOA</a>
+    <a href="/licitacoes">Licitacoes portal</a>
+    <a href="/dispensas-inexigibilidades">Dispensas</a>
+    <a href="/usuario-esic">Usuario e-SIC</a>
+    <a href="/esic-registro-solicitacao">Registro e-SIC</a>
+    <a href="/sic-presencial">SIC presencial</a>
+    <a href="/estatisticas-sic">Estatisticas SIC</a>
+    <a href="/dados-genericos-esic">Dados genericos e-SIC</a>
+    <a href="/cadastro-esic">Cadastro e-SIC</a>
+    <a href="/transmissao">Transmissao</a>
+    <a href="/conselhos_municipais/secretaria_de_financas">Conselho municipal</a>
+    <a href="/secretarias/consulta_publica_pmsb">Consulta publica</a>
     <a href="/gabinete/5/secretaria/1/administra-o-e-finan-as">Secretaria aninhada no gabinete</a>
     <a href="/gabinetecivil@cidade.sp.gov.br">E-mail colado como URL</a>
     <a href="/planejamento-orcamentario/?cat=20&export=csv">Export CSV</a>
