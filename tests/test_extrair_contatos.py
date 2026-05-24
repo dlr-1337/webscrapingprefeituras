@@ -901,6 +901,18 @@ def test_rotulo_sessao_transmissao_nao_vira_autoridade():
     assert all(item["Nome"] != "Sessao Transmissao" for item in contatos)
 
 
+def test_rotulo_verba_indenizatoria_nao_vira_autoridade():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Valores Cotas Verba Indenizatoria Ativ
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/homepage")
+
+    assert all(item["Nome"] != "Valores Cotas Verba Indenizatoria Ativ" for item in contatos)
+
+
 def test_pires_do_rio_mescla_nome_e_contato_do_prefeito_no_mesmo_orgao():
     cargos = {"prefeito": ["prefeito", "prefeita", "gabinete da prefeita"]}
     texto = """

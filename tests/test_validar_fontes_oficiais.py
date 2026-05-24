@@ -189,6 +189,33 @@ def test_validar_registros_rejeita_rotulo_sessao_transmissao():
     assert "pessoa" in result.loc[0, obs_col].lower()
 
 
+def test_validar_registros_rejeita_rotulo_verba_indenizatoria():
+    dados = pd.DataFrame(
+        [
+            {
+                "UF": "BA",
+                "Municipio/Capital": "Itubera",
+                "Cargo/Area": "Prefeito",
+                "Orgao/Secretaria": "Gabinete/Prefeitura",
+                "Status": "Parcial",
+                "Nome": "Valores Cotas Verba Indenizatoria Ativ",
+                "E-mail": "",
+                "Telefone": "",
+                "Celular/WhatsApp": "",
+                "URL da fonte": "https://fonte.test/homepage",
+            }
+        ]
+    )
+    texto = "Prefeito Valores Cotas Verba Indenizatoria Ativ"
+
+    result = validar_registros(dados, lambda _url: (texto, "Encontrado", ""), max_linhas=0)
+
+    status_col = next(c for c in result.columns if str(c).startswith("Status valida"))
+    obs_col = next(c for c in result.columns if str(c).startswith("Observa"))
+    assert result.loc[0, status_col] == "Divergente"
+    assert "pessoa" in result.loc[0, obs_col].lower()
+
+
 def test_validar_registros_rejeita_nome_presente_apenas_em_endereco():
     dados = pd.DataFrame(
         [

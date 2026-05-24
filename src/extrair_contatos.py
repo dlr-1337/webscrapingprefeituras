@@ -82,6 +82,7 @@ NOME_EXCLUDE = {
     "saude de jussara opcao",
     "superintendencia executiva",
     "trabalho coordenadoria",
+    "valores cotas verba indenizatoria",
     "planejameto noticias",
     "continue lendo",
     "termos de posse",
@@ -121,6 +122,7 @@ NOME_TOKEN_EXCLUDE = {
     "contato",
     "contatos",
     "conteudo",
+    "cotas",
     "contas",
     "controle",
     "continue",
@@ -191,6 +193,7 @@ NOME_TOKEN_EXCLUDE = {
     "trabalho",
     "transparencia",
     "transmissao",
+    "indenizatoria",
     "rural",
     "urbano",
     "departamentos",
@@ -206,6 +209,8 @@ NOME_TOKEN_EXCLUDE = {
     "ultimas",
     "ultimo",
     "ver",
+    "verba",
+    "valores",
 }
 
 NOME_PREFIXOS_INVALIDOS = {

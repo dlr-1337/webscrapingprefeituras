@@ -251,6 +251,33 @@ def test_coletar_paginas_visita_home_e_links_relevantes_sem_rede_real():
     assert all(fonte.gerou_texto for fonte in result.fontes_consultadas)
 
 
+def test_coletar_paginas_ignora_link_redirecionado_para_homepage_administrativa():
+    home = """
+    <html><body>
+      <h1>Prefeitura</h1>
+      <a href="/contato">Contato</a>
+    </body></html>
+    """
+    homepage_admin = "<html><body>Prefeito Valores Cotas Verba Indenizatoria Ativ</body></html>"
+    session = FakeSession(
+        {
+            "https://cidade.sp.gov.br/": FakeResponse("https://cidade.sp.gov.br/", home),
+            "https://cidade.sp.gov.br/contato": FakeResponse("https://cidade.sp.gov.br/homepage", homepage_admin),
+        }
+    )
+
+    result = coletar_paginas(
+        "https://cidade.sp.gov.br/",
+        ["contato", "prefeito"],
+        config={"timeout_segundos": 1, "retries": 0, "delay_entre_requisicoes": 0, "max_paginas_por_municipio": 5, "user_agent": "teste", "usar_caminhos_fallback_bloqueio": False},
+        session=session,
+    )
+
+    assert [pagina.url for pagina in result.paginas] == ["https://cidade.sp.gov.br/"]
+    assert result.fontes_consultadas[-1].url_final == "https://cidade.sp.gov.br/homepage"
+    assert result.fontes_consultadas[-1].status == "PÃ¡gina sem informaÃ§Ã£o pÃºblica"
+
+
 def test_coletar_paginas_deduplica_www_http_e_https():
     home = """
     <html><body>

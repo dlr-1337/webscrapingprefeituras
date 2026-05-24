@@ -381,6 +381,17 @@ def _url_deve_ser_ignorada(url: str) -> bool:
     return any(token in query for token in QUERY_IGNORADAS)
 
 
+def _redirecionou_para_url_ignorada(url: str, final_url: str) -> bool:
+    if not final_url:
+        return False
+    if clean_url(url) == clean_url(final_url):
+        return False
+    path_original = urlparse(url).path.rstrip("/") or "/"
+    if path_original == "/":
+        return False
+    return _url_deve_ser_ignorada(final_url)
+
+
 def _url_chave(url: str) -> tuple[str, str, str]:
     parsed = urlparse(url)
     host = parsed.netloc.lower().removeprefix("www.")
@@ -809,8 +820,26 @@ def coletar_paginas(
                     status_http_nav,
                     content_type_nav,
                     metodo_nav,
+            )
+            texto = texto_nav
+
+        if _redirecionou_para_url_ignorada(url, final_url or ""):
+            fontes_consultadas.append(
+                FonteConsultada(
+                    url=url,
+                    url_final=final_url or url,
+                    status="PÃ¡gina sem informaÃ§Ã£o pÃºblica",
+                    observacoes="URL redirecionou para pÃ¡gina administrativa ignorada.",
+                    status_http=status_http,
+                    content_type=content_type,
+                    metodo=metodo,
+                    data_hora=datetime.now().isoformat(timespec="seconds"),
+                    gerou_texto=False,
                 )
-                texto = texto_nav
+            )
+            if logger:
+                logger.warning("PÃ¡gina ignorada por redirecionar para URL administrativa: %s -> %s", url, final_url)
+            continue
 
         if pagina_indica_bloqueio(texto, html):
             fontes_consultadas.append(
