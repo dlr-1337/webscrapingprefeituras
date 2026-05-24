@@ -277,6 +277,29 @@ def test_validar_registros_rejeita_credito_de_foto_como_nome():
     assert "credito" in result.loc[0, obs_col].lower()
 
 
+def test_validar_registros_sem_linhas_retorna_colunas_esperadas():
+    dados = pd.DataFrame(
+        [
+            {
+                "UF": "CE",
+                "MunicÃ­pio/Capital": "Fortaleza",
+                "Cargo/Ãrea": "Prefeito",
+                "Status": "NÃ£o publicado",
+                "Nome": "",
+                "E-mail": "",
+                "Telefone": "",
+                "Celular/WhatsApp": "",
+                "URL da fonte": "https://fortaleza.ce.gov.br/",
+            }
+        ]
+    )
+
+    result = validar_registros(dados, lambda _url: ("", "Encontrado", ""), max_linhas=0)
+
+    assert result.empty
+    assert any(str(column).startswith("Status valida") for column in result.columns)
+
+
 def test_validar_registros_associa_telefone_por_digitos_no_bloco_da_categoria():
     dados = pd.DataFrame(
         [

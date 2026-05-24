@@ -85,6 +85,7 @@ NOME_EXCLUDE = {
     "valores cotas verba indenizatoria",
     "planejameto noticias",
     "continue lendo",
+    "visualizar pdf",
     "termos de posse",
     "divisao divisao",
     "distritos industriais",
@@ -170,6 +171,7 @@ NOME_TOKEN_EXCLUDE = {
     "praca",
     "posse",
     "prestacao",
+    "pdf",
     "presidente",
     "prefeita",
     "prefeito",
@@ -209,6 +211,7 @@ NOME_TOKEN_EXCLUDE = {
     "ultimas",
     "ultimo",
     "ver",
+    "visualizar",
     "verba",
     "valores",
 }

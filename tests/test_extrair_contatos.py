@@ -1028,6 +1028,19 @@ def test_concessao_de_areas_nao_vira_agencia_de_desenvolvimento():
     assert all(item[COL_CARGO_ORGAO] != "Agência/Sala de Desenvolvimento" for item in contatos)
 
 
+def test_visualizar_pdf_nao_vira_nome_de_responsavel():
+    cargos = {"financas_fazenda": ["fazenda", "secretaria de fazenda"]}
+    texto = """
+    Secretaria Municipal de Fazenda
+    Visualizar PDF
+    Estrutura Organizacional
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://portal.io.org.br/ba/fazenda/estrutura-organizacional")
+
+    assert all(item["Nome"] != "Visualizar PDF" for item in contatos)
+
+
 def test_distritos_industriais_nao_vira_agencia_de_desenvolvimento():
     cargos = carregar_cargos()
     texto = """

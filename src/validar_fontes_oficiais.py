@@ -21,6 +21,22 @@ from src.utils import normalize_for_search
 
 CAMPOS_CONFERENCIA = ("Nome", "E-mail", "Telefone", "Celular/WhatsApp")
 STATUS_CONFERENCIA = {"Encontrado", "Parcial"}
+COLUNAS_RESULTADO = [
+    "Linha Dados",
+    "UF",
+    "Município/Capital",
+    "Cargo/Área",
+    "Status coleta",
+    "Nome",
+    "E-mail",
+    "Telefone",
+    "Celular/WhatsApp",
+    "URL da fonte",
+    "Status validação",
+    "Campos conferidos",
+    "Observações",
+    "Data/hora validação",
+]
 
 
 def _row_get(row: pd.Series, *names: str) -> object:
@@ -236,7 +252,7 @@ def validar_registros(
         else:
             resultados.append(_resultado(row, index, url, "Validado", "", campos_conferidos))
 
-    return pd.DataFrame(resultados)
+    return pd.DataFrame(resultados, columns=COLUNAS_RESULTADO)
 
 
 def _resultado(
