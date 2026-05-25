@@ -106,6 +106,7 @@ NOME_EXCLUDE = {
     "visualizar pdf",
     "termos de posse",
     "chefia chefe",
+    "cidadao empresa turista",
     "clique aqui",
     "tecnica legislativa art",
     "divisao divisao",
@@ -139,12 +140,30 @@ NOME_EXCLUDE = {
     "administracao publicado",
     "administracao publica",
     "governo e planejamento",
+    "governo de condeuba",
+    "governo de itapaci",
+    "mulheres responsa",
     "esporte e lazer",
     "capela mortuaria",
     "abertura de mei",
+    "aquicultura e pesca",
+    "assessor de apoio legislativo",
+    "assessora especial",
     "dama utilizamos",
+    "forma de acompanhamento",
+    "imprimir corrigir",
+    "imprimir fechar categoria",
+    "galeria de fotos",
+    "galeria de prefeitos",
     "mapa do site covid",
     "beto araujo",
+    "certidao estadual",
+    "pesquisar confirmacao",
+    "politica de privacidade",
+    "programas sociais",
+    "publicacao ou veto fluxo",
+    "funcionamento trajetoria",
+    "junimar salvador borges",
 }
 
 NOME_TOKEN_EXCLUDE = {
@@ -153,11 +172,18 @@ NOME_TOKEN_EXCLUDE = {
     "covid",
     "dama",
     "dados",
+    "chefe",
+    "fluxo",
+    "funcionamento",
     "interpretacao",
     "mapa",
     "regional",
+    "publicacao",
     "site",
+    "subchefe",
+    "trajetoria",
     "utilizamos",
+    "veto",
     "data",
     "grosso",
     "ir",
@@ -167,6 +193,8 @@ NOME_TOKEN_EXCLUDE = {
     "administracao",
     "assessor",
     "capela",
+    "certidao",
+    "cidadania",
     "curriculo",
     "especial",
     "esporte",
@@ -193,6 +221,8 @@ NOME_TOKEN_EXCLUDE = {
     "agraria",
     "anteriores",
     "controladoria",
+    "completo",
+    "consulta",
     "edicao",
     "fone",
     "geral",
@@ -214,6 +244,10 @@ NOME_TOKEN_EXCLUDE = {
     "alagoas",
     "analises",
     "avaliar",
+    "acompanhamento",
+    "apoio",
+    "aquicultura",
+    "assessora",
     "baixar",
     "camara",
     "clinicas",
@@ -237,6 +271,9 @@ NOME_TOKEN_EXCLUDE = {
     "nublado",
     "parcialmente",
     "patrimonio",
+    "pelo",
+    "pesca",
+    "pesquisar",
     "plano",
     "plurianual",
     "roteiro",
@@ -269,6 +306,7 @@ NOME_TOKEN_EXCLUDE = {
     "branco",
     "calendario",
     "chefia",
+    "cidadao",
     "cidade",
     "clique",
     "casa",
@@ -293,12 +331,23 @@ NOME_TOKEN_EXCLUDE = {
     "cultura",
     "dia",
     "denuncia",
+    "delegacia",
+    "departamento",
+    "despesas",
+    "deputada",
+    "deputado",
+    "destaque",
+    "destaques",
     "digital",
+    "diminuir",
+    "direto",
     "diario",
     "diretoria",
     "educacao",
     "email",
     "endereco",
+    "endere",
+    "empresa",
     "estrada",
     "estado",
     "estadual",
@@ -309,6 +358,10 @@ NOME_TOKEN_EXCLUDE = {
     "financas",
     "foto",
     "fotos",
+    "fonte",
+    "fundiaria",
+    "galeria",
+    "gerencia",
     "imagem",
     "imagens",
     "imprensa",
@@ -316,11 +369,15 @@ NOME_TOKEN_EXCLUDE = {
     "infraestrutura",
     "juridica",
     "juridico",
+    "legislativo",
     "licitacao",
     "licitacoes",
     "login",
     "gabinete",
     "gestao",
+    "graduada",
+    "graduado",
+    "habitacao",
     "horario",
     "juventude",
     "lei",
@@ -337,7 +394,9 @@ NOME_TOKEN_EXCLUDE = {
     "municipais",
     "municipal",
     "municipio",
+    "mun",
     "mulher",
+    "mulheres",
     "negocios",
     "nosso",
     "obras",
@@ -360,31 +419,42 @@ NOME_TOKEN_EXCLUDE = {
     "prefeita",
     "prefeito",
     "ponto",
+    "popular",
+    "privacidade",
     "procurador",
     "processos",
     "publicas",
     "publicos",
     "redacao",
     "rapido",
+    "redes",
+    "redigir",
+    "regularizacao",
     "recursos",
     "responsavel",
+    "responsaveis",
+    "responsa",
     "reportagem",
     "rua",
     "saude",
     "secretaria",
     "secretarias",
     "secretario",
+    "sec",
     "servico",
     "servicos",
     "sistema",
     "sessao",
+    "sociais",
     "sobre",
+    "sua",
     "subsecretaria",
     "subsecretario",
     "telefone",
     "telefones",
     "tecnologia",
     "tecnica",
+    "territorio",
     "legislativa",
     "termos",
     "eletronico",
@@ -393,9 +463,11 @@ NOME_TOKEN_EXCLUDE = {
     "trabalho",
     "transparencia",
     "transmissao",
+    "turista",
     "indenizatoria",
     "rural",
     "urbano",
+    "urbanismo",
     "departamentos",
     "divisao",
     "distritos",
@@ -534,8 +606,60 @@ CONTATO_CONTINUACAO_PREFIXOS = (
     "whatsapp",
 )
 
-NOME_PREFIXOS_DESCARTAVEIS = {"nome", "introducao", "detalhes", "curriculo"}
-NOME_SUFFIXOS_DESCARTAVEIS = {"acao", "acoes", "biografia", "dados", "data", "detalhes", "fone", "introducao", "partido", "saber", "sede", "vice"}
+NOME_PREFIXOS_DESCARTAVEIS = {
+    "assessor",
+    "assessora",
+    "chefe",
+    "completo",
+    "curriculo",
+    "deputada",
+    "deputado",
+    "destaque",
+    "destaques",
+    "detalhes",
+    "fechar",
+    "habitacao",
+    "horario",
+    "horarios",
+    "imprimir",
+    "introducao",
+    "nome",
+    "pelo",
+    "principal",
+    "responsavel",
+    "responsaveis",
+    "titular",
+}
+NOME_SUFFIXOS_DESCARTAVEIS = {
+    "acao",
+    "acoes",
+    "ao",
+    "biografia",
+    "dados",
+    "data",
+    "detalhes",
+    "adjunta",
+    "adjunto",
+    "em",
+    "endere",
+    "fone",
+    "formulario",
+    "funcao",
+    "categoria",
+    "corrigir",
+    "dr",
+    "dra",
+    "graduada",
+    "graduado",
+    "introducao",
+    "na",
+    "partido",
+    "procurador",
+    "procuradora",
+    "saber",
+    "sede",
+    "vice",
+}
 
 
 def carregar_cargos(path: str | Path | None = None) -> dict[str, list[str]]:
@@ -1160,6 +1284,7 @@ def extrair_perfis_institucionais(
         celulares = [phone for phone in telefones if telefone_eh_celular(phone)]
         fixos = [phone for phone in telefones if phone not in celulares]
         emails, fixos, celulares = _filtrar_contatos_por_cargo(cargo, trecho, emails, fixos, celulares)
+        emails, fixos, celulares = _limitar_contatos_de_homepage(cargo, url, emails, fixos, celulares)
         tem_contato = bool(emails or fixos or celulares)
         if _descartar_resultado_por_contexto(cargo, url, tem_contato):
             continue
@@ -1275,12 +1400,14 @@ def _filtrar_emails_por_cargo(cargo: str, emails: list[str]) -> list[str]:
         return [
             email
             for email in emails
-            if not ("prefeito" in email.lower() and "vice" not in email.lower())
+            if not (("prefeito" in email.lower() or email.lower().startswith("prefeitura")) and "vice" not in email.lower())
             and (
                 "vice" in email.lower()
                 or not any(email.lower().startswith(prefix) for prefix in ("administra@", "contato@", "ouvidoria@", "comunicacao@", "administracao@"))
             )
         ]
+    if cargo == "Chefe de gabinete":
+        return [email for email in emails if "gabinete" in email.lower()]
     return emails
 
 
@@ -1307,7 +1434,30 @@ def _filtrar_contatos_por_cargo(
     if cargo in {"Prefeito", "Vice-prefeito"} and emails and not emails_filtrados:
         fixos_filtrados = []
         celulares_filtrados = []
+    if cargo == "Chefe de gabinete" and emails and len(emails_filtrados) < len(emails):
+        fixos_filtrados = []
+        celulares_filtrados = []
     return emails_filtrados, fixos_filtrados, celulares_filtrados
+
+
+def _limitar_contatos_de_homepage(
+    cargo: str,
+    url: str,
+    emails: list[str],
+    fixos: list[str],
+    celulares: list[str],
+) -> tuple[list[str], list[str], list[str]]:
+    total_contatos = len(emails) + len(fixos) + len(celulares)
+    path = normalize_for_search(urlparse(str(url or "")).path).replace("_", "-").replace("/", " ")
+    if cargo not in {"Prefeito", "Contato geral"} and _url_raiz(url) and total_contatos > 1:
+        return [], [], []
+    if cargo != "Contato geral" and "prefeito-e-equipe-de-governo" in path and total_contatos > 2:
+        return [], [], []
+    if cargo == "Prefeito" and len(fixos) > 2:
+        fixos = []
+    if cargo != "Contato geral" and total_contatos > 4:
+        return [], [], []
+    return emails, fixos, celulares
 
 
 def extrair_perfis_secretaria(
@@ -1347,13 +1497,16 @@ def extrair_perfis_secretaria(
 
         end = _limite_bloco_secretaria(lines, index)
         emails, fixos, celulares = _contatos_no_intervalo(lines, index, end)
-        status = "Encontrado" if emails or fixos or celulares else "Parcial"
-        observacoes = "" if status == "Encontrado" else "Nome/cargo publicado, mas sem contato direto no bloco."
         for cargo in cargos:
-            fixos_cargo = [] if celulares else fixos
-            if _descartar_resultado_por_contexto(cargo, url, bool(emails or fixos or celulares)):
+            emails_cargo, fixos_cargo, celulares_cargo = _limitar_contatos_de_homepage(
+                cargo, url, emails, [] if celulares else fixos, celulares
+            )
+            tem_contato_cargo = bool(emails_cargo or fixos_cargo or celulares_cargo)
+            status = "Encontrado" if tem_contato_cargo else "Parcial"
+            observacoes = "" if status == "Encontrado" else "Nome/cargo publicado, mas sem contato direto no bloco."
+            if _descartar_resultado_por_contexto(cargo, url, tem_contato_cargo):
                 continue
-            resultados.append(_montar_resultado(cargo, nome, emails, fixos_cargo, celulares, url, status, observacoes))
+            resultados.append(_montar_resultado(cargo, nome, emails_cargo, fixos_cargo, celulares_cargo, url, status, observacoes))
 
     return _deduplicar_resultados(resultados)
 
@@ -1394,13 +1547,16 @@ def extrair_perfis_lista_secretarias(
 
         end = _limite_bloco_secretaria(lines, nome_index)
         emails, fixos, celulares = _contatos_no_intervalo(lines, index, end)
-        status = "Encontrado" if emails or fixos or celulares else "Parcial"
-        observacoes = "" if status == "Encontrado" else "Nome/cargo publicado, mas sem contato direto no bloco."
         for cargo in list(dict.fromkeys(cargos)):
-            fixos_cargo = [] if celulares else fixos
-            if _descartar_resultado_por_contexto(cargo, url, bool(emails or fixos or celulares)):
+            emails_cargo, fixos_cargo, celulares_cargo = _limitar_contatos_de_homepage(
+                cargo, url, emails, [] if celulares else fixos, celulares
+            )
+            tem_contato_cargo = bool(emails_cargo or fixos_cargo or celulares_cargo)
+            status = "Encontrado" if tem_contato_cargo else "Parcial"
+            observacoes = "" if status == "Encontrado" else "Nome/cargo publicado, mas sem contato direto no bloco."
+            if _descartar_resultado_por_contexto(cargo, url, tem_contato_cargo):
                 continue
-            resultados.append(_montar_resultado(cargo, nome, emails, fixos_cargo, celulares, url, status, observacoes))
+            resultados.append(_montar_resultado(cargo, nome, emails_cargo, fixos_cargo, celulares_cargo, url, status, observacoes))
 
     return _deduplicar_resultados(resultados)
 
@@ -1769,12 +1925,38 @@ def _url_incompativel_com_cargo(cargo: str, url: str) -> bool:
     raw_url = normalize_for_search(str(url or ""))
     path = normalize_for_search(urlparse(str(url or "")).path).replace("_", "-").replace("/", " ")
     cargo_norm = normalize_for_search(cargo)
+    if cargo != "Contato geral" and "carta-servicos" in path:
+        return True
+    if cargo != "Contato geral" and "cartaservicos" in path:
+        return True
+    if cargo != "Contato geral" and "legislacao" in path:
+        return True
+    if cargo != "Contato geral" and any(token in path for token in ("leis", "sileg")):
+        return True
+    if cargo != "Contato geral" and any(token in path for token in ("servico", "servicos")) and "carta-de-servico orgao" not in path:
+        return True
+    if cargo != "Contato geral" and "igrejinha.rs.gov.br" in raw_url and "secretarias.php" in raw_url:
+        return True
     if cargo == "Prefeito" and "vice" in path and "prefeito-e-vice" not in path and "prefeitoevice" not in path:
+        return True
+    if cargo == "Prefeito" and ("chefe-de-gabinete" in path or "especialgabinete" in raw_url):
+        return True
+    if cargo == "Vice-prefeito" and "primeira-dama" in path:
         return True
     if cargo in CARGOS_EXECUTIVOS:
         if any(token in path for token in ("fale-com-o-prefeito", "contato", "assessor-de-imprensa")):
             return True
         contexto_executivo = any(token in path for token in ("prefeito", "vice", "gabinete", "equipe", "gestores"))
+        if any(token in path for token in ("assessor", "procuradoria")):
+            return True
+        if "assistencia" in path and not contexto_executivo:
+            return True
+        if "secretaria" in path and not contexto_executivo:
+            return True
+        if "secretaria.php" in raw_url and not contexto_executivo:
+            return True
+        if "secretarias.php" in raw_url and not contexto_executivo:
+            return True
         if "secretariaview" in path and not contexto_executivo:
             return True
         contexto_administrativo = any(token in path for token in ("administracao", "recursos-humanos", " rh", "rh "))
@@ -1787,6 +1969,8 @@ def _url_incompativel_com_cargo(cargo: str, url: str) -> bool:
         and "secretariaview" in path
         and not any(token in path for token in ("desenvolvimento", "industria", "comercio", "empreendedor", "trabalho"))
     ):
+        return True
+    if cargo_norm == "secretaria de desenvolvimento" and any(token in path for token in ("smmadu", "sdsh")):
         return True
     if "desenvolvimento economico" in cargo_norm and any(
         token in path
@@ -1923,6 +2107,9 @@ def extrair_contatos_de_texto(
         for cargo in cargos:
             emails_cargo, fixos_cargo, celulares_cargo = _filtrar_contatos_por_cargo(
                 cargo, bloco, emails, fixos, celulares
+            )
+            emails_cargo, fixos_cargo, celulares_cargo = _limitar_contatos_de_homepage(
+                cargo, url, emails_cargo, fixos_cargo, celulares_cargo
             )
             if celulares_cargo:
                 fixos_cargo = []

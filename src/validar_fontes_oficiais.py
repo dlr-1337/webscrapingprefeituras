@@ -109,6 +109,7 @@ def _termos_categoria(row: pd.Series) -> list[str]:
         termos.extend(["chefe de gabinete", "gabinete"])
     if "desenvolvimento economico" in hay:
         termos.extend([
+            "desenvolvimento",
             "desenvolvimento economico",
             "industria",
             "comercio",
