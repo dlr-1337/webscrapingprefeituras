@@ -78,6 +78,7 @@ NOME_EXCLUDE = {
     "minha casa",
     "municipio de acrelandia assessor parlamentar",
     "negocios publicos",
+    "nossa historia desde",
     "obras publicas",
     "orgao de imprensa",
     "ouvidoria e atendimento",
@@ -105,6 +106,7 @@ NOME_EXCLUDE = {
     "continue lendo",
     "visualizar pdf",
     "termos de posse",
+    "tia angela",
     "chefia chefe",
     "cidadao empresa turista",
     "clique aqui",
@@ -143,27 +145,113 @@ NOME_EXCLUDE = {
     "governo de condeuba",
     "governo de itapaci",
     "mulheres responsa",
+    "advogado e empresario",
     "esporte e lazer",
     "capela mortuaria",
     "abertura de mei",
     "aquicultura e pesca",
+    "alta complexidade",
+    "antecedentes criminais",
+    "anexo iii",
+    "anexo viii",
     "assessor de apoio legislativo",
     "assessora especial",
+    "assessoria de comunicacao",
+    "assessoria de convenios",
+    "categorias de paginas dinamicas",
+    "certidao negativa de debitos",
+    "coordenadoria de tributacao e arrecadacao mobiliarias",
     "dama utilizamos",
+    "estancia de socorro",
     "forma de acompanhamento",
+    "governou louveira",
     "imprimir corrigir",
     "imprimir fechar categoria",
+    "indiretas todas",
+    "indice de artigos resultado",
     "galeria de fotos",
     "galeria de prefeitos",
     "mapa do site covid",
     "beto araujo",
     "certidao estadual",
+    "canta cerrado",
+    "campo bom",
+    "cascavel norte",
+    "conselheiros tutelares",
+    "constituicoes feder",
+    "creche escola",
+    "divida ativa",
+    "edificio torre center",
     "pesquisar confirmacao",
     "politica de privacidade",
+    "ordem dos advogados",
+    "piraquara conheca",
+    "programa de integridade",
+    "programa primeiros passos",
+    "programa transformar",
     "programas sociais",
     "publicacao ou veto fluxo",
     "funcionamento trajetoria",
+    "emprega santiago",
+    "estagiarios abril",
+    "frederico westphalen",
+    "fomento parana",
+    "jogos escolares",
+    "junta militar",
+    "forcas armadas",
     "junimar salvador borges",
+    "leis complementares",
+    "linha direta",
+    "lutar unidos",
+    "parceria sebrae",
+    "perguntas frequentes",
+    "pela pasta",
+    "quem somos",
+    "regimento interno",
+    "retrospectiva anual",
+    "rotary club",
+    "seguro desemprego",
+    "secretarios e diretores",
+    "situacao de emergencia",
+    "agendas disponiveis",
+    "anterior proximo",
+    "america latina",
+    "assuntos juridicos",
+    "atribuicoes analisar",
+    "areia branca",
+    "assistencia e vigilancia",
+    "assessorias especiais",
+    "castro primeira",
+    "codigo de posturas",
+    "codigo nacional",
+    "coordenacao governamental",
+    "direito do consumidor",
+    "direito publico",
+    "disciplinas pedagogicas",
+    "em construcao",
+    "externos castramovel",
+    "expansao industrial e portuaria",
+    "gerente de esportes",
+    "mobilidade urbana",
+    "mobilidade urbana eduardo bueno",
+    "pagina inicial",
+    "paulo afonso",
+    "projeto rosa amiga",
+    "sao francisco",
+    "sao paulo",
+    "secao de habilitacao",
+    "secao ii",
+    "seguranca cidada",
+    "solicitacoes ambientais",
+    "sustentabilidade e governanca",
+    "termo de us",
+    "tupa milton carlos",
+    "universidade sao francisco",
+    "vagas disponiveis",
+    "ribeirao preto local",
+    "transloc transportes",
+    "unidades executivas",
+    "via rapida empresa",
 }
 
 NOME_TOKEN_EXCLUDE = {
@@ -192,9 +280,11 @@ NOME_TOKEN_EXCLUDE = {
     "abertura",
     "administracao",
     "assessor",
+    "assessoria",
     "capela",
     "certidao",
     "cidadania",
+    "biografia",
     "curriculo",
     "especial",
     "esporte",
@@ -247,16 +337,19 @@ NOME_TOKEN_EXCLUDE = {
     "acompanhamento",
     "apoio",
     "aquicultura",
+    "arrecadacao",
     "assessora",
     "baixar",
     "camara",
     "clinicas",
     "cachaca",
     "comercio",
+    "conheca",
     "conselho",
     "conservacao",
     "defesa",
     "diretor",
+    "debitos",
     "drogas",
     "economico",
     "emprego",
@@ -267,6 +360,7 @@ NOME_TOKEN_EXCLUDE = {
     "lugares",
     "livre",
     "ltda",
+    "mobiliarias",
     "max",
     "nublado",
     "parcialmente",
@@ -276,10 +370,12 @@ NOME_TOKEN_EXCLUDE = {
     "pesquisar",
     "plano",
     "plurianual",
+    "primeiros",
     "roteiro",
     "saber",
     "seletivo",
     "serrana",
+    "passos",
     "social",
     "superintendente",
     "turismo",
@@ -300,11 +396,14 @@ NOME_TOKEN_EXCLUDE = {
     "atualizacao",
     "atualizado",
     "avenida",
+    "advogado",
+    "advogados",
     "aviario",
     "bairro",
     "base",
     "branco",
     "calendario",
+    "categorias",
     "chefia",
     "cidadao",
     "cidade",
@@ -322,9 +421,11 @@ NOME_TOKEN_EXCLUDE = {
     "contato",
     "contatos",
     "conteudo",
+    "convenios",
     "cotas",
     "contas",
     "controle",
+    "coordenadoria",
     "corrupcao",
     "continue",
     "constituicao",
@@ -339,6 +440,7 @@ NOME_TOKEN_EXCLUDE = {
     "destaque",
     "destaques",
     "digital",
+    "dinamicas",
     "diminuir",
     "direto",
     "diario",
@@ -348,7 +450,9 @@ NOME_TOKEN_EXCLUDE = {
     "endereco",
     "endere",
     "empresa",
+    "empresario",
     "estrada",
+    "estancia",
     "estado",
     "estadual",
     "estrutura",
@@ -367,6 +471,7 @@ NOME_TOKEN_EXCLUDE = {
     "imprensa",
     "informacoes",
     "infraestrutura",
+    "indiretas",
     "juridica",
     "juridico",
     "legislativo",
@@ -375,11 +480,14 @@ NOME_TOKEN_EXCLUDE = {
     "login",
     "gabinete",
     "gestao",
+    "governou",
     "graduada",
     "graduado",
     "habitacao",
     "horario",
     "juventude",
+    "indice",
+    "integridade",
     "lei",
     "legislacao",
     "lendo",
@@ -398,10 +506,14 @@ NOME_TOKEN_EXCLUDE = {
     "mulher",
     "mulheres",
     "negocios",
+    "negativa",
+    "nossa",
     "nosso",
+    "desde",
     "obras",
     "oficial",
     "opcao",
+    "ordem",
     "organizacional",
     "orgao",
     "orgaos",
@@ -418,19 +530,24 @@ NOME_TOKEN_EXCLUDE = {
     "presidente",
     "prefeita",
     "prefeito",
+    "prefeitura",
+    "prefeituras",
     "ponto",
     "popular",
     "privacidade",
+    "programa",
     "procurador",
     "processos",
     "publicas",
     "publicos",
     "redacao",
     "rapido",
+    "rapida",
     "redes",
     "redigir",
     "regularizacao",
     "recursos",
+    "resultado",
     "responsavel",
     "responsaveis",
     "responsa",
@@ -463,11 +580,16 @@ NOME_TOKEN_EXCLUDE = {
     "trabalho",
     "transparencia",
     "transmissao",
+    "todas",
+    "transformar",
+    "tributacao",
     "turista",
+    "tia",
     "indenizatoria",
     "rural",
     "urbano",
     "urbanismo",
+    "turistica",
     "departamentos",
     "divisao",
     "distritos",
@@ -476,12 +598,109 @@ NOME_TOKEN_EXCLUDE = {
     "filtrar",
     "noticia",
     "noticias",
+    "paginas",
     "apagar",
     "agenda",
     "ultima",
     "ultimas",
     "ultimo",
     "unico",
+    "antecedentes",
+    "anexo",
+    "armadas",
+    "ativa",
+    "canta",
+    "center",
+    "cerrado",
+    "complexidade",
+    "constituicoes",
+    "conselheiros",
+    "creche",
+    "criminais",
+    "desemprego",
+    "diretores",
+    "direitos",
+    "divida",
+    "edificio",
+    "emprega",
+    "emergencia",
+    "escola",
+    "escolares",
+    "estagiarios",
+    "executivas",
+    "feder",
+    "festival",
+    "fomento",
+    "forcas",
+    "frequentes",
+    "humanos",
+    "infantil",
+    "interno",
+    "jogos",
+    "junta",
+    "leis",
+    "linha",
+    "militar",
+    "oficina",
+    "parceria",
+    "perguntas",
+    "pela",
+    "predio",
+    "regimento",
+    "retrospectiva",
+    "rotary",
+    "sebrae",
+    "seguro",
+    "secretarios",
+    "agendas",
+    "ambientais",
+    "assistencia",
+    "assessorias",
+    "assuntos",
+    "atribuicoes",
+    "analisar",
+    "anterior",
+    "castramovel",
+    "codigo",
+    "construcao",
+    "consumidor",
+    "coordenacao",
+    "disciplinas",
+    "disponiveis",
+    "expansao",
+    "externos",
+    "gerente",
+    "governamental",
+    "governanca",
+    "habilitacao",
+    "industrial",
+    "inicial",
+    "juridico",
+    "juridicos",
+    "local",
+    "mobilidade",
+    "nacional",
+    "pedagogicas",
+    "portuaria",
+    "primeira",
+    "proximo",
+    "posturas",
+    "publico",
+    "se",
+    "secao",
+    "seguranca",
+    "solicitacoes",
+    "sustentabilidade",
+    "universidade",
+    "vagas",
+    "vigilancia",
+    "situacao",
+    "somos",
+    "torre",
+    "transportes",
+    "tutelares",
+    "unidades",
+    "via",
     "ver",
     "visualizar",
     "verba",
@@ -619,6 +838,7 @@ NOME_PREFIXOS_DESCARTAVEIS = {
     "detalhes",
     "fechar",
     "habitacao",
+    "historia",
     "horario",
     "horarios",
     "imprimir",
@@ -649,6 +869,7 @@ NOME_SUFFIXOS_DESCARTAVEIS = {
     "corrigir",
     "dr",
     "dra",
+    "conheca",
     "graduada",
     "graduado",
     "introducao",
@@ -737,9 +958,9 @@ def dividir_blocos(texto: str) -> list[str]:
         if not lines:
             continue
         if len(" ".join(lines)) > 1200:
-            blocks.extend(" ".join(lines[i : i + 8]) for i in range(0, len(lines), 8))
+            blocks.extend("\n".join(lines[i : i + 8]) for i in range(0, len(lines), 8))
         else:
-            blocks.append(" ".join(lines))
+            blocks.append("\n".join(lines))
     return blocks or [text]
 
 
@@ -754,7 +975,11 @@ def _termo_cargo_presente(haystack: str, needle: str) -> bool:
             pattern = rf"(?<!vice-)(?<!vice )(?<![\w-]){escaped}(?![\w-])"
         else:
             pattern = rf"(?<![\w-]){escaped}(?![\w-])"
-        if re.search(pattern, haystack):
+        for match in re.finditer(pattern, haystack):
+            if candidate.replace("-", " ") in {"chefe de gabinete", "chefia de gabinete"}:
+                suffix = haystack[match.end() : match.end() + 80]
+                if re.match(r"^\s+(do|da|de)\s+(?!prefeit[oa]\b|executivo\b|municipio\b|municipal\b)", suffix):
+                    continue
             return True
     return False
 
@@ -977,6 +1202,30 @@ def _nome_em_contexto_de_endereco(texto: str, nome: str) -> bool:
     return False
 
 
+def _nome_em_contexto_familiar_ou_biografico(texto: str, nome: str) -> bool:
+    nome_norm = normalize_for_search(nome)
+    normalized = normalize_for_search(texto)
+    if not nome_norm or not normalized:
+        return False
+    termos = (
+        "esposa",
+        "esposo",
+        "companheira",
+        "companheiro",
+        "filho",
+        "filha",
+        "mae",
+        "pai",
+        "irmao",
+        "irma",
+    )
+    for match in re.finditer(re.escape(nome_norm), normalized):
+        contexto = normalized[max(0, match.start() - 80) : min(len(normalized), match.end() + 80)]
+        if any(termo in contexto for termo in termos):
+            return True
+    return False
+
+
 def _nome_antes_do_indice(texto: str, index: int) -> str:
     prefix = str(texto or "")[max(0, index - 180) : index].strip(" \t\n\r:-\u2013\u2014")
     if not prefix:
@@ -993,6 +1242,7 @@ def _nome_antes_do_indice(texto: str, index: int) -> str:
             and _nome_valido(nome)
             and not _nome_aparece_apenas_em_linha_de_credito(parte, nome)
             and not _nome_em_contexto_de_endereco(parte, nome)
+            and not _nome_em_contexto_familiar_ou_biografico(parte, nome)
         ):
             return nome
     return ""
@@ -1172,6 +1422,33 @@ def _nome_da_linha(line: str) -> str:
     return ""
 
 
+def _nome_em_linhas_sequenciais(lines: list[str], start: int, limit: int = 5) -> tuple[str, int]:
+    partes: list[str] = []
+    ultimo_index = start
+    for index in range(start, min(len(lines), start + limit)):
+        line = str(lines[index] or "").strip(" \t:-\u2013\u2014.,")
+        if not line or line == PROFILE_BLANK_LINE:
+            break
+        normalized = normalize_for_search(line).strip(".,:;")
+        if normalized in PARTICULAS_NOME:
+            partes.append(line)
+            ultimo_index = index
+            continue
+        if " " in line or re.search(r"[@\d]", line):
+            break
+        if normalized in NOME_TOKEN_EXCLUDE or normalized in NOME_SUFFIXOS_DESCARTAVEIS:
+            break
+        if not _parece_linha_de_nome_proprio(line):
+            break
+        partes.append(line)
+        ultimo_index = index
+
+    candidate = _limpar_ruido_nome(" ".join(partes))
+    if len(partes) >= 2 and _nome_valido(candidate) and _parece_linha_de_nome_proprio(candidate):
+        return candidate, ultimo_index
+    return "", start
+
+
 def _parece_linha_de_nome_proprio(candidate: str) -> bool:
     token_pattern = re.compile(r"^[A-ZÁÀÂÃÉÈÊÍÌÓÒÔÕÚÙÇ][A-Za-zÁÀÂÃÉÈÊÍÌÓÒÔÕÚÙÇáàâãéèêíìóòôõúùç']+$")
     for token in str(candidate or "").split():
@@ -1250,6 +1527,11 @@ def extrair_perfis_institucionais(
 
         nome = _nome_no_trecho(nome_inline)
         nome_index = index
+        if not nome:
+            sequencial, sequencial_index = _nome_em_linhas_sequenciais(linhas, index + 1)
+            if sequencial:
+                nome = sequencial
+                nome_index = sequencial_index
         if not nome:
             for candidate_index, candidate_line in enumerate(linhas[index + 1 : index + 5], start=index + 1):
                 if candidate_line == PROFILE_BLANK_LINE:
@@ -1330,6 +1612,13 @@ def _contatos_no_intervalo(lines: list[str], start: int, end: int) -> tuple[list
 
 def _nome_apos_rotulo_secretario(lines: list[str], index: int) -> tuple[str, int]:
     line = lines[index]
+    normalized = normalize_for_search(line).strip(" :-\u2013\u2014")
+    if normalized in {"secretario", "secretaria", "secretario(a)"}:
+        next_index = _indice_proxima_linha(lines, index)
+        if next_index is None:
+            return "", index
+        return _nome_da_linha(lines[next_index]) or _nome_no_trecho(lines[next_index]), next_index
+
     match = re.match(r"^\s*secret[aá]ri[oa](?:\s*\(a\))?\s*[:\-\u2013\u2014]\s*(.*)$", line, flags=re.IGNORECASE)
     if not match:
         return "", index
@@ -1521,13 +1810,25 @@ def extrair_perfis_lista_secretarias(
 
     for index, line in enumerate(lines):
         normalized = normalize_for_search(line)
-        if "secretaria" not in normalized and "agencia" not in normalized:
-            continue
-        if not _linha_parece_titulo_orgao(line) and not normalized.startswith("agencia"):
-            continue
-
         cargos = detectar_cargos(line, cargos_config)
         if not cargos:
+            continue
+        titulo_orgao = _linha_parece_titulo_orgao(line) or normalized.startswith("agencia")
+        titulo_area_curto = (
+            len(normalized) <= 90
+            and not re.search(r"[@\d.;]", line)
+            and any(
+                normalize_for_search(cargo)
+                in {
+                    "secretaria de desenvolvimento economico",
+                    "secretaria de desenvolvimento",
+                    "secretaria de financas/fazenda",
+                    "secretaria de planejamento",
+                }
+                for cargo in cargos
+            )
+        )
+        if not titulo_orgao and not titulo_area_curto:
             continue
 
         nome = ""
@@ -1584,6 +1885,19 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
             if nome and _nome_valido(nome) and not _nome_aparece_apenas_em_linha_de_credito(block, nome):
                 return nome
 
+    linhas = _linhas_nao_vazias(block)
+    for index, line in enumerate(linhas):
+        if not _cargo_no_inicio_da_linha(line, cargos_config):
+            continue
+        nome, _nome_index = _nome_em_linhas_sequenciais(linhas, index + 1)
+        if (
+            nome
+            and not _nome_aparece_apenas_em_linha_de_credito(block, nome)
+            and not _nome_em_contexto_de_endereco(block, nome)
+            and not _nome_em_contexto_familiar_ou_biografico(block, nome)
+        ):
+            return nome
+
     rotulo_match = re.search(
         r"(?:respons\S*|titular|autoridade administrativa)\s*[:\-\u2013\u2014]?\s*(.{4,140})",
         block,
@@ -1616,6 +1930,7 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
                     and _nome_valido(candidate)
                     and not _nome_aparece_apenas_em_linha_de_credito(window, candidate)
                     and not _nome_em_contexto_de_endereco(window, candidate)
+                    and not _nome_em_contexto_familiar_ou_biografico(window, candidate)
                 ):
                     return candidate
             for found in NAME_PATTERN.finditer(window):
@@ -1625,6 +1940,7 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
                     and _nome_valido(candidate)
                     and not _nome_aparece_apenas_em_linha_de_credito(window, candidate)
                     and not _nome_em_contexto_de_endereco(window, candidate)
+                    and not _nome_em_contexto_familiar_ou_biografico(window, candidate)
                 ):
                     return candidate
 
@@ -1635,6 +1951,7 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
             and _nome_valido(candidate)
             and not _nome_aparece_apenas_em_linha_de_credito(block[:300], candidate)
             and not _nome_em_contexto_de_endereco(block[:300], candidate)
+            and not _nome_em_contexto_familiar_ou_biografico(block[:300], candidate)
         ):
             return candidate
     return ""
@@ -1933,7 +2250,14 @@ def _url_incompativel_com_cargo(cargo: str, url: str) -> bool:
         return True
     if cargo != "Contato geral" and any(token in path for token in ("leis", "sileg")):
         return True
-    if cargo != "Contato geral" and any(token in path for token in ("servico", "servicos")) and "carta-de-servico orgao" not in path:
+    if cargo != "Contato geral" and any(token in raw_url for token in ("download?type=txt", ".pdf")):
+        return True
+    if (
+        cargo != "Contato geral"
+        and any(token in path for token in ("servico", "servicos"))
+        and "carta-de-servico orgao" not in path
+        and not ("desenvolvimento" in cargo_norm and "desenvolvimento" in path)
+    ):
         return True
     if cargo != "Contato geral" and "igrejinha.rs.gov.br" in raw_url and "secretarias.php" in raw_url:
         return True
@@ -1941,10 +2265,29 @@ def _url_incompativel_com_cargo(cargo: str, url: str) -> bool:
         return True
     if cargo == "Prefeito" and ("chefe-de-gabinete" in path or "especialgabinete" in raw_url):
         return True
+    if cargo == "Prefeito" and "contas-do-prefeito" in raw_url:
+        return True
+    if cargo == "Prefeito" and any(token in raw_url for token in ("/prefeitos", "cidade/prefeitos")):
+        return True
     if cargo == "Vice-prefeito" and "primeira-dama" in path:
+        return True
+    if cargo == "Vice-prefeito" and "manaus.am.gov.br/prefeitura/prefeito" in raw_url:
         return True
     if cargo in CARGOS_EXECUTIVOS:
         if any(token in path for token in ("fale-com-o-prefeito", "contato", "assessor-de-imprensa")):
+            return True
+        if any(
+            token in path or token in raw_url
+            for token in (
+                "cmei",
+                "creche",
+                "escola",
+                "educacao",
+                "estagio",
+                "professor",
+                "professora",
+            )
+        ):
             return True
         contexto_executivo = any(token in path for token in ("prefeito", "vice", "gabinete", "equipe", "gestores"))
         if any(token in path for token in ("assessor", "procuradoria")):
@@ -1959,6 +2302,10 @@ def _url_incompativel_com_cargo(cargo: str, url: str) -> bool:
             return True
         if "secretariaview" in path and not contexto_executivo:
             return True
+        if any(token in path for token in ("mobilidade", "pdu", "unidades")) and not contexto_executivo:
+            return True
+        if any(token in path for token in ("departamento index", "departamento view")) and not contexto_executivo:
+            return True
         contexto_administrativo = any(token in path for token in ("administracao", "recursos-humanos", " rh", "rh "))
         if contexto_administrativo and not contexto_executivo:
             return True
@@ -1972,7 +2319,10 @@ def _url_incompativel_com_cargo(cargo: str, url: str) -> bool:
         return True
     if cargo_norm == "secretaria de desenvolvimento" and any(token in path for token in ("smmadu", "sdsh")):
         return True
-    if "desenvolvimento economico" in cargo_norm and any(
+    if (
+        "desenvolvimento economico" in cargo_norm
+        and not any(token in path for token in ("desenvolvimento", "industria", "comercio", "empreendedor", "trabalho"))
+        and any(
         token in path
         for token in (
             "assistencia",
@@ -1988,6 +2338,7 @@ def _url_incompativel_com_cargo(cargo: str, url: str) -> bool:
             "social",
             "viacao",
         )
+    )
     ):
         return True
     if ("financas" in cargo_norm or "fazenda" in cargo_norm) and any(token in path for token in ("cultura", "esporte", "educacao")):

@@ -120,3 +120,49 @@ def test_montar_alvos_inclui_governo_estadual_configurado():
     assert estadual["UF"] == "SP"
     assert "Governo" in estadual["Município/Capital"]
     assert estadual["Site oficial"]
+
+
+def test_nome_igual_localidade_nao_entra_como_pessoa():
+    row = pd.Series({"UF": "RS", "Estado": "Rio Grande do Sul", "MunicÃ­pio/Capital": "Santa Maria", "MunicÃ­pio": "Santa Maria"})
+
+    assert main_module._nome_representa_localidade("Santa Maria", row)
+    assert main_module._nome_representa_localidade("Santa Maria/RS", row)
+    assert not main_module._nome_representa_localidade("Juliana Barboza", row)
+
+    row_com_nome_longo = pd.Series({"UF": "SP", "Estado": "Sao Paulo", "MunicÃ­pio/Capital": "Santa Cruz do Rio Pardo", "MunicÃ­pio": "Santa Cruz do Rio Pardo"})
+    assert main_module._nome_representa_localidade("Santa Cruz", row_com_nome_longo)
+
+
+def test_nome_com_sufixo_geografico_nao_entra_como_pessoa():
+    row = pd.Series({"UF": "PR", "Estado": "Parana", "MunicÃ­pio/Capital": "Cascavel", "MunicÃ­pio": "Cascavel"})
+
+    assert main_module._nome_representa_localidade("CASCAVEL NORTE", row)
+    assert not main_module._nome_representa_localidade("Nelson Cipriani", row)
+
+
+def test_fonte_oficial_alternativa_de_porto_velho_cobre_prefeito():
+    row = pd.Series(
+        {
+            "UF": "RO",
+            "Estado": "Rondonia",
+            "Município/Capital": "Porto Velho",
+            "Município": "Porto Velho",
+            "Esfera": "Municipal",
+            "Site oficial": "https://www.portovelho.ro.gov.br/",
+        }
+    )
+
+    contatos = main_module._contatos_oficiais_alternativos(row)
+    linhas = main_module._linhas_com_cobertura_categorias(
+        row,
+        contatos,
+        "Não publicado",
+        "Sem dado oficial claro.",
+        "2026-05-25",
+    )
+    dados = pd.DataFrame(linhas)
+    prefeito = dados[dados["Cargo/Área"] == "Prefeito"].iloc[0]
+
+    assert contatos[0]["Nome"] == "Leonardo Barreto de Moraes"
+    assert "transparencia.portovelho.ro.gov.br" in prefeito["URL da fonte"]
+    assert prefeito["Status"] == "Parcial"

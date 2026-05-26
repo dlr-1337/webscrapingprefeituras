@@ -986,6 +986,69 @@ def test_equipe_governo_bauru_nao_vaza_contatos_entre_perfis():
     assert por_cargo["Secretaria de Desenvolvimento Econômico"]["Telefone"] == "3227-7819"
     assert por_cargo["Secretaria de Finanças/Fazenda"]["Nome"] == "Everson Demarchi"
     assert "(014) 3235-1314" not in por_cargo["Secretaria de Finanças/Fazenda"]["Telefone"]
+
+
+def test_area_de_desenvolvimento_com_secretaria_em_linhas_separadas_extrai_titular():
+    cargos = carregar_cargos()
+    texto = """
+    Desenvolvimento Economico e Inovacao
+    A Secretaria de Desenvolvimento Economico e Inovacao fomenta negocios.
+    Secretaria
+    Daiana de Leonco Monzon
+    Estrutura Organizacional
+    Telefone
+    :
+    (51) 3097-9400
+    E-mail
+    :
+    smdei@novohamburgo.rs.gov.br
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www.novohamburgo.rs.gov.br/smdei")
+    desenvolvimento = [item for item in contatos if item[COL_CARGO_ORGAO] == "Secretaria de Desenvolvimento Econômico"][0]
+
+    assert desenvolvimento["Nome"] == "Daiana de Leonco Monzon"
+    assert desenvolvimento["E-mail"] == "smdei@novohamburgo.rs.gov.br"
+    assert desenvolvimento["Telefone"] == "(51) 3097-9400"
+
+
+def test_prefeito_em_linhas_quebradas_nao_usa_nome_de_esposa_da_biografia():
+    cargos = carregar_cargos()
+    texto = """
+    Prefeito
+    Elvis
+    Leonardo
+    Cezar
+    Formado em Direito, sempre com o apoio de sua esposa Selma
+    Cezar e do seu filho, Caio.
+    Elvis Cezar nasceu em Carapicuiba e foi eleito prefeito.
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://prefeitura.santanadeparnaiba.sp.gov.br/Plataforma/prefeito")
+    nomes = {item["Nome"] for item in contatos if item[COL_CARGO_ORGAO] == "Prefeito"}
+
+    assert "Elvis Leonardo Cezar" in nomes
+    assert "Selma Cezar" not in nomes
+
+
+def test_chefe_de_gabinete_subordinado_em_biografia_nao_vira_chefe_municipal():
+    cargos = carregar_cargos()
+    texto = """
+    Secretaria Municipal de Controle Geral
+    Secretario
+    Rafael Martins Gomes
+    Biografia
+    Rafael Martins Gomes atuou como Chefe de Gabinete do Procurador-Geral.
+    Contato
+    E-mail:
+    semconger@novaiguacu.rj.gov.br
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www.novaiguacu.rj.gov.br/semconger/")
+
+    assert all(item[COL_CARGO_ORGAO] != "Chefe de gabinete" for item in contatos)
+
+
 def test_pires_do_rio_chefia_de_gabinete_usa_responsavel_do_bloco():
     cargos = {
         "chefe_gabinete": ["chefe de gabinete", "chefia de gabinete", "gabinete"],
@@ -1167,6 +1230,316 @@ def test_rotulos_de_portal_nao_viram_nome_de_autoridade():
     assert all(item["Nome"] != "Ouvidoria e Atendimento" for item in contatos)
     assert all(item["Nome"] != "Serviço de Informações" for item in contatos)
     assert all(item["Nome"] != "Órgão de Imprensa" for item in contatos)
+
+
+def test_rotulos_institucionais_de_sites_reais_nao_viram_nome():
+    cargos = {
+        "prefeito": ["prefeito", "prefeita"],
+        "vice_prefeito": ["vice-prefeito", "vice prefeito"],
+        "chefe_gabinete": ["chefe de gabinete", "gabinete"],
+        "financas_fazenda": ["financas", "fazenda"],
+        "agencia_desenvolvimento": ["agencia de desenvolvimento", "sala do empreendedor"],
+    }
+    texto = """
+    Prefeito
+    Prefeitura de Jatai
+
+    Prefeito
+    Ordem dos Advogados
+
+    Vice-prefeito
+    Indice de Artigos Resultado
+
+    Prefeito
+    Indiretas Todas
+
+    Prefeito
+    Piraquara Conheca
+
+    Prefeito
+    Nossa Historia Desde
+
+    Prefeito
+    Tia Angela
+
+    Vice-prefeito
+    Estancia de Socorro
+
+    Chefe de gabinete
+    Programa de Integridade
+
+    Financas
+    Coordenadoria de Tributacao e Arrecadacao Mobiliarias
+
+    Agencia de Desenvolvimento
+    Certidao Negativa de Debitos
+
+    Sala do Empreendedor
+    Programa Transformar Tramandai
+
+    Sala do Empreendedor
+    Via Rapida Empresa
+
+    Prefeito
+    Regimento Interno
+
+    Prefeito
+    Quem Somos
+
+    Prefeito
+    Emprega Santiago
+
+    Vice-prefeito
+    Rotary Club
+
+    Financas
+    Anexo III
+
+    Agencia de Desenvolvimento
+    Parceria SEBRAE
+
+    Prefeito
+    Creche Escola
+
+    Prefeito
+    Leis Complementares
+
+    Prefeito
+    Oficina Festival
+
+    Prefeito
+    Seguro Desemprego
+
+    Prefeito
+    Antecedentes Criminais
+
+    Chefe de gabinete
+    Linha Direta
+
+    Prefeito
+    Situacao de Emergencia
+
+    Vice-prefeito
+    Edificio Torre Center
+
+    Vice-prefeito
+    Secretarios e Diretores
+
+    Prefeito
+    Divida Ativa
+
+    Prefeito
+    Forcas Armadas
+
+    Vice-prefeito
+    Direito do Consumidor
+
+    Chefe de gabinete
+    Em Construcao
+
+    Prefeito
+    SECAO II
+
+    Prefeito
+    Paulo Afonso
+
+    Vice-prefeito
+    Disciplinas Pedagogicas
+
+    Prefeito
+    Agendas Disponiveis
+
+    Prefeito
+    Assessorias Especiais
+
+    Vice-prefeito
+    Pagina Inicial
+
+    Prefeito
+    Codigo Nacional
+
+    Planejamento
+    Coordenacao Governamental
+
+    Agencia de Desenvolvimento
+    Solicitacoes Ambientais
+
+    Desenvolvimento
+    Assistencia e Vigilancia
+
+    Prefeito
+    Sustentabilidade e Governanca
+
+    Desenvolvimento
+    Vagas Disponiveis
+
+    Prefeito
+    America Latina
+
+    Prefeito
+    Castro Primeira
+
+    Chefe de gabinete
+    Atribuicoes Analisar
+
+    Prefeito
+    Externos Castramovel
+
+    Vice-prefeito
+    Termo de Us
+
+    Prefeito
+    Mobilidade Urbana Eduardo Bueno
+
+    Prefeito
+    Tupa Milton Carlos
+
+    Prefeito
+    Ribeirao Preto Local
+
+    Prefeito
+    Assuntos Juridicos
+
+    Prefeito
+    Lauro de Freitas Anterior Proximo Se
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/")
+    nomes = {item["Nome"] for item in contatos}
+
+    assert "Prefeitura de Jatai" not in nomes
+    assert "Ordem dos Advogados" not in nomes
+    assert "Indice de Artigos Resultado" not in nomes
+    assert "Indiretas Todas" not in nomes
+    assert "Piraquara Conheca" not in nomes
+    assert "Nossa Historia Desde" not in nomes
+    assert "Tia Angela" not in nomes
+    assert "Estancia de Socorro" not in nomes
+    assert "Programa de Integridade" not in nomes
+    assert "Coordenadoria de Tributacao e Arrecadacao Mobiliarias" not in nomes
+    assert "Certidao Negativa de Debitos" not in nomes
+    assert "Programa Transformar Tramandai" not in nomes
+    assert "Via Rapida Empresa" not in nomes
+    assert "Regimento Interno" not in nomes
+    assert "Quem Somos" not in nomes
+    assert "Emprega Santiago" not in nomes
+    assert "Rotary Club" not in nomes
+    assert "Anexo III" not in nomes
+    assert "Parceria SEBRAE" not in nomes
+    assert "Creche Escola" not in nomes
+    assert "Leis Complementares" not in nomes
+    assert "Oficina Festival" not in nomes
+    assert "Seguro Desemprego" not in nomes
+    assert "Antecedentes Criminais" not in nomes
+    assert "Linha Direta" not in nomes
+    assert "Situacao de Emergencia" not in nomes
+    assert "Edificio Torre Center" not in nomes
+    assert "Secretarios e Diretores" not in nomes
+    assert "Divida Ativa" not in nomes
+    assert "Forcas Armadas" not in nomes
+    assert "Direito do Consumidor" not in nomes
+    assert "Em Construcao" not in nomes
+    assert "SECAO II" not in nomes
+    assert "Paulo Afonso" not in nomes
+    assert "Disciplinas Pedagogicas" not in nomes
+    assert "Agendas Disponiveis" not in nomes
+    assert "Assessorias Especiais" not in nomes
+    assert "Pagina Inicial" not in nomes
+    assert "Codigo Nacional" not in nomes
+    assert "Coordenacao Governamental" not in nomes
+    assert "Solicitacoes Ambientais" not in nomes
+    assert "Assistencia e Vigilancia" not in nomes
+    assert "Sustentabilidade e Governanca" not in nomes
+    assert "Vagas Disponiveis" not in nomes
+    assert "America Latina" not in nomes
+    assert "Castro Primeira" not in nomes
+    assert "Atribuicoes Analisar" not in nomes
+    assert "Externos Castramovel" not in nomes
+    assert "Termo de Us" not in nomes
+    assert "Mobilidade Urbana Eduardo Bueno" not in nomes
+    assert "Tupa Milton Carlos" not in nomes
+    assert "Ribeirao Preto Local" not in nomes
+    assert "Assuntos Juridicos" not in nomes
+    assert "Lauro de Freitas Anterior Proximo Se" not in nomes
+
+
+def test_sobrenome_homem_nao_e_rejeitado_como_home():
+    cargos = {"vice_prefeito": ["vice-prefeito", "vice prefeito"]}
+    texto = """
+    Vice-Prefeito
+    Ludovico Jose Homem Marcari
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/vice")
+
+    assert any(item["Nome"] == "Ludovico Jose Homem Marcari" for item in contatos)
+
+
+def test_contas_do_prefeito_nao_vira_fonte_de_perfil_do_prefeito():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Indiretas Todas
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://portal.londrina.pr.gov.br/contas-do-prefeito")
+
+    assert all(item[COL_CARGO_ORGAO] != "Prefeito" for item in contatos)
+
+
+def test_pagina_historica_de_prefeitos_nao_vira_prefeito_atual():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Ennio Brancalion
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www.maua.sp.gov.br/Cidade/Prefeitos")
+
+    assert all(item[COL_CARGO_ORGAO] != "Prefeito" for item in contatos)
+
+
+def test_pagina_escolar_nao_vira_fonte_de_cargo_executivo():
+    cargos = {"prefeito": ["prefeito", "prefeita"]}
+    texto = """
+    Prefeito
+    Tia Angela
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://www.piraquara.pr.gov.br/cmei-tia-angela-4921")
+
+    assert all(item[COL_CARGO_ORGAO] != "Prefeito" for item in contatos)
+
+
+def test_pagina_de_unidade_ou_departamento_nao_vira_executivo():
+    cargos = {"vice_prefeito": ["vice-prefeito", "vice prefeito"], "prefeito": ["prefeito", "prefeita"]}
+
+    unidade = extrair_contatos_de_texto(
+        "Vice-prefeito\nPaula Louzada Martins Breve",
+        cargos,
+        "https://www.anchieta.es.gov.br/unidades/7",
+    )
+    departamento = extrair_contatos_de_texto(
+        "Prefeito\nMobilidade Urbana Eduardo Bueno",
+        cargos,
+        "https://www.francodarocha.sp.gov.br/mobilidadeurbana/",
+    )
+
+    assert all(item[COL_CARGO_ORGAO] not in {"Prefeito", "Vice-prefeito"} for item in unidade + departamento)
+
+
+def test_pdf_e_pagina_de_manaus_so_de_prefeito_nao_viram_vice():
+    cargos = {"vice_prefeito": ["vice-prefeito", "vice prefeito"]}
+    texto = """
+    Vice-prefeito
+    David Almeida
+    """
+
+    pagina_prefeito = extrair_contatos_de_texto(texto, cargos, "https://www.manaus.am.gov.br/prefeitura/prefeito/")
+    pdf = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/site/download?type=txt&fileName=governo.pdf")
+
+    assert all(item[COL_CARGO_ORGAO] != "Vice-prefeito" for item in pagina_prefeito)
+    assert all(item[COL_CARGO_ORGAO] != "Vice-prefeito" for item in pdf)
 
 
 def test_responsavel_inline_nao_inclui_rotulo_no_nome():

@@ -70,3 +70,135 @@ def test_gerar_excel_inclui_dados_e_resultado_consolidado(tmp_path):
     dados = pd.read_excel(output, sheet_name="Dados")
     consolidado = pd.read_excel(output, sheet_name="Resultado consolidado")
     assert list(dados.columns) == list(consolidado.columns)
+
+
+def test_gerar_excel_rebaixa_encontrado_sem_dado_publicado(tmp_path):
+    output = tmp_path / "resultado.xlsx"
+    resultado = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Município/Capital": "Franco da Rocha",
+                "Município": "Franco da Rocha",
+                "Esfera": "Municipal",
+                "Cargo/Área": "Prefeito",
+                "Nome": "",
+                "E-mail": "",
+                "Telefone": "",
+                "Celular/WhatsApp": "",
+                "Status": "Encontrado",
+                "URL da fonte": "https://www.francodarocha.sp.gov.br/",
+            },
+            {
+                "UF": "SP",
+                "Município/Capital": "Franco da Rocha",
+                "Município": "Franco da Rocha",
+                "Esfera": "Municipal",
+                "Cargo/Área": "Vice-prefeito",
+                "Nome": "",
+                "E-mail": "vice@francodarocha.sp.gov.br",
+                "Telefone": "",
+                "Celular/WhatsApp": "",
+                "Status": "Encontrado",
+                "URL da fonte": "https://www.francodarocha.sp.gov.br/gabinete/",
+            },
+        ]
+    )
+    municipios = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Município/Capital": "Franco da Rocha",
+                "Município": "Franco da Rocha",
+                "Esfera": "Municipal",
+                "Status geral": "Encontrado",
+            }
+        ]
+    )
+
+    gerar_excel(resultado, municipios, pd.DataFrame(), output)
+
+    dados = pd.read_excel(output, sheet_name="Dados")
+    prefeito = dados[dados["Cargo/Área"] == "Prefeito"].iloc[0]
+    vice = dados[dados["Cargo/Área"] == "Vice-prefeito"].iloc[0]
+    assert prefeito["Status"] == "Não publicado"
+    assert "sem dado oficial claro" in prefeito["Observações"]
+    assert vice["Status"] == "Encontrado"
+
+
+def test_gerar_excel_descarta_nome_institucional(tmp_path):
+    output = tmp_path / "resultado.xlsx"
+    resultado = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Município/Capital": "Franco da Rocha",
+                "Município": "Franco da Rocha",
+                "Esfera": "Municipal",
+                "Cargo/Área": "Prefeito",
+                "Nome": "Assuntos Jurídicos",
+                "Status": "Encontrado",
+                "URL da fonte": "https://www.francodarocha.sp.gov.br/assuntos-juridicos/",
+            }
+        ]
+    )
+    municipios = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Município/Capital": "Franco da Rocha",
+                "Município": "Franco da Rocha",
+                "Esfera": "Municipal",
+                "Status geral": "Encontrado",
+            }
+        ]
+    )
+
+    gerar_excel(resultado, municipios, pd.DataFrame(), output)
+
+    dados = pd.read_excel(output, sheet_name="Dados")
+    row = dados.iloc[0]
+    assert pd.isna(row["Nome"])
+    assert row["Status"] == "Não publicado"
+    assert "rótulo institucional" in row["Observações"]
+
+
+def test_gerar_excel_rebaixa_fonte_indisponivel_na_validacao(tmp_path):
+    output = tmp_path / "resultado.xlsx"
+    resultado = pd.DataFrame(
+        [
+            {
+                "UF": "PR",
+                "Município/Capital": "Antonina",
+                "Município": "Antonina",
+                "Esfera": "Municipal",
+                "Cargo/Área": "Finanças/Fazenda",
+                "Nome": "Rafael Neves Alves",
+                "E-mail": "financas@antonina.pr.gov.br",
+                "Telefone": "(41) 3978-1042",
+                "Celular/WhatsApp": "",
+                "Status": "Encontrado",
+                "URL da fonte": "https://www.antonina.pr.gov.br/secretariaView/?id=6",
+            }
+        ]
+    )
+    municipios = pd.DataFrame(
+        [
+            {
+                "UF": "PR",
+                "Município/Capital": "Antonina",
+                "Município": "Antonina",
+                "Esfera": "Municipal",
+                "Status geral": "Encontrado",
+            }
+        ]
+    )
+
+    gerar_excel(resultado, municipios, pd.DataFrame(), output)
+
+    dados = pd.read_excel(output, sheet_name="Dados")
+    row = dados.iloc[0]
+    assert row["Status"] == "Site fora do ar"
+    assert pd.isna(row["Nome"])
+    assert pd.isna(row["E-mail"])
+    assert "indisponibilidade" in row["Observações"]

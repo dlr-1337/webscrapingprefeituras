@@ -150,6 +150,29 @@ def _valor_associado_a_categoria(texto: str, valor: str, row: pd.Series) -> bool
         janela_norm = normalize_for_search(janela)
         if any(term in janela_norm for term in termos):
             return True
+        nome = str(row.get("Nome", "") or "").strip()
+        nome_norm = normalize_for_search(nome)
+        if nome_norm and nome_norm != valor_norm and nome_norm in janela_norm:
+            for nome_index, nome_line in enumerate(linhas):
+                if nome_norm not in normalize_for_search(nome_line):
+                    continue
+                janela_nome = "\n".join(linhas[max(0, nome_index - 12) : min(len(linhas), nome_index + 13)])
+                janela_nome_norm = normalize_for_search(janela_nome)
+                if any(term in janela_nome_norm for term in termos):
+                    return True
+    texto_norm = normalize_for_search(texto)
+    if valor_norm in texto_norm:
+        for start in range(len(linhas)):
+            acumulado: list[str] = []
+            for end in range(start, min(len(linhas), start + 8)):
+                acumulado.append(linhas[end])
+                if valor_norm not in normalize_for_search(" ".join(acumulado)):
+                    continue
+                janela = "\n".join(linhas[max(0, start - 12) : min(len(linhas), end + 13)])
+                janela_norm = normalize_for_search(janela)
+                if any(term in janela_norm for term in termos):
+                    return True
+                break
     return False
 
 
@@ -161,13 +184,18 @@ def _categoria_exige_nome_pessoa(cargo_area: str) -> bool:
 def baixar_texto_playwright(url: str, timeout: int = 25) -> tuple[str, str, str]:
     html, status, observacoes, final_url, _status_http, _content_type, _metodo = _baixar_com_navegador(url, timeout, "auto")
     texto = html_para_texto(html)
-    if status == "Encontrado" and not texto:
-        session = criar_sessao("Robo de validacao institucional", 1)
-        html_req, status_req, obs_req, final_req, *_rest = _baixar(session, final_url or url, timeout)
-        texto_req = html_para_texto(html_req)
-        if texto_req:
+    session = criar_sessao("Robo de validacao institucional", 1)
+    html_req, status_req, obs_req, final_req, *_rest = _baixar(session, final_url or url, timeout)
+    texto_req = html_para_texto(html_req)
+    if texto_req:
+        if not texto:
             return texto_req, status_req, f"Playwright sem texto; fallback requests em {final_req}. {obs_req}".strip()
-    return texto, status, observacoes or final_url
+        if texto_req not in texto:
+            texto = f"{texto}\n{texto_req}"
+    if status not in {"Encontrado", "Parcial"} and status_req in {"Encontrado", "Parcial"}:
+        status = status_req
+    obs = " | ".join(part for part in (observacoes or final_url, obs_req) if part)
+    return texto, status, obs
 
 
 def selecionar_linhas_para_validacao(

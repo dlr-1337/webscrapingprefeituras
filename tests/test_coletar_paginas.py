@@ -397,6 +397,38 @@ def test_baixar_fecha_resposta_streamada_apos_html():
     assert response.closed
 
 
+def test_baixar_usa_fallback_oficial_porto_velho_quando_artigo_da_502():
+    import src.coletar_paginas as coletor
+
+    original = FakeStreamResponse(
+        "https://www.portovelho.ro.gov.br/artigo/22645/o-prefeito",
+        [b"erro"],
+        status_code=502,
+    )
+    fallback = FakeStreamResponse(
+        "https://agencia.portovelho.ro.gov.br/artigo/22645/o-prefeito",
+        [b"<html>Prefeito Leo Moraes</html>"],
+    )
+    session = FakeSession(
+        {
+            "https://www.portovelho.ro.gov.br/artigo/22645/o-prefeito": original,
+            "https://agencia.portovelho.ro.gov.br/artigo/22645/o-prefeito": fallback,
+        }
+    )
+
+    html, status, _obs, final_url, *_ = coletor._baixar(
+        session,
+        "https://www.portovelho.ro.gov.br/artigo/22645/o-prefeito",
+        timeout=1,
+    )
+
+    assert status == "Encontrado"
+    assert html == "<html>Prefeito Leo Moraes</html>"
+    assert final_url == "https://agencia.portovelho.ro.gov.br/artigo/22645/o-prefeito"
+    assert original.closed
+    assert fallback.closed
+
+
 def test_baixar_fecha_resposta_streamada_em_conteudo_ignorado():
     import src.coletar_paginas as coletor
 

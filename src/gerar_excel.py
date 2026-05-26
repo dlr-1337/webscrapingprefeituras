@@ -18,6 +18,87 @@ from src.validar_resultados import (
 from src.utils import load_yaml, project_path
 
 
+STATUS_COM_DADO = {"Encontrado", "Parcial"}
+CAMPOS_DADO_PUBLICADO = ["Nome", "E-mail", "Telefone", "Celular/WhatsApp", "Celular"]
+OBS_SEM_DADO_PUBLICADO = "Páginas oficiais consultadas, mas sem dado oficial claro para esta categoria."
+FONTES_INDISPONIVEIS_VALIDACAO = ("antonina.pr.gov.br/secretariaview",)
+OBS_FONTE_INDISPONIVEL_VALIDACAO = (
+    "Fonte oficial retornou indisponibilidade durante a validação; dado publicado previamente não foi mantido sem confirmação atual."
+)
+
+
+def _valor_preenchido(value: object) -> bool:
+    if pd.isna(value):
+        return False
+    text = str(value).strip()
+    return bool(text) and text.lower() not in {"nan", "none", "null"}
+
+
+def _juntar_observacao(atual: object, nova: str) -> str:
+    atual_texto = "" if pd.isna(atual) else str(atual).strip()
+    if not atual_texto:
+        return nova
+    if nova in atual_texto:
+        return atual_texto
+    return f"{atual_texto} {nova}"
+
+
+def _fonte_indisponivel_validacao(row: pd.Series) -> bool:
+    url = str(row.get("URL da fonte", "") or row.get("URL específica", "") or "").lower()
+    return any(token in url for token in FONTES_INDISPONIVEIS_VALIDACAO)
+
+
+def normalizar_status_sem_dado_publicado(resultado_df: pd.DataFrame) -> pd.DataFrame:
+    resultado = resultado_df.copy()
+    if resultado.empty or "Status" not in resultado.columns:
+        return resultado
+
+    for column in CAMPOS_DADO_PUBLICADO + ["Cargo/Área", "Observações"]:
+        if column not in resultado.columns:
+            resultado[column] = ""
+
+    try:
+        from src.extrair_contatos import _nome_valido
+    except Exception:  # pragma: no cover - proteção contra import parcial em empacotamentos
+        _nome_valido = None
+
+    for index, row in resultado.iterrows():
+        cargo = str(row.get("Cargo/Área", "") or "").strip()
+        status = str(row.get("Status", "") or "").strip()
+        if cargo == CATEGORIA_IDENTIFICACAO.label or status not in STATUS_COM_DADO:
+            continue
+
+        if _fonte_indisponivel_validacao(row):
+            for campo in CAMPOS_DADO_PUBLICADO:
+                resultado.at[index, campo] = ""
+            resultado.at[index, "Status"] = "Site fora do ar"
+            resultado.at[index, "Observações"] = _juntar_observacao(
+                row.get("Observações", ""),
+                OBS_FONTE_INDISPONIVEL_VALIDACAO,
+            )
+            continue
+
+        nome = row.get("Nome", "")
+        if _valor_preenchido(nome) and _nome_valido is not None and not _nome_valido(str(nome)):
+            resultado.at[index, "Nome"] = ""
+            resultado.at[index, "Observações"] = _juntar_observacao(
+                row.get("Observações", ""),
+                "Nome descartado por parecer rótulo institucional, navegação ou texto sem pessoa publicada.",
+            )
+
+        dados_presentes = any(_valor_preenchido(resultado.at[index, campo]) for campo in CAMPOS_DADO_PUBLICADO)
+        if dados_presentes:
+            continue
+
+        resultado.at[index, "Status"] = "Não publicado"
+        resultado.at[index, "Observações"] = _juntar_observacao(
+            resultado.at[index, "Observações"],
+            OBS_SEM_DADO_PUBLICADO,
+        )
+
+    return resultado
+
+
 def criar_resumo(
     resultado_df: pd.DataFrame,
     municipios_df: pd.DataFrame,
@@ -205,6 +286,7 @@ def gerar_excel(
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     resultado = garantir_colunas(resultado_df, COLUNAS_RESULTADO)
+    resultado = normalizar_status_sem_dado_publicado(resultado)
     municipios = garantir_colunas(municipios_df, COLUNAS_MUNICIPIOS)
     pendencias = garantir_colunas(pendencias_df, COLUNAS_PENDENCIAS)
     fontes_log = garantir_colunas(fontes_log_df if fontes_log_df is not None else pd.DataFrame(), COLUNAS_FONTES_LOG)

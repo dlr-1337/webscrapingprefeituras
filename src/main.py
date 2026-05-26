@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import argparse
+import re
+import unicodedata
 from datetime import datetime
 from pathlib import Path
 
@@ -23,6 +25,21 @@ from src.logger import configurar_logger
 from src.normalizar_dados import normalizar_resultados
 from src.utils import clean_url, ensure_project_dirs, load_yaml, project_path
 from src.validar_resultados import criar_pendencia, validar_resultados
+
+
+FONTES_OFICIAIS_ALTERNATIVAS = [
+    {
+        "UF": "RO",
+        "Município/Capital": "Porto Velho",
+        "Esfera": "Municipal",
+        "Cargo/Órgão": "Prefeito",
+        "Órgão/Secretaria": "Gabinete/Prefeitura",
+        "Nome": "Leonardo Barreto de Moraes",
+        "URL da fonte": "https://transparencia.portovelho.ro.gov.br/despesas/despesas/149693ea-d294-4a75-ac9a-0b2700eaf822",
+        "Status": "Parcial",
+        "Observações": "Fonte oficial alternativa usada porque a página institucional do prefeito retornou 502 durante a validação.",
+    }
+]
 
 
 def parse_args() -> argparse.Namespace:
@@ -81,6 +98,39 @@ def _metadata_alvo(row: pd.Series) -> dict:
         "Esfera": row.get("Esfera", "Municipal") or "Municipal",
         "Site oficial": row.get("Site oficial", ""),
     }
+
+
+def _contatos_oficiais_alternativos(row: pd.Series) -> list[dict]:
+    uf = str(row.get("UF", "")).upper()
+    municipio = _normalizar_identidade(row.get("Município/Capital", "") or row.get("Município", ""))
+    esfera = _normalizar_identidade(row.get("Esfera", "Municipal") or "Municipal")
+    contatos: list[dict] = []
+    for fonte in FONTES_OFICIAIS_ALTERNATIVAS:
+        if str(fonte.get("UF", "")).upper() != uf:
+            continue
+        if _normalizar_identidade(fonte.get("Município/Capital", "")) != municipio:
+            continue
+        if _normalizar_identidade(fonte.get("Esfera", "Municipal")) != esfera:
+            continue
+        cargo = str(fonte.get("Cargo/Órgão", ""))
+        url = clean_url(fonte.get("URL da fonte", ""))
+        contatos.append(
+            {
+                "Órgão/Secretaria": fonte.get("Órgão/Secretaria", ""),
+                "Cargo/Área": cargo,
+                "Cargo/Órgão": cargo,
+                "Nome": fonte.get("Nome", ""),
+                "E-mail": fonte.get("E-mail", ""),
+                "Telefone": fonte.get("Telefone", ""),
+                "Celular/WhatsApp": fonte.get("Celular/WhatsApp", ""),
+                "Celular": fonte.get("Celular", ""),
+                "URL da fonte": url,
+                "URL específica": url,
+                "Status": fonte.get("Status", "Parcial"),
+                "Observações": fonte.get("Observações", ""),
+            }
+        )
+    return contatos
 
 
 def _linha_resultado_pendencia(row: pd.Series, status: str, observacoes: str) -> dict:
@@ -163,6 +213,46 @@ def _linha_contato_com_metadata(row: pd.Series, contato: dict, data_coleta: str)
     return linha, categoria_label
 
 
+def _normalizar_identidade(texto: str) -> str:
+    texto_ascii = unicodedata.normalize("NFKD", str(texto or "")).encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"[^a-z0-9]+", " ", texto_ascii.lower()).strip()
+
+
+def _nome_representa_localidade(nome: str, row: pd.Series) -> bool:
+    nome_norm = _normalizar_identidade(nome)
+    if not nome_norm:
+        return False
+
+    municipio = (
+        row.get("Município/Capital", "")
+        or row.get("MunicÃ­pio/Capital", "")
+        or row.get("Município", "")
+        or row.get("MunicÃ­pio", "")
+    )
+    municipio_norm = _normalizar_identidade(municipio)
+    uf_norm = _normalizar_identidade(row.get("UF", ""))
+    estado_norm = _normalizar_identidade(row.get("Estado", ""))
+    localidade_variantes = {
+        municipio_norm,
+        f"{municipio_norm} {uf_norm}".strip(),
+        f"{municipio_norm} {estado_norm}".strip(),
+    }
+    if nome_norm in localidade_variantes:
+        return True
+
+    if municipio_norm and nome_norm.startswith(f"{municipio_norm} "):
+        sufixo = nome_norm.removeprefix(f"{municipio_norm} ").strip()
+        if sufixo in {"centro", "norte", "sul", "leste", "oeste"}:
+            return True
+
+    if municipio_norm.startswith(f"{nome_norm} "):
+        prefixos_toponimicos = {"alto", "alta", "baixo", "baixa", "bela", "belo", "bom", "boa", "campo", "nova", "novo", "rio", "santa", "santo", "sao"}
+        primeira_palavra = nome_norm.split(" ", 1)[0]
+        return primeira_palavra in prefixos_toponimicos and len(nome_norm.split()) >= 2
+
+    return False
+
+
 def _pontuacao_linha_categoria(linha: dict) -> tuple[int, int, int, int, str]:
     status = str(linha.get("Status", ""))
     url = str(linha.get("URL da fonte", "") or linha.get("URL específica", "")).lower()
@@ -206,6 +296,10 @@ def _linhas_com_cobertura_categorias(
             continue
         if categoria_label == CATEGORIA_IDENTIFICACAO.label:
             continue
+        if _nome_representa_localidade(str(linha.get("Nome", "")), row):
+            linha["Nome"] = ""
+            if not any(str(linha.get(campo, "") or "").strip() for campo in ("E-mail", "Telefone", "Celular/WhatsApp", "Celular")):
+                continue
         candidatos_por_categoria.setdefault(categoria_label, []).append(linha)
 
     for categoria in CATEGORIAS_DE_COLETA:
@@ -353,7 +447,8 @@ def executar_pipeline(args: argparse.Namespace) -> Path | None:
             try:
                 coleta = coletar_paginas(site, palavras_chave, scraping_config, logger=logger)
                 fontes_log.extend(_fonte_para_linha(row, fonte) for fonte in (coleta.fontes_consultadas or []))
-                if not coleta.paginas:
+                contatos_alternativos = _contatos_oficiais_alternativos(row)
+                if not coleta.paginas and not contatos_alternativos:
                     status_geral = coleta.status
                     observacao_geral = coleta.observacoes
                     resultados.extend(
@@ -363,7 +458,7 @@ def executar_pipeline(args: argparse.Namespace) -> Path | None:
                         criar_pendencia(uf, municipio, "Coleta", observacao_geral, status_geral, site, "", esfera, municipio_capital)
                     )
                 else:
-                    contatos = extrair_contatos_paginas(coleta.paginas, cargos_config)
+                    contatos = contatos_alternativos + extrair_contatos_paginas(coleta.paginas, cargos_config)
                     if contatos:
                         status_geral = "Encontrado" if any(item.get("Status") == "Encontrado" for item in contatos) else "Parcial"
                         observacao_geral = f"{len(contatos)} registro(s) de contato extraído(s)."

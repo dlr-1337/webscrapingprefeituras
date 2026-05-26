@@ -452,6 +452,15 @@ def _redirecionou_para_url_ignorada(url: str, final_url: str) -> bool:
     return _url_deve_ser_ignorada(final_url)
 
 
+def _url_fallback_oficial(url: str) -> str:
+    parsed = urlparse(str(url or ""))
+    host = parsed.netloc.lower()
+    if host in {"www.portovelho.ro.gov.br", "portovelho.ro.gov.br"} and parsed.path.startswith("/artigo/"):
+        query = f"?{parsed.query}" if parsed.query else ""
+        return clean_url(f"https://agencia.portovelho.ro.gov.br{parsed.path}{query}")
+    return ""
+
+
 def _url_chave(url: str) -> tuple[str, str, str]:
     parsed = urlparse(url)
     host = parsed.netloc.lower().removeprefix("www.")
@@ -527,8 +536,14 @@ def _baixar(
     try:
         response = session.get(url, timeout=timeout, allow_redirects=True, stream=True)
     except requests.Timeout:
+        fallback = _url_fallback_oficial(url)
+        if fallback and fallback != clean_url(url):
+            return _baixar(session, fallback, timeout)
         return "", "Site fora do ar", "Timeout ao acessar URL.", url, None, "", "requests"
     except requests.RequestException as exc:
+        fallback = _url_fallback_oficial(url)
+        if fallback and fallback != clean_url(url):
+            return _baixar(session, fallback, timeout)
         return "", "Site fora do ar", f"Erro de conexão: {exc}", url, None, "", "requests"
 
     try:
@@ -537,6 +552,11 @@ def _baixar(
         if response.status_code in {401, 403, 429}:
             return _ler_texto_limitado(response), "Bloqueio técnico", f"HTTP {response.status_code}.", final_url, response.status_code, content_type, "requests"
         if response.status_code >= 500:
+            fallback = _url_fallback_oficial(final_url or url)
+            if fallback and fallback != clean_url(final_url or url):
+                html, status, observacao, fallback_final, fallback_status, fallback_type, metodo = _baixar(session, fallback, timeout)
+                if status == "Encontrado":
+                    return html, status, observacao, fallback_final, fallback_status, fallback_type, metodo
             return _ler_texto_limitado(response), "Site fora do ar", f"HTTP {response.status_code}.", final_url, response.status_code, content_type, "requests"
         if response.status_code >= 400:
             return _ler_texto_limitado(response), "Página sem informação pública", f"HTTP {response.status_code}.", final_url, response.status_code, content_type, "requests"
