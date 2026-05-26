@@ -35,8 +35,11 @@ NOME_EXCLUDE = {
     "secretaria municipal",
     "desenvolvimento economico",
     "sala do empreendedor",
+    "iss online",
+    "concursos e selecoes",
     "fale conosco",
     "portal da transparencia",
+    "painel de facilidades",
     "praca",
     "diario oficial",
     "acessar o conteudo",
@@ -1847,6 +1850,9 @@ def extrair_perfis_lista_secretarias(
             continue
 
         end = _limite_bloco_secretaria(lines, nome_index)
+        trecho_secretaria = "\n".join(lines[index:end])
+        if _nome_aparece_apenas_em_linha_de_endereco(trecho_secretaria, nome) or _nome_em_contexto_de_endereco(trecho_secretaria, nome):
+            continue
         emails, fixos, celulares = _contatos_no_intervalo(lines, index, end)
         for cargo in list(dict.fromkeys(cargos)):
             emails_cargo, fixos_cargo, celulares_cargo = _limitar_contatos_de_homepage(
@@ -1905,7 +1911,12 @@ def extrair_nome_proximo(texto: str, cargos_config: dict[str, list[str]]) -> str
     )
     if rotulo_match:
         candidate = _nome_no_trecho(rotulo_match.group(1))
-        if candidate and _nome_valido(candidate) and not _nome_aparece_apenas_em_linha_de_credito(block, candidate):
+        if (
+            candidate
+            and _nome_valido(candidate)
+            and not _nome_aparece_apenas_em_linha_de_credito(block, candidate)
+            and not _nome_em_contexto_de_endereco(block, candidate)
+        ):
             return candidate
 
     normalized_block = normalize_for_search(block)
@@ -2312,6 +2323,24 @@ def _url_incompativel_com_cargo(cargo: str, url: str) -> bool:
     if "planejamento" in cargo_norm and "loanda.pr.gov.br" in raw_url and "secretariaview/?id=22" in raw_url:
         return True
     if (
+        "planejamento" in cargo_norm
+        and "planejamento" not in path
+        and any(token in path for token in ("assistencia", "cultura", "educacao", "esporte", "saude", "sauacutede", "sauacutedep"))
+    ):
+        return True
+    if (
+        _cargo_eh_agencia_desenvolvimento(cargo)
+        and any(token in path for token in ("gabinete", "prefeito", "vice"))
+        and not any(token in path for token in ("banco-do-povo", "casa-do-empreendedor", "desenvolvimento", "empreendedor"))
+    ):
+        return True
+    if (
+        _cargo_eh_agencia_desenvolvimento(cargo)
+        and not any(token in path for token in ("banco-do-povo", "casa-do-empreendedor", "desenvolvimento", "empreendedor"))
+        and any(token in path for token in ("assistencia", "cultura", "educacao", "esporte", "financas", "saude", "sauacutede", "sauacutedep", "secretaria"))
+    ):
+        return True
+    if (
         "desenvolvimento economico" in cargo_norm
         and "secretariaview" in path
         and not any(token in path for token in ("desenvolvimento", "industria", "comercio", "empreendedor", "trabalho"))
@@ -2348,6 +2377,13 @@ def _url_incompativel_com_cargo(cargo: str, url: str) -> bool:
 
 def _descartar_resultado_por_contexto(cargo: str, url: str, tem_contato: bool) -> bool:
     if _url_incompativel_com_cargo(cargo, url):
+        return True
+    path = normalize_for_search(urlparse(str(url or "")).path).replace("_", "-").replace("/", " ")
+    if (
+        _cargo_eh_agencia_desenvolvimento(cargo)
+        and not tem_contato
+        and not any(token in path for token in ("banco-do-povo", "casa-do-empreendedor", "desenvolvimento", "empreendedor"))
+    ):
         return True
     return cargo != "Contato geral" and not tem_contato and _url_raiz(url)
 
@@ -2470,6 +2506,14 @@ def extrair_contatos_de_texto(
             contato_geral = cargo == "Contato geral"
             if _descartar_resultado_por_contexto(cargo, url, tem_contato_cargo):
                 continue
+            if _cargo_eh_agencia_desenvolvimento(cargo) and nome and not _nome_agencia_desenvolvimento_valido(nome):
+                nome = ""
+            if _cargo_eh_agencia_desenvolvimento(cargo) and not nome:
+                if not emails_cargo:
+                    continue
+                fixos_cargo = []
+                celulares_cargo = []
+                tem_contato_cargo = bool(emails_cargo)
             if (
                 _cargo_eh_agencia_desenvolvimento(cargo)
                 and nome

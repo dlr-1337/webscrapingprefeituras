@@ -1727,6 +1727,105 @@ def test_rotulos_de_portal_mg_nao_viram_nome_de_autoridade():
     assert "COM VOCE" not in nomes
 
 
+def test_painel_de_facilidades_nao_vira_nome_e_telefone_generico_de_sala():
+    cargos = {"agencia_desenvolvimento": ["sala do empreendedor"]}
+    texto = """
+    Sala do Empreendedor
+    PAINEL DE FACILIDADES
+    E-mail: saladoempreendedor@girua.rs.gov.br
+    Telefone: (55) 3361-2000
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/sala-do-empreendedor")
+    agencias = [item for item in contatos if item[COL_CARGO_ORGAO] == "Agência/Sala de Desenvolvimento"]
+
+    assert agencias
+    assert all(item["Nome"] != "PAINEL DE FACILIDADES" for item in agencias)
+    assert all(item["Telefone"] == "" for item in agencias)
+    assert any(item["E-mail"] == "saladoempreendedor@girua.rs.gov.br" for item in agencias)
+
+
+def test_responsavel_em_linha_de_endereco_nao_vira_financas():
+    cargos = {"financas_fazenda": ["secretaria de financas", "financas"]}
+    texto = """
+    Secretaria de Financas
+    Responsavel: Rua Professor Joao da Matta e Luz, 84
+    CEP: 06401-120
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/secretarias/secretaria-de-financas")
+
+    assert all(item["Nome"] != "Joao da Matta" for item in contatos)
+
+
+def test_planejamento_familiar_em_pagina_de_saude_nao_vira_planejamento():
+    cargos = {"planejamento": ["planejamento", "secretaria de planejamento"]}
+    texto = """
+    Secretaria Municipal de Saude
+    Secretaria
+    Simone Bonfanti
+    Planejamento familiar
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/secretaria-municipal-de-saude")
+
+    assert all(item[COL_CARGO_ORGAO] != "Secretaria de Planejamento" for item in contatos)
+
+    contatos_mojibake = extrair_contatos_de_texto(
+        texto,
+        cargos,
+        "https://cidade.gov.br/site/conteudos/161-psecretaria-municipal-de-sauacutedep",
+    )
+    assert all(item[COL_CARGO_ORGAO] != "Secretaria de Planejamento" for item in contatos_mojibake)
+
+
+def test_email_de_vice_nao_vira_agencia_de_desenvolvimento():
+    cargos = {"agencia_desenvolvimento": ["sala do empreendedor"]}
+    texto = """
+    Gabinete do Vice-Prefeito
+    Sala do Empreendedor
+    E-mail: gabineteviceprefeito@cidade.gov.br
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/gabinete-do-vice-prefeito")
+
+    assert all(item[COL_CARGO_ORGAO] != "Agência/Sala de Desenvolvimento" for item in contatos)
+
+
+def test_link_lateral_de_sala_em_pagina_saude_nao_vira_agencia():
+    cargos = {"agencia_desenvolvimento": ["sala do empreendedor"]}
+    texto = """
+    Secretaria Municipal de Saude
+    Secretaria
+    Simone Bonfanti
+    Sala do Empreendedor
+    Iss Online
+    """
+
+    contatos = extrair_contatos_de_texto(
+        texto,
+        cargos,
+        "https://cidade.gov.br/site/conteudos/161-psecretaria-municipal-de-sauacutedep",
+    )
+
+    assert all(item[COL_CARGO_ORGAO] != "Agência/Sala de Desenvolvimento" for item in contatos)
+    assert all(item["Nome"] != "Iss Online" for item in contatos)
+
+
+def test_link_lateral_de_sala_em_pagina_generica_sem_contato_nao_vira_agencia():
+    cargos = {"agencia_desenvolvimento": ["sala do empreendedor"]}
+    texto = """
+    Secretaria
+    Sala do Empreendedor
+    Concursos e Selecoes
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/site/conteudos/159-secretaria")
+
+    assert all(item[COL_CARGO_ORGAO] != "Agência/Sala de Desenvolvimento" for item in contatos)
+    assert all(item["Nome"] != "Concursos e Selecoes" for item in contatos)
+
+
 def test_sufixos_de_portal_mg_sao_aparados_do_nome():
     cargos = {
         "prefeito": ["prefeito", "prefeita"],

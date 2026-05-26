@@ -179,6 +179,32 @@ def test_gerar_excel_rebaixa_fonte_indisponivel_na_validacao(tmp_path):
                 "Celular/WhatsApp": "",
                 "Status": "Encontrado",
                 "URL da fonte": "https://www.antonina.pr.gov.br/secretariaView/?id=6",
+            },
+            {
+                "UF": "PR",
+                "Município/Capital": "Loanda",
+                "Município": "Loanda",
+                "Esfera": "Municipal",
+                "Cargo/Área": "Prefeito",
+                "Nome": "Jose Maria Pereira Fernandes",
+                "E-mail": "",
+                "Telefone": "",
+                "Celular/WhatsApp": "",
+                "Status": "Parcial",
+                "URL da fonte": "https://loanda.pr.gov.br/gabinete/1_Prefeito.html",
+            },
+            {
+                "UF": "PR",
+                "Município/Capital": "Quedas do Iguaçu",
+                "Município": "Quedas do Iguaçu",
+                "Esfera": "Municipal",
+                "Cargo/Área": "Vice-prefeito",
+                "Nome": "Fatima Manica Revers",
+                "E-mail": "gabinete@quedasdoiguacu.pr.gov.br",
+                "Telefone": "(46) 3532-8200",
+                "Celular/WhatsApp": "",
+                "Status": "Encontrado",
+                "URL da fonte": "https://www.quedasdoiguacu.pr.gov.br/gabinete/2_Vice-Prefeita.html",
             }
         ]
     )
@@ -197,8 +223,7 @@ def test_gerar_excel_rebaixa_fonte_indisponivel_na_validacao(tmp_path):
     gerar_excel(resultado, municipios, pd.DataFrame(), output)
 
     dados = pd.read_excel(output, sheet_name="Dados")
-    row = dados.iloc[0]
-    assert row["Status"] == "Site fora do ar"
-    assert pd.isna(row["Nome"])
-    assert pd.isna(row["E-mail"])
-    assert "indisponibilidade" in row["Observações"]
+    assert set(dados["Status"]) == {"Site fora do ar"}
+    assert dados["Nome"].isna().all()
+    assert dados["E-mail"].isna().all()
+    assert dados["Observações"].str.contains("indisponibilidade").all()

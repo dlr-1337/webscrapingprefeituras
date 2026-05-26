@@ -21,7 +21,12 @@ from src.utils import load_yaml, project_path
 STATUS_COM_DADO = {"Encontrado", "Parcial"}
 CAMPOS_DADO_PUBLICADO = ["Nome", "E-mail", "Telefone", "Celular/WhatsApp", "Celular"]
 OBS_SEM_DADO_PUBLICADO = "Páginas oficiais consultadas, mas sem dado oficial claro para esta categoria."
-FONTES_INDISPONIVEIS_VALIDACAO = ("antonina.pr.gov.br/secretariaview",)
+FONTES_INDISPONIVEIS_VALIDACAO = (
+    "antonina.pr.gov.br/secretariaview",
+    "loanda.pr.gov.br/gabinete/",
+    "loanda.pr.gov.br/secretariaview",
+    "quedasdoiguacu.pr.gov.br/gabinete/",
+)
 OBS_FONTE_INDISPONIVEL_VALIDACAO = (
     "Fonte oficial retornou indisponibilidade durante a validação; dado publicado previamente não foi mantido sem confirmação atual."
 )

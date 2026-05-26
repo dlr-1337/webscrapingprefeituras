@@ -18,6 +18,7 @@ def _args(input_path, output_path, **overrides):
         "municipio": None,
         "sem_playwright": True,
         "sem_estaduais": True,
+        "sem_testar_inferencia_sites": True,
     }
     values.update(overrides)
     return argparse.Namespace(**values)

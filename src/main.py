@@ -60,6 +60,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--municipio", help="Processa apenas um município.")
     parser.add_argument("--sem-playwright", action="store_true", help="Desativa uso opcional de Playwright.")
     parser.add_argument("--sem-estaduais", action="store_true", help="Desativa fontes configuradas de governos estaduais.")
+    parser.add_argument(
+        "--sem-testar-inferencia-sites",
+        action="store_true",
+        help="Não testa URLs oficiais .gov.br inferidas quando a base não informa site.",
+    )
     return parser.parse_args()
 
 
@@ -388,7 +393,10 @@ def executar_pipeline(args: argparse.Namespace) -> Path | None:
         logger.info("Execução encerrada por --somente-filtrar")
         return project_path("data", "output", "municipios_filtrados.xlsx")
 
-    municipios_com_sites = preencher_sites(municipios_filtrados, testar_inferencia=False)
+    municipios_com_sites = preencher_sites(
+        municipios_filtrados,
+        testar_inferencia=not getattr(args, "sem_testar_inferencia_sites", False),
+    )
     alvos = _montar_alvos(municipios_com_sites, incluir_estaduais=not args.sem_estaduais)
 
     if args.dry_run:

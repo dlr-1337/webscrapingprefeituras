@@ -17,8 +17,12 @@ def inferir_urls_basicas(municipio: str, uf: str) -> list[str]:
     return [
         f"https://www.{slug}.{uf}.gov.br/",
         f"https://{slug}.{uf}.gov.br/",
+        f"http://www.{slug}.{uf}.gov.br/",
+        f"http://{slug}.{uf}.gov.br/",
         f"https://www.prefeitura.{slug}.{uf}.gov.br/",
         f"https://prefeitura.{slug}.{uf}.gov.br/",
+        f"http://www.prefeitura.{slug}.{uf}.gov.br/",
+        f"http://prefeitura.{slug}.{uf}.gov.br/",
     ]
 
 

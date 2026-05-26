@@ -152,7 +152,16 @@ def _run_jobs(jobs: list[Path], log_dir: Path, max_parallel: int) -> list[dict[s
             log_base = log_dir / f"{index:03d}_{input_path.stem}"
             stdout = open(f"{log_base}.out", "w", encoding="utf-8")
             stderr = open(f"{log_base}.err", "w", encoding="utf-8")
-            cmd = [sys.executable, "-m", "src.main", "--input", str(input_path), "--output", str(output_path)]
+            cmd = [
+                sys.executable,
+                "-m",
+                "src.main",
+                "--input",
+                str(input_path),
+                "--output",
+                str(output_path),
+                "--sem-estaduais",
+            ]
             print(f"START {index}/{total} {input_path} -> {output_path}", flush=True)
             proc = subprocess.Popen(cmd, stdout=stdout, stderr=stderr)
             running.append(
@@ -201,10 +210,10 @@ def _consolidate(jobs: list[Path], lotes_dir: Path, final_workbook: Path) -> Non
     for uf in sorted(ufs):
         chunk_dir = lotes_dir / "chunks" / uf
         if chunk_dir.exists():
-            consolidar_lotes(chunk_dir, lotes_dir / f"resultado_{uf}.xlsx")
+            consolidar_lotes(chunk_dir, lotes_dir / f"resultado_{uf}.xlsx", sem_estaduais=True)
             print(f"CONSOLIDATED_UF {uf}", flush=True)
 
-    consolidar_lotes(lotes_dir, final_workbook)
+    consolidar_lotes(lotes_dir, final_workbook, sem_estaduais=True)
     print("CONSOLIDATED_FINAL", flush=True)
 
 
@@ -221,6 +230,10 @@ def main() -> int:
         metavar="UF:MUNICIPIO",
         help="Municipio adicional para reprocessar, mesmo sem invalidez semantica detectada.",
     )
+    parser.add_argument(
+        "--targets-csv",
+        help="CSV com colunas uf e municipio para reprocessar; se houver site_inferido, usa apenas linhas preenchidas.",
+    )
     args = parser.parse_args()
 
     workbook = Path(args.workbook)
@@ -235,6 +248,18 @@ def main() -> int:
             raise SystemExit(f"Alvo invalido: {target}. Use UF:Municipio.")
         uf, municipio = target.split(":", 1)
         extra_targets.add((uf.strip().upper(), _norm(municipio)))
+    if args.targets_csv:
+        targets_df = pd.read_csv(args.targets_csv)
+        cols = _colmap(targets_df)
+        uf_col = cols.get("uf")
+        municipio_col = cols.get("municipio") or cols.get("municipio/capital")
+        site_col = cols.get("site_inferido")
+        if not uf_col or not municipio_col:
+            raise SystemExit("--targets-csv precisa ter colunas uf e municipio.")
+        for _, row in targets_df.iterrows():
+            if site_col and not _cell(row, site_col):
+                continue
+            extra_targets.add((str(row[uf_col]).strip().upper(), _norm(row[municipio_col])))
 
     jobs = sorted(set(_select_inputs(invalid_rows, lotes_dir)) | set(_select_inputs_for_targets(extra_targets, lotes_dir)))
     (log_dir / "invalid_rows.json").write_text(json.dumps(invalid_rows, ensure_ascii=False, indent=2), encoding="utf-8")

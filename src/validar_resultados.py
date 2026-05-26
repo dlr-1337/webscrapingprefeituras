@@ -337,6 +337,21 @@ def _auditar_escopo_processado(
             for _, row in source.iterrows()
             if str(row.get("Esfera", "Municipal")) == "Municipal"
         }
+        fora_do_escopo = {
+            (str(row["UF"]), str(row["Município/Capital"]), str(row["Esfera"]))
+            for _, row in source.iterrows()
+            if str(row.get("Esfera", "Municipal")) != "Municipal"
+        }
+        for uf, municipio_capital, esfera in sorted(fora_do_escopo):
+            issues.append(
+                _issue(
+                    "Escopo",
+                    "Erro",
+                    f"Alvo fora do escopo municipal em {source_name}: Esfera={esfera}.",
+                    uf,
+                    municipio_capital,
+                )
+            )
         for _, esperado in esperados.iterrows():
             key = (str(esperado["UF"]), str(esperado["Município/Capital"]), "Municipal")
             if key not in presentes:

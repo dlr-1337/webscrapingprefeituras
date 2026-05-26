@@ -76,6 +76,7 @@ def _args_lote(input_path: Path, output_path: Path, uf: str, sem_playwright: boo
         municipio=None,
         sem_playwright=sem_playwright,
         sem_estaduais=sem_estaduais,
+        sem_testar_inferencia_sites=False,
     )
 
 
@@ -164,7 +165,7 @@ def _executar_lote_em_chunks(
             sem_estaduais=not incluir_estadual_no_chunk,
         )
 
-    return consolidar_lotes(chunks_base / uf.upper(), output_path)
+    return consolidar_lotes(chunks_base / uf.upper(), output_path, sem_estaduais=sem_estaduais)
 
 
 def _read_sheet(path: Path, preferred: str, fallback: str | None = None) -> pd.DataFrame:
@@ -176,7 +177,13 @@ def _read_sheet(path: Path, preferred: str, fallback: str | None = None) -> pd.D
     return pd.DataFrame()
 
 
-def consolidar_lotes(lotes_dir: str | Path, output_path: str | Path) -> Path:
+def _manter_apenas_municipais(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty or "Esfera" not in df.columns:
+        return df
+    return df[df["Esfera"].astype(str).str.strip().str.lower() != "estadual"].reset_index(drop=True)
+
+
+def consolidar_lotes(lotes_dir: str | Path, output_path: str | Path, sem_estaduais: bool = False) -> Path:
     lote_files = sorted(Path(lotes_dir).glob("resultado_*.xlsx"))
     resultados: list[pd.DataFrame] = []
     municipios: list[pd.DataFrame] = []
@@ -195,6 +202,12 @@ def consolidar_lotes(lotes_dir: str | Path, output_path: str | Path) -> Path:
     municipios_df = pd.concat(municipios, ignore_index=True) if municipios else pd.DataFrame()
     pendencias_df = pd.concat(pendencias, ignore_index=True) if pendencias else pd.DataFrame()
     fontes_df = pd.concat(fontes_log, ignore_index=True) if fontes_log else pd.DataFrame()
+
+    if sem_estaduais:
+        resultado_df = _manter_apenas_municipais(resultado_df)
+        municipios_df = _manter_apenas_municipais(municipios_df)
+        pendencias_df = _manter_apenas_municipais(pendencias_df)
+        fontes_df = _manter_apenas_municipais(fontes_df)
 
     return gerar_excel(resultado_df, municipios_df, pendencias_df, output_path, fontes_df)
 
@@ -261,7 +274,7 @@ def executar_coleta_completa(
                     print(f"Lote {uf} falhou: {exc}")
                     raise
 
-    return consolidar_lotes(lotes_path, output_path)
+    return consolidar_lotes(lotes_path, output_path, sem_estaduais=sem_estaduais)
 
 
 def main() -> None:

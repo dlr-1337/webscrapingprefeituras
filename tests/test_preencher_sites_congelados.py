@@ -42,6 +42,10 @@ def test_preencher_sites_congelados_gera_base_e_pendencias(tmp_path):
             requests.Timeout("demorou"),
             requests.Timeout("demorou"),
             requests.Timeout("demorou"),
+            requests.Timeout("demorou"),
+            requests.Timeout("demorou"),
+            requests.Timeout("demorou"),
+            requests.Timeout("demorou"),
         ]
     )
 
@@ -61,4 +65,4 @@ def test_preencher_sites_congelados_gera_base_e_pendencias(tmp_path):
 
     pendentes = pd.read_excel(pendencias_path)
     assert set(pendentes["status_localizacao_site"]) == {"Necessita validação manual", "Site não localizado"}
-    assert len(session.urls) == 6
+    assert len(session.urls) == 10

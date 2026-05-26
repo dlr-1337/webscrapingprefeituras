@@ -27,8 +27,12 @@ def test_infere_urls_basicas_com_slug_sem_acentos():
     assert inferir_urls_basicas("São João d'Aliança", "GO") == [
         "https://www.saojoaodalianca.go.gov.br/",
         "https://saojoaodalianca.go.gov.br/",
+        "http://www.saojoaodalianca.go.gov.br/",
+        "http://saojoaodalianca.go.gov.br/",
         "https://www.prefeitura.saojoaodalianca.go.gov.br/",
         "https://prefeitura.saojoaodalianca.go.gov.br/",
+        "http://www.prefeitura.saojoaodalianca.go.gov.br/",
+        "http://prefeitura.saojoaodalianca.go.gov.br/",
     ]
 
 

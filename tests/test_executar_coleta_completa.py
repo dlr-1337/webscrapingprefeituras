@@ -32,6 +32,68 @@ def _criar_lote(path, uf, municipio):
     gerar_excel(resultado, municipios, pd.DataFrame(), path)
 
 
+def _criar_lote_com_estadual(path):
+    resultado = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Município/Capital": "Campinas",
+                "Município": "Campinas",
+                "Esfera": "Municipal",
+                "Cargo/Área": "Município/Capital e UF",
+                "Status": "Encontrado",
+                "URL da fonte": "https://campinas.sp.gov.br/",
+            },
+            {
+                "UF": "SP",
+                "Município/Capital": "Governo do Estado de São Paulo",
+                "Município": "Governo do Estado de São Paulo",
+                "Esfera": "Estadual",
+                "Cargo/Área": "Município/Capital e UF",
+                "Status": "Encontrado",
+                "URL da fonte": "https://www.saopaulo.sp.gov.br/",
+            },
+        ]
+    )
+    municipios = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Município/Capital": "Campinas",
+                "Município": "Campinas",
+                "Esfera": "Municipal",
+                "Status geral": "Encontrado",
+            },
+            {
+                "UF": "SP",
+                "Município/Capital": "Governo do Estado de São Paulo",
+                "Município": "Governo do Estado de São Paulo",
+                "Esfera": "Estadual",
+                "Status geral": "Encontrado",
+            },
+        ]
+    )
+    fontes = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Município/Capital": "Campinas",
+                "Município": "Campinas",
+                "Esfera": "Municipal",
+                "URL consultada": "https://campinas.sp.gov.br/",
+            },
+            {
+                "UF": "SP",
+                "Município/Capital": "Governo do Estado de São Paulo",
+                "Município": "Governo do Estado de São Paulo",
+                "Esfera": "Estadual",
+                "URL consultada": "https://www.saopaulo.sp.gov.br/",
+            },
+        ]
+    )
+    gerar_excel(resultado, municipios, pd.DataFrame(), path, fontes)
+
+
 def test_consolidar_lotes_une_planilhas_por_uf(tmp_path):
     lotes_dir = tmp_path / "lotes"
     lotes_dir.mkdir()
@@ -43,6 +105,18 @@ def test_consolidar_lotes_une_planilhas_por_uf(tmp_path):
     dados = pd.read_excel(output, sheet_name="Dados")
     assert set(dados["UF"]) == {"SP", "RJ"}
     assert len(dados) == 2
+
+
+def test_consolidar_lotes_sem_estaduais_filtra_checkpoints_antigos(tmp_path):
+    lotes_dir = tmp_path / "lotes"
+    lotes_dir.mkdir()
+    _criar_lote_com_estadual(lotes_dir / "resultado_SP.xlsx")
+
+    output = completo.consolidar_lotes(lotes_dir, tmp_path / "final.xlsx", sem_estaduais=True)
+
+    for sheet in ("Dados", "Municípios pesquisados", "Fontes e Log"):
+        dados = pd.read_excel(output, sheet_name=sheet)
+        assert set(dados["Esfera"].dropna()) == {"Municipal"}
 
 
 def test_executar_coleta_completa_retoma_lote_existente(tmp_path, monkeypatch):

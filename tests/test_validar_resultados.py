@@ -166,3 +166,75 @@ def test_auditar_planilha_final_aponta_data_url_e_escopo(tmp_path):
     issues = auditar_planilha_final(output, input_path)
 
     assert {"Fonte", "Data", "Cobertura", "Escopo"}.issubset(set(issues["Tipo"]))
+
+
+def test_auditar_planilha_final_reprova_linha_estadual_fora_do_escopo(tmp_path):
+    input_path = tmp_path / "municipios.csv"
+    input_path.write_text(
+        "municipio,uf,estado,populacao,capital,site_oficial\n"
+        "Campinas,SP,São Paulo,1200000,false,https://campinas.sp.gov.br/\n",
+        encoding="utf-8",
+    )
+    output = tmp_path / "resultado.xlsx"
+    dados = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Estado": "São Paulo",
+                "Município/Capital": "Campinas",
+                "Município": "Campinas",
+                "Esfera": "Municipal",
+                "Cargo/Área": categoria,
+                "Cargo/Órgão": categoria,
+                "URL da fonte": "https://campinas.sp.gov.br/",
+                "URL específica": "https://campinas.sp.gov.br/",
+                "Data da coleta": "2026-05-22",
+                "Status": "Encontrado" if categoria == "Município/Capital e UF" else "Não publicado",
+                "Observações": "" if categoria == "Município/Capital e UF" else "Não publicado oficialmente na fonte consultada.",
+            }
+            for categoria in labels_categorias_obrigatorias()
+        ]
+        + [
+            {
+                "UF": "SP",
+                "Estado": "São Paulo",
+                "Município/Capital": "Governo do Estado de São Paulo",
+                "Município": "Governo do Estado de São Paulo",
+                "Esfera": "Estadual",
+                "Cargo/Área": "Município/Capital e UF",
+                "Cargo/Órgão": "Município/Capital e UF",
+                "URL da fonte": "https://www.saopaulo.sp.gov.br/",
+                "URL específica": "https://www.saopaulo.sp.gov.br/",
+                "Data da coleta": "2026-05-22",
+                "Status": "Encontrado",
+                "Observações": "",
+            }
+        ]
+    )
+    municipios = pd.DataFrame(
+        [
+            {
+                "UF": "SP",
+                "Estado": "São Paulo",
+                "Município/Capital": "Campinas",
+                "Município": "Campinas",
+                "Esfera": "Municipal",
+                "Site oficial": "https://campinas.sp.gov.br/",
+                "Status geral": "Encontrado",
+            },
+            {
+                "UF": "SP",
+                "Estado": "São Paulo",
+                "Município/Capital": "Governo do Estado de São Paulo",
+                "Município": "Governo do Estado de São Paulo",
+                "Esfera": "Estadual",
+                "Site oficial": "https://www.saopaulo.sp.gov.br/",
+                "Status geral": "Encontrado",
+            },
+        ]
+    )
+
+    gerar_excel(dados, municipios, pd.DataFrame(), output)
+    issues = auditar_planilha_final(output, input_path)
+
+    assert any("fora do escopo municipal" in str(descricao) for descricao in issues["Descrição"])
