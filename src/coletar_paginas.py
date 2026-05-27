@@ -20,6 +20,9 @@ EXTENSOES_IGNORADAS = {
     ".pdf",
     ".doc",
     ".docx",
+    ".odt",
+    ".ods",
+    ".odp",
     ".xls",
     ".xlsx",
     ".zip",
@@ -47,6 +50,7 @@ CAMINHOS_IGNORADOS = (
     "/categoria",
     "/publicacoes",
     "/publicacao",
+    "/publicacoes",
     "/galeria",
     "/normas-legais",
     "/documentos",
@@ -54,6 +58,7 @@ CAMINHOS_IGNORADOS = (
     "/site/tag",
     "/site/servicos",
     "/portal/carta-de-servico/servico/",
+    "/portal/carta-servicos/",
     "/turismo",
     "/videos",
     "/faq",
@@ -64,14 +69,37 @@ QUERY_IGNORADAS = (
     "page=",
     "pagina=",
     "pagina=404",
+    "cat=",
     "pg=",
+    "p=",
+    "cp=",
     "start=",
     "export=",
     "ps_export=",
+    "wpdmc=",
     "length=",
     "share=",
     "servico=",
     "tipo=",
+    "tipolei=",
+    "idnot=",
+    "itemid=",
+    "filename=",
+    "entry=wp_",
+    "mime-type=",
+    "page_id=",
+    "departamentosearch",
+    "theme=",
+    "ajaxprevent=",
+    "classe=uploadmidia",
+    "processo=viewfile",
+    "n5b0",
+    "spb0",
+    "vfb0",
+    "9fb0",
+    "z5b0",
+    "servicos-secretarias",
+    "iprem",
 )
 SEGMENTOS_IGNORADOS = {
     "/page/",
@@ -79,32 +107,57 @@ SEGMENTOS_IGNORADOS = {
     "/category/",
     "/categoria/",
     "/account/",
+    "/acessibilidade",
+    "/blog/",
+    "/blogs/",
+    "/aviso/",
+    "/boletim-epidemiologico",
+    "/bolsa-familia",
+    "/busca",
     "/calendario-secretaria/",
+    "/cadastro-unico",
+    "/competencias",
     "/concursos-selecoes-publicas",
     "/contrato/",
     "/contratos",
+    "/contenthandler/",
     "/convenios",
     "/cadastro-esic",
     "/carta-de-servicos",
     "/dados-abertos",
+    "/dados/legis/",
     "/dados-genericos-esic",
+    "/documentos",
     "/download/",
     "/downloads/",
+    "/documentos-e-arquivos",
+    "/documentos-necessarios",
+    "/documentos-para-cadastro",
     "/despesa",
     "/detalhe-da-materia/",
     "/detalhe-prefeito/",
     "/diarias",
     "/e-sic",
     "/editais-licitacoes",
+    "/todos-os-editais",
     "/esic-registro-solicitacao",
     "/fotos/",
     "/filtro/",
     "/folha-pagamento",
     "/homepage",
+    "/iptu",
+    "/mapa-do-site",
+    "/cmei-",
+    "/instrumentoplanejamento",
+    "/instrumento-planejamento",
+    "/informe-epidemiologico",
     "/inscritos-divida-ativa",
     "/divida-ativa",
+    "/isencao-de-iptu",
     "/lei-acesso-informacao",
     "/lei-de-acesso-informacao",
+    "/legis/",
+    "/legislacao",
     "/leis-atos-normativos",
     "/legislacoes-e-atos",
     "/lei-diretrizes-orcamentarias",
@@ -118,20 +171,53 @@ SEGMENTOS_IGNORADOS = {
     "/ordem-cronologica",
     "/ouvidoria",
     "/painel-obras",
+    "/planejamento-execucao-orcamentaria",
+    "/execucao-orcamentaria",
+    "/metas-do-plano",
+    "/nota-fiscal",
     "/perguntas-frequentes",
     "/perguntasfrequentes",
     "/pesquisa-satisfacao",
     "/pesquisa-de-satisfacao",
+    "/plano-diretor",
+    "/plano-municipal",
+    "/planejamento-e-prestacao-de-contas",
     "/plano-contratacao-anual",
     "/plano-estrategico-institucional",
     "/politica-privacidade",
+    "/publicacoes",
+    "/programas-e-projetos",
+    "/projetos-em-fase",
+    "/processo-seletivo",
+    "processoseletivo",
+    "/portarias/",
+    "/secretaria-da-educacao",
+    "/secretaria-da-saude",
+    "/secretaria-de-assistencia-social",
+    "/secretaria-de-cultura",
+    "/secretaria-de-educacao",
+    "/secretaria-de-esporte-e-lazer",
+    "/secretaria-de-esportes-e-lazer",
+    "/secretaria-de-meio-ambiente",
+    "/secretaria-municipal-da-saude",
+    "/secretaria-municipal-de-assistencia-social",
+    "/secretaria-municipal-de-cultura",
+    "/secretaria-municipal-de-educacao",
+    "/secretaria-municipal-de-esporte",
+    "/secretaria-municipal-de-meio-ambiente",
     "/receita",
     "/renuncias-de-receitas",
     "/relacao-sancionados",
+    "/relatorios-fiscais",
+    "/relatorio-de-gestao-anual",
+    "/relatorios-de-gestao-anual",
+    "/remume",
+    "/requerimentos",
     "/prestacao-de-contas",
     "/prestacao_de_contas",
     "/responsavel-lgpd",
     "/servicos/",
+    "/servicos-oferecidos",
     "/servidores",
     "/secretaria-de-saude",
     "/secretaria-municipal-de-saude",
@@ -141,13 +227,26 @@ SEGMENTOS_IGNORADOS = {
     "/terceirizados",
     "/transferencias-realizadas",
     "/transmissao",
+    "/transparencia/",
+    "/lei-aces-infor-url",
+    "/conselho-tutelar",
+    "/conselho-municipal-de-alimentacao",
+    "/conselho-municipal-de-educacao",
+    "/escolas/",
+    "/terminal-rodoviario",
+    "/unidades-da-",
+    "/unidades-de-saude",
+    "/unidades-socioassistenciais",
     "/usuario-esic",
     "/valores-diarias",
+    "/-//",
     "/acessoexterno/",
+    "/a-prefeitura/equipe/",
     "/site/acessibilidade",
     "/site/acessoainformacao",
     "/site/dadosmunicipais",
     "/site/diariooficial",
+    "/site/download",
     "/site/encontreportal",
     "/site/glossario",
     "/site/mapasite",
@@ -159,9 +258,27 @@ SEGMENTOS_IGNORADOS = {
     "/site/transparencia",
     "/site/tiposservicos",
     "/editais/",
+    "/financas/adiantamentos",
+    "/financas/assunto",
+    "/financas/bic",
+    "/financas/cartorios",
+    "/financas/certidoes",
+    "/financas/consulta_proprietario",
+    "/financas/cobranca",
+    "/financas/faq",
+    "/financas/iptu",
+    "/financas/legislacoes",
+    "/financas/nfe",
+    "/financas/parcelamento",
+    "/financas/pecas_planejamento",
+    "/financas/sistema_tributario",
+    "/financas/tabelas_guias",
+    "/financas/terceiro_setor",
+    "/financas/transparencia",
     "/gabinete-militar/",
     "/galeria",
     "/noticia/",
+    "/noticia",
     "/noticias/",
     "/noticias",
     "/agenda",
@@ -170,6 +287,12 @@ SEGMENTOS_IGNORADOS = {
     "/portal/editais/",
     "/portal/noticia/",
     "/portal/noticias/",
+    "/portal-do-servidor",
+    "/portaldoservidor",
+    "/portal-transparencia",
+    "/portal/sic",
+    "/portal/transparencia",
+    "/portal-da-transparencia/",
     "/catnoticias/",
     "/viewnoticia/",
     "cont_not.asp",
@@ -188,18 +311,52 @@ SEGMENTOS_IGNORADOS = {
     "/turismo/",
     "-noticias",
     "noticias-",
+    "wp-admin",
+    "orgaos-e-secretarias",
+    "_wp_link_placeholder",
+    "erro-site",
+    "secassistenciasocial",
+    "secretaria-turismo",
+    "secretariadesaude",
     "escola-municipal",
     "escolas-municipais",
     "prefeitos-de-",
+    "relacao-de-prefeitos",
     "intendentes_e_prefeitos",
     "intendentes-e-prefeitos",
     "ex-prefeitos",
     "historico-prefeitos",
+    "nossa-cidade",
+    "orgaos-municipais",
+    "simbolos",
+    "escolas-publicas",
+    "telefones-uteis",
+    "transparencia-legislativa",
+    "precatorios",
+    "formulario-interno",
+    "protocolo-sei",
+    "procurador-do-municipio",
+    "secretario-executivo",
+    "requerimento-de-imagens-monitoramento",
+    "previdencia",
+    "portal-servidor",
     "gabinete-militar",
+    "gestao-de-residuos",
     "funcoes-da-secretaria",
     "filadepagamento",
     "fila-de-pagamento",
+    "almoxarifado",
+    "assessoria-de-comunicacao",
+    "casa-de-passagem",
+    "conselhos-municipais",
+    "contas-do-executivo",
+    "departamento-de-compras",
+    "departamento-de-protocolo",
+    "departamento-de-eletrica",
+    "equipamentos-publicos",
     "fornecedor",
+    "gestao-de-contratos",
+    "engenharia-e-projetos",
     "bemimovel",
     "consumoestoque",
     "contrato.lista",
@@ -210,9 +367,98 @@ SEGMENTOS_IGNORADOS = {
     "consulta_publica",
     "consulta-publica",
     "novidade-",
+    "objetivos-de-desenvolvimento-sustentavel",
+    "ods-",
+    "consulta-de-processos",
+    "concursos",
+    "comunicados",
+    "cargos.aspx",
+    "guia-do-visitante",
+    "midia-video",
+    "midia-audio",
+    "contratacoes-publicas",
+    "controle-de-dados-pessoais",
+    "central-de-atendimento",
+    "inscricao-para-empresas",
+    "parcelamentos",
+    "emissao-2o-via",
+    "refis",
+    "elementor-",
+    "painel-de-indicadores",
+    "participacao-popular",
+    "participacao-polular",
+    "planejamento-governamental",
+    "seguranca-alimentar",
+    "sagep",
+    "ministerio-do-trabalho",
+    "empresa-amiga",
+    "form-banco-oportunidades",
+    "codigo-tributario",
+    "fiscalizacao-tributaria",
+    "instrucoes-normativas",
+    "itbi",
+    "nfs-e",
+    "nfse",
+    "/iss",
+    "controle-interno",
+    "fuss",
+    "igualdade-racial",
+    "direito-animais",
+    "protecaodireitoanimais",
+    "protecao-direito-animais",
+    "transparencia-publica",
+    "videomonitoramento",
+    "atividade-delegada",
+    "carta-servicos",
+    "/esic",
+    "pagamentos",
+    "podcast",
+    "compac",
+    "comtur",
+    "atas-codema",
+    "autorizacoes-codema",
+    "bens-e-inventario",
+    "codema",
+    "educacao-cultura-esporte-e-lazer",
+    "casa-de-acolhida",
+    "centro-do-idoso",
+    "centro-pop",
+    "cras",
+    "creas",
+    "direitos-humanos",
+    "desenvolvimento-agropecuario",
+    "desenvolvimento-ambiental",
+    "desenvolvimento-rural",
+    "desenvolvimento-social",
+    "desenvolvimento_social",
+    "lgbtqia",
     "ppa-participativo",
+    "peti",
+    "promaip",
+    "protecao-social",
+    "programas-projetos",
     "plano_de_saneamento",
     "plano-de-saneamento",
+    "parceria-osc",
+    "servicos-online",
+    "terceiro-setor",
+    "guarda-civil",
+    "patrimonio",
+    "/pat/atendimento",
+    "/pat/cadastro",
+    "/pat/captacao",
+    "/pat/carteira-de-trabalho",
+    "/pat/padef",
+    "/pat/publico-alvo",
+    "/pat/qualificacao-profissional",
+    "/pat/recepcao",
+    "/pat/seguro-desemprego",
+    "/pat/servicos",
+    "/pat/supervisao",
+    "/pat/vagas",
+    "pre-moldado",
+    "programa-crianca",
+    "parques-e-jardins",
     "saneamento_basico",
     "saneamento-basico",
     "downloads-secretaria",
@@ -220,10 +466,99 @@ SEGMENTOS_IGNORADOS = {
     "diario-oficial",
     "editais-e-publicacoes",
     "instituicoes-relacionadas",
+    "julgamento-das-contas",
+    "prestacao-de-contas",
+    "rreo-",
+    "rgf-",
+    "atas/",
+    "emendasparlamentares",
+    "modelo-de-documentos",
+    "modelos-de-documentos",
+    "pecas-de-planejamento",
+    "trib-imobiliarios",
+    "trib-mobiliarios",
+    "loa-",
+    "ldo-",
+    "ra:collection",
+    "sileg",
     "simbolos-oficiais",
     "esqueci-minha-senha",
+    "educacao-capacita",
+    "feira-virtual-do-produtor",
+    "/sagra",
+    "/smas",
+    "/semel",
+    "/semma",
+    "/sear",
     "/entrar",
 }
+
+SEGMENTOS_SECRETARIA_RELEVANTES = (
+    "administracao",
+    "desenvolvimento",
+    "empreendedor",
+    "fazenda",
+    "financas",
+    "gabinete",
+    "governo",
+    "industria",
+    "planejamento",
+    "prefeito",
+    "vice",
+)
+
+SEGMENTOS_SECRETARIA_FORA_ESCOPO = (
+    "assistencia",
+    "agricultura",
+    "ambiente",
+    "ambulatorio",
+    "animal",
+    "cidadania",
+    "comunicacao",
+    "conselho",
+    "controladoria",
+    "controlador",
+    "cultura",
+    "defesa_civil",
+    "defesacivil",
+    "demutran",
+    "direitos_humanos",
+    "educacao",
+    "esf",
+    "esporte",
+    "eventos",
+    "familia",
+    "habitacao",
+    "infraestrutura",
+    "imprensa",
+    "juridico",
+    "juridicos",
+    "juventude",
+    "lazer",
+    "militar",
+    "meioambiente",
+    "meio_ambiente",
+    "mobilidade",
+    "mulher",
+    "obras",
+    "pesca",
+    "procuradoria",
+    "relacoes_institucionais",
+    "saneamento",
+    "seguranca",
+    "servicos_urbanos",
+    "servicos_municipais",
+    "servicos_publicos",
+    "saude",
+    "social",
+    "suprimentos",
+    "transito",
+    "transporte",
+    "turismo",
+    "urbanos",
+    "urbanismo",
+    "zeladoria",
+)
 
 MAX_BYTES_POR_PAGINA = 2_000_000
 
@@ -406,11 +741,34 @@ def _url_deve_ser_ignorada(url: str) -> bool:
     raw_url = unquote(url).lower()
     path = normalize_for_search(unquote(parsed.path))
     query = parsed.query.lower()
-    if any(token in raw_url for token in ("<br", "<b>", "notice", "trying to get property")):
+    if "<" in raw_url or ">" in raw_url:
+        return True
+    if "*" in raw_url or ":3000" in raw_url or "201.63.46.6" in raw_url:
+        return True
+    if any(token in raw_url for token in ("notice", "trying to get property")):
         return True
     if "cliente_processo_eletronico" in raw_url:
         return True
+    if "177.84.147.222" in raw_url:
+        return True
+    if any(
+        subdomain in raw_url
+        for subdomain in (
+            "://educacao.",
+            "://saude.",
+            "://mambiente.",
+            "://transito.",
+            "://transparencia.",
+            "://sistemas.",
+            "://sisweb.",
+        )
+    ):
+        return True
     if "ctgi.cloud.el.com.br" in raw_url:
+        return True
+    if "e-gov.betha.com.br" in raw_url or "resource.faces" in raw_url:
+        return True
+    if any(social in raw_url for social in ("facebook.com", "instagram.com", "linkedin.com", "youtube.com")):
         return True
     if any(path.endswith(ext) for ext in EXTENSOES_IGNORADAS):
         return True
@@ -420,15 +778,56 @@ def _url_deve_ser_ignorada(url: str) -> bool:
         return True
     if any(segment in path for segment in SEGMENTOS_IGNORADOS):
         return True
+    if path.count("/conteudo/") >= 3:
+        return True
     if path.count("/secretaria/") >= 2:
         return True
+    if "/gabinete/" in path and ("/gabinete/gabinete" in path or "/secretarias/" in path):
+        return True
     if "/gabinete/" in path and "/secretaria/" in path:
+        return True
+    if path.rstrip("/").endswith("/file"):
         return True
     if path.rstrip("/").endswith(("/videos", "/faq")):
         return True
     if "noticias.asp" in query or "cont_not" in query or "idsomar=" in query:
         return True
+    if "desenvolvimento_social" in raw_url or path.rstrip("/").endswith("/desenvolvimento-social"):
+        return True
     last_segment = path.rstrip("/").rsplit("/", 1)[-1]
+    path_parts = [part for part in path.split("/") if part]
+    if len(path_parts) >= 2 and len(path_parts[0]) == 4 and path_parts[0].isdigit() and len(path_parts[1]) == 2 and path_parts[1].isdigit():
+        return True
+    if last_segment in {"pagina-principal", "servicos", "sitemap"}:
+        return True
+    if "conselho_municipal" in path.replace("-", "_") and "desenvolvimento" not in path:
+        return True
+    secretaria_like = any(marker in path for marker in ("/secretaria/", "/secretarias/", "/secretariados/", "/portal/secretarias/")) or last_segment.startswith("secretaria-")
+    if secretaria_like:
+        secretaria_scope = normalize_for_search(f"{last_segment}?{unquote(parsed.query)}").replace("-", "_")
+        conteudo_relevante = any(token in secretaria_scope for token in SEGMENTOS_SECRETARIA_RELEVANTES)
+        fora_escopo = any(token in secretaria_scope for token in SEGMENTOS_SECRETARIA_FORA_ESCOPO)
+        if fora_escopo and not conteudo_relevante:
+            return True
+    last_segment_scope = last_segment.replace("-", "_")
+    conteudo_relevante = any(token in last_segment_scope for token in SEGMENTOS_SECRETARIA_RELEVANTES)
+    fora_escopo = any(token in last_segment_scope for token in SEGMENTOS_SECRETARIA_FORA_ESCOPO)
+    if fora_escopo and not conteudo_relevante:
+        return True
+    path_scope = path.replace("-", "_")
+    caminho_relevante = any(
+        token in path_scope
+        for token in SEGMENTOS_SECRETARIA_RELEVANTES
+        if token not in {"gabinete", "governo", "prefeito", "vice"}
+    )
+    caminho_fora_escopo = any(f"/{token}/" in path_scope for token in SEGMENTOS_SECRETARIA_FORA_ESCOPO)
+    if caminho_fora_escopo and not caminho_relevante:
+        return True
+    query_scope = normalize_for_search(unquote(parsed.query)).replace("-", "_")
+    query_relevante = any(token in query_scope for token in SEGMENTOS_SECRETARIA_RELEVANTES)
+    query_fora_escopo = any(token in query_scope for token in SEGMENTOS_SECRETARIA_FORA_ESCOPO)
+    if query_fora_escopo and not query_relevante:
+        return True
     if len(last_segment) >= 45 and last_segment.count("-") >= 5:
         return True
     if last_segment.count("-") >= 5 and not last_segment.startswith(("secretaria-", "departamento-", "diretoria-", "gabinete-", "sala-do-empreendedor")):
@@ -465,6 +864,8 @@ def _url_chave(url: str) -> tuple[str, str, str]:
     parsed = urlparse(url)
     host = parsed.netloc.lower().removeprefix("www.")
     path = parsed.path.rstrip("/") or "/"
+    while "//" in path:
+        path = path.replace("//", "/")
     return host, path, parsed.query
 
 
@@ -472,10 +873,6 @@ def _bases_fallback_bloqueio(site: str) -> list[str]:
     parsed = urlparse(site)
     host = parsed.netloc.lower()
     hosts = [host]
-    if host.startswith("www."):
-        hosts.append(f"www2.{host[4:]}")
-    elif host.startswith("www2."):
-        hosts.append(f"www.{host[5:]}")
 
     bases = []
     for candidate_host in dict.fromkeys(hosts):
@@ -521,6 +918,11 @@ def extrair_links_relevantes(html: str, base_url: str, palavras_chave: Iterable[
             continue
 
         text = normalize_for_search(f"{anchor.get_text(' ', strip=True)} {absolute}")
+        text_scope = text.replace("-", "_")
+        texto_relevante = any(token in text_scope for token in SEGMENTOS_SECRETARIA_RELEVANTES)
+        texto_fora_escopo = any(token in text_scope for token in SEGMENTOS_SECRETARIA_FORA_ESCOPO)
+        if ("desenvolvimento_social" in text_scope or texto_fora_escopo) and not texto_relevante:
+            continue
         if any(word in text for word in palavras):
             links.append(absolute)
 
@@ -841,7 +1243,7 @@ def coletar_paginas(
             )
             if logger:
                 logger.warning("Página ignorada: %s | %s | %s", url, status, observacao)
-            if len(visitadas) == 1 and status in {"Site fora do ar", "Bloqueio técnico"}:
+            if len(visitadas) == 1 and status == "Bloqueio técnico":
                 if inserir_fallback_bloqueio():
                     continue
                 return ResultadoColeta([], status, observacao, fontes_consultadas)

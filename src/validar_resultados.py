@@ -10,6 +10,7 @@ from src.carregar_municipios import carregar_municipios
 from src.escopo_categorias import labels_categorias_obrigatorias
 from src.filtrar_municipios import filtrar_municipios
 from src.normalizar_dados import STATUS_PERMITIDOS
+from src.utils import load_yaml, project_path
 
 
 def parse_args() -> argparse.Namespace:
@@ -17,6 +18,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("excel", help="Caminho da planilha final .xlsx.")
     parser.add_argument("--input", dest="input_path", help="Base de municípios usada para derivar o escopo esperado.")
     parser.add_argument("--output", dest="output_path", help="Caminho opcional para salvar o relatório de auditoria em XLSX.")
+    parser.add_argument(
+        "--incluir-estaduais",
+        action="store_true",
+        help="Aceita governos estaduais configurados como alvos do escopo.",
+    )
     return parser.parse_args()
 
 
@@ -184,6 +190,8 @@ def validar_cobertura_categorias(df: pd.DataFrame, municipios_df: pd.DataFrame) 
         municipio_capital = str(alvo.get("Município/Capital", alvo.get("Município", "")))
         municipio = str(alvo.get("Município", municipio_capital))
         esfera = str(alvo.get("Esfera", "Municipal") or "Municipal")
+        if esfera != "Municipal":
+            continue
 
         subset = resultado[
             (resultado["UF"].astype(str) == uf)
@@ -219,7 +227,36 @@ def carregar_municipios_esperados(input_path: str | Path) -> pd.DataFrame:
     return result[["UF", "Município/Capital", "Município", "Esfera"]].drop_duplicates().reset_index(drop=True)
 
 
-def auditar_planilha_final(excel_path: str | Path, input_path: str | Path | None = None) -> pd.DataFrame:
+def carregar_estaduais_esperados(config_path: str | Path | None = None) -> pd.DataFrame:
+    path = Path(config_path) if config_path else project_path("config", "governos_estaduais.yml")
+    if not path.exists():
+        return pd.DataFrame(columns=["UF", "Município/Capital", "Município", "Esfera", "Site oficial"])
+
+    data = load_yaml(path)
+    governos = data.get("governos_estaduais", data)
+    rows: list[dict[str, str]] = []
+    for uf, config in sorted(governos.items()):
+        site = str(config.get("site", "")).strip()
+        if not site:
+            continue
+        nome = str(config.get("nome") or f"Governo Estadual {uf}").strip()
+        rows.append(
+            {
+                "UF": str(uf).upper(),
+                "Município/Capital": nome,
+                "Município": nome,
+                "Esfera": "Estadual",
+                "Site oficial": site,
+            }
+        )
+    return pd.DataFrame(rows, columns=["UF", "Município/Capital", "Município", "Esfera", "Site oficial"])
+
+
+def auditar_planilha_final(
+    excel_path: str | Path,
+    input_path: str | Path | None = None,
+    incluir_estaduais: bool = False,
+) -> pd.DataFrame:
     excel_file = Path(excel_path)
     if not excel_file.exists():
         return pd.DataFrame(
@@ -255,7 +292,15 @@ def auditar_planilha_final(excel_path: str | Path, input_path: str | Path | None
     issues.extend(_auditar_linhas_dados(dados))
     issues.extend(_auditar_cobertura_workbook(dados, municipios))
     if input_path:
-        issues.extend(_auditar_escopo_processado(dados, municipios, carregar_municipios_esperados(input_path)))
+        issues.extend(
+            _auditar_escopo_processado(
+                dados,
+                municipios,
+                carregar_municipios_esperados(input_path),
+                carregar_estaduais_esperados() if incluir_estaduais else pd.DataFrame(),
+                incluir_estaduais=incluir_estaduais,
+            )
+        )
 
     return pd.DataFrame(
         issues,
@@ -329,31 +374,63 @@ def _auditar_escopo_processado(
     dados: pd.DataFrame,
     municipios: pd.DataFrame,
     esperados: pd.DataFrame,
+    estaduais_esperados: pd.DataFrame | None = None,
+    incluir_estaduais: bool = False,
 ) -> list[dict[str, object]]:
     issues: list[dict[str, object]] = []
+    estaduais_esperados = estaduais_esperados if estaduais_esperados is not None else pd.DataFrame()
+    estaduais_keys = {
+        (str(row["UF"]).upper(), str(row["Município/Capital"]), "Estadual")
+        for _, row in estaduais_esperados.iterrows()
+    }
     for source_name, source in (("Municípios pesquisados", municipios), ("Dados", dados)):
         presentes = {
-            (str(row["UF"]), str(row["Município/Capital"]), str(row["Esfera"]))
+            (str(row["UF"]).upper(), str(row["Município/Capital"]), str(row["Esfera"]))
             for _, row in source.iterrows()
             if str(row.get("Esfera", "Municipal")) == "Municipal"
         }
         fora_do_escopo = {
-            (str(row["UF"]), str(row["Município/Capital"]), str(row["Esfera"]))
+            (str(row["UF"]).upper(), str(row["Município/Capital"]), str(row["Esfera"]))
             for _, row in source.iterrows()
             if str(row.get("Esfera", "Municipal")) != "Municipal"
         }
         for uf, municipio_capital, esfera in sorted(fora_do_escopo):
-            issues.append(
-                _issue(
-                    "Escopo",
-                    "Erro",
-                    f"Alvo fora do escopo municipal em {source_name}: Esfera={esfera}.",
-                    uf,
-                    municipio_capital,
+            key = (uf, municipio_capital, esfera)
+            if not incluir_estaduais:
+                issues.append(
+                    _issue(
+                        "Escopo",
+                        "Erro",
+                        f"Alvo fora do escopo municipal em {source_name}: Esfera={esfera}.",
+                        uf,
+                        municipio_capital,
+                    )
                 )
-            )
+                continue
+            if key not in estaduais_keys:
+                issues.append(
+                    _issue(
+                        "Escopo",
+                        "Erro",
+                        f"Alvo estadual não configurado em {source_name}: {municipio_capital}.",
+                        uf,
+                        municipio_capital,
+                    )
+                )
+        if incluir_estaduais:
+            for uf, municipio_capital, esfera in sorted(estaduais_keys):
+                if (uf, municipio_capital, esfera) not in fora_do_escopo:
+                    issues.append(
+                        _issue(
+                            "Escopo",
+                            "Erro",
+                            f"Governo estadual configurado ausente em {source_name}.",
+                            uf,
+                            municipio_capital,
+                        )
+                    )
         for _, esperado in esperados.iterrows():
-            key = (str(esperado["UF"]), str(esperado["Município/Capital"]), "Municipal")
+            key = (str(esperado["UF"]).upper(), str(esperado["Município/Capital"]), "Municipal")
             if key not in presentes:
                 issues.append(
                     _issue(
@@ -369,7 +446,7 @@ def _auditar_escopo_processado(
 
 def main() -> None:
     args = parse_args()
-    issues = auditar_planilha_final(args.excel, args.input_path)
+    issues = auditar_planilha_final(args.excel, args.input_path, incluir_estaduais=args.incluir_estaduais)
     if args.output_path:
         output = Path(args.output_path)
         output.parent.mkdir(parents=True, exist_ok=True)
