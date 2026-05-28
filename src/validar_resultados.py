@@ -249,6 +249,20 @@ def carregar_estaduais_esperados(config_path: str | Path | None = None) -> pd.Da
                 "Site oficial": site,
             }
         )
+        for orgao in config.get("orgaos", []) or []:
+            org_site = str(orgao.get("site", "")).strip()
+            org_nome = str(orgao.get("nome") or "").strip()
+            if not org_site or not org_nome:
+                continue
+            rows.append(
+                {
+                    "UF": str(uf).upper(),
+                    "Município/Capital": org_nome,
+                    "Município": org_nome,
+                    "Esfera": "Estadual",
+                    "Site oficial": org_site,
+                }
+            )
     return pd.DataFrame(rows, columns=["UF", "Município/Capital", "Município", "Esfera", "Site oficial"])
 
 
@@ -424,7 +438,7 @@ def _auditar_escopo_processado(
                         _issue(
                             "Escopo",
                             "Erro",
-                            f"Governo estadual configurado ausente em {source_name}.",
+                            f"Alvo estadual configurado ausente em {source_name}.",
                             uf,
                             municipio_capital,
                         )

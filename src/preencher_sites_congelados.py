@@ -34,6 +34,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--timeout", type=int, default=5, help="Timeout em segundos por candidato de URL.")
     parser.add_argument("--workers", type=int, default=12, help="Quantidade de validações paralelas.")
+    parser.add_argument(
+        "--sem-busca-web-sites",
+        action="store_true",
+        help="Não usa busca web oficial para localizar sites ausentes na base.",
+    )
     return parser.parse_args()
 
 
@@ -83,6 +88,7 @@ def preencher_sites_congelados(
     timeout: int = 5,
     workers: int = 1,
     session=requests,
+    usar_busca_web: bool = True,
 ) -> tuple[Path, Path | None]:
     input_file = Path(input_path)
     output_file = Path(output_path)
@@ -103,6 +109,7 @@ def preencher_sites_congelados(
             testar_inferencia=True,
             timeout=timeout,
             session=session,
+            usar_busca_web=usar_busca_web,
         )
         return clean_url(site), site_status, obs
 
@@ -142,6 +149,7 @@ def main() -> None:
         args.pendencias_path,
         timeout=args.timeout,
         workers=args.workers,
+        usar_busca_web=not args.sem_busca_web_sites,
     )
     print(f"Base com sites gerada: {output}")
     if pendencias:

@@ -3,7 +3,12 @@ import logging
 
 import pandas as pd
 
-from src.escopo_categorias import labels_categorias_obrigatorias
+from src.escopo_categorias import (
+    CATEGORIA_IDENTIFICACAO,
+    classificar_categoria_resultado,
+    labels_categorias_obrigatorias,
+    normalizar_label_categoria,
+)
 from src import main as main_module
 
 
@@ -18,7 +23,9 @@ def _args(input_path, output_path, **overrides):
         "municipio": None,
         "sem_playwright": True,
         "sem_estaduais": True,
+        "somente_estaduais": False,
         "sem_testar_inferencia_sites": True,
+        "sem_busca_web_sites": True,
     }
     values.update(overrides)
     return argparse.Namespace(**values)
@@ -123,6 +130,122 @@ def test_montar_alvos_inclui_governo_estadual_configurado():
     assert estadual["Site oficial"]
 
 
+def test_criar_alvos_estaduais_expande_orgaos_configurados():
+    municipios = pd.DataFrame(
+        [
+            {
+                "UF": "AL",
+                "Estado": "Alagoas",
+                "Município": "Maceio",
+                "População": 1000000,
+                "Capital": True,
+                "Critério de inclusão": "Capital",
+                "Site oficial": "https://maceio.al.gov.br/",
+            }
+        ]
+    )
+    config = {
+        "AL": {
+            "nome": "Governo do Estado de Alagoas",
+            "estado": "Alagoas",
+            "site": "https://alagoas.al.gov.br/",
+            "orgaos": [
+                {
+                    "nome": "Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos de Alagoas",
+                    "site": "https://alagoasdigital.al.gov.br/orgao/64",
+                    "categorias": ["desenvolvimento_economico"],
+                }
+            ],
+        }
+    }
+
+    alvos = main_module._criar_alvos_estaduais(municipios, config)
+
+    assert len(alvos) == 2
+    orgao = alvos[alvos["Município/Capital"].str.contains("Desenvolvimento", regex=False)].iloc[0]
+    assert orgao["Esfera"] == "Estadual"
+    assert orgao["Site oficial"] == "https://alagoasdigital.al.gov.br/orgao/64"
+    assert orgao["Categorias alvo"] == normalizar_label_categoria("desenvolvimento_economico")
+
+
+def test_cobertura_estadual_configurada_exige_apenas_categoria_do_orgao():
+    categoria = normalizar_label_categoria("desenvolvimento_economico")
+    row = pd.Series(
+        {
+            "UF": "AL",
+            "Estado": "Alagoas",
+            "Município/Capital": "Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos de Alagoas",
+            "Município": "Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos de Alagoas",
+            "Esfera": "Estadual",
+            "Site oficial": "https://alagoasdigital.al.gov.br/orgao/64",
+            "Categorias alvo": categoria,
+        }
+    )
+
+    linhas = main_module._linhas_com_cobertura_categorias(
+        row,
+        [],
+        "Não publicado",
+        "Sem dado oficial claro.",
+        "2026-05-28",
+    )
+
+    dados = pd.DataFrame(linhas)
+    assert set(dados["Cargo/Área"]) == {CATEGORIA_IDENTIFICACAO.label, categoria}
+
+
+def test_contato_estadual_generico_usa_categoria_configurada():
+    categoria = normalizar_label_categoria("desenvolvimento_economico")
+    row = pd.Series(
+        {
+            "UF": "AL",
+            "Estado": "Alagoas",
+            "Município/Capital": "Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos de Alagoas",
+            "Município": "Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos de Alagoas",
+            "Esfera": "Estadual",
+            "Site oficial": "https://alagoasdigital.al.gov.br/orgao/64",
+            "Categorias alvo": categoria,
+        }
+    )
+    contatos = [
+        {
+            "Órgão/Secretaria": "Contato institucional",
+            "Cargo/Área": "Contato institucional",
+            "Cargo/Órgão": "Contato institucional",
+            "Nome": "Maria Alice",
+            "E-mail": "gabinete@sedics.al.gov.br",
+            "URL da fonte": "https://alagoasdigital.al.gov.br/orgao/64",
+            "Status": "Encontrado",
+        }
+    ]
+
+    linhas = main_module._linhas_com_cobertura_categorias(
+        row,
+        contatos,
+        "Não publicado",
+        "Sem dado oficial claro.",
+        "2026-05-28",
+    )
+
+    dados = pd.DataFrame(linhas)
+    estadual = dados[dados["Cargo/Área"] == categoria].iloc[0]
+    assert estadual["E-mail"] == "gabinete@sedics.al.gov.br"
+    assert estadual["Status"] == "Encontrado"
+
+
+def test_classifica_desenvolvimento_industria_comercio_servicos_como_economico():
+    assert (
+        classificar_categoria_resultado(
+            {
+                "Órgão/Secretaria": "Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos",
+                "Cargo/Área": "Secretaria estadual",
+                "URL da fonte": "https://alagoasdigital.al.gov.br/orgao/64",
+            }
+        )
+        == normalizar_label_categoria("desenvolvimento_economico")
+    )
+
+
 def test_nome_igual_localidade_nao_entra_como_pessoa():
     row = pd.Series({"UF": "RS", "Estado": "Rio Grande do Sul", "MunicÃ­pio/Capital": "Santa Maria", "MunicÃ­pio": "Santa Maria"})
 
@@ -167,3 +290,87 @@ def test_fonte_oficial_alternativa_de_porto_velho_cobre_prefeito():
     assert contatos[0]["Nome"] == "Leonardo Barreto de Moraes"
     assert "transparencia.portovelho.ro.gov.br" in prefeito["URL da fonte"]
     assert prefeito["Status"] == "Parcial"
+
+
+def test_cobertura_preserva_multiplos_contatos_na_mesma_categoria():
+    row = pd.Series(
+        {
+            "UF": "SP",
+            "Estado": "São Paulo",
+            "Município/Capital": "Campinas",
+            "Município": "Campinas",
+            "Esfera": "Municipal",
+            "Site oficial": "https://campinas.sp.gov.br/",
+        }
+    )
+    contatos = [
+        {
+            "Órgão/Secretaria": "Gabinete/Prefeitura",
+            "Cargo/Área": "Prefeito",
+            "Cargo/Órgão": "Prefeito",
+            "Nome": "Pessoa Um",
+            "E-mail": "um@example.gov.br",
+            "URL da fonte": "https://campinas.sp.gov.br/gabinete",
+            "Status": "Encontrado",
+        },
+        {
+            "Órgão/Secretaria": "Gabinete/Prefeitura",
+            "Cargo/Área": "Prefeito",
+            "Cargo/Órgão": "Prefeito",
+            "Nome": "Pessoa Dois",
+            "E-mail": "dois@example.gov.br",
+            "URL da fonte": "https://campinas.sp.gov.br/gabinete",
+            "Status": "Encontrado",
+        },
+    ]
+
+    linhas = main_module._linhas_com_cobertura_categorias(
+        row,
+        contatos,
+        "Não publicado",
+        "Sem dado oficial claro.",
+        "2026-05-25",
+    )
+
+    dados = pd.DataFrame(linhas)
+    prefeitos = dados[dados["Cargo/Área"] == "Prefeito"]
+    assert len(prefeitos) == 2
+    assert set(prefeitos["E-mail"]) == {"um@example.gov.br", "dois@example.gov.br"}
+    assert set(labels_categorias_obrigatorias()).issubset(set(dados["Cargo/Área"]))
+
+
+def test_classifica_chefa_de_gabinete_no_escopo():
+    row = pd.Series(
+        {
+            "UF": "BA",
+            "Estado": "Bahia",
+            "Município/Capital": "Muritiba",
+            "Município": "Muritiba",
+            "Esfera": "Municipal",
+            "Site oficial": "https://www.muritiba.ba.gov.br/",
+        }
+    )
+    contatos = [
+        {
+            "Órgão/Secretaria": "Contato geral",
+            "Cargo/Área": "Contato geral",
+            "Cargo/Órgão": "Contato geral",
+            "Nome": "",
+            "E-mail": "gabinete@muritiba.ba.gov.br",
+            "URL da fonte": "https://www.muritiba.ba.gov.br/secretaria/14/chefa-de-gabinete",
+            "Status": "Parcial",
+        }
+    ]
+
+    linhas = main_module._linhas_com_cobertura_categorias(
+        row,
+        contatos,
+        "Não publicado",
+        "Sem dado oficial claro.",
+        "2026-05-25",
+    )
+
+    dados = pd.DataFrame(linhas)
+    gabinete = dados[dados["Cargo/Área"] == "Chefe de gabinete"].iloc[0]
+    assert gabinete["E-mail"] == "gabinete@muritiba.ba.gov.br"
+    assert gabinete["Status"] == "Parcial"

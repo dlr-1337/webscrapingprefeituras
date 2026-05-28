@@ -38,6 +38,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--ufs", nargs="*", help="Lista opcional de UFs a processar.")
     parser.add_argument("--sem-playwright", action="store_true", help="Desativa uso opcional de Playwright nos lotes.")
     parser.add_argument("--sem-estaduais", action="store_true", help="Desativa fontes configuradas de governos estaduais.")
+    parser.add_argument("--somente-estaduais", action="store_true", help="Processa apenas fontes estaduais configuradas.")
+    parser.add_argument("--sem-busca-web-sites", action="store_true", help="Não usa busca web oficial para sites ausentes.")
     parser.add_argument("--forcar", action="store_true", help="Reprocessa lotes mesmo que já existam.")
     parser.add_argument("--workers-ufs", type=int, default=1, help="Quantidade de UFs processadas em paralelo.")
     parser.add_argument("--chunk-size", type=int, default=0, help="Divide cada UF em partes menores com checkpoint.")
@@ -65,7 +67,15 @@ def lote_concluido(path: str | Path) -> bool:
     return "Dados" in sheets or "Resultado consolidado" in sheets
 
 
-def _args_lote(input_path: Path, output_path: Path, uf: str, sem_playwright: bool, sem_estaduais: bool) -> argparse.Namespace:
+def _args_lote(
+    input_path: Path,
+    output_path: Path,
+    uf: str,
+    sem_playwright: bool,
+    sem_estaduais: bool,
+    sem_busca_web_sites: bool = False,
+    somente_estaduais: bool = False,
+) -> argparse.Namespace:
     return argparse.Namespace(
         input_path=str(input_path),
         output_path=str(output_path),
@@ -76,11 +86,21 @@ def _args_lote(input_path: Path, output_path: Path, uf: str, sem_playwright: boo
         municipio=None,
         sem_playwright=sem_playwright,
         sem_estaduais=sem_estaduais,
+        somente_estaduais=somente_estaduais,
         sem_testar_inferencia_sites=False,
+        sem_busca_web_sites=sem_busca_web_sites,
     )
 
 
-def _executar_lote_subprocess(input_path: Path, output_path: Path, uf: str, sem_playwright: bool, sem_estaduais: bool) -> Path:
+def _executar_lote_subprocess(
+    input_path: Path,
+    output_path: Path,
+    uf: str,
+    sem_playwright: bool,
+    sem_estaduais: bool,
+    sem_busca_web_sites: bool = False,
+    somente_estaduais: bool = False,
+) -> Path:
     cmd = [
         sys.executable,
         "-m",
@@ -96,6 +116,10 @@ def _executar_lote_subprocess(input_path: Path, output_path: Path, uf: str, sem_
         cmd.append("--sem-playwright")
     if sem_estaduais:
         cmd.append("--sem-estaduais")
+    if somente_estaduais:
+        cmd.append("--somente-estaduais")
+    if sem_busca_web_sites:
+        cmd.append("--sem-busca-web-sites")
 
     log_path = output_path.with_suffix(".log")
     err_path = output_path.with_suffix(".err.log")
@@ -133,12 +157,17 @@ def _executar_lote_em_chunks(
     sem_estaduais: bool,
     chunk_size: int,
     forcar: bool = False,
+    sem_busca_web_sites: bool = False,
+    somente_estaduais: bool = False,
 ) -> Path:
+    if somente_estaduais:
+        return _executar_lote_subprocess(input_path, output_path, uf, sem_playwright, sem_estaduais, sem_busca_web_sites, True)
+
     df = _read_base_chunks(input_path)
     uf_col = _uf_column(df)
     uf_df = df[df[uf_col].astype(str).str.upper() == uf.upper()].reset_index(drop=True)
     if uf_df.empty or len(uf_df) <= chunk_size:
-        return _executar_lote_subprocess(input_path, output_path, uf, sem_playwright, sem_estaduais)
+        return _executar_lote_subprocess(input_path, output_path, uf, sem_playwright, sem_estaduais, sem_busca_web_sites)
 
     chunks_base = output_path.parent / "chunks"
     chunk_dir = chunks_base / uf.upper()
@@ -163,6 +192,7 @@ def _executar_lote_em_chunks(
             uf,
             sem_playwright,
             sem_estaduais=not incluir_estadual_no_chunk,
+            sem_busca_web_sites=sem_busca_web_sites,
         )
 
     return consolidar_lotes(chunks_base / uf.upper(), output_path, sem_estaduais=sem_estaduais)
@@ -219,9 +249,11 @@ def executar_coleta_completa(
     ufs: list[str] | None = None,
     sem_playwright: bool = False,
     sem_estaduais: bool = False,
+    sem_busca_web_sites: bool = False,
     forcar: bool = False,
     workers_ufs: int = 1,
     chunk_size: int = 0,
+    somente_estaduais: bool = False,
 ) -> Path:
     input_file = Path(input_path)
     lotes_path = Path(lotes_dir)
@@ -248,9 +280,13 @@ def executar_coleta_completa(
                     sem_estaduais,
                     chunk_size,
                     forcar=forcar,
+                    sem_busca_web_sites=sem_busca_web_sites,
+                    somente_estaduais=somente_estaduais,
                 )
             else:
-                executar_pipeline(_args_lote(input_file, partial, uf, sem_playwright, sem_estaduais))
+                executar_pipeline(
+                    _args_lote(input_file, partial, uf, sem_playwright, sem_estaduais, sem_busca_web_sites, somente_estaduais)
+                )
     else:
         with ThreadPoolExecutor(max_workers=workers_ufs) as executor:
             futures = {
@@ -261,7 +297,11 @@ def executar_coleta_completa(
                     uf,
                     sem_playwright,
                     sem_estaduais,
-                    *([chunk_size, forcar] if chunk_size > 0 else []),
+                    *(
+                        [chunk_size, forcar, sem_busca_web_sites, somente_estaduais]
+                        if chunk_size > 0
+                        else [sem_busca_web_sites, somente_estaduais]
+                    ),
                 ): (uf, partial)
                 for uf, partial in pendentes
             }
@@ -286,9 +326,11 @@ def main() -> None:
         ufs=args.ufs,
         sem_playwright=args.sem_playwright,
         sem_estaduais=args.sem_estaduais,
+        sem_busca_web_sites=args.sem_busca_web_sites,
         forcar=args.forcar,
         workers_ufs=args.workers_ufs,
         chunk_size=args.chunk_size,
+        somente_estaduais=args.somente_estaduais,
     )
     print(f"Resultado completo consolidado: {output}")
 
