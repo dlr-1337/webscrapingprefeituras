@@ -258,6 +258,27 @@ NOME_EXCLUDE = {
     "transloc transportes",
     "unidades executivas",
     "via rapida empresa",
+    "concordar e fechar",
+    "aceitar cookies",
+    "preferencias de cookies",
+    "politica de privacidade",
+    "selo ouro",
+    "analise de uso",
+    "olhe preco",
+    "sub menus",
+    "accessibility toolbar",
+    "legislatura periodo",
+    "marketing e jornalismo",
+    "polo de bebidas",
+    "amargosa top",
+    "partido socialista brasileiro",
+    "movimento democratico brasileiro",
+    "composicao da coligacao",
+    "insatisfeito regular",
+    "satisfeito muito",
+    "quadra poliesportiva",
+    "atividades ludicas",
+    "censo escolar",
 }
 
 NOME_TOKEN_EXCLUDE = {
@@ -270,11 +291,19 @@ NOME_TOKEN_EXCLUDE = {
     "fluxo",
     "funcionamento",
     "interpretacao",
+    "accessibility",
+    "cookies",
+    "cookie",
+    "legislatura",
     "mapa",
+    "marketing",
+    "menus",
     "regional",
     "publicacao",
+    "selo",
     "site",
     "subchefe",
+    "toolbar",
     "trajetoria",
     "utilizamos",
     "veto",
@@ -2169,13 +2198,25 @@ def _deduplicar_resultados(resultados: list[dict[str, str]]) -> list[dict[str, s
         for item in resultados
         if _registro_forte(item)
     }
+    valid_name_keys = {
+        (item.get("URL da fonte", ""), item.get(COL_CARGO_ORGAO, ""))
+        for item in resultados
+        if str(item.get("Nome", "")).strip() and _nome_valido(str(item.get("Nome", "")))
+    }
 
     deduplicados: list[dict[str, str]] = []
     vistos: set[tuple[str, ...]] = set()
     for item in resultados:
+        item = dict(item)
         key = (item.get("URL da fonte", ""), item.get(COL_CARGO_ORGAO, ""))
         if key in strong_keys and not _registro_forte(item):
             continue
+
+        nome = str(item.get("Nome", "") or "").strip()
+        if nome and not _nome_valido(nome):
+            if not _tem_contato_resultado(item) or key in valid_name_keys:
+                continue
+            item["Nome"] = ""
 
         item_key = (
             item.get(COL_CARGO_ORGAO, ""),

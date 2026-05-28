@@ -90,6 +90,33 @@ def test_html_para_texto_prioriza_conteudo_principal_e_remove_boilerplate():
     assert "Municipal de Educa" not in texto
 
 
+def test_html_para_texto_preserva_mailto_tel_e_remove_cookie():
+    html = """
+    <html>
+      <body>
+        <main>
+          <h1>Prefeito</h1>
+          <h2>Wilson do Cafe</h2>
+          <a href="mailto:gabinete@cidade.gov.br?subject=Contato">Email</a>
+          <a href="tel:+5577999990000">Telefone</a>
+        </main>
+        <div id="cookie-card">
+          Preferencias de Cookies
+          Utilizamos cookies para melhorar sua experiencia.
+          <button>Concordar e Fechar</button>
+        </div>
+      </body>
+    </html>
+    """
+
+    texto = html_para_texto(html)
+
+    assert "Wilson do Cafe" in texto
+    assert "gabinete@cidade.gov.br" in texto
+    assert "+5577999990000" in texto
+    assert "Concordar e Fechar" not in texto
+
+
 def test_html_para_texto_preserva_assistencia_social_e_remove_widget_social():
     html = """
     <html>

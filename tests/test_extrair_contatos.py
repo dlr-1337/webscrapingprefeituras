@@ -485,6 +485,26 @@ def test_rejeita_menu_como_nome_de_autoridade():
     assert extrair_contatos_de_texto(texto, CARGOS, "https://cidade.gov.br") == []
 
 
+def test_descarta_nome_de_cookie_sem_remover_autoridade_real():
+    cargos = {"prefeito": ["prefeito"], "vice_prefeito": ["vice-prefeito", "vice prefeito"]}
+    texto = """
+    O Prefeito
+    Wilson do Cafe
+    Governo
+    A Prefeitura
+    Preferencias de Cookies
+    Utilizamos cookies para melhorar sua experiencia.
+    Politica de Privacidade
+    Concordar e Fechar
+    """
+
+    contatos = extrair_contatos_de_texto(texto, cargos, "https://cidade.gov.br/governo/o-prefeito")
+    nomes = [item["Nome"] for item in contatos]
+
+    assert "Wilson do Cafe" in nomes
+    assert "Concordar e Fechar" not in nomes
+
+
 def test_gabinete_generico_nao_vira_chefe_de_gabinete():
     cargos = {"chefe_gabinete": ["chefe de gabinete", "gabinete"]}
     texto = """

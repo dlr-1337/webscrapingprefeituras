@@ -614,9 +614,17 @@ TAGS_BOILERPLATE = ("script", "style", "noscript", "svg", "header", "nav", "foot
 
 BOILERPLATE_CLASS_ID_TOKENS = (
     "breadcrumb",
+    "cookie",
+    "cookies",
+    "consent",
     "menu",
+    "modal",
     "navbar",
     "navigation",
+    "privacy",
+    "privacidade",
+    "lgpd",
+    "gdpr",
     "rodape",
     "footer",
     "sidebar",
@@ -628,6 +636,16 @@ BOILERPLATE_CLASS_ID_TOKENS = (
     "share",
     "search",
     "acessibilidade",
+)
+
+CONSENTIMENTO_TEXTO_TOKENS = (
+    "preferencias de cookies",
+    "preferencia de cookies",
+    "politica de privacidade",
+    "utilizamos cookies",
+    "aceitar cookies",
+    "concordar e fechar",
+    "lgpd",
 )
 
 CAMINHOS_FALLBACK_BLOQUEIO = (
@@ -715,8 +733,67 @@ def criar_sessao(user_agent: str, retries: int) -> requests.Session:
     return session
 
 
+def _valor_href_contato(href: str) -> str:
+    value = unquote(str(href or "").strip())
+    lowered = value.lower()
+    if lowered.startswith("mailto:"):
+        value = value.split(":", 1)[1].split("?", 1)[0].strip()
+    elif lowered.startswith("tel:"):
+        value = value.split(":", 1)[1].split("?", 1)[0].strip()
+    else:
+        return ""
+    return value.strip()
+
+
+def _anexar_contatos_href(soup: BeautifulSoup) -> None:
+    for anchor in soup.find_all("a", href=True):
+        contato = _valor_href_contato(str(anchor.get("href", "")))
+        if not contato:
+            continue
+
+        texto = anchor.get_text(" ", strip=True)
+        texto_norm = normalize_for_search(texto)
+        contato_norm = normalize_for_search(contato)
+        texto_digits = "".join(char for char in texto if char.isdigit())
+        contato_digits = "".join(char for char in contato if char.isdigit())
+        if contato_norm and contato_norm in texto_norm:
+            continue
+        if contato_digits and contato_digits in texto_digits:
+            continue
+        anchor.append(f" {contato}")
+
+
+def _remover_blocos_consentimento(soup: BeautifulSoup) -> None:
+    for tag in list(soup.find_all(True)):
+        if tag.parent is None:
+            continue
+        marker = " ".join(
+            str(value)
+            for value in (
+                tag.get("id", ""),
+                " ".join(tag.get("class", [])),
+                tag.get("role", ""),
+                tag.get("aria-label", ""),
+            )
+        )
+        marker_norm = normalize_for_search(marker)
+        if any(token in marker_norm for token in ("cookie", "cookies", "consent", "lgpd", "privacy", "privacidade", "gdpr")):
+            tag.decompose()
+            continue
+
+        text_norm = normalize_for_search(tag.get_text(" ", strip=True))
+        if (
+            tag.name not in {"html", "body", "main", "article"}
+            and 0 < len(text_norm) <= 1200
+            and any(token in text_norm for token in CONSENTIMENTO_TEXTO_TOKENS)
+        ):
+            tag.decompose()
+
+
 def html_para_texto(html: str) -> str:
     soup = BeautifulSoup(html or "", "html.parser")
+    _anexar_contatos_href(soup)
+    _remover_blocos_consentimento(soup)
     for tag in soup(TAGS_BOILERPLATE):
         tag.decompose()
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -15,10 +16,11 @@ from src.validar_resultados import (
     COLUNAS_RESULTADO,
     garantir_colunas,
 )
-from src.utils import load_yaml, project_path
+from src.utils import load_yaml, normalize_for_search, project_path
 
 
 STATUS_COM_DADO = {"Encontrado", "Parcial"}
+EMAIL_PATTERN = re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.IGNORECASE)
 CAMPOS_DADO_PUBLICADO = ["Nome", "E-mail", "Telefone", "Celular/WhatsApp", "Celular"]
 OBS_SEM_DADO_PUBLICADO = "Páginas oficiais consultadas, mas sem dado oficial claro para esta categoria."
 FONTES_INDISPONIVEIS_VALIDACAO = (
@@ -104,6 +106,65 @@ def normalizar_status_sem_dado_publicado(resultado_df: pd.DataFrame) -> pd.DataF
     return resultado
 
 
+def preparar_resultado_excel(resultado_df: pd.DataFrame) -> pd.DataFrame:
+    resultado = garantir_colunas(resultado_df, COLUNAS_RESULTADO)
+    resultado = normalizar_status_sem_dado_publicado(resultado)
+    return _remover_linhas_sem_dado_duplicadas(resultado)
+
+
+def _linha_tem_dado_publicado(row: pd.Series) -> bool:
+    return any(_valor_preenchido(row.get(campo, "")) for campo in CAMPOS_DADO_PUBLICADO)
+
+
+def _coluna_por_tokens(df: pd.DataFrame, *tokens: str) -> str:
+    for column in df.columns:
+        normalized = normalize_for_search(column).replace("/", " ")
+        if all(token in normalized for token in tokens):
+            return str(column)
+    return ""
+
+
+def _remover_linhas_sem_dado_duplicadas(resultado_df: pd.DataFrame) -> pd.DataFrame:
+    if resultado_df.empty:
+        return resultado_df
+
+    group_columns = [
+        _coluna_por_tokens(resultado_df, "uf"),
+        _coluna_por_tokens(resultado_df, "municipio", "capital"),
+        _coluna_por_tokens(resultado_df, "esfera"),
+        _coluna_por_tokens(resultado_df, "cargo", "area"),
+    ]
+    cargo_column = group_columns[-1]
+    if not all(group_columns):
+        return resultado_df
+
+    resultado = resultado_df.copy()
+    tem_dado = resultado.apply(_linha_tem_dado_publicado, axis=1)
+    grupos_com_dado = {
+        tuple(row[column] for column in group_columns)
+        for _, row in resultado.loc[tem_dado, group_columns].fillna("").astype(str).iterrows()
+    }
+
+    keep: list[bool] = []
+    grupos_sem_dado_vistos: set[tuple[str, ...]] = set()
+    for index, row in resultado.iterrows():
+        cargo = str(row.get(cargo_column, "") or "")
+        key = tuple(str(row.get(column, "") or "") for column in group_columns)
+        if cargo == CATEGORIA_IDENTIFICACAO.label or tem_dado.at[index]:
+            keep.append(True)
+            continue
+        if key in grupos_com_dado:
+            keep.append(False)
+            continue
+        if key in grupos_sem_dado_vistos:
+            keep.append(False)
+            continue
+        grupos_sem_dado_vistos.add(key)
+        keep.append(True)
+
+    return resultado.loc[keep].reset_index(drop=True)
+
+
 def criar_resumo(
     resultado_df: pd.DataFrame,
     municipios_df: pd.DataFrame,
@@ -118,6 +179,12 @@ def criar_resumo(
     pend_status = pendencias_df.get("Status", pd.Series(dtype=str)).astype(str)
 
     rows = [
+        _resumo_row("Indicadores gerais", "Total de linhas na aba Dados", len(resultado_df)),
+        _resumo_row("Indicadores gerais", "Total de linhas de categorias de contato", len(resultado_contatos)),
+        _resumo_row("Indicadores gerais", "Total de linhas com e-mail", _contar_linhas_com_email(resultado_df)),
+        _resumo_row("Indicadores gerais", "Total de enderecos de e-mail encontrados", _contar_emails(resultado_df)),
+        _resumo_row("Indicadores gerais", "Total de e-mails unicos", _contar_emails_unicos(resultado_df)),
+        _resumo_row("Indicadores gerais", "Total de linhas com algum contato", _contar_linhas_com_algum_contato(resultado_df)),
         _resumo_row("Indicadores gerais", "Total de municípios no escopo", total_municipios),
         _resumo_row("Indicadores gerais", "Total de municípios com algum dado encontrado", _contar_municipios_unicos(encontrados)),
         _resumo_row("Indicadores gerais", "Total de municípios com dados parciais", _contar_municipios_unicos(parciais)),
@@ -215,6 +282,38 @@ def _contar_municipios_unicos(df: pd.DataFrame) -> int:
     if df.empty or not {"UF", "Município"}.issubset(df.columns):
         return 0
     return int(df[["UF", "Município"]].drop_duplicates().shape[0])
+
+
+def _serie_texto(df: pd.DataFrame, column: str) -> pd.Series:
+    if column not in df.columns:
+        return pd.Series("", index=df.index, dtype=str)
+    return df[column].fillna("").astype(str)
+
+
+def _contar_linhas_com_email(df: pd.DataFrame) -> int:
+    return int(_serie_texto(df, "E-mail").str.strip().ne("").sum())
+
+
+def _emails_da_planilha(df: pd.DataFrame) -> list[str]:
+    emails: list[str] = []
+    for value in _serie_texto(df, "E-mail"):
+        emails.extend(email.lower() for email in EMAIL_PATTERN.findall(value))
+    return emails
+
+
+def _contar_emails(df: pd.DataFrame) -> int:
+    return len(_emails_da_planilha(df))
+
+
+def _contar_emails_unicos(df: pd.DataFrame) -> int:
+    return len(set(_emails_da_planilha(df)))
+
+
+def _contar_linhas_com_algum_contato(df: pd.DataFrame) -> int:
+    mask = pd.Series(False, index=df.index)
+    for column in ("E-mail", "Telefone", "Celular/WhatsApp", "Celular"):
+        mask = mask | _serie_texto(df, column).str.strip().ne("")
+    return int(mask.sum())
 
 
 def _resultado_sem_identificacao(df: pd.DataFrame) -> pd.DataFrame:

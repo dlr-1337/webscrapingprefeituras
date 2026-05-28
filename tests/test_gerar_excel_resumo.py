@@ -25,6 +25,13 @@ def test_criar_resumo_conta_status_e_municipios_unicos():
     resumo = criar_resumo(resultado, municipios, pendencias)
     valores = dict(zip(resumo["Indicador"], resumo["Valor"]))
 
+    assert valores["Total de linhas na aba Dados"] == 3
+    assert valores["Total de linhas de categorias de contato"] == 3
+    assert valores["Total de linhas com e-mail"] == 0
+    assert valores["Total de enderecos de e-mail encontrados"] == 0
+    assert valores["Total de e-mails unicos"] == 0
+    assert valores["Total de linhas com algum contato"] == 0
+
     assert valores["Total de municípios no escopo"] == 5
     assert valores["Total de municípios com algum dado encontrado"] == 1
     assert valores["Total de municípios com dados parciais"] == 1
