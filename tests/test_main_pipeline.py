@@ -19,6 +19,7 @@ def _args(input_path, output_path, **overrides):
         "sem_playwright": True,
         "sem_estaduais": True,
         "sem_testar_inferencia_sites": True,
+        "sem_busca_web_sites": True,
     }
     values.update(overrides)
     return argparse.Namespace(**values)
@@ -167,3 +168,87 @@ def test_fonte_oficial_alternativa_de_porto_velho_cobre_prefeito():
     assert contatos[0]["Nome"] == "Leonardo Barreto de Moraes"
     assert "transparencia.portovelho.ro.gov.br" in prefeito["URL da fonte"]
     assert prefeito["Status"] == "Parcial"
+
+
+def test_cobertura_preserva_multiplos_contatos_na_mesma_categoria():
+    row = pd.Series(
+        {
+            "UF": "SP",
+            "Estado": "São Paulo",
+            "Município/Capital": "Campinas",
+            "Município": "Campinas",
+            "Esfera": "Municipal",
+            "Site oficial": "https://campinas.sp.gov.br/",
+        }
+    )
+    contatos = [
+        {
+            "Órgão/Secretaria": "Gabinete/Prefeitura",
+            "Cargo/Área": "Prefeito",
+            "Cargo/Órgão": "Prefeito",
+            "Nome": "Pessoa Um",
+            "E-mail": "um@example.gov.br",
+            "URL da fonte": "https://campinas.sp.gov.br/gabinete",
+            "Status": "Encontrado",
+        },
+        {
+            "Órgão/Secretaria": "Gabinete/Prefeitura",
+            "Cargo/Área": "Prefeito",
+            "Cargo/Órgão": "Prefeito",
+            "Nome": "Pessoa Dois",
+            "E-mail": "dois@example.gov.br",
+            "URL da fonte": "https://campinas.sp.gov.br/gabinete",
+            "Status": "Encontrado",
+        },
+    ]
+
+    linhas = main_module._linhas_com_cobertura_categorias(
+        row,
+        contatos,
+        "Não publicado",
+        "Sem dado oficial claro.",
+        "2026-05-25",
+    )
+
+    dados = pd.DataFrame(linhas)
+    prefeitos = dados[dados["Cargo/Área"] == "Prefeito"]
+    assert len(prefeitos) == 2
+    assert set(prefeitos["E-mail"]) == {"um@example.gov.br", "dois@example.gov.br"}
+    assert set(labels_categorias_obrigatorias()).issubset(set(dados["Cargo/Área"]))
+
+
+def test_classifica_chefa_de_gabinete_no_escopo():
+    row = pd.Series(
+        {
+            "UF": "BA",
+            "Estado": "Bahia",
+            "Município/Capital": "Muritiba",
+            "Município": "Muritiba",
+            "Esfera": "Municipal",
+            "Site oficial": "https://www.muritiba.ba.gov.br/",
+        }
+    )
+    contatos = [
+        {
+            "Órgão/Secretaria": "Contato geral",
+            "Cargo/Área": "Contato geral",
+            "Cargo/Órgão": "Contato geral",
+            "Nome": "",
+            "E-mail": "gabinete@muritiba.ba.gov.br",
+            "URL da fonte": "https://www.muritiba.ba.gov.br/secretaria/14/chefa-de-gabinete",
+            "Status": "Parcial",
+        }
+    ]
+
+    linhas = main_module._linhas_com_cobertura_categorias(
+        row,
+        contatos,
+        "Não publicado",
+        "Sem dado oficial claro.",
+        "2026-05-25",
+    )
+
+    dados = pd.DataFrame(linhas)
+    gabinete = dados[dados["Cargo/Área"] == "Chefe de gabinete"].iloc[0]
+    assert gabinete["E-mail"] == "gabinete@muritiba.ba.gov.br"
+    assert gabinete["Status"] == "Parcial"

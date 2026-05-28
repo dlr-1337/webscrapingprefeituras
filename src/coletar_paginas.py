@@ -67,6 +67,7 @@ CAMINHOS_IGNORADOS = (
 QUERY_IGNORADAS = (
     "pag=",
     "page=",
+    "page_no=",
     "pagina=",
     "pagina=404",
     "cat=",
@@ -74,6 +75,7 @@ QUERY_IGNORADAS = (
     "p=",
     "cp=",
     "start=",
+    "b_start",
     "export=",
     "ps_export=",
     "wpdmc=",
@@ -88,9 +90,11 @@ QUERY_IGNORADAS = (
     "entry=wp_",
     "mime-type=",
     "page_id=",
+    "q=noticia",
     "departamentosearch",
     "theme=",
     "ajaxprevent=",
+    "binary=true",
     "classe=uploadmidia",
     "processo=viewfile",
     "n5b0",
@@ -108,14 +112,20 @@ SEGMENTOS_IGNORADOS = {
     "/categoria/",
     "/account/",
     "/acessibilidade",
+    "/aspectos-gerais",
     "/blog/",
     "/blogs/",
     "/aviso/",
+    "/arquivos/",
+    "/arquivos_site/",
+    "/audiencias-publicas",
     "/boletim-epidemiologico",
     "/bolsa-familia",
     "/busca",
     "/calendario-secretaria/",
+    "/calendario-oficial",
     "/cadastro-unico",
+    "/cadastro-mobiliario",
     "/competencias",
     "/concursos-selecoes-publicas",
     "/contrato/",
@@ -127,9 +137,11 @@ SEGMENTOS_IGNORADOS = {
     "/dados-abertos",
     "/dados/legis/",
     "/dados-genericos-esic",
+    "/direitostitular",
     "/documentos",
     "/download/",
     "/downloads/",
+    "/dx/api/dam/",
     "/documentos-e-arquivos",
     "/documentos-necessarios",
     "/documentos-para-cadastro",
@@ -144,13 +156,16 @@ SEGMENTOS_IGNORADOS = {
     "/fotos/",
     "/filtro/",
     "/folha-pagamento",
+    "/folha_de_pagamento",
     "/homepage",
+    "/hino",
     "/iptu",
     "/mapa-do-site",
     "/cmei-",
     "/instrumentoplanejamento",
     "/instrumento-planejamento",
     "/informe-epidemiologico",
+    "/lgpd",
     "/inscritos-divida-ativa",
     "/divida-ativa",
     "/isencao-de-iptu",
@@ -158,6 +173,7 @@ SEGMENTOS_IGNORADOS = {
     "/lei-de-acesso-informacao",
     "/legis/",
     "/legislacao",
+    "/leis_decretos",
     "/leis-atos-normativos",
     "/legislacoes-e-atos",
     "/lei-diretrizes-orcamentarias",
@@ -166,6 +182,7 @@ SEGMENTOS_IGNORADOS = {
     "/licitacao/",
     "/licitacoes",
     "/links-uteis",
+    "/localizacao",
     "/mapa-site",
     "/obras-paralisadas",
     "/ordem-cronologica",
@@ -181,10 +198,12 @@ SEGMENTOS_IGNORADOS = {
     "/pesquisa-de-satisfacao",
     "/plano-diretor",
     "/plano-municipal",
+    "/plano-plurianual",
     "/planejamento-e-prestacao-de-contas",
     "/plano-contratacao-anual",
     "/plano-estrategico-institucional",
     "/politica-privacidade",
+    "/peprivacidade",
     "/publicacoes",
     "/programas-e-projetos",
     "/projetos-em-fase",
@@ -215,7 +234,9 @@ SEGMENTOS_IGNORADOS = {
     "/requerimentos",
     "/prestacao-de-contas",
     "/prestacao_de_contas",
+    "/prefeitos-anteriores",
     "/responsavel-lgpd",
+    "/tratamentodados",
     "/servicos/",
     "/servicos-oferecidos",
     "/servidores",
@@ -321,7 +342,10 @@ SEGMENTOS_IGNORADOS = {
     "escola-municipal",
     "escolas-municipais",
     "prefeitos-de-",
+    "prefeitos-anteriores",
     "relacao-de-prefeitos",
+    "remuneracao-servidores",
+    "remuneracao_servidores",
     "intendentes_e_prefeitos",
     "intendentes-e-prefeitos",
     "ex-prefeitos",
@@ -334,6 +358,9 @@ SEGMENTOS_IGNORADOS = {
     "transparencia-legislativa",
     "precatorios",
     "formulario-interno",
+    "formularios-da-secretaria",
+    "declaracao-de-",
+    "a-forca-da-industria",
     "protocolo-sei",
     "procurador-do-municipio",
     "secretario-executivo",
@@ -354,6 +381,8 @@ SEGMENTOS_IGNORADOS = {
     "departamento-de-protocolo",
     "departamento-de-eletrica",
     "equipamentos-publicos",
+    "distritos-industriais",
+    "economia-pujante",
     "fornecedor",
     "gestao-de-contratos",
     "engenharia-e-projetos",
@@ -378,6 +407,7 @@ SEGMENTOS_IGNORADOS = {
     "midia-audio",
     "contratacoes-publicas",
     "controle-de-dados-pessoais",
+    "contatodpo",
     "central-de-atendimento",
     "inscricao-para-empresas",
     "parcelamentos",
@@ -387,10 +417,15 @@ SEGMENTOS_IGNORADOS = {
     "painel-de-indicadores",
     "participacao-popular",
     "participacao-polular",
+    "aprova-digital",
+    "atendimento-presencial",
+    "duvidas-e-orientacoes",
+    "grandes-geradores",
     "planejamento-governamental",
     "seguranca-alimentar",
     "sagep",
     "ministerio-do-trabalho",
+    "maiores-empresas",
     "empresa-amiga",
     "form-banco-oportunidades",
     "codigo-tributario",
@@ -491,6 +526,7 @@ SEGMENTOS_IGNORADOS = {
     "/semma",
     "/sear",
     "/entrar",
+    "/vantagens/",
 }
 
 SEGMENTOS_SECRETARIA_RELEVANTES = (
@@ -657,7 +693,13 @@ def carregar_config_scraping(path: str | Path | None = None) -> dict:
 
 def criar_sessao(user_agent: str, retries: int) -> requests.Session:
     session = requests.Session()
-    session.headers.update({"User-Agent": user_agent})
+    session.headers.update(
+        {
+            "User-Agent": user_agent,
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+        }
+    )
     retry = Retry(
         total=retries,
         connect=retries,
@@ -857,6 +899,9 @@ def _url_fallback_oficial(url: str) -> str:
     if host in {"www.portovelho.ro.gov.br", "portovelho.ro.gov.br"} and parsed.path.startswith("/artigo/"):
         query = f"?{parsed.query}" if parsed.query else ""
         return clean_url(f"https://agencia.portovelho.ro.gov.br{parsed.path}{query}")
+    if host.startswith("www."):
+        query = f"?{parsed.query}" if parsed.query else ""
+        return clean_url(f"{parsed.scheme}://{host.removeprefix('www.')}{parsed.path}{query}")
     return ""
 
 

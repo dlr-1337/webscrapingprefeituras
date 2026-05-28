@@ -36,7 +36,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--workers-ufs", type=int, default=1, help="Quantidade de UFs em paralelo.")
     parser.add_argument("--chunk-size", type=int, default=10, help="Municipios por checkpoint dentro de cada UF.")
     parser.add_argument("--sem-estaduais", action="store_true", help="Desativa fontes estaduais configuradas.")
+    parser.add_argument("--sem-busca-web-sites", action="store_true", help="Não usa busca web oficial para sites ausentes.")
     parser.add_argument("--timeout-validacao", type=int, default=30, help="Timeout por URL na validacao.")
+    parser.add_argument(
+        "--max-linhas-validacao",
+        type=int,
+        default=80,
+        help="Quantidade de linhas na validacao amostral. Use 0 para validar todas.",
+    )
     parser.add_argument(
         "--validacao-output",
         default=str(project_path("data", "output", "validacao_fontes_revalidado_visualmente.xlsx")),
@@ -58,12 +65,13 @@ def executar(args: argparse.Namespace) -> Path:
         ufs=args.ufs,
         sem_playwright=False,
         sem_estaduais=args.sem_estaduais,
+        sem_busca_web_sites=args.sem_busca_web_sites,
         forcar=args.forcar,
         workers_ufs=args.workers_ufs,
         chunk_size=args.chunk_size,
     )
 
-    auditoria = auditar_planilha_final(output, args.input_path)
+    auditoria = auditar_planilha_final(output, args.input_path, incluir_estaduais=not args.sem_estaduais)
     auditoria_path = Path(args.auditoria_output)
     auditoria_path.parent.mkdir(parents=True, exist_ok=True)
     auditoria.to_excel(auditoria_path, index=False)
@@ -71,7 +79,7 @@ def executar(args: argparse.Namespace) -> Path:
         print(f"Auditoria encontrou {len(auditoria)} divergencia(s): {auditoria_path}")
         raise SystemExit(1)
 
-    validacao = validar_planilha(output, max_linhas=0, timeout=args.timeout_validacao)
+    validacao = validar_planilha(output, max_linhas=args.max_linhas_validacao, timeout=args.timeout_validacao)
     validacao_path = Path(args.validacao_output)
     validacao_path.parent.mkdir(parents=True, exist_ok=True)
     validacao.to_excel(validacao_path, index=False)

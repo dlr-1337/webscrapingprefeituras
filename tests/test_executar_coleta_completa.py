@@ -171,6 +171,7 @@ def test_chunk_size_funciona_em_execucao_sequencial(tmp_path, monkeypatch):
         sem_estaduais,
         chunk_size,
         forcar=False,
+        sem_busca_web_sites=False,
     ):
         chamadas.append((uf, chunk_size, forcar))
         _criar_lote(output_path, uf, "Campinas")
@@ -209,7 +210,14 @@ def test_forcar_reprocessa_chunks_existentes(tmp_path, monkeypatch):
     _criar_lote(chunks_dir / "resultado_SP_part003.xlsx", "SP", "Antigo3")
     chamadas = []
 
-    def fake_executar_lote_subprocess(input_file, chunk_output, uf, sem_playwright, sem_estaduais):
+    def fake_executar_lote_subprocess(
+        input_file,
+        chunk_output,
+        uf,
+        sem_playwright,
+        sem_estaduais,
+        sem_busca_web_sites=False,
+    ):
         chamadas.append(chunk_output.name)
         _criar_lote(chunk_output, uf, chunk_output.stem)
         return chunk_output

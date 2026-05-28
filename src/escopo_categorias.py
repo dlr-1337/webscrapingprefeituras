@@ -56,7 +56,7 @@ def classificar_categoria_resultado(resultado: dict[str, object]) -> str:
     texto = normalize_for_search(
         " ".join(
             str(resultado.get(campo, ""))
-            for campo in ("Cargo/Área", "Cargo/Órgão", "Órgão/Secretaria")
+            for campo in ("Cargo/Área", "Cargo/Órgão", "Órgão/Secretaria", "URL da fonte", "URL específica")
         )
     )
     texto_sem_hifen = texto.replace("-", " ")
@@ -67,10 +67,18 @@ def classificar_categoria_resultado(resultado: dict[str, object]) -> str:
         return "Município/Capital e UF"
     if "vice prefeito" in texto_sem_hifen or "vice prefeita" in texto_sem_hifen:
         return "Vice-prefeito"
-    if "chefe de gabinete" in texto:
+    if "chefe de gabinete" in texto_sem_hifen or "chefa de gabinete" in texto_sem_hifen:
         return "Chefe de gabinete"
-    if "desenvolvimento economico" in texto:
+    if "desenvolvimento economico" in texto_sem_hifen:
         return "Desenvolvimento econômico"
+    if (
+        ("agencia" in texto and "desenvolvimento" in texto)
+        or "sala do empreendedor" in texto
+        or "casa do empreendedor" in texto
+        or "banco do povo" in texto
+        or "agencia/sala de desenvolvimento" in texto
+    ):
+        return "Agências municipais de desenvolvimento"
     if "financas" in texto or "fazenda" in texto:
         return "Finanças/Fazenda"
     if "planejamento" in texto:
@@ -83,7 +91,7 @@ def classificar_categoria_resultado(resultado: dict[str, object]) -> str:
         or "agencia/sala de desenvolvimento" in texto
     ):
         return "Agências municipais de desenvolvimento"
-    if "secretaria de desenvolvimento" in texto or texto == "desenvolvimento":
+    if "secretaria de desenvolvimento" in texto_sem_hifen or texto == "desenvolvimento":
         return "Desenvolvimento"
     if "prefeito" in texto or "prefeita" in texto:
         return "Prefeito"

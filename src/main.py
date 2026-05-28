@@ -65,6 +65,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Não testa URLs oficiais .gov.br inferidas quando a base não informa site.",
     )
+    parser.add_argument(
+        "--sem-busca-web-sites",
+        action="store_true",
+        help="Não usa busca web oficial para localizar sites ausentes na base.",
+    )
     return parser.parse_args()
 
 
@@ -310,7 +315,7 @@ def _linhas_com_cobertura_categorias(
     for categoria in CATEGORIAS_DE_COLETA:
         candidatos = candidatos_por_categoria.get(categoria.label, [])
         if candidatos:
-            linhas.append(max(candidatos, key=_pontuacao_linha_categoria))
+            linhas.extend(sorted(candidatos, key=_pontuacao_linha_categoria, reverse=True))
             continue
         linhas.append(_linha_resultado_categoria(row, categoria.label, status_faltante, observacao_faltante, data_coleta))
 
@@ -396,6 +401,7 @@ def executar_pipeline(args: argparse.Namespace) -> Path | None:
     municipios_com_sites = preencher_sites(
         municipios_filtrados,
         testar_inferencia=not getattr(args, "sem_testar_inferencia_sites", False),
+        usar_busca_web=not getattr(args, "sem_busca_web_sites", False),
     )
     alvos = _montar_alvos(municipios_com_sites, incluir_estaduais=not args.sem_estaduais)
 

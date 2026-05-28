@@ -38,18 +38,25 @@ def test_preencher_sites_congelados_gera_base_e_pendencias(tmp_path):
         [
             FakeResponse(404),
             FakeResponse(200, "text/html; charset=utf-8"),
-            requests.Timeout("demorou"),
-            requests.Timeout("demorou"),
-            requests.Timeout("demorou"),
-            requests.Timeout("demorou"),
-            requests.Timeout("demorou"),
-            requests.Timeout("demorou"),
-            requests.Timeout("demorou"),
-            requests.Timeout("demorou"),
+            requests.ConnectionError("fora"),
+            requests.ConnectionError("fora"),
+            requests.ConnectionError("fora"),
+            requests.ConnectionError("fora"),
+            requests.ConnectionError("fora"),
+            requests.ConnectionError("fora"),
+            requests.ConnectionError("fora"),
+            requests.ConnectionError("fora"),
         ]
     )
 
-    output, pendencias = preencher_sites_congelados(input_path, output_path, pendencias_path, session=session, timeout=1)
+    output, pendencias = preencher_sites_congelados(
+        input_path,
+        output_path,
+        pendencias_path,
+        session=session,
+        timeout=1,
+        usar_busca_web=False,
+    )
 
     result = pd.read_csv(output)
     assert output == output_path
@@ -60,7 +67,7 @@ def test_preencher_sites_congelados_gera_base_e_pendencias(tmp_path):
         "Site não localizado",
     ]
     assert result.loc[0, "site_oficial"] == "https://cidade.sp.gov.br/"
-    assert result.loc[1, "site_oficial"] == "https://campinas.sp.gov.br/"
+    assert result.loc[1, "site_oficial"] == "https://www.campinas.sp.gov.br/"
     assert result.loc[2, "site_oficial"] != result.loc[2, "site_oficial"]
 
     pendentes = pd.read_excel(pendencias_path)
