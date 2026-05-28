@@ -96,6 +96,30 @@ def test_validar_desenvolvimento_economico_aceita_industria_e_comercio_oficial()
     assert result.loc[0, status_col] == "Validado"
 
 
+def test_validar_registros_estadual_configurado_nao_exige_categoria_colada_no_contato():
+    dados = pd.DataFrame(
+        [
+            {
+                "UF": "AL",
+                "Município/Capital": "Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos de Alagoas",
+                "Esfera": "Estadual",
+                "Cargo/Área": "Desenvolvimento econômico",
+                "Status": "Encontrado",
+                "Nome": "",
+                "E-mail": "gabinete@sedics.al.gov.br",
+                "Telefone": "",
+                "Celular/WhatsApp": "",
+                "URL da fonte": "https://alagoasdigital.al.gov.br/orgao/64",
+            }
+        ]
+    )
+    texto = "Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos\nContato: gabinete@sedics.al.gov.br"
+
+    result = validar_registros(dados, lambda _url: (texto, "Encontrado", ""), max_linhas=0)
+
+    assert result.loc[0, "Status validação"] == "Validado"
+
+
 def test_validar_registros_aponta_divergencia():
     dados = pd.DataFrame(
         [

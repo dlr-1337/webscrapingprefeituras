@@ -16,6 +16,7 @@ from src.escopo_categorias import (
     FONTE_TERRITORIAL_URL,
     categoria_por_label,
     classificar_categoria_resultado,
+    normalizar_label_categoria,
 )
 from src.extrair_contatos import carregar_cargos, extrair_contatos_paginas
 from src.filtrar_municipios import aplicar_filtros_cli, filtrar_municipios, salvar_municipios_filtrados
@@ -60,6 +61,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--municipio", help="Processa apenas um município.")
     parser.add_argument("--sem-playwright", action="store_true", help="Desativa uso opcional de Playwright.")
     parser.add_argument("--sem-estaduais", action="store_true", help="Desativa fontes configuradas de governos estaduais.")
+    parser.add_argument("--somente-estaduais", action="store_true", help="Processa apenas fontes estaduais configuradas.")
     parser.add_argument(
         "--sem-testar-inferencia-sites",
         action="store_true",
@@ -93,6 +95,35 @@ def carregar_governos_estaduais(path: str | Path | None = None) -> dict:
         return {}
     data = load_yaml(config_path)
     return data.get("governos_estaduais", data)
+
+
+def _categorias_configuradas(value: object) -> list[str]:
+    if not value:
+        return []
+    if isinstance(value, str):
+        raw_items = [item.strip() for item in re.split(r"[;,]", value) if item.strip()]
+    elif isinstance(value, (list, tuple, set)):
+        raw_items = list(value)
+    else:
+        raw_items = [value]
+
+    categorias: list[str] = []
+    for item in raw_items:
+        label = normalizar_label_categoria(item)
+        if label and label not in categorias:
+            categorias.append(label)
+    return categorias
+
+
+def _categorias_alvo(row: pd.Series) -> list[str]:
+    return _categorias_configuradas(row.get("Categorias alvo", ""))
+
+
+def _categorias_cobertura(row: pd.Series) -> list[str]:
+    esfera = str(row.get("Esfera", "Municipal") or "Municipal")
+    if esfera != "Municipal":
+        return _categorias_alvo(row)
+    return [categoria.label for categoria in CATEGORIAS_DE_COLETA]
 
 
 def _metadata_alvo(row: pd.Series) -> dict:
@@ -208,6 +239,10 @@ def _linha_resultado_categoria(
 
 def _linha_contato_com_metadata(row: pd.Series, contato: dict, data_coleta: str) -> tuple[dict, str]:
     categoria_label = classificar_categoria_resultado(contato)
+    if not categoria_label and str(row.get("Esfera", "Municipal") or "Municipal") != "Municipal":
+        categorias_alvo = _categorias_alvo(row)
+        if len(categorias_alvo) == 1:
+            categoria_label = categorias_alvo[0]
     linha = _metadata_alvo(row)
     linha.update(contato)
     linha["Data da coleta"] = linha.get("Data da coleta") or data_coleta
@@ -299,6 +334,7 @@ def _linhas_com_cobertura_categorias(
         )
     ]
     candidatos_por_categoria: dict[str, list[dict]] = {}
+    categorias_requeridas = _categorias_cobertura(row)
 
     for contato in contatos:
         linha, categoria_label = _linha_contato_com_metadata(row, contato, data_coleta)
@@ -316,6 +352,8 @@ def _linhas_com_cobertura_categorias(
         candidatos = candidatos_por_categoria.get(categoria.label, [])
         if candidatos:
             linhas.extend(sorted(candidatos, key=_pontuacao_linha_categoria, reverse=True))
+            continue
+        if categoria.label not in categorias_requeridas:
             continue
         linhas.append(_linha_resultado_categoria(row, categoria.label, status_faltante, observacao_faltante, data_coleta))
 
@@ -340,10 +378,11 @@ def _criar_alvos_estaduais(municipios_df: pd.DataFrame, governos_config: dict) -
             continue
         first = grupo.iloc[0]
         nome = str(config.get("nome") or f"Governo Estadual {uf}")
+        estado = config.get("estado") or first.get("Estado", "")
         rows.append(
             {
                 "UF": str(uf).upper(),
-                "Estado": config.get("estado") or first.get("Estado", ""),
+                "Estado": estado,
                 "Município/Capital": nome,
                 "Município": nome,
                 "População": "",
@@ -351,8 +390,34 @@ def _criar_alvos_estaduais(municipios_df: pd.DataFrame, governos_config: dict) -
                 "Critério de inclusão": "Fonte estadual configurada",
                 "Esfera": "Estadual",
                 "Site oficial": site,
+                "Categorias alvo": "",
             }
         )
+        for orgao in config.get("orgaos", []) or []:
+            org_site = str(orgao.get("site", "")).strip()
+            if not org_site:
+                continue
+            categorias = _categorias_configuradas(
+                orgao.get("categorias") or orgao.get("categoria_preferencial") or orgao.get("categoria")
+            )
+            org_nome = str(orgao.get("nome") or "").strip()
+            if not org_nome:
+                continue
+            criterio_categoria = "; ".join(categorias) if categorias else "orgao estadual"
+            rows.append(
+                {
+                    "UF": str(uf).upper(),
+                    "Estado": estado,
+                    "Município/Capital": org_nome,
+                    "Município": org_nome,
+                    "População": "",
+                    "Capital": False,
+                    "Critério de inclusão": f"Fonte estadual configurada: {criterio_categoria}",
+                    "Esfera": "Estadual",
+                    "Site oficial": org_site,
+                    "Categorias alvo": "; ".join(categorias),
+                }
+            )
     return pd.DataFrame(rows)
 
 
@@ -398,12 +463,17 @@ def executar_pipeline(args: argparse.Namespace) -> Path | None:
         logger.info("Execução encerrada por --somente-filtrar")
         return project_path("data", "output", "municipios_filtrados.xlsx")
 
-    municipios_com_sites = preencher_sites(
-        municipios_filtrados,
-        testar_inferencia=not getattr(args, "sem_testar_inferencia_sites", False),
-        usar_busca_web=not getattr(args, "sem_busca_web_sites", False),
-    )
+    if getattr(args, "somente_estaduais", False):
+        municipios_com_sites = municipios_filtrados.copy()
+    else:
+        municipios_com_sites = preencher_sites(
+            municipios_filtrados,
+            testar_inferencia=not getattr(args, "sem_testar_inferencia_sites", False),
+            usar_busca_web=not getattr(args, "sem_busca_web_sites", False),
+        )
     alvos = _montar_alvos(municipios_com_sites, incluir_estaduais=not args.sem_estaduais)
+    if getattr(args, "somente_estaduais", False):
+        alvos = alvos[alvos["Esfera"].astype(str) == "Estadual"].reset_index(drop=True)
 
     if args.dry_run:
         logger.info("Dry-run concluído sem coleta de páginas.")
@@ -413,6 +483,9 @@ def executar_pipeline(args: argparse.Namespace) -> Path | None:
     scraping_config = carregar_config_scraping()
     if args.sem_playwright:
         scraping_config["usar_playwright_quando_necessario"] = False
+    if getattr(args, "somente_estaduais", False):
+        scraping_config["max_paginas_por_municipio"] = min(int(scraping_config.get("max_paginas_por_municipio", 40)), 12)
+        scraping_config["delay_entre_requisicoes"] = min(float(scraping_config.get("delay_entre_requisicoes", 1.5)), 0.5)
 
     palavras_config = load_yaml(project_path("config", "palavras_chave.yml"))
     palavras_chave = palavras_config.get("palavras_chave", [])

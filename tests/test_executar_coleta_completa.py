@@ -172,6 +172,7 @@ def test_chunk_size_funciona_em_execucao_sequencial(tmp_path, monkeypatch):
         chunk_size,
         forcar=False,
         sem_busca_web_sites=False,
+        somente_estaduais=False,
     ):
         chamadas.append((uf, chunk_size, forcar))
         _criar_lote(output_path, uf, "Campinas")

@@ -2,7 +2,13 @@ import pandas as pd
 
 from src.escopo_categorias import FONTE_TERRITORIAL_URL, labels_categorias_obrigatorias
 from src.gerar_excel import gerar_excel
-from src.validar_resultados import auditar_planilha_final, criar_pendencia, garantir_colunas, validar_resultados
+from src.validar_resultados import (
+    auditar_planilha_final,
+    carregar_estaduais_esperados,
+    criar_pendencia,
+    garantir_colunas,
+    validar_resultados,
+)
 
 
 def test_garantir_colunas_preserva_ordem_e_preenche_ausentes():
@@ -321,6 +327,30 @@ def test_auditar_planilha_final_aceita_estadual_configurado_quando_incluido(tmp_
     gerar_excel(dados, municipios, pd.DataFrame(), output)
 
     assert auditar_planilha_final(output, input_path, incluir_estaduais=True).empty
+
+
+def test_carregar_estaduais_esperados_inclui_orgaos_configurados(tmp_path):
+    config_path = tmp_path / "governos.yml"
+    config_path.write_text(
+        """
+governos_estaduais:
+  AL:
+    nome: Governo do Estado de Alagoas
+    site: https://alagoas.al.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos de Alagoas
+        site: https://alagoasdigital.al.gov.br/orgao/64
+        categorias: [desenvolvimento_economico]
+""".strip(),
+        encoding="utf-8",
+    )
+
+    esperados = carregar_estaduais_esperados(config_path)
+
+    assert set(esperados["Município/Capital"]) == {
+        "Governo do Estado de Alagoas",
+        "Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos de Alagoas",
+    }
 
 
 def test_auditar_planilha_final_reprova_estadual_nao_configurado(tmp_path, monkeypatch):

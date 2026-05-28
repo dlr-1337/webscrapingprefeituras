@@ -181,6 +181,10 @@ def _categoria_exige_nome_pessoa(cargo_area: str) -> bool:
     return normalized not in {"municipio/capital e uf", "agencias municipais de desenvolvimento"}
 
 
+def _exige_associacao_visual_categoria(row: pd.Series) -> bool:
+    return str(_row_get(row, "Esfera") or "Municipal").strip().lower() != "estadual"
+
+
 def baixar_texto_playwright(url: str, timeout: int = 25) -> tuple[str, str, str]:
     html, status, observacoes, final_url, _status_http, _content_type, _metodo = _baixar_com_navegador(url, timeout, "auto")
     texto = html_para_texto(html)
@@ -265,6 +269,7 @@ def validar_registros(
         cargo_area = str(_row_get(row, "Cargo/Área", "Cargo/Area", "Cargo/Ãrea") or "")
         nome_raw = row.get("Nome", "")
         nome = "" if pd.isna(nome_raw) else str(nome_raw).strip()
+        exige_associacao = _exige_associacao_visual_categoria(row)
         if nome and cargo_area != CATEGORIA_IDENTIFICACAO.label and _categoria_exige_nome_pessoa(cargo_area):
             if not _nome_valido(nome):
                 divergencias.append(f"Nome não parece pessoa publicada: {nome}")
@@ -272,14 +277,18 @@ def validar_registros(
                 divergencias.append(f"Nome aparece apenas em linha de endereco/CEP: {nome}")
             elif _nome_aparece_apenas_em_linha_de_credito(texto, nome):
                 divergencias.append(f"Nome aparece apenas em linha de credito/autoria: {nome}")
-            elif not _valor_associado_a_categoria(texto, nome, row):
+            elif exige_associacao and not _valor_associado_a_categoria(texto, nome, row):
                 divergencias.append(f"Nome sem associação visual/estrutural com a categoria: {nome}")
         for campo in CAMPOS_CONFERENCIA:
             for valor in _split_multi(row.get(campo, "")):
                 campos_conferidos += 1
                 if not _texto_contem_valor(texto, campo, valor):
                     divergencias.append(f"{campo} não localizado na fonte: {valor}")
-                elif campo in {"E-mail", "Telefone", "Celular/WhatsApp"} and not _valor_associado_a_categoria(texto, valor, row):
+                elif (
+                    exige_associacao
+                    and campo in {"E-mail", "Telefone", "Celular/WhatsApp"}
+                    and not _valor_associado_a_categoria(texto, valor, row)
+                ):
                     divergencias.append(f"{campo} sem associação visual/estrutural com a categoria: {valor}")
 
         if divergencias:

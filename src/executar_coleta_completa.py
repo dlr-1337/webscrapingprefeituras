@@ -38,6 +38,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--ufs", nargs="*", help="Lista opcional de UFs a processar.")
     parser.add_argument("--sem-playwright", action="store_true", help="Desativa uso opcional de Playwright nos lotes.")
     parser.add_argument("--sem-estaduais", action="store_true", help="Desativa fontes configuradas de governos estaduais.")
+    parser.add_argument("--somente-estaduais", action="store_true", help="Processa apenas fontes estaduais configuradas.")
     parser.add_argument("--sem-busca-web-sites", action="store_true", help="Não usa busca web oficial para sites ausentes.")
     parser.add_argument("--forcar", action="store_true", help="Reprocessa lotes mesmo que já existam.")
     parser.add_argument("--workers-ufs", type=int, default=1, help="Quantidade de UFs processadas em paralelo.")
@@ -73,6 +74,7 @@ def _args_lote(
     sem_playwright: bool,
     sem_estaduais: bool,
     sem_busca_web_sites: bool = False,
+    somente_estaduais: bool = False,
 ) -> argparse.Namespace:
     return argparse.Namespace(
         input_path=str(input_path),
@@ -84,6 +86,7 @@ def _args_lote(
         municipio=None,
         sem_playwright=sem_playwright,
         sem_estaduais=sem_estaduais,
+        somente_estaduais=somente_estaduais,
         sem_testar_inferencia_sites=False,
         sem_busca_web_sites=sem_busca_web_sites,
     )
@@ -96,6 +99,7 @@ def _executar_lote_subprocess(
     sem_playwright: bool,
     sem_estaduais: bool,
     sem_busca_web_sites: bool = False,
+    somente_estaduais: bool = False,
 ) -> Path:
     cmd = [
         sys.executable,
@@ -112,6 +116,8 @@ def _executar_lote_subprocess(
         cmd.append("--sem-playwright")
     if sem_estaduais:
         cmd.append("--sem-estaduais")
+    if somente_estaduais:
+        cmd.append("--somente-estaduais")
     if sem_busca_web_sites:
         cmd.append("--sem-busca-web-sites")
 
@@ -152,7 +158,11 @@ def _executar_lote_em_chunks(
     chunk_size: int,
     forcar: bool = False,
     sem_busca_web_sites: bool = False,
+    somente_estaduais: bool = False,
 ) -> Path:
+    if somente_estaduais:
+        return _executar_lote_subprocess(input_path, output_path, uf, sem_playwright, sem_estaduais, sem_busca_web_sites, True)
+
     df = _read_base_chunks(input_path)
     uf_col = _uf_column(df)
     uf_df = df[df[uf_col].astype(str).str.upper() == uf.upper()].reset_index(drop=True)
@@ -243,6 +253,7 @@ def executar_coleta_completa(
     forcar: bool = False,
     workers_ufs: int = 1,
     chunk_size: int = 0,
+    somente_estaduais: bool = False,
 ) -> Path:
     input_file = Path(input_path)
     lotes_path = Path(lotes_dir)
@@ -270,9 +281,12 @@ def executar_coleta_completa(
                     chunk_size,
                     forcar=forcar,
                     sem_busca_web_sites=sem_busca_web_sites,
+                    somente_estaduais=somente_estaduais,
                 )
             else:
-                executar_pipeline(_args_lote(input_file, partial, uf, sem_playwright, sem_estaduais, sem_busca_web_sites))
+                executar_pipeline(
+                    _args_lote(input_file, partial, uf, sem_playwright, sem_estaduais, sem_busca_web_sites, somente_estaduais)
+                )
     else:
         with ThreadPoolExecutor(max_workers=workers_ufs) as executor:
             futures = {
@@ -283,7 +297,11 @@ def executar_coleta_completa(
                     uf,
                     sem_playwright,
                     sem_estaduais,
-                    *([chunk_size, forcar, sem_busca_web_sites] if chunk_size > 0 else [sem_busca_web_sites]),
+                    *(
+                        [chunk_size, forcar, sem_busca_web_sites, somente_estaduais]
+                        if chunk_size > 0
+                        else [sem_busca_web_sites, somente_estaduais]
+                    ),
                 ): (uf, partial)
                 for uf, partial in pendentes
             }
@@ -312,6 +330,7 @@ def main() -> None:
         forcar=args.forcar,
         workers_ufs=args.workers_ufs,
         chunk_size=args.chunk_size,
+        somente_estaduais=args.somente_estaduais,
     )
     print(f"Resultado completo consolidado: {output}")
 

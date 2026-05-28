@@ -3,107 +3,377 @@ governos_estaduais:
     nome: Governo do Estado do Acre
     estado: Acre
     site: https://www.ac.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado de Industria, Ciencia e Tecnologia do Acre
+        site: https://seict.ac.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda do Acre
+        site: https://sefaz.ac.gov.br/2021/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado de Planejamento do Acre
+        site: https://seplan.ac.gov.br/
+        categorias: [planejamento]
   AL:
     nome: Governo do Estado de Alagoas
     estado: Alagoas
     site: https://alagoas.al.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado do Desenvolvimento, Industria, Comercio e Servicos de Alagoas
+        site: https://alagoasdigital.al.gov.br/orgao/64
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda de Alagoas
+        site: https://www.sefaz.al.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado do Planejamento, Gestao e Patrimonio de Alagoas
+        site: https://www.seplag.al.gov.br/
+        categorias: [planejamento]
   AP:
     nome: Governo do Estado do Amapa
     estado: Amapa
     site: https://www.portal.ap.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado do Trabalho e Empreendedorismo do Amapa
+        site: https://sete.portal.ap.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda do Amapa
+        site: https://www.sefaz.ap.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado do Planejamento do Amapa
+        site: https://seplan.portal.ap.gov.br/
+        categorias: [planejamento]
   AM:
     nome: Governo do Estado do Amazonas
     estado: Amazonas
     site: https://www.amazonas.am.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado de Desenvolvimento Economico, Ciencia, Tecnologia e Inovacao do Amazonas
+        site: https://www.sedecti.am.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda do Amazonas
+        site: https://www.sefaz.am.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Portal do Planejamento do Amazonas
+        site: https://portaldoplanejamento.am.gov.br/
+        categorias: [planejamento]
   BA:
     nome: Governo do Estado da Bahia
     estado: Bahia
     site: https://www.ba.gov.br/
+    orgaos:
+      - nome: Secretaria de Desenvolvimento Economico da Bahia
+        site: https://www.sde.ba.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria da Fazenda do Estado da Bahia
+        site: https://www.sefaz.ba.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria do Planejamento da Bahia
+        site: https://www.seplan.ba.gov.br/
+        categorias: [planejamento]
   CE:
     nome: Governo do Estado do Ceara
     estado: Ceara
     site: https://www.ceara.gov.br/
+    orgaos:
+      - nome: Secretaria do Desenvolvimento Economico do Ceara
+        site: https://www.sde.ce.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria da Fazenda do Ceara
+        site: https://www.sefaz.ce.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria do Planejamento e Gestao do Ceara
+        site: https://www.seplag.ce.gov.br/
+        categorias: [planejamento]
   DF:
     nome: Governo do Distrito Federal
     estado: Distrito Federal
     site: https://www.df.gov.br/
+    orgaos:
+      - nome: Secretaria de Desenvolvimento Economico, Trabalho e Renda do Distrito Federal
+        site: https://www.sedet.df.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado de Economia do Distrito Federal
+        site: https://www.economia.df.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado de Planejamento, Orcamento e Administracao do Distrito Federal
+        site: https://www.seplad.df.gov.br/
+        categorias: [planejamento]
   ES:
     nome: Governo do Estado do Espirito Santo
     estado: Espirito Santo
     site: https://www.es.gov.br/
+    orgaos:
+      - nome: Secretaria de Desenvolvimento do Espirito Santo
+        site: https://sedes.es.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria da Fazenda do Espirito Santo
+        site: https://sefaz.es.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Economia e Planejamento do Espirito Santo
+        site: https://planejamento.es.gov.br/
+        categorias: [planejamento]
   GO:
     nome: Governo do Estado de Goias
     estado: Goias
     site: https://www.go.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado de Industria, Comercio e Servicos de Goias
+        site: https://goias.gov.br/industriaecomercio/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria da Economia de Goias
+        site: https://goias.gov.br/economia/
+        categorias: [financas_fazenda]
+      - nome: Plano Plurianual do Estado de Goias
+        site: https://ppa.go.gov.br/
+        categorias: [planejamento]
   MA:
     nome: Governo do Estado do Maranhao
     estado: Maranhao
     site: https://www.ma.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado de Industria e Comercio do Maranhao
+        site: https://www.seinc.ma.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda do Maranhao
+        site: https://sistemas1.sefaz.ma.gov.br/portalsefaz/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado do Planejamento e Orcamento do Maranhao
+        site: https://www.seplan.ma.gov.br/
+        categorias: [planejamento]
   MT:
     nome: Governo do Estado de Mato Grosso
     estado: Mato Grosso
     site: https://www.mt.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado de Desenvolvimento Economico de Mato Grosso
+        site: https://www.sedec.mt.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado de Fazenda de Mato Grosso
+        site: https://www.sefaz.mt.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado de Planejamento e Gestao de Mato Grosso
+        site: https://www.seplag.mt.gov.br/
+        categorias: [planejamento]
   MS:
     nome: Governo do Estado de Mato Grosso do Sul
     estado: Mato Grosso do Sul
     site: https://www.ms.gov.br/
+    orgaos:
+      - nome: Secretaria de Meio Ambiente, Desenvolvimento, Ciencia, Tecnologia e Inovacao de Mato Grosso do Sul
+        site: https://www.semadesc.ms.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado de Fazenda de Mato Grosso do Sul
+        site: https://www.sefaz.ms.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado de Governo e Gestao Estrategica de Mato Grosso do Sul
+        site: https://www.segov.ms.gov.br/
+        categorias: [planejamento]
   MG:
     nome: Governo do Estado de Minas Gerais
     estado: Minas Gerais
     site: https://www.mg.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado de Desenvolvimento Economico de Minas Gerais
+        site: https://desenvolvimento.mg.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado de Fazenda de Minas Gerais
+        site: https://www.fazenda.mg.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado de Planejamento e Gestao de Minas Gerais
+        site: https://www.mg.gov.br/planejamento
+        categorias: [planejamento]
   PA:
     nome: Governo do Estado do Para
     estado: Para
     site: https://www.pa.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado de Desenvolvimento Economico, Mineracao e Energia do Para
+        site: https://www.sedeme.pa.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda do Para
+        site: https://www.sefa.pa.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado de Planejamento e Administracao do Para
+        site: https://www.seplad.pa.gov.br/
+        categorias: [planejamento]
   PB:
     nome: Governo do Estado da Paraiba
     estado: Paraiba
     site: https://paraiba.pb.gov.br/
+    orgaos:
+      - nome: Secretaria de Turismo e Desenvolvimento Economico da Paraiba
+        site: https://paraiba.pb.gov.br/diretas/secretaria-de-turismo-e-desenvolvimento-economico/pagina-inicial
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda da Paraiba
+        site: https://www.sefaz.pb.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Planejamento, Orcamento e Gestao da Paraiba
+        site: https://paraiba.pb.gov.br/diretas/secretaria-de-planejamento-orcamento-e-gestao/pagina-inicial
+        categorias: [planejamento]
   PR:
     nome: Governo do Estado do Parana
     estado: Parana
     site: https://www.parana.pr.gov.br/
+    orgaos:
+      - nome: Superintendencia Geral de Desenvolvimento Economico e Social do Parana
+        site: https://www.sgdes.pr.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria da Fazenda do Parana
+        site: https://www.fazenda.pr.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria do Planejamento do Parana
+        site: https://www.planejamento.pr.gov.br/
+        categorias: [planejamento]
   PE:
     nome: Governo do Estado de Pernambuco
     estado: Pernambuco
     site: https://www.pe.gov.br/
+    orgaos:
+      - nome: Secretaria de Desenvolvimento Economico de Pernambuco
+        site: https://www.sdec.pe.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria da Fazenda de Pernambuco
+        site: https://www.sefaz.pe.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Planejamento, Gestao e Desenvolvimento Regional de Pernambuco
+        site: https://www.seplag.pe.gov.br/
+        categorias: [planejamento]
   PI:
     nome: Governo do Estado do Piaui
     estado: Piaui
     site: https://www.pi.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado do Desenvolvimento Economico do Piaui
+        site: https://www.pi.gov.br/orgao/secretaria-de-estado-do-desenvolvimento-economico-sde/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria da Fazenda do Piaui
+        site: https://www.sefaz.pi.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria do Planejamento do Piaui
+        site: https://www.seplan.pi.gov.br/
+        categorias: [planejamento]
   RJ:
     nome: Governo do Estado do Rio de Janeiro
     estado: Rio de Janeiro
     site: https://www.rj.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado de Desenvolvimento Economico, Industria, Comercio e Servicos do Rio de Janeiro
+        site: https://www.rj.gov.br/desenvolvimentoeconomico/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado de Fazenda do Rio de Janeiro
+        site: https://www.fazenda.rj.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado de Planejamento e Gestao do Rio de Janeiro
+        site: https://www.rj.gov.br/planejamento/
+        categorias: [planejamento]
   RN:
     nome: Governo do Estado do Rio Grande do Norte
     estado: Rio Grande do Norte
     site: https://www.rn.gov.br/
+    orgaos:
+      - nome: Secretaria do Desenvolvimento Economico, da Ciencia, da Tecnologia e da Inovacao do Rio Grande do Norte
+        site: http://www.sedec.rn.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda do Rio Grande do Norte
+        site: http://www.set.rn.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado do Planejamento, do Orcamento e Gestao do Rio Grande do Norte
+        site: http://www.seplan.rn.gov.br/
+        categorias: [planejamento]
   RS:
     nome: Governo do Estado do Rio Grande do Sul
     estado: Rio Grande do Sul
     site: https://www.estado.rs.gov.br/
+    orgaos:
+      - nome: Secretaria de Desenvolvimento Economico do Rio Grande do Sul
+        site: https://desenvolvimento.rs.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria da Fazenda do Rio Grande do Sul
+        site: https://fazenda.rs.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Planejamento, Governanca e Gestao do Rio Grande do Sul
+        site: https://planejamento.rs.gov.br/
+        categorias: [planejamento]
   RO:
     nome: Governo do Estado de Rondonia
     estado: Rondonia
     site: https://rondonia.ro.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado do Desenvolvimento Economico de Rondonia
+        site: https://rondonia.ro.gov.br/sedec/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado de Financas de Rondonia
+        site: https://rondonia.ro.gov.br/sefin/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado do Planejamento, Orcamento e Gestao de Rondonia
+        site: https://rondonia.ro.gov.br/sepog/
+        categorias: [planejamento]
   RR:
     nome: Governo do Estado de Roraima
     estado: Roraima
     site: https://portal.rr.gov.br/
+    orgaos:
+      - nome: Secretaria do Trabalho e Bem-Estar Social de Roraima
+        site: https://setrabes.rr.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda de Roraima
+        site: https://www.sefaz.rr.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado do Planejamento e Orcamento de Roraima
+        site: https://seplan.rr.gov.br/
+        categorias: [planejamento]
   SC:
     nome: Governo do Estado de Santa Catarina
     estado: Santa Catarina
     site: https://www.sc.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado da Industria, Comercio e Servico de Santa Catarina
+        site: https://www.sicos.sc.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda de Santa Catarina
+        site: https://www.sef.sc.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria de Estado do Planejamento de Santa Catarina
+        site: https://www.seplan.sc.gov.br/
+        categorias: [planejamento]
   SP:
     nome: Governo do Estado de Sao Paulo
     estado: Sao Paulo
     site: https://www.saopaulo.sp.gov.br/
+    orgaos:
+      - nome: Secretaria de Desenvolvimento Economico do Estado de Sao Paulo
+        site: https://www.desenvolvimentoeconomico.sp.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria da Fazenda e Planejamento do Estado de Sao Paulo
+        site: https://portal.fazenda.sp.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria da Fazenda e Planejamento do Estado de Sao Paulo - Planejamento
+        site: http://planejamento.sp.gov.br/
+        categorias: [planejamento]
   SE:
     nome: Governo do Estado de Sergipe
     estado: Sergipe
     site: https://www.se.gov.br/
+    orgaos:
+      - nome: Secretaria de Estado do Desenvolvimento Economico e da Ciencia e Tecnologia de Sergipe
+        site: https://sedetec.se.gov.br/
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria de Estado da Fazenda de Sergipe
+        site: https://www.sefaz.se.gov.br/
+        categorias: [financas_fazenda]
+      - nome: Secretaria Especial de Planejamento, Orcamento e Inovacao de Sergipe
+        site: https://www.se.gov.br/seplan
+        categorias: [planejamento]
   TO:
     nome: Governo do Estado do Tocantins
     estado: Tocantins
     site: https://www.to.gov.br/
+    orgaos:
+      - nome: Secretaria da Industria, Comercio e Servicos do Tocantins
+        site: https://www.to.gov.br/sics
+        categorias: [desenvolvimento_economico]
+      - nome: Secretaria da Fazenda do Tocantins
+        site: https://www.to.gov.br/sefaz
+        categorias: [financas_fazenda]
+      - nome: Secretaria do Planejamento e Orcamento do Tocantins
+        site: https://www.to.gov.br/seplan
+        categorias: [planejamento]
